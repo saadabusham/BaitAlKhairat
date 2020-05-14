@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بيت الخيرات</string>
+
+    <string name="bait_alkhairat_app">تطبيق منصة بيت الخيرات</string>
+    <string name="all_rights_reserved">حميع الحقوق محفوظة 2020</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="help_center">مركز الخدمة</string>
+    <string name="share_app">مشاركة التطبيق</string>
+    <string name="rate_app">تقييم التطبيق</string>
+    <string name="use_language">Use English language</string>
+    <string name="terms_and_conditions">الشروط والاحكام</string>
+    <string name="privacy_policy">السياسة والخصوصية</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="version">اصدار 1.0</string>
+    <string name="cart">السلة</string>
+    <string name="donors">المتبرعين</string>
+    <string name="needy">المحتاجين</string>
+    <string name="news">عاجل</string>
+    <string name="humanitarian_cases">حالات انسانية</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="filter">تصفية</string>
+</resources>

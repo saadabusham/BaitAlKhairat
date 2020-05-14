@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.home.HomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/btnDonors"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="-3dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rounded_tab_orange_right"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onDonorsClicked()}"
+                android:text="@string/donors"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/btnNeedy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rounded_tab_empty_orange_left"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onNeedyClicked()}"
+                android:text="@string/needy"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/fragment_tab"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </LinearLayout>
+
+</layout>
