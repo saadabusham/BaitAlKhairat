@@ -21,4 +21,10 @@
     <string name="humanitarian_cases">حالات انسانية</string>
     <string name="view_all">عرض الكل</string>
     <string name="filter">تصفية</string>
+    <string name="case_id">رقم الحالة : </string>
+    <string name="case_type">نوع الحالة : </string>
+    <string name="country">البلد : </string>
+    <string name="jordan">الاردن</string>
+    <string name="amount">المجموع : </string>
+    <string name="donate">قدم التبرع</string>
 </resources>

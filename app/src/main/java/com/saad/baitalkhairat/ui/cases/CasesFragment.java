@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.subcategory;
+package com.saad.baitalkhairat.ui.cases;
 
 import android.content.Context;
 import android.view.Menu;
@@ -6,7 +6,7 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentSubCategoryBinding;
+import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
@@ -15,15 +15,15 @@ import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 import javax.inject.Inject;
 
 
-public class SubCategoryFragment extends BaseFragment<FragmentSubCategoryBinding, SubCategoryViewModel>
-        implements SubCategoryNavigator {
+public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewModel>
+        implements CasesNavigator {
 
-    private static final String TAG = SubCategoryFragment.class.getSimpleName();
+    private static final String TAG = CasesFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private SubCategoryViewModel mHomeViewModel;
-    private FragmentSubCategoryBinding mViewBinding;
+    private CasesViewModel mHomeViewModel;
+    private FragmentCasesBinding mViewBinding;
 
 
     @Override
@@ -65,13 +65,13 @@ public class SubCategoryFragment extends BaseFragment<FragmentSubCategoryBinding
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_sub_category;
+        return R.layout.fragment_cases;
     }
 
     @Override
-    public SubCategoryViewModel getViewModel() {
-        mHomeViewModel = (SubCategoryViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(SubCategoryViewModel.class, getViewDataBinding(), this);
+    public CasesViewModel getViewModel() {
+        mHomeViewModel = (CasesViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(CasesViewModel.class, getViewDataBinding(), this);
         return mHomeViewModel;
     }
 

@@ -13,6 +13,7 @@ import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.donors.DonorsFragment;
+import com.saad.baitalkhairat.ui.needy.NeedyFragment;
 
 public class HomeViewModel extends BaseViewModel<HomeNavigator, FragmentHomeBinding> {
 
@@ -59,14 +60,16 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator, FragmentHomeBind
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
         getNavigator().getChildFragment().popBackStack();
-        DonorsFragment fragment = new DonorsFragment();
+
         switch (position) {
             case 0:
-                fragment.setArguments(bundle);
-                return fragment;
+                DonorsFragment donorsFragment = new DonorsFragment();
+                donorsFragment.setArguments(bundle);
+                return donorsFragment;
             default:
-                fragment.setArguments(bundle);
-                return fragment;
+                NeedyFragment needyFragment = new NeedyFragment();
+                needyFragment.setArguments(bundle);
+                return needyFragment;
         }
     }
 

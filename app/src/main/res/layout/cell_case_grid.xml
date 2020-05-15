@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemCaseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cardFavoriteCell"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_167sdp"
+        android:layout_margin="@dimen/_7sdp"
+        android:background="@drawable/shape_rounded_empty_gray_light"
+        android:onClick="@{viewModel::onItemClick}"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_1sdp"
+            android:background="@color/subcategory_grid_text_background"
+            android:gravity="start|center"
+            android:maxLines="3"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:text="@string/all_rights_reserved"
+            android:textColor="@color/subcategory_grid_text_color"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tvCaseIdText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/case_id"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvCaseId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/tvCaseIdText"
+                android:maxLines="3"
+                android:text="1452"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tvCaseTypeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/case_type"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvCaseType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/tvCaseTypeText"
+                android:maxLines="3"
+                android:text="orphan"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tvCountryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/country"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/tvCountryText"
+                android:maxLines="3"
+                android:text="@string/jordan"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tvAmountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/tvAmount"
+                android:maxLines="3"
+                android:text="@string/amount"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:maxLines="3"
+                android:text="100 jd"
+                android:textColor="@color/green"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/imgAddToCart"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/add_to_cart_background"
+                android:padding="@dimen/_5sdp"
+                app:srcCompat="@drawable/ic_add_to_cart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:text="@string/donate"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

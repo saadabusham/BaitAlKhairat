@@ -7,33 +7,33 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Category;
+import com.saad.baitalkhairat.model.Case;
 
 
-public class ItemCategoryViewModel extends BaseObservable {
+public class ItemCaseViewModel extends BaseObservable {
 
     private final Context context;
     RecyclerClick mRecyclerClick;
-    private Category category;
+    private Case caseItem;
     private int position;
 
-    public ItemCategoryViewModel(Context context, Category category, int position, RecyclerClick mRecyclerClick) {
+    public ItemCaseViewModel(Context context, Case caseItem, int position, RecyclerClick mRecyclerClick) {
         this.context = context;
-        this.category = category;
+        this.caseItem = caseItem;
         this.position = position;
         this.mRecyclerClick = mRecyclerClick;
     }
 
-    public Category getCategory() {
-        return category;
+    public Case getCaseItem() {
+        return caseItem;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCaseItem(Case caseItem) {
+        this.caseItem = caseItem;
         notifyChange();
     }
 
     public void onItemClick(View view) {
-        mRecyclerClick.onClick(category, position);
+        mRecyclerClick.onClick(caseItem, position);
     }
 }

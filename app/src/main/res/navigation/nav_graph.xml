@@ -16,17 +16,20 @@
         <action
             android:id="@+id/action_nav_home_to_categoryFragment"
             app:destination="@id/nav_category" />
+        <action
+            android:id="@+id/action_nav_home_to_cases_Fragment"
+            app:destination="@id/casesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_category"
         android:name="com.saad.baitalkhairat.ui.category.CategoryFragment"
         android:label="CategoryFragment">
         <action
-            android:id="@+id/action_nav_category_to_subCategoryFragment"
-            app:destination="@id/subCategoryFragment" />
+            android:id="@+id/action_nav_category_to_cases_Fragment"
+            app:destination="@id/casesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/subCategoryFragment"
-        android:name="com.saad.baitalkhairat.ui.subcategory.SubCategoryFragment"
-        android:label="SubCategoryFragment" />
+        android:id="@+id/casesFragment"
+        android:name="com.saad.baitalkhairat.ui.cases.CasesFragment"
+        android:label="CasesFragment" />
 </navigation>

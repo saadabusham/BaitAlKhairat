@@ -13,6 +13,7 @@ import com.saad.baitalkhairat.ui.auth.otpverifier.OtpVerifierViewModel;
 import com.saad.baitalkhairat.ui.auth.phonenumber.PhoneNumberViewModel;
 import com.saad.baitalkhairat.ui.auth.register.RegisterViewModel;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
+import com.saad.baitalkhairat.ui.cases.CasesViewModel;
 import com.saad.baitalkhairat.ui.category.CategoryViewModel;
 import com.saad.baitalkhairat.ui.donors.DonorsViewModel;
 import com.saad.baitalkhairat.ui.emptyactivity.EmptyActivityViewModel;
@@ -20,8 +21,8 @@ import com.saad.baitalkhairat.ui.emptyfragment.EmptyFragmentViewModel;
 import com.saad.baitalkhairat.ui.filebox.FileBoxViewModel;
 import com.saad.baitalkhairat.ui.home.HomeViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivityViewModel;
+import com.saad.baitalkhairat.ui.needy.NeedyViewModel;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
-import com.saad.baitalkhairat.ui.subcategory.SubCategoryViewModel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -91,9 +92,12 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(CategoryViewModel.class)) {
             //noinspection unchecked
             return (T) new CategoryViewModel(mContext, dataManager, viewDataBinding, navigation);
-        } else if (modelClass.isAssignableFrom(SubCategoryViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(CasesViewModel.class)) {
             //noinspection unchecked
-            return (T) new SubCategoryViewModel(mContext, dataManager, viewDataBinding, navigation);
+            return (T) new CasesViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(NeedyViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NeedyViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

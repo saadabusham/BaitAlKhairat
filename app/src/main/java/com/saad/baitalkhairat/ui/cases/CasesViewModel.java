@@ -1,36 +1,43 @@
-package com.saad.baitalkhairat.ui.category;
+package com.saad.baitalkhairat.ui.cases;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentCategoryBinding;
+import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
+import com.saad.baitalkhairat.model.Case;
 import com.saad.baitalkhairat.model.Category;
 import com.saad.baitalkhairat.repository.DataManager;
-import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
+import com.saad.baitalkhairat.ui.adapter.CaseGridAdapter;
+import com.saad.baitalkhairat.ui.adapter.CaseListAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
+import java.util.ArrayList;
 
-public class CategoryViewModel extends BaseViewModel<CategoryNavigator, FragmentCategoryBinding>
-        implements RecyclerClick<Category> {
 
-    CategoryAdapter categoryAdapter;
+public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesBinding>
+        implements RecyclerClick<Category>, OnLoadMoreListener {
+
+    CaseGridAdapter caseGridAdapter;
+    CaseListAdapter caseListAdapter;
     boolean isRefreshing = false;
     boolean isRetry = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
 
-    public <V extends ViewDataBinding, N extends BaseNavigator> CategoryViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (CategoryNavigator) navigation, (FragmentCategoryBinding) viewDataBinding);
+    ArrayList<Case> caseArrayList;
+
+    public <V extends ViewDataBinding, N extends BaseNavigator> CasesViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
+        super(mContext, dataManager, (CasesNavigator) navigation, (FragmentCasesBinding) viewDataBinding);
     }
 
     @Override
@@ -46,7 +53,26 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
         });
     }
 
+    public void onGridViewClicked() {
+        getViewBinding().imgGridView.setImageResource(R.drawable.ic_gridview_filled);
+        getViewBinding().imgListView.setImageResource(R.drawable.ic_listview_outline);
+        getViewBinding().recyclerView.setLayoutManager(new GridLayoutManager(getMyContext(), 2));
+        getViewBinding().recyclerView.setAdapter(caseGridAdapter);
+        caseListAdapter.setOnLoadMoreListener(null);
+        caseGridAdapter.setOnLoadMoreListener(this::onLoadMore);
+    }
+
+    public void onListViewClicked() {
+        getViewBinding().imgGridView.setImageResource(R.drawable.ic_gridview_outline);
+        getViewBinding().imgListView.setImageResource(R.drawable.ic_listview_filled);
+        getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
+        getViewBinding().recyclerView.setAdapter(caseListAdapter);
+        caseGridAdapter.setOnLoadMoreListener(null);
+        caseListAdapter.setOnLoadMoreListener(this::onLoadMore);
+    }
+
     private void setUpRecycler() {
+        caseArrayList = new ArrayList<>();
         getViewBinding().swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -55,42 +81,34 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
             }
         });
 
-        getViewBinding().recyclerView.setLayoutManager(new GridLayoutManager(getMyContext(), 3));
+        getViewBinding().recyclerView.setLayoutManager(new GridLayoutManager(getMyContext(), 2));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        categoryAdapter = new CategoryAdapter(getMyContext(), this, getViewBinding().recyclerView);
-        getViewBinding().recyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                categoryAdapter.addItem(null);
-                categoryAdapter.notifyItemInserted(categoryAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(categoryAdapter.getItemCount() - 1);
-                setLoadMore(true);
-                getData();
-            }
-        });
+        caseGridAdapter = new CaseGridAdapter(getMyContext(), caseArrayList, this, getViewBinding().recyclerView);
+        caseListAdapter = new CaseListAdapter(getMyContext(), caseArrayList, this, getViewBinding().recyclerView);
+        getViewBinding().recyclerView.setAdapter(caseGridAdapter);
+        caseGridAdapter.setOnLoadMoreListener(this::onLoadMore);
         getLocalData();
     }
 
     private void getLocalData() {
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
+        caseArrayList.add(new Case());
     }
 
     public void getData() {
@@ -140,7 +158,8 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
         getViewBinding().recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                categoryAdapter.notifyDataSetChanged();
+                caseGridAdapter.notifyDataSetChanged();
+                caseListAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -148,8 +167,9 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
     @Override
     public void onClick(Category category, int position) {
 //        Bundle data = new Bundle();
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_category_to_cases_Fragment);
+//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                .navigate(R.id.action_tribeEldersFragment_to_tribeElderDetailsFragment,
+//                        data);
 
     }
 
@@ -199,7 +219,7 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
         getViewBinding().layoutNoDataFound.btnRetry.setVisibility(View.VISIBLE);
         setRetry(false);
         if (isSuccess) {
-            categoryAdapter.clearItems();
+            caseArrayList.clear();
             getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
             getViewBinding().swipeRefreshLayout.setEnabled(true);
         }
@@ -207,9 +227,19 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {
-            categoryAdapter.clearItems();
+            caseArrayList.clear();
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);
+    }
+
+    @Override
+    public void onLoadMore() {
+        caseArrayList.add(null);
+        caseGridAdapter.notifyItemInserted(caseArrayList.size() - 1);
+        caseListAdapter.notifyItemInserted(caseArrayList.size() - 1);
+        getViewBinding().recyclerView.scrollToPosition(caseArrayList.size() - 1);
+        setLoadMore(true);
+        getData();
     }
 }

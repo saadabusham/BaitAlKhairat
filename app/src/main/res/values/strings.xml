@@ -249,4 +249,10 @@
     <string name="humanitarian_cases">Humanitarian cases</string>
     <string name="view_all">view all</string>
     <string name="filter">Filter</string>
+    <string name="case_id">Case ID : </string>
+    <string name="case_type">Case type : </string>
+    <string name="country">Country : </string>
+    <string name="jordan">Jordan</string>
+    <string name="amount">Amount : </string>
+    <string name="donate">Donate</string>
 </resources>

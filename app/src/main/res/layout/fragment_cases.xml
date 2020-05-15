@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.subcategory.SubCategoryViewModel" />
+            type="com.saad.baitalkhairat.ui.cases.CasesViewModel" />
     </data>
 
     <LinearLayout
@@ -58,18 +58,17 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:gravity="center">
 
-                <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    app:srcCompat="@drawable/ic_filter" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
                     android:text="@string/filter"
                     android:textColor="@color/black" />
 
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    app:srcCompat="@drawable/ic_filter" />
 
             </LinearLayout>
 

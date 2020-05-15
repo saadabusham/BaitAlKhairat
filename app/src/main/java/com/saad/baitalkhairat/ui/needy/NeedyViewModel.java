@@ -1,35 +1,34 @@
-package com.saad.baitalkhairat.ui.subcategory;
+package com.saad.baitalkhairat.ui.needy;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentSubCategoryBinding;
+import com.saad.baitalkhairat.databinding.FragmentNeedyBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Category;
+import com.saad.baitalkhairat.model.Needy;
 import com.saad.baitalkhairat.repository.DataManager;
-import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
+import com.saad.baitalkhairat.ui.adapter.NeedyAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
 
-public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, FragmentSubCategoryBinding>
-        implements RecyclerClick<Category> {
+public class NeedyViewModel extends BaseViewModel<NeedyNavigator, FragmentNeedyBinding>
+        implements RecyclerClick<Needy> {
 
-    CategoryAdapter categoryAdapter;
+    NeedyAdapter needyAdapter;
     boolean isRefreshing = false;
     boolean isRetry = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
 
-    public <V extends ViewDataBinding, N extends BaseNavigator> SubCategoryViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (SubCategoryNavigator) navigation, (FragmentSubCategoryBinding) viewDataBinding);
+    public <V extends ViewDataBinding, N extends BaseNavigator> NeedyViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
+        super(mContext, dataManager, (NeedyNavigator) navigation, (FragmentNeedyBinding) viewDataBinding);
     }
 
     @Override
@@ -45,18 +44,6 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
         });
     }
 
-    public void onGridViewClicked() {
-        getViewBinding().imgGridView.setImageResource(R.drawable.ic_gridview_filled);
-
-        getViewBinding().imgListView.setImageResource(R.drawable.ic_listview_outline);
-    }
-
-    public void onListViewClicked() {
-        getViewBinding().imgGridView.setImageResource(R.drawable.ic_gridview_outline);
-
-        getViewBinding().imgListView.setImageResource(R.drawable.ic_listview_filled);
-    }
-
     private void setUpRecycler() {
         getViewBinding().swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -66,16 +53,16 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
             }
         });
 
-        getViewBinding().recyclerView.setLayoutManager(new GridLayoutManager(getMyContext(), 3));
+        getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        categoryAdapter = new CategoryAdapter(getMyContext(), this, getViewBinding().recyclerView);
-        getViewBinding().recyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+        needyAdapter = new NeedyAdapter(getMyContext(), this, getViewBinding().recyclerView);
+        getViewBinding().recyclerView.setAdapter(needyAdapter);
+        needyAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                categoryAdapter.addItem(null);
-                categoryAdapter.notifyItemInserted(categoryAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(categoryAdapter.getItemCount() - 1);
+                needyAdapter.addItem(null);
+                needyAdapter.notifyItemInserted(needyAdapter.getItemCount() - 1);
+                getViewBinding().recyclerView.scrollToPosition(needyAdapter.getItemCount() - 1);
                 setLoadMore(true);
                 getData();
             }
@@ -84,24 +71,24 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
     }
 
     private void getLocalData() {
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
+        needyAdapter.addItem(new Needy());
     }
 
     public void getData() {
@@ -151,17 +138,16 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
         getViewBinding().recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                categoryAdapter.notifyDataSetChanged();
+                needyAdapter.notifyDataSetChanged();
             }
         });
     }
 
     @Override
-    public void onClick(Category category, int position) {
+    public void onClick(Needy needy, int position) {
 //        Bundle data = new Bundle();
 //        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                .navigate(R.id.action_tribeEldersFragment_to_tribeElderDetailsFragment,
-//                        data);
+//                .navigate(R.id.action_nav_category_to_subCategoryFragment);
 
     }
 
@@ -211,7 +197,7 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
         getViewBinding().layoutNoDataFound.btnRetry.setVisibility(View.VISIBLE);
         setRetry(false);
         if (isSuccess) {
-            categoryAdapter.clearItems();
+            needyAdapter.clearItems();
             getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
             getViewBinding().swipeRefreshLayout.setEnabled(true);
         }
@@ -219,7 +205,7 @@ public class SubCategoryViewModel extends BaseViewModel<SubCategoryNavigator, Fr
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {
-            categoryAdapter.clearItems();
+            needyAdapter.clearItems();
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);

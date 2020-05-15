@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -195,6 +196,8 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
 //        data.putString("categoryName", category.getName());
 //        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_home_to_servicesFragment,
 //                data);
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_nav_home_to_cases_Fragment);
 
     }
 
