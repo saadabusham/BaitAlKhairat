@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarColoredBackArrowDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:gravity="center|top"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edFacebookLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/facebook_link"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edTwitterLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/twitter_link"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edYoutubeLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/youtube_link"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edInstagramLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/instagram_link"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edLinkedInLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/linked_in_link"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSignup"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/tablayout_gray"
+                android:enabled="false"
+                android:onClick="@{() -> viewModel.onSaveClick()}"
+                android:text="@string/sign_up"
+                android:textColor="@color/login_text_gray" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

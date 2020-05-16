@@ -51,14 +51,21 @@ public class MyInfoListViewModel extends BaseViewModel<MyInfoListNavigator, Frag
 
     @Override
     public void onClick(int position) {
-//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
 
         switch (position) {
             case 0:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_myInfoListFragment_to_editProfileFragment);
                 break;
+            case 1:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_myInfoListFragment_to_userDegreeFragment);
+                break;
+            case 2:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_myInfoListFragment_to_userSocialLinksFragment);
+                break;
+
         }
     }
 }

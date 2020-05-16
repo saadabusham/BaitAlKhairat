@@ -100,9 +100,9 @@
     <string name="my_wallet">محفظتي</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
     <string name="basic_information">معلومات أساسية</string>
-    <string name="information_about_my_degree">معلومات حول درجة  تعليمي</string>
+    <string name="information_about_my_degree">معلومات حول درجة تعليمي</string>
     <string name="social_links">روابط اجتماعية</string>
-    <string name="my_identification_papers">اوراقي الثبوتية</string>
+    <string name="my_identification_papers">اوراق الثبوتية</string>
     <string name="save">حفظ</string>
     <string name="about_me">معلومات حولي</string>
     <string name="camera">الكاميرا</string>
@@ -115,5 +115,18 @@
     <string name="married">متزوج</string>
     <string name="widower">ارمل</string>
     <string name="deforced">مطلق</string>
+    <string name="facebook_link">رابط الفيسبوك</string>
+    <string name="twitter_link">رابط التويتر</string>
+    <string name="youtube_link">رابط اليوتيوب</string>
+    <string name="instagram_link">رابط الانستغرام</string>
+    <string name="linked_in_link">رابط الينكدان</string>
+    <string name="start_date">تاريخ البداية</string>
+    <string name="graduation_date">تاريخ التخرج</string>
+    <string name="school_university">المدرسة/الجامعة</string>
+    <string name="specialization">التخصص</string>
+    <string name="start_date_is_required">تاريخ البداية اجباري</string>
+    <string name="graduation_day_is_required">تاريخ التخرج اجباري</string>
+    <string name="specialization_is_required">التخصص اجباري</string>
+    <string name="school_university_is_required">المدرسة/الجامعة اجبارية</string>
 
 </resources>

@@ -112,9 +112,23 @@
         <action
             android:id="@+id/action_myInfoListFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_myInfoListFragment_to_userSocialLinksFragment"
+            app:destination="@id/userSocialLinksFragment" />
+        <action
+            android:id="@+id/action_myInfoListFragment_to_userDegreeFragment"
+            app:destination="@id/userDegreeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileFragment"
         android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/userSocialLinksFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksFragment"
+        android:label="UserSocialLinksFragment" />
+    <fragment
+        android:id="@+id/userDegreeFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.userdegree.UserDegreeFragment"
+        android:label="UserDegreeFragment" />
 </navigation>

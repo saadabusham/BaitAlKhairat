@@ -327,5 +327,17 @@
     <string name="married">Married</string>
     <string name="widower">Widower</string>
     <string name="deforced">Deforced</string>
-
+    <string name="facebook_link">Facebook link</string>
+    <string name="twitter_link">Twitter link</string>
+    <string name="youtube_link">Youtube link</string>
+    <string name="instagram_link">Instagram link</string>
+    <string name="linked_in_link">linkedIn link</string>
+    <string name="graduation_date">Graduation date</string>
+    <string name="start_date">Start date</string>
+    <string name="school_university">School/University</string>
+    <string name="specialization">Specialization</string>
+    <string name="start_date_is_required">Start date is required</string>
+    <string name="graduation_day_is_required">graduation date is required</string>
+    <string name="specialization_is_required">Specialization is required</string>
+    <string name="school_university_is_required">School/University is required</string>
 </resources>
