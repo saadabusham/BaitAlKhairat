@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -18,6 +19,7 @@ import com.saad.baitalkhairat.ui.auth.loginJourney.login.LoginFragment;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
+import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -119,5 +121,10 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
                         }
                     }));
         }
+    }
+
+    public int getGravity() {
+        return LanguageUtils.getLanguage(getMyContext()).equals("ar")
+                ? Gravity.RIGHT : Gravity.LEFT;
     }
 }
