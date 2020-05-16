@@ -7,9 +7,10 @@
         </shape>
     </item>
     <item
-        android:bottom="2dp"
+        android:bottom="4dp"
         android:left="1dp"
-        android:right="1dp">
+        android:right="1dp"
+        android:top="1dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/white" />
             <corners android:radius="@dimen/_2sdp" />

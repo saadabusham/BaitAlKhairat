@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/cardFavoriteCell"
         android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_167sdp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:background="@drawable/shape_rounded_empty_gray_light"
         android:onClick="@{viewModel::onItemClick}"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_margin="@dimen/_1sdp"
-            android:background="@color/subcategory_grid_text_background"
+            android:background="@color/cases_grid_text_background"
             android:gravity="start|center"
             android:maxLines="3"
             android:paddingStart="@dimen/_5sdp"
@@ -164,6 +164,7 @@
                 android:layout_alignParentStart="true"
                 android:background="@drawable/add_to_cart_background"
                 android:padding="@dimen/_5sdp"
+                android:onClick="@{viewModel::onAddToCartClick}"
                 app:srcCompat="@drawable/ic_add_to_cart" />
 
             <TextView
@@ -174,6 +175,7 @@
                 android:background="@color/orange"
                 android:gravity="center"
                 android:text="@string/donate"
+                android:onClick="@{viewModel::onDonateClick}"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </LinearLayout>

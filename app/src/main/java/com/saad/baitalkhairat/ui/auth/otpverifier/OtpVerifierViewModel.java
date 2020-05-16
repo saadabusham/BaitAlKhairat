@@ -1,40 +1,34 @@
 package com.saad.baitalkhairat.ui.auth.otpverifier;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.ActivityOtpVerifierBinding;
-import com.saad.baitalkhairat.enums.DialogTypes;
+import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
-import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.helper.SessionManager;
-import com.saad.baitalkhairat.model.RegisterResponse;
-import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.VerifyPhoneResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
-import com.saad.baitalkhairat.ui.auth.createpassword.CreatePasswordActivity;
-import com.saad.baitalkhairat.ui.auth.login.LoginActivity;
-import com.saad.baitalkhairat.ui.auth.register.RegisterActivity;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
-import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.utils.TimeUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, ActivityOtpVerifierBinding> {
+public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, FragmentOtpVerifierBinding> {
 
     int type;
     long milliToFinish = 90000;
     String token = "";
+
     CountDownTimer countDownTimer = new CountDownTimer(milliToFinish, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -44,110 +38,58 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
         @Override
         public void onFinish() {
             milliToFinish = 0;
-            getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.colorPrimaryDark));
+            getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.green));
+            getViewBinding().tvTimeToSecond.setTextColor(getMyContext().getResources().getColor(R.color.green));
         }
     };
 
     public <V extends ViewDataBinding, N extends BaseNavigator> OtpVerifierViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (OtpVerifierNavigator) navigation, (ActivityOtpVerifierBinding) viewDataBinding);
+        super(mContext, dataManager, (OtpVerifierNavigator) navigation, (FragmentOtpVerifierBinding) viewDataBinding);
         setOtpTextWatcher();
         countDownTimer.start();
     }
 
+    @Override
+    protected void setUp() {
+        token = getNavigator().getToken();
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public void verifyCode() {
-        if (isValidate()) {
-            getDataManager().getAuthService().getDataApi().verifyCode(token, getOtp())
-                    .toObservable()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
-                        @Override
-                        public void onSuccess(String response) {
-                            if (((OtpVerifierActivity) getMyContext()).getType() == PhoneNumberTypes.REGISTER.getValue()) {
-                                getMyContext().startActivity
-                                        (RegisterActivity.newIntent(getMyContext(), token));
-                            } else if (((OtpVerifierActivity) getMyContext()).getType() == PhoneNumberTypes.REGISTER_SOCIAL.getValue()) {
-                                if (User.getObjUser() == null) {
-                                    showErrorDialog();
-                                } else {
-                                    registerSocial();
-                                }
-                            } else if (((OtpVerifierActivity) getMyContext()).getType() == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
-                                getMyContext().startActivity
-                                        (CreatePasswordActivity.newIntent(getMyContext(), token));
-                            }
-                        }
-
-                        @Override
-                        public void onError(String error, int errorCode) {
-                            showToast(error);
-                        }
-                    }));
-
-//            }
+//        if (isValidate()) {
+//            getDataManager().getAuthService().getDataApi().verifyCode(token, getOtp())
+//                    .toObservable()
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribeOn(Schedulers.io())
+//                    .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
+//                        @Override
+//                        public void onSuccess(String response) {
+//                            if (type == PhoneNumberTypes.REGISTER.getValue()) {
+//
+//                            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
+//                                getMyContext().startActivity
+//                                        (CreatePasswordActivity.newIntent(getMyContext(), token));
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(String error, int errorCode) {
+//                            showToast(error);
+//                        }
+//                    }));
+//
+////            }
+//        }
+        if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
+            Bundle data = new Bundle();
+            data.putString("token", token);
+            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                    .navigate(R.id.createPasswordFragment, data);
         }
     }
-
-    private void showErrorDialog() {
-        new OnLineDialog(getMyContext()) {
-            @Override
-            public void onPositiveButtonClicked() {
-                SessionManager.logoutUser();
-                dismiss();
-                getBaseActivity().finishAffinity();
-                getBaseActivity().startActivity(LoginActivity.newIntent(getMyContext()));
-            }
-
-            @Override
-            public void onNegativeButtonClicked() {
-
-            }
-        }.showConfirmationDialog(DialogTypes.OK,
-                getMyContext().getResources().getString(R.string.error),
-                getMyContext().getResources().getString(R.string.error_to_register_with_socail_please_try_again));
-    }
-
-    private void registerSocial() {
-        getDataManager().getAuthService().getDataApi().registerUser(getUserObj())
-                .toObservable()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponse<RegisterResponse>(getMyContext(), true, new APICallBack<RegisterResponse>() {
-                    @Override
-                    public void onSuccess(RegisterResponse response) {
-                        User user = response.getUser();
-                        user.setToken(response.getJwt_token());
-                        User.getInstance().setObjUser(user);
-                        SessionManager.createUserLoginSession();
-                        getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
-                            @Override
-                            public void onSuccess(Object response) {
-                                getBaseActivity().finishAffinity();
-//                                getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
-                            }
-
-                            @Override
-                            public void onError(String error, int errorCode) {
-                                showErrorDialog();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(String error, int errorCode) {
-                        showErrorDialog();
-                    }
-                }));
-    }
-
-    private User getUserObj() {
-        User user = User.getInstance();
-        user.setToken(getNavigator().getToken());
-        user.setPassword(GeneralFunction.generateRandomPassword());
-        user.setPassword_confirmation(user.getPassword());
-        return user;
-    }
-
     public void resendCode() {
         if (milliToFinish == 0) {
             getDataManager().getAuthService().getDataApi().resendCode(token)
@@ -171,25 +113,55 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
         }
     }
 
+    public void onEditClick() {
+        popUp();
+    }
+
     public boolean isValidate() {
         int error = 0;
         if (getViewBinding().userOtp1.getText().toString().isEmpty()) {
-            getViewBinding().userOtp1.setHintTextColor(getMyContext().getResources().getColor(R.color.Rose));
+            getViewBinding().userOtp1.setHintTextColor(getMyContext().getResources().getColor(R.color.red));
             error = +1;
         }
         if (getViewBinding().userOtp2.getText().toString().isEmpty()) {
-            getViewBinding().userOtp2.setHintTextColor(getMyContext().getResources().getColor(R.color.Rose));
+            getViewBinding().userOtp2.setHintTextColor(getMyContext().getResources().getColor(R.color.red));
             error = +1;
         }
         if (getViewBinding().userOtp3.getText().toString().isEmpty()) {
-            getViewBinding().userOtp3.setHintTextColor(getMyContext().getResources().getColor(R.color.Rose));
+            getViewBinding().userOtp3.setHintTextColor(getMyContext().getResources().getColor(R.color.red));
             error = +1;
         }
         if (getViewBinding().userOtp4.getText().toString().isEmpty()) {
-            getViewBinding().userOtp4.setHintTextColor(getMyContext().getResources().getColor(R.color.Rose));
+            getViewBinding().userOtp4.setHintTextColor(getMyContext().getResources().getColor(R.color.red));
             error = +1;
         }
+        if (error == 0)
+            checkValidate(true);
+        else
+            checkValidate(false);
+
         return error == 0;
+    }
+
+    private void checkValidate(boolean isValid) {
+        if (isValid) {
+            getViewBinding().btnVerifyCode.setBackgroundColor(getMyContext().getResources().getColor(R.color.orange_login_button));
+            getViewBinding().btnVerifyCode.setTextColor(getMyContext().getResources().getColor(R.color.white));
+            getViewBinding().btnVerifyCode.setEnabled(true);
+        } else {
+            getViewBinding().btnVerifyCode.setBackgroundColor(getMyContext().getResources().getColor(R.color.tablayout_gray));
+            getViewBinding().btnVerifyCode.setTextColor(getMyContext().getResources().getColor(R.color.login_text_gray));
+            getViewBinding().btnVerifyCode.setEnabled(false);
+        }
+    }
+
+    public String getOtp() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getViewBinding().userOtp1.getText().toString());
+        stringBuilder.append(getViewBinding().userOtp2.getText().toString());
+        stringBuilder.append(getViewBinding().userOtp3.getText().toString());
+        stringBuilder.append(getViewBinding().userOtp4.getText().toString());
+        return stringBuilder.toString();
     }
 
     public void setOtpTextWatcher() {
@@ -204,6 +176,7 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
                 if (s.toString().length() == 1) {
                     getViewBinding().userOtp2.requestFocus();
                 }
+                isValidate();
             }
 
             @Override
@@ -223,6 +196,7 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
                 if (s.toString().length() == 1) {
                     getViewBinding().userOtp3.requestFocus();
                 }
+                isValidate();
             }
 
             @Override
@@ -242,6 +216,7 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
                 if (s.toString().length() == 1) {
                     getViewBinding().userOtp4.requestFocus();
                 }
+                isValidate();
             }
 
             @Override
@@ -249,28 +224,23 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Ac
 
             }
         });
-    }
 
-    public String getOtp() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getViewBinding().userOtp1.getText().toString());
-        stringBuilder.append(getViewBinding().userOtp2.getText().toString());
-        stringBuilder.append(getViewBinding().userOtp3.getText().toString());
-        stringBuilder.append(getViewBinding().userOtp4.getText().toString());
-        return stringBuilder.toString();
-    }
+        getViewBinding().userOtp4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    public void setType(int type) {
-        this.type = type;
-        if (type == PhoneNumberTypes.CHANGE_PHONE_NUMBER.getValue()) {
-            getViewBinding().tvTitle.setText(getMyContext().getResources().getString(R.string.change_phone_number));
-        } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
-            getViewBinding().tvTitle.setText(getMyContext().getResources().getString(R.string.forget_password));
-        }
-    }
+            }
 
-    @Override
-    protected void setUp() {
-        token = getNavigator().getToken();
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                isValidate();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 }

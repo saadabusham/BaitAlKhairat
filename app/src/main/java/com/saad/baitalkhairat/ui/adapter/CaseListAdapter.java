@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.saad.baitalkhairat.databinding.CellCaseListBinding;
 import com.saad.baitalkhairat.databinding.CellLoadMoreBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
-import com.saad.baitalkhairat.interfaces.RecyclerClick;
+import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
 import com.saad.baitalkhairat.model.Case;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemCaseViewModel;
@@ -25,12 +25,12 @@ public class CaseListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final int VIEW_PROG = 0;
     private final List<Case> caseList;
     Context mContext;
-    RecyclerClick mRecyclerClick;
+    RecyclerClickWithCase mRecyclerClick;
     private int lastVisibleItem, totalItemCount;
     private boolean loading;
     private OnLoadMoreListener loadMoreListener;
 
-    public CaseListAdapter(Context mContext, ArrayList<Case> caseList, RecyclerClick mRecyclerClick, RecyclerView recyclerView) {
+    public CaseListAdapter(Context mContext, ArrayList<Case> caseList, RecyclerClickWithCase mRecyclerClick, RecyclerView recyclerView) {
         this.caseList = caseList;
         this.mContext = mContext;
         this.mRecyclerClick = mRecyclerClick;

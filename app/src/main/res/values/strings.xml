@@ -9,13 +9,10 @@
     <string name="Loading">Loading ...</string>
     <string name="log_in">Login</string>
     <string name="welcome">Welcome</string>
-    <string name="phone_number">Phone number</string>
-    <string name="password">Password</string>
-    <string name="forget_password">Forget password?</string>
+
+
     <string name="do_not_have_an_account">Do not have an account?</string>
-    <string name="sign_up">sign up</string>
-    <string name="this_fieled_is_required">This fieled is required</string>
-    <string name="the_phone_number_is_required">The phone number is required</string>
+
     <string name="permission_denied_you_cannot_access_location_data_and_camera">Permission denied you can not access location data and camera</string>
     <string name="OK">OK</string>
     <string name="Cancel">Cancel</string>
@@ -26,8 +23,8 @@
     <string name="new_user">New user</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
-    <string name="email">E-mail</string>
-    <string name="confirm_password">Confirm password</string>
+
+
     <string name="profile_picture">Profile picture</string>
     <string name="upload_picture">Upload picture</string>
     <string name="i_have_read_and_agree">I have read and agree</string>
@@ -39,26 +36,19 @@
     <string name="select_option">Select option</string>
     <string name="download">Download</string>
     <string name="downloading_failed">Downloading failed</string>
-    <string name="user_name_is_required">User name is required</string>
     <string name="last_name_is_required">Last name is required</string>
-    <string name="email_is_required">Email is required</string>
-    <string name="password_is_required">Password is required</string>
-    <string name="does_not_match">Does not match</string>
+
     <string name="condition_and_terms">condition and terms</string>
     <string name="you_should_accpet_our_condition_and_terms">You should accept our condition and terms</string>
     <string name="guest">Guest</string>
     <string name="Or_login_with">Or login with</string>
-    <string name="gender">Gender</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="birthdate">Birth date</string>
-    <string name="birthdate_is_required">Birthdate is required</string>
+
+
     <string name="send_code">Send code</string>
     <string name="verify_code">Verify code</string>
     <string name="didnt_receive_code">Did not receive code?</string>
-    <string name="resend_code">Resend code</string>
+
     <string name="change_phone_number">Change phone number</string>
-    <string name="register">Register</string>
     <string name="change_password">Change password</string>
     <string name="home">Home</string>
     <string name="orders">orders</string>
@@ -75,16 +65,16 @@
     <string name="server_error">Server error</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="error_parsing_entity">Error parsing entity</string>
-    <string name="login">Login</string>
+
     <string name="please_login_to_continue">Please login to continue</string>
     <string name="enter_your_phone_number_to_register">Enter your phone number to register</string>
     <string name="enter_your_phone_number_to_create_new_password">Enter your phone number to create new password</string>
     <string name="enter_your_new_phone_number_to_confirm">Enter your new phone number to confirm</string>
     <string name="please_enter_the_activation_code_that_was_sent_to_your_phone">Please enter the activation code that was sent to your phone</string>
     <string name="please_fill_your_phone_number">Please fill your phone number</string>
-    <string name="user_name">Username</string>
+
     <string name="please_fill_your_information_to_continue">Please fill your information to continue</string>
-    <string name="confirm">Confirm</string>
+
     <string name="myorders">My orders</string>
     <string name="wallet">Wallet</string>
     <string name="settings">Settings</string>
@@ -96,14 +86,12 @@
     <string name="yes">Yes</string>
     <string name="hello">Hello ,</string>
 
-    <string name="year">year</string>
-    <string name="month">month</string>
+
     <string name="week">week</string>
     <string name="hour">hour</string>
     <string name="minute">minute</string>
     <string name="second">second</string>
     <string name="now">now</string>
-    <string name="day">day</string>
     <string name="save_changes">Save changes</string>
     <string name="help">help</string>
     <string name="please_choose_your_preferred_language">Please choose your preferred language</string>
@@ -198,7 +186,7 @@
     <string name="total">Total</string>
     <string name="price_after_discount">Price after discount</string>
     <string name="old_password">Old password</string>
-    <string name="new_password">New password</string>
+
     <string name="confirm_new_password">Confirm new password</string>
     <string name="type_here">Type here</string>
     <string name="extra_option">Extra options</string>
@@ -255,4 +243,55 @@
     <string name="jordan">Jordan</string>
     <string name="amount">Amount : </string>
     <string name="donate">Donate</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="filter_search">Filter search</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="country_original">Country</string>
+    <string name="case_type_original">Case type</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="please_enter_your_phone_number_and_password">Please enter your phone number and password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="login_or_register">Login or register</string>
+    <string name="jordan_code">+962</string>
+    <string name="register_new">Register new Account</string>
+    <string name="create_an_account_with_your_phone_number">Create an account with your phone number</string>
+    <string name="you_will_receive_a_four_digit_confirmation_number_after_completing_the_registration">You will receive a four-digit confirmation number after completing the registration</string>
+    <string name="user_name">Please enter your full name</string>
+    <string name="please_enter_your_phone_number">Please enter your phone number</string>
+    <string name="email">Enter your E-mail</string>
+    <string name="by_clicking_on_register_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">By clicking on Register now, you agree to the terms and conditions for the Khairat platform</string>
+    <string name="select_gender">Select gender</string>
+    <string name="country_of_residence">Country of residence</string>
+    <string name="enter_new_password">Enter new Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="birthday">Birthday</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+    <string name="this_fieled_is_required">This filled is required</string>
+    <string name="the_phone_number_is_required">The phone number is required</string>
+    <string name="user_name_is_required">User name is required</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="does_not_match">Does not match</string>
+    <string name="birthday_is_required">Birthday is required</string>
+    <string name="verification_code">Verification code</string>
+    <string name="verification_code_sent_to">Verification code sent to</string>
+    <string name="resend_code">Resend code</string>
+    <string name="use_your_phone_number">Use your phone number</string>
+    <string name="you_will_receive_a_four_digit_confirmation_number_to_complete_the_change_of_the_password">You will receive a four-digit confirmation number to complete the change of the password</string>
+    <string name="send">Send</string>
+    <string name="reset_password">Reset password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm">Confirm</string>
+    <string name="Hello">Hello !!</string>
+    <string name="register_or_create_a_new_account_to_log_in">Register or create a new account to \nlog in</string>
+
 </resources>

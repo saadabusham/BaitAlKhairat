@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.cases.CasesViewModel" />
+            type="com.saad.baitalkhairat.ui.intro.cases.CasesViewModel" />
     </data>
 
     <LinearLayout
@@ -30,23 +30,24 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_22sdp"
                 android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/imgGridView"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:onClick="@{()-> viewModel.onGridViewClicked()}"
-                    app:srcCompat="@drawable/ic_gridview_filled" />
 
                 <ImageView
                     android:id="@+id/imgListView"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:onClick="@{()->viewModel.onListViewClicked()}"
                     app:srcCompat="@drawable/ic_listview_outline" />
+
+                <ImageView
+                    android:id="@+id/imgGridView"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:onClick="@{()-> viewModel.onGridViewClicked()}"
+                    app:srcCompat="@drawable/ic_gridview_filled" />
+
 
             </LinearLayout>
 
@@ -55,8 +56,9 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:gravity="center">
+                android:layout_marginEnd="@dimen/_22sdp"
+                android:gravity="center"
+                android:onClick="@{()-> viewModel.onFilterClicked()}">
 
                 <TextView
                     android:layout_width="wrap_content"

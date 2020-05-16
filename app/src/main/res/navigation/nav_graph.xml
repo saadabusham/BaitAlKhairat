@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.saad.baitalkhairat.ui.home.HomeFragment"
+        android:name="com.saad.baitalkhairat.ui.intro.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -19,10 +19,13 @@
         <action
             android:id="@+id/action_nav_home_to_cases_Fragment"
             app:destination="@id/casesFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_signInHolderFragment"
+            app:destination="@id/signInHolderFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_category"
-        android:name="com.saad.baitalkhairat.ui.category.CategoryFragment"
+        android:name="com.saad.baitalkhairat.ui.intro.category.CategoryFragment"
         android:label="CategoryFragment">
         <action
             android:id="@+id/action_nav_category_to_cases_Fragment"
@@ -30,6 +33,45 @@
     </fragment>
     <fragment
         android:id="@+id/casesFragment"
-        android:name="com.saad.baitalkhairat.ui.cases.CasesFragment"
-        android:label="CasesFragment" />
+        android:name="com.saad.baitalkhairat.ui.intro.cases.CasesFragment"
+        android:label="CasesFragment">
+        <action
+            android:id="@+id/action_casesFragment_to_caseDetailsFragment"
+            app:destination="@id/caseDetailsFragment" />
+        <action
+            android:id="@+id/action_casesFragment_to_filterCasesFragment"
+            app:destination="@id/filterCasesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/caseDetailsFragment"
+        android:name="com.saad.baitalkhairat.ui.intro.casedetails.CaseDetailsFragment"
+        android:label="CaseDetailsFragment" />
+    <fragment
+        android:id="@+id/filterCasesFragment"
+        android:name="com.saad.baitalkhairat.ui.intro.filtercases.FilterCasesFragment"
+        android:label="FilterCasesFragment" />
+    <fragment
+        android:id="@+id/signInHolderFragment"
+        android:name="com.saad.baitalkhairat.ui.auth.signinholder.SignInHolderFragment"
+        android:label="SignInHolderFragment" />
+    <fragment
+        android:id="@+id/otpVerifierFragment"
+        android:name="com.saad.baitalkhairat.ui.auth.otpverifier.OtpVerifierFragment"
+        android:label="OtpVerifierFragment" />
+    <fragment
+        android:id="@+id/verifyPhoneNumberFragment"
+        android:name="com.saad.baitalkhairat.ui.auth.verifyphonenumber.VerifyPhoneNumberFragment"
+        android:label="VerifyPhoneNumberFragment" />
+    <fragment
+        android:id="@+id/createPasswordFragment"
+        android:name="com.saad.baitalkhairat.ui.auth.createpassword.CreatePasswordFragment"
+        android:label="CreatePasswordFragment" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.account.AccountFragment"
+        android:label="AccountFragment">
+        <action
+            android:id="@+id/action_nav_account_to_signInHolderFragment"
+            app:destination="@id/signInHolderFragment" />
+    </fragment>
 </navigation>

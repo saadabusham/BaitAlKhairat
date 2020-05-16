@@ -25,7 +25,7 @@ public class EmptyFragment extends BaseFragment<FragmentEmptyBinding, EmptyFragm
 
     @Inject
     ViewModelProviderFactory factory;
-    private EmptyFragmentViewModel mEmptyViewModel;
+    private EmptyFragmentViewModel mViewModel;
     private FragmentEmptyBinding mViewBinding;
 
 
@@ -73,9 +73,9 @@ public class EmptyFragment extends BaseFragment<FragmentEmptyBinding, EmptyFragm
 
     @Override
     public EmptyFragmentViewModel getViewModel() {
-        mEmptyViewModel = (EmptyFragmentViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+        mViewModel = (EmptyFragmentViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
                 .create(EmptyFragmentViewModel.class, getViewDataBinding(), this);
-        return mEmptyViewModel;
+        return mViewModel;
     }
 
     @Override
@@ -86,8 +86,8 @@ public class EmptyFragment extends BaseFragment<FragmentEmptyBinding, EmptyFragm
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
-        mEmptyViewModel.getLoadingStatus().observe(this, new LoadingObserver());
-        mEmptyViewModel.getData().observe(this, new DataObserver());
+        mViewModel.getLoadingStatus().observe(this, new LoadingObserver());
+        mViewModel.getData().observe(this, new DataObserver());
 //        mEmptyViewModel.loadData();
     }
 

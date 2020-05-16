@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_notification_nav"
         android:title="@string/wallet" />
     <item
-        android:id="@+id/nav_settings"
+        android:id="@+id/nav_account"
         android:icon="@drawable/ic_account_nav"
         android:title="@string/settings" />
 

@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.saad.baitalkhairat.R;
@@ -80,5 +81,11 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
     @Override
     public void onClick(int position) {
 
+        switch (position) {
+            case 7:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.signInHolderFragment);
+                break;
+        }
     }
 }

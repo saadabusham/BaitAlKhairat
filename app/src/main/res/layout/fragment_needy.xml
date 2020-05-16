@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.needy.NeedyViewModel" />
+            type="com.saad.baitalkhairat.ui.intro.needy.NeedyViewModel" />
     </data>
 
     <LinearLayout

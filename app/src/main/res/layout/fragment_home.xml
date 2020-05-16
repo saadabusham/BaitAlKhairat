@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.home.HomeViewModel" />
+            type="com.saad.baitalkhairat.ui.intro.home.HomeViewModel" />
     </data>
 
     <LinearLayout

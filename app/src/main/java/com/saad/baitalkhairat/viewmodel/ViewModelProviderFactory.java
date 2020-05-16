@@ -8,20 +8,24 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.auth.createpassword.CreatePasswordViewModel;
-import com.saad.baitalkhairat.ui.auth.login.LoginViewModel;
+import com.saad.baitalkhairat.ui.auth.loginJourney.login.LoginViewModel;
 import com.saad.baitalkhairat.ui.auth.otpverifier.OtpVerifierViewModel;
-import com.saad.baitalkhairat.ui.auth.phonenumber.PhoneNumberViewModel;
-import com.saad.baitalkhairat.ui.auth.register.RegisterViewModel;
+import com.saad.baitalkhairat.ui.auth.registerJourney.register.RegisterViewModel;
+import com.saad.baitalkhairat.ui.auth.signinholder.SignInHolderViewModel;
+import com.saad.baitalkhairat.ui.auth.verifyphonenumber.VerifyPhoneNumberViewModel;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
-import com.saad.baitalkhairat.ui.cases.CasesViewModel;
-import com.saad.baitalkhairat.ui.category.CategoryViewModel;
-import com.saad.baitalkhairat.ui.donors.DonorsViewModel;
 import com.saad.baitalkhairat.ui.emptyactivity.EmptyActivityViewModel;
 import com.saad.baitalkhairat.ui.emptyfragment.EmptyFragmentViewModel;
 import com.saad.baitalkhairat.ui.filebox.FileBoxViewModel;
-import com.saad.baitalkhairat.ui.home.HomeViewModel;
+import com.saad.baitalkhairat.ui.intro.casedetails.CaseDetailsViewModel;
+import com.saad.baitalkhairat.ui.intro.cases.CasesViewModel;
+import com.saad.baitalkhairat.ui.intro.category.CategoryViewModel;
+import com.saad.baitalkhairat.ui.intro.donors.DonorsViewModel;
+import com.saad.baitalkhairat.ui.intro.filtercases.FilterCasesViewModel;
+import com.saad.baitalkhairat.ui.intro.home.HomeViewModel;
+import com.saad.baitalkhairat.ui.intro.needy.NeedyViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivityViewModel;
-import com.saad.baitalkhairat.ui.needy.NeedyViewModel;
+import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
 
 import javax.inject.Inject;
@@ -71,9 +75,9 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(FileBoxViewModel.class)) {
             //noinspection unchecked
             return (T) new FileBoxViewModel(mContext, dataManager, viewDataBinding, navigation);
-        } else if (modelClass.isAssignableFrom(PhoneNumberViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(VerifyPhoneNumberViewModel.class)) {
             //noinspection unchecked
-            return (T) new PhoneNumberViewModel(mContext, dataManager, viewDataBinding, navigation);
+            return (T) new VerifyPhoneNumberViewModel(mContext, dataManager, viewDataBinding, navigation);
         } else if (modelClass.isAssignableFrom(OtpVerifierViewModel.class)) {
             //noinspection unchecked
             return (T) new OtpVerifierViewModel(mContext, dataManager, viewDataBinding, navigation);
@@ -98,6 +102,18 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(NeedyViewModel.class)) {
             //noinspection unchecked
             return (T) new NeedyViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(CaseDetailsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CaseDetailsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(FilterCasesViewModel.class)) {
+            //noinspection unchecked
+            return (T) new FilterCasesViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(SignInHolderViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SignInHolderViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(AccountViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AccountViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

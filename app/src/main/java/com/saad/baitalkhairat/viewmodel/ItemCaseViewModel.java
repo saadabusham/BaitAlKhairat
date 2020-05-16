@@ -6,18 +6,19 @@ import android.view.View;
 
 import androidx.databinding.BaseObservable;
 
-import com.saad.baitalkhairat.interfaces.RecyclerClick;
+import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
+import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
 import com.saad.baitalkhairat.model.Case;
 
 
 public class ItemCaseViewModel extends BaseObservable {
 
     private final Context context;
-    RecyclerClick mRecyclerClick;
+    RecyclerClickWithCase mRecyclerClick;
     private Case caseItem;
     private int position;
 
-    public ItemCaseViewModel(Context context, Case caseItem, int position, RecyclerClick mRecyclerClick) {
+    public ItemCaseViewModel(Context context, Case caseItem, int position, RecyclerClickWithCase mRecyclerClick) {
         this.context = context;
         this.caseItem = caseItem;
         this.position = position;
@@ -34,6 +35,15 @@ public class ItemCaseViewModel extends BaseObservable {
     }
 
     public void onItemClick(View view) {
-        mRecyclerClick.onClick(caseItem, position);
+        mRecyclerClick.onClick(caseItem, position, RecycleClickCasesTypes.DETAILS.getType());
     }
+
+    public void onAddToCartClick(View view) {
+        mRecyclerClick.onClick(caseItem, position, RecycleClickCasesTypes.ADD_TO_CART.getType());
+    }
+
+    public void onDonateClick(View view) {
+        mRecyclerClick.onClick(caseItem, position, RecycleClickCasesTypes.DONATE.getType());
+    }
+
 }

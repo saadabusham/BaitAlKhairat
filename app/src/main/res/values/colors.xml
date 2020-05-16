@@ -5,16 +5,31 @@
     <color name="colorAccent">#000000</color>
 
     <color name="orange">#FF9500</color>
+    <color name="orange_login_button">#F9A514</color>
+    <color name="edittextUnderline">#525A65</color>
+    <color name="forgetpassword_blue">#1371FF</color>
+    <color name="login_gray">#545355</color>
     <color name="blue">#0289FF</color>
     <color name="green">#38B557</color>
     <color name="item_background_gray">#EFEFF4</color>
-    <color name="subcategory_grid_text_background">#F3F3F3</color>
+    <color name="tablayout_gray">#E5E5E5</color>
+    <color name="tablayout_divider">#CECECE</color>
+    <color name="cases_grid_text_background">#80D3D3D3</color>
     <color name="subcategory_grid_text_color">#535254</color>
-    <color name="add_to_cart_background">#D3D3D3</color>
+    <color name="add_to_cart_background">#80D3D3D3</color>
     <color name="case_background">#E0E0E0</color>
+    <color name="divider_background">#D8D8D8</color>
     <color name="needy_background_stroke">#B6BDC2</color>
+    <color name="login_text_gray">#B9B9B9</color>
+    <color name="gray_textview_light">#707070</color>
+    <color name="otp_background">#EEEEEE</color>
+    <color name="otv_verification_gray">#394951</color>
+    <color name="register_divider">#61A2ACAF</color>
     <color name="black_effective">#2a2a2a</color>
     <color name="dark_gray">#7A7A7A</color>
+    <color name="fill_item_gray">#FAFAFA</color>
+    <color name="night_blue">#10385D</color>
+
 
     <color name="order_cell_red">#D12323</color>
     <color name="red">#ee2c3c</color>
@@ -30,7 +45,6 @@
     <color name="gray_dark">#5B5B5C</color>
 
     <color name="very_light_blue">#293646</color>
-    <color name="night_blue">#1F2734</color>
     <color name="white">#ffffff</color>
     <color name="yallo">#FEC91D</color>
     <color name="shape_gray">#55627038</color>
@@ -39,7 +53,7 @@
     <color name="yellow">#FFF700</color>
     <color name="aa">#ffffff</color>
     <color name="gray_heart_background">#F7F7FA</color>
-    <color name="gray_textview_light">#707070</color>
+
     <color name="light_text">#C1C6CB</color>
     <color name="text_light">#ADADAD</color>
     <color name="light_rose">#FFF3F3</color>
@@ -61,7 +75,7 @@
     <color name="light_green">#8CBE54</color>
     <color name="fill_order_dark_gray">#909090</color>
     <color name="cancel_red_color">#AC0E40</color>
-    <color name="fill_item_gray">#FAFAFA</color>
+
 
     <color name="color_blue">#2094E3</color>
     <color name="color_blue_dark">#10629A</color>

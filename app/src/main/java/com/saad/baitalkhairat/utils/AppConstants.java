@@ -88,4 +88,10 @@ public final class AppConstants {
         public static final String ORDER_CANCEL = "ORDER_CANCEL";
         public static final String ORDER_COMPLEATED = "ORDER_COMPLEATED";
     }
+
+    public class BundleData {
+
+
+        public static final String FILTER = "FILTER";
+    }
 }

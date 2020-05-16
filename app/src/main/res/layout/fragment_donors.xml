@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.donors.DonorsViewModel" />
+            type="com.saad.baitalkhairat.ui.intro.donors.DonorsViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -36,14 +36,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_140sdp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp" />
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp" />
 
                 <LinearLayout
                     android:id="@+id/linearNews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@drawable/shape_rectangle"
                     android:gravity="center|start"
                     android:minHeight="@dimen/_40sdp"
@@ -72,8 +75,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -101,7 +104,7 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp" />
+                    android:layout_margin="@dimen/_13sdp" />
 
             </LinearLayout>
 

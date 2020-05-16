@@ -2,17 +2,19 @@ package com.saad.baitalkhairat.ui.auth.createpassword;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.ActivityCreatePasswordBinding;
+import com.saad.baitalkhairat.databinding.FragmentCreatePasswordBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
-import com.saad.baitalkhairat.ui.auth.login.LoginActivity;
+import com.saad.baitalkhairat.ui.auth.loginJourney.login.LoginFragment;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
@@ -20,12 +22,36 @@ import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigator, ActivityCreatePasswordBinding> {
+public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigator, FragmentCreatePasswordBinding> {
 
     String token = "";
 
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            isValid();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
     public <V extends ViewDataBinding, N extends BaseNavigator> CreatePasswordViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (CreatePasswordNavigator) navigation, (ActivityCreatePasswordBinding) viewDataBinding);
+        super(mContext, dataManager, (CreatePasswordNavigator) navigation, (FragmentCreatePasswordBinding) viewDataBinding);
+    }
+
+    @Override
+    protected void setUp() {
+        token = getNavigator().getToken();
+        getViewBinding().edNewPassword.addTextChangedListener(textWatcher);
+        getViewBinding().edConfirmPassword.addTextChangedListener(textWatcher);
     }
 
     public boolean isValid() {
@@ -40,7 +66,23 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
             getViewBinding().edNewPassword.setError(getMyContext().getString(R.string.does_not_match));
             getViewBinding().edConfirmPassword.setError(getMyContext().getString(R.string.does_not_match));
         }
+        if (error == 0)
+            checkValidate(true);
+        else
+            checkValidate(false);
         return error == 0;
+    }
+
+    private void checkValidate(boolean isValid) {
+        if (isValid) {
+            getViewBinding().btnCreate.setBackgroundColor(getMyContext().getResources().getColor(R.color.orange_login_button));
+            getViewBinding().btnCreate.setTextColor(getMyContext().getResources().getColor(R.color.white));
+            getViewBinding().btnCreate.setEnabled(true);
+        } else {
+            getViewBinding().btnCreate.setBackgroundColor(getMyContext().getResources().getColor(R.color.tablayout_gray));
+            getViewBinding().btnCreate.setTextColor(getMyContext().getResources().getColor(R.color.login_text_gray));
+            getViewBinding().btnCreate.setEnabled(false);
+        }
     }
 
     public void createPassword() {
@@ -59,7 +101,7 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
                                 public void onPositiveButtonClicked() {
                                     getBaseActivity().finishAffinity();
                                     getBaseActivity().startActivity(new Intent(getMyContext(),
-                                            LoginActivity.class));
+                                            LoginFragment.class));
                                 }
 
                                 @Override
@@ -77,10 +119,5 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
                         }
                     }));
         }
-    }
-
-    @Override
-    protected void setUp() {
-        token = getNavigator().getToken();
     }
 }
