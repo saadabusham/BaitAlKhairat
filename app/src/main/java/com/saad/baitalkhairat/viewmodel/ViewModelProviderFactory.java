@@ -25,7 +25,15 @@ import com.saad.baitalkhairat.ui.intro.filtercases.FilterCasesViewModel;
 import com.saad.baitalkhairat.ui.intro.home.HomeViewModel;
 import com.saad.baitalkhairat.ui.intro.needy.NeedyViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivityViewModel;
+import com.saad.baitalkhairat.ui.menu.about_us.AboutUsViewModel;
+import com.saad.baitalkhairat.ui.menu.commonquastions.QuestionsViewModel;
+import com.saad.baitalkhairat.ui.menu.privacy_policy.PrivacyPolicyViewModel;
+import com.saad.baitalkhairat.ui.menu.servicecenter.ServiceCenterViewModel;
+import com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsViewModel;
+import com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
+import com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileViewModel;
+import com.saad.baitalkhairat.ui.profilejourney.myinfolist.MyInfoListViewModel;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
 
 import javax.inject.Inject;
@@ -114,6 +122,30 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(AccountViewModel.class)) {
             //noinspection unchecked
             return (T) new AccountViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(NotificationsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NotificationsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(NotificationDetailsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NotificationDetailsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ServiceCenterViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ServiceCenterViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(PrivacyPolicyViewModel.class)) {
+            //noinspection unchecked
+            return (T) new PrivacyPolicyViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(AboutUsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new AboutUsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(QuestionsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new QuestionsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(MyInfoListViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MyInfoListViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(EditProfileViewModel.class)) {
+            //noinspection unchecked
+            return (T) new EditProfileViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

@@ -73,5 +73,48 @@
         <action
             android:id="@+id/action_nav_account_to_signInHolderFragment"
             app:destination="@id/signInHolderFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_myInfoListFragment"
+            app:destination="@id/myInfoListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsFragment"
+        android:label="NotificationsFragment">
+        <action
+            android:id="@+id/action_nav_notifications_to_notificationDetailsFragment"
+            app:destination="@id/notificationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationDetailsFragment"
+        android:name="com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsFragment"
+        android:label="NotificationDetailsFragment" />
+    <fragment
+        android:id="@+id/serviceCenterFragment"
+        android:name="com.saad.baitalkhairat.ui.menu.servicecenter.ServiceCenterFragment"
+        android:label="ServiceCenterFragment" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.saad.baitalkhairat.ui.menu.privacy_policy.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.saad.baitalkhairat.ui.menu.about_us.AboutUsFragment"
+        android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.saad.baitalkhairat.ui.menu.commonquastions.QuestionsFragment"
+        android:label="QuestionsFragment" />
+    <fragment
+        android:id="@+id/myInfoListFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.myinfolist.MyInfoListFragment"
+        android:label="MyInfoListFragment">
+        <action
+            android:id="@+id/action_myInfoListFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>

@@ -3,7 +3,8 @@ package com.saad.baitalkhairat.enums;
 public enum DrawerWithIconTypes {
     NO_ICON(1),
     WITH_ICON(2),
-    HIDE_ITEM(3);
+    HIDE_ITEM(3),
+    FULL_INVISIBLE_ITEM(4);
 
     private int typeID;
 

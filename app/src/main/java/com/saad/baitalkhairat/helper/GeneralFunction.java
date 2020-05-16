@@ -10,6 +10,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -225,5 +227,25 @@ public class GeneralFunction {
         }
         String saltStr = salt.toString();
         return saltStr;
+    }
+
+    public static void rotateImageView(ImageView imageView, boolean original) {
+        Animation animation;
+        if (original) {
+            animation = new RotateAnimation(
+                    -180,
+                    0,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        } else {
+            animation = new RotateAnimation(
+                    0,
+                    -180,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        }
+
+        animation.setDuration(200);
+        animation.setFillAfter(true);
+        imageView.startAnimation(animation);
     }
 }

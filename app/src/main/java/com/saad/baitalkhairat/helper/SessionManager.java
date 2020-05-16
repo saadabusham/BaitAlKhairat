@@ -17,6 +17,7 @@ public class SessionManager {
     private static final String KEY_OBJECT_USER = "objUser";
     private static final String KEY_LANGUAGE = "language";
     private static final String KEY_ALLOW_NOTIFICATIONS = "allowNotifications";
+    private static final String KEY_IS_THERE_NOTIFICATIONS = "isThereNotifications";
     private static final String KEY_FIREBASE_TOKEN = "deviceToken";
     // Editor for Shared preferences
     static SharedPreferences.Editor editor;
@@ -101,6 +102,16 @@ public class SessionManager {
 
     public static String getisSetLanguage() {
         return mSharedPref.getString(KEY_LANGUAGE, "");
+    }
+
+    public static boolean getIsThereNotification() {
+        return mSharedPref.getBoolean(KEY_IS_THERE_NOTIFICATIONS, true);
+    }
+
+    public static void setIsThereNotification(boolean NotificationAllowed) {
+        editor = mSharedPref.edit();
+        editor.putBoolean(KEY_IS_THERE_NOTIFICATIONS, NotificationAllowed);
+        editor.commit();
     }
 
     public static boolean getIsNotificationAllowed() {

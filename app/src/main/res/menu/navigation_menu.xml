@@ -12,7 +12,7 @@
         android:title="@string/myorders" />
 
     <item
-        android:id="@+id/nav_wallet"
+        android:id="@+id/nav_notifications"
         android:icon="@drawable/ic_notification_nav"
         android:title="@string/wallet" />
     <item

@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.auth.editprofile;
+package com.saad.baitalkhairat.ui.profilejourney.editprofile;
 
 
 import com.saad.baitalkhairat.ui.base.BaseNavigator;

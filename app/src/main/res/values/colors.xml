@@ -29,7 +29,16 @@
     <color name="dark_gray">#7A7A7A</color>
     <color name="fill_item_gray">#FAFAFA</color>
     <color name="night_blue">#10385D</color>
-
+    <color name="blue_dark">#007AFF</color>
+    <color name="notification_date_color">#B0B5C2</color>
+    <color name="notification_title_gray">#2A3439</color>
+    <color name="notification_body_gray">#2D2D2D</color>
+    <color name="rate_gold">#FFC72A</color>
+    <color name="question_divider_gray">#F4F6F9</color>
+    <color name="account_green">#055806</color>
+    <color name="account_background">#EEEEEE</color>
+    <color name="black_light">#1F000000</color>
+    <color name="pink">#FFF7DF</color>
 
     <color name="order_cell_red">#D12323</color>
     <color name="red">#ee2c3c</color>

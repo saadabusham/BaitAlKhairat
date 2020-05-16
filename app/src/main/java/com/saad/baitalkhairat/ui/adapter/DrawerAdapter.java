@@ -2,12 +2,14 @@ package com.saad.baitalkhairat.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.CellDrawerItemBinding;
+import com.saad.baitalkhairat.enums.DrawerWithIconTypes;
 import com.saad.baitalkhairat.helper.GeneralFunction;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.MenuItem;
@@ -75,6 +77,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 GeneralFunction.tintImage(mBinding.imgIcon, R.color.red);
                 mBinding.tvTitle.setTextColor(mContext.getResources().getColor(R.color.red));
             }
+            if (arrayListMenuItems.get(position).isWithIcon == DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode()) {
+                mBinding.relativeCellDrawer.setVisibility(View.GONE);
+                mBinding.relativeCellDrawer.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            }
+//            else {
+//                mBinding.relativeCellDrawer.setVisibility(View.VISIBLE);
+//                mBinding.relativeCellDrawer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//            }
         }
 
     }

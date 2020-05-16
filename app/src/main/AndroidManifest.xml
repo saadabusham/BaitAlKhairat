@@ -57,6 +57,9 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.filebox.FileBoxActivity" />
 
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

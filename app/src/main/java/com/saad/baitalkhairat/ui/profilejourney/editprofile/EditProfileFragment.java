@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.auth.editprofile;
+package com.saad.baitalkhairat.ui.profilejourney.editprofile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -109,7 +109,7 @@ public class EditProfileFragment extends BaseFragment<FragmentEditProfileBinding
             case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE: {
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 if (resultCode == RESULT_OK) {
-                    mEditProfileViewModel.uploadProfilePicture(result.getUri());
+//                    mEditProfileViewModel.uploadProfilePicture(result.getUri());
 //                    mViewBinding.imgPicture.setImageURI(result.getUri());
                     GeneralFunction.loadImage(getMyContext(), result.getUri().toString(), mViewBinding.imgPicture);
 

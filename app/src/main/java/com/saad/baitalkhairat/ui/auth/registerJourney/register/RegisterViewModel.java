@@ -36,39 +36,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RegisterViewModel extends BaseViewModel<RegisterNavigator, FragmentRegisterBinding> {
 
-    AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            isValid();
-        }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            isValid();
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
-    DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-
-        getViewBinding().edDay.setText(String.valueOf(dayOfMonth));
-        getViewBinding().edMonth.setText(String.valueOf(monthOfYear + 1));
-        getViewBinding().edYear.setText(String.valueOf(year));
-    };
 
     public <V extends ViewDataBinding, N extends BaseNavigator> RegisterViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (RegisterNavigator) navigation, (FragmentRegisterBinding) viewDataBinding);
@@ -182,6 +150,59 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
         return user;
     }
 
+    AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            isValid();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    private void checkValidate(boolean isValid) {
+        if (isValid) {
+            getViewBinding().btnSignup.setBackgroundColor(getMyContext().getResources().getColor(R.color.orange_login_button));
+            getViewBinding().btnSignup.setTextColor(getMyContext().getResources().getColor(R.color.white));
+            getViewBinding().btnSignup.setEnabled(true);
+        } else {
+            getViewBinding().btnSignup.setBackgroundColor(getMyContext().getResources().getColor(R.color.tablayout_gray));
+            getViewBinding().btnSignup.setTextColor(getMyContext().getResources().getColor(R.color.login_text_gray));
+            getViewBinding().btnSignup.setEnabled(false);
+        }
+    }
+
+    public int getGravity() {
+        return LanguageUtils.getLanguage(getMyContext()).equals("ar")
+                ? Gravity.RIGHT : Gravity.LEFT;
+    }
+
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            isValid();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+    DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+
+        getViewBinding().edDay.setText(String.valueOf(dayOfMonth));
+        getViewBinding().edMonth.setText(String.valueOf(monthOfYear + 1));
+        getViewBinding().edYear.setText(String.valueOf(year));
+        isValid();
+    };
+
     public boolean isValid() {
         int error = 0;
 
@@ -202,7 +223,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
 
         if (getViewBinding().edDay.getText().toString().isEmpty()) {
             error = +1;
-            getViewBinding().edPassword.setError(getMyContext().getString(R.string.birthday_is_required));
+            getViewBinding().edDay.setError(getMyContext().getString(R.string.birthday_is_required));
         }
 
         if (getViewBinding().spinnerCountry.getSelectedItemPosition() == 0) {
@@ -231,22 +252,4 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
             checkValidate(false);
         return error == 0;
     }
-
-    private void checkValidate(boolean isValid) {
-        if (isValid) {
-            getViewBinding().btnSignup.setBackgroundColor(getMyContext().getResources().getColor(R.color.orange_login_button));
-            getViewBinding().btnSignup.setTextColor(getMyContext().getResources().getColor(R.color.white));
-            getViewBinding().btnSignup.setEnabled(true);
-        } else {
-            getViewBinding().btnSignup.setBackgroundColor(getMyContext().getResources().getColor(R.color.tablayout_gray));
-            getViewBinding().btnSignup.setTextColor(getMyContext().getResources().getColor(R.color.login_text_gray));
-            getViewBinding().btnSignup.setEnabled(false);
-        }
-    }
-
-    public int getGravity() {
-        return LanguageUtils.getLanguage(getMyContext()).equals("ar")
-                ? Gravity.RIGHT : Gravity.LEFT;
-    }
-
 }
