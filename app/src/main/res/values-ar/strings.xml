@@ -131,5 +131,15 @@
     <string name="add_document">اضف مستندات</string>
     <string name="back">رجوع</string>
     <string name="remove">حذف الصورة</string>
+    <string name="are_you_sure">هل انت متأكد؟</string>
+    <string name="OK">حسنا</string>
+    <string name="your_need_list_is_empty">قائمة احتياجاتي فارغة</string>
+    <string name="there_are_no_needs_yet_you_can_provide_a_need">لا يوجد احتياجات الى الآن يمكنك تقديم احتياج</string>
+    <string name="your_donations_list_is_empty">قائمة تبرعاتك فارغة</string>
+    <string name="there_are_no_donations_yet_you_can_make_a_donation">لا يوجد تبرعات الى الآن يمكنك تقديم تبرع</string>
+    <string name="make_a_donation">قدم تبرع</string>
+    <string name="current_needs">احتياجات حالية</string>
+    <string name="past_needs">تبرعات سابقة</string>
+    <string name="apply_need">قدم احتياج</string>
 
 </resources>

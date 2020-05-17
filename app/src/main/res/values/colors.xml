@@ -40,6 +40,10 @@
     <color name="black_light">#1F000000</color>
     <color name="pink">#FFF7DF</color>
     <color name="red_light">#FF5722</color>
+    <color name="image_overlay">#F5F5F5</color>
+    <color name="process_gray">#BAC7CC</color>
+    <color name="gray_light2">#A2ACAF</color>
+
 
     <color name="order_cell_red">#D12323</color>
     <color name="red">#ee2c3c</color>

@@ -29,6 +29,8 @@ import com.saad.baitalkhairat.ui.menu.about_us.AboutUsViewModel;
 import com.saad.baitalkhairat.ui.menu.commonquastions.QuestionsViewModel;
 import com.saad.baitalkhairat.ui.menu.privacy_policy.PrivacyPolicyViewModel;
 import com.saad.baitalkhairat.ui.menu.servicecenter.ServiceCenterViewModel;
+import com.saad.baitalkhairat.ui.needjourney.myneedsholder.MyNeedsHolderViewModel;
+import com.saad.baitalkhairat.ui.needjourney.myneedslist.MyNeedsListViewModel;
 import com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsViewModel;
 import com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
@@ -162,6 +164,12 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(ViewDocumentViewModel.class)) {
             //noinspection unchecked
             return (T) new ViewDocumentViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(MyNeedsHolderViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MyNeedsHolderViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(MyNeedsListViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MyNeedsListViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

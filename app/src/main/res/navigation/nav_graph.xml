@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_nav_account_to_myInfoListFragment"
             app:destination="@id/myInfoListFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_myNeedsHolderFragment"
+            app:destination="@id/myNeedsHolderFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
@@ -146,4 +149,16 @@
         android:id="@+id/viewDocumentFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentFragment"
         android:label="ViewDocumentFragment" />
+    <fragment
+        android:id="@+id/myNeedsHolderFragment"
+        android:name="com.saad.baitalkhairat.ui.needjourney.myneedsholder.MyNeedsHolderFragment"
+        android:label="MyNeedsHolderFragment">
+        <action
+            android:id="@+id/action_myNeedsHolderFragment_to_myNeedsListFragment"
+            app:destination="@id/myNeedsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myNeedsListFragment"
+        android:name="com.saad.baitalkhairat.ui.needjourney.myneedslist.MyNeedsListFragment"
+        android:label="MyNeedsListFragment" />
 </navigation>

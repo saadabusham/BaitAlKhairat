@@ -14,7 +14,7 @@
     <string name="do_not_have_an_account">Do not have an account?</string>
 
     <string name="permission_denied_you_cannot_access_location_data_and_camera">Permission denied you can not access location data and camera</string>
-    <string name="OK">OK</string>
+
 
     <string name="language">Language</string>
     <string name="arabic">العربية</string>
@@ -101,7 +101,7 @@
     <string name="type_a_message">Type a message ... </string>
     <string name="jd">JD</string>
     <string name="service_name">Service name : </string>
-    <string name="order_date">Order date : </string>
+
     <string name="waiting_accept_offer">Waiting accept offer</string>
     <string name="order_details">Order details : </string>
     <string name="order_detail">Order details</string>
@@ -343,4 +343,20 @@
     <string name="add_document">Add documents</string>
     <string name="back">Back</string>
     <string name="remove">Remove</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="OK">OK</string>
+    <string name="your_need_list_is_empty">Your needs list is empty</string>
+    <string name="there_are_no_needs_yet_you_can_provide_a_need">There are no needs yet you can provide a need</string>
+    <string name="your_donations_list_is_empty">Your donations list is empty</string>
+    <string name="there_are_no_donations_yet_you_can_make_a_donation">There are no donations yet. You can make a donation</string>
+    <string name="make_a_donation">Make a donation</string>
+    <string name="current_needs">Current needs</string>
+    <string name="past_needs">Past needs</string>
+    <string name="apply_need">Apply need</string>
+    <string name="order_received">Order received</string>
+    <string name="Under_studying">under studying</string>
+    <string name="on_way">On way</string>
+    <string name="delivered">Delivered</string>
+    <string name="order_date">Order date</string>
+    <string name="since">since</string>
 </resources>

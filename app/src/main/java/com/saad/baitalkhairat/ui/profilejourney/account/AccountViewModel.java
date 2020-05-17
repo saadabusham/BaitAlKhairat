@@ -58,7 +58,12 @@ public class AccountViewModel extends BaseViewModel<AccountNavigator, FragmentAc
 
     @Override
     public void onClick(int position) {
-
+        switch (position) {
+            case 0:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_nav_account_to_myNeedsHolderFragment);
+                break;
+        }
     }
 
     public void onLoginClicked() {

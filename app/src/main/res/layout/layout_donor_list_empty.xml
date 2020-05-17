@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/relativeListEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="160dp"
+            app:srcCompat="@drawable/ic_donor" />
+
+        <TextView
+            style="@style/bold_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/your_donations_list_is_empty"
+            android:textColor="@color/night_blue"
+            android:textSize="22sp" />
+
+        <TextView
+            style="@style/roman_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/there_are_no_donations_yet_you_can_make_a_donation"
+            android:textColor="@color/night_blue"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</layout>
