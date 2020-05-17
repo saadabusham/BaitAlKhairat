@@ -33,9 +33,11 @@ import com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.Notific
 import com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileViewModel;
+import com.saad.baitalkhairat.ui.profilejourney.identification_document.IdentificationDocumentViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.myinfolist.MyInfoListViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.userdegree.UserDegreeViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksViewModel;
+import com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentViewModel;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
 
 import javax.inject.Inject;
@@ -154,6 +156,12 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(UserDegreeViewModel.class)) {
             //noinspection unchecked
             return (T) new UserDegreeViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(IdentificationDocumentViewModel.class)) {
+            //noinspection unchecked
+            return (T) new IdentificationDocumentViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ViewDocumentViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ViewDocumentViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

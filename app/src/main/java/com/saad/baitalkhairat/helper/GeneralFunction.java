@@ -98,7 +98,7 @@ public class GeneralFunction {
     public static void setImageUrl(ImageView imageView, String url) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.drawable.ic_loading);
-        requestOptions.error(R.color.navigation_gray);
+        requestOptions.error(R.color.red);
         Glide.with(imageView.getContext()).applyDefaultRequestOptions(requestOptions).load(url).into(imageView);
     }
 

@@ -69,6 +69,7 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:text="@string/start_date"
                         android:textColor="@color/login_gray"
+                        style="@style/bold_style"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -140,6 +141,7 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:text="@string/graduation_date"
                         android:textColor="@color/login_gray"
+                        style="@style/bold_style"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -227,6 +229,7 @@
                     android:enabled="false"
                     android:onClick="@{() -> viewModel.registerClicked()}"
                     android:text="@string/save"
+                    style="@style/bold_style"
                     android:textColor="@color/login_text_gray" />
 
             </LinearLayout>

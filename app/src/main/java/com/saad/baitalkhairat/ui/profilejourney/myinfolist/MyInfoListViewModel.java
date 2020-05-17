@@ -65,6 +65,10 @@ public class MyInfoListViewModel extends BaseViewModel<MyInfoListNavigator, Frag
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_myInfoListFragment_to_userSocialLinksFragment);
                 break;
+            case 3:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_myInfoListFragment_to_identificationDocumentFragment);
+                break;
 
         }
     }

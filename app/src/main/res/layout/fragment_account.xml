@@ -49,6 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/hello"
+                        style="@style/bold_style"
                         android:textColor="@color/account_green"
                         android:textSize="16sp" />
 
@@ -58,6 +59,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:gravity="@{viewModel.getGravity()}"
                         android:singleLine="true"
+                        style="@style/bold_style"
                         android:text="saad abu sham"
                         android:textColor="@color/account_green"
                         android:textSize="16sp" />
@@ -73,6 +75,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/membership_no"
                         android:textColor="@color/account_green"
+                        style="@style/bold_style"
                         android:textSize="13sp" />
 
                     <TextView
@@ -81,6 +84,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:singleLine="true"
                         android:text="123456"
+                        style="@style/bold_style"
                         android:textColor="@color/account_green"
                         android:textSize="13sp" />
                 </LinearLayout>

@@ -33,6 +33,7 @@
                     android:gravity="center|start"
                     android:text="@string/login_to_your_account"
                     android:textColor="@color/login_gray"
+                    style="@style/bold_style"
                     android:textSize="17sp" />
 
                 <TextView
@@ -42,6 +43,7 @@
                     android:gravity="center|start"
                     android:text="@string/please_enter_your_phone_number_and_password"
                     android:textColor="@color/login_gray"
+                    style="@style/roman_style"
                     android:textSize="13sp" />
 
                 <LinearLayout
@@ -125,7 +127,7 @@
                     android:text="@string/forget_password"
                     android:textColor="@color/forgetpassword_blue"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    style="@style/roman_style" />
 
             </LinearLayout>
 
@@ -139,6 +141,7 @@
                 android:enabled="false"
                 android:onClick="@{() -> viewModel.loginClick()}"
                 android:text="@string/login"
+                style="@style/bold_style"
                 android:textColor="@color/login_text_gray" />
 
         </LinearLayout>

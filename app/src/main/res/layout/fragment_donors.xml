@@ -34,7 +34,7 @@
                     android:id="@+id/imageSlider"
                     layout="@layout/image_slider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_height="@dimen/_138sdp"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp" />
@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|start|top"
                         android:text="@string/news"
+                        style="@style/bold_style"
                         android:textColor="@color/red"
                         android:textSize="16sp" />
 
@@ -69,6 +70,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="@string/terms_and_conditions"
                         android:textColor="@color/black"
+                        style="@style/roman_style"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -85,6 +87,7 @@
                         android:layout_centerInParent="true"
                         android:layout_toStartOf="@id/tvViewAll"
                         android:text="@string/humanitarian_cases"
+                        style="@style/bold_style"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -96,6 +99,7 @@
                         android:layout_centerInParent="true"
                         android:onClick="@{()-> viewModel.onViewAllClicked()}"
                         android:text="@string/view_all"
+                        style="@style/roman_style"
                         android:textColor="@color/blue"
                         android:textSize="17sp" />
                 </RelativeLayout>

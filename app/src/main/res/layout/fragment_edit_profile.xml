@@ -157,6 +157,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:text="@string/birthday"
                             android:textColor="@color/login_gray"
+                            style="@style/bold_style"
                             android:textSize="16sp" />
 
                         <LinearLayout
@@ -227,6 +228,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:text="@string/about_me"
                             android:textColor="@color/login_gray"
+                            style="@style/bold_style"
                             android:textSize="16sp" />
 
                         <EditText

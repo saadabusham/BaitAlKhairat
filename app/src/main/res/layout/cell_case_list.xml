@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/cardFavoriteCell"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_140sdp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:background="@drawable/shape_rounded_empty_gray_light"
         android:onClick="@{viewModel::onItemClick}"
@@ -39,6 +39,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:gravity="start|center"
                 android:maxLines="3"
+                style="@style/bold_style"
                 android:text="@string/all_rights_reserved"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="14sp" />
@@ -66,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:text="@string/case_id"
+                    style="@style/light_style"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
 
@@ -76,6 +78,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseIdText"
                     android:maxLines="3"
+                    style="@style/bold_style"
                     android:text="1452"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -94,6 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
+                    style="@style/light_style"
                     android:text="@string/case_type"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -105,6 +109,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseTypeText"
                     android:maxLines="3"
+                    style="@style/bold_style"
                     android:text="orphan"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -123,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
+                    style="@style/light_style"
                     android:text="@string/country"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -134,6 +140,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCountryText"
                     android:maxLines="3"
+                    style="@style/bold_style"
                     android:text="@string/jordan"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -164,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:text="@string/amount"
+                    style="@style/light_style"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
 
@@ -174,6 +182,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:maxLines="3"
+                    style="@style/bold_style"
                     android:text="100 jd"
                     android:textColor="@color/green"
                     android:textSize="12sp" />
@@ -200,6 +209,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@color/orange"
                     android:gravity="center"
+                    style="@style/bold_style"
                     android:text="@string/donate"
                     android:onClick="@{viewModel::onDonateClick}"
                     android:textColor="@color/white"

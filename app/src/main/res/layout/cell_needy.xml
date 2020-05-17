@@ -36,6 +36,7 @@
             android:maxLines="3"
             android:text="@string/all_rights_reserved"
             android:textColor="@color/black"
+            style="@style/bold_style"
             android:textSize="18sp" />
 
         <LinearLayout

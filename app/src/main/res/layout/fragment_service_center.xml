@@ -44,6 +44,7 @@
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:text="@string/feel_free_to_contact"
                     android:textColor="@color/notification_title_gray"
+                    style="@style/roman_style"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -65,6 +66,7 @@
                         android:drawableStart="@drawable/ic_phone"
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="@string/phone"
+                        style="@style/roman_style"
                         android:textColor="@color/notification_title_gray"
                         android:textSize="13sp" />
 
@@ -77,6 +79,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:text="962787901166"
                         android:textColor="@color/notification_title_gray"
+                        style="@style/bold_style"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -101,6 +104,7 @@
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="@string/email"
                         android:textColor="@color/notification_title_gray"
+                        style="@style/roman_style"
                         android:textSize="13sp" />
 
 
@@ -112,6 +116,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:text="sa2edabusham87@gmail.com"
                         android:textColor="@color/notification_title_gray"
+                        style="@style/bold_style"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -136,6 +141,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:text="@string/the_most_common_questions"
                         android:textColor="@color/notification_title_gray"
+                        style="@style/roman_style"
                         android:textSize="13sp" />
 
                 </LinearLayout>

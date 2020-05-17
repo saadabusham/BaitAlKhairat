@@ -340,4 +340,7 @@
     <string name="graduation_day_is_required">graduation date is required</string>
     <string name="specialization_is_required">Specialization is required</string>
     <string name="school_university_is_required">School/University is required</string>
+    <string name="add_document">Add documents</string>
+    <string name="back">Back</string>
+    <string name="remove">Remove</string>
 </resources>

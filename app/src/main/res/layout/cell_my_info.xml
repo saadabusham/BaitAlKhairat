@@ -26,6 +26,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:gravity="center|start"
             android:text="@{viewModel.text}"
+            style="@style/roman_style"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

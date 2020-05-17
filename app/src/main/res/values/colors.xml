@@ -39,6 +39,7 @@
     <color name="account_background">#EEEEEE</color>
     <color name="black_light">#1F000000</color>
     <color name="pink">#FFF7DF</color>
+    <color name="red_light">#FF5722</color>
 
     <color name="order_cell_red">#D12323</color>
     <color name="red">#ee2c3c</color>

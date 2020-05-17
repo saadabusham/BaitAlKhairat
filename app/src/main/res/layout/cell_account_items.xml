@@ -45,6 +45,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:maxLines="3"
+                style="@style/bold_style"
                 android:text="@{viewModel.accountItem.text}"
                 android:textColor="@color/account_green"
                 android:textSize="22sp" />

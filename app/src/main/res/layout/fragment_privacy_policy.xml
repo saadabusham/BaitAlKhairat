@@ -38,6 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
                     android:text="@string/privacy_policy"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
                     android:textSize="17sp" />
 
@@ -49,6 +50,7 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:gravity="center|start"
+                    style="@style/roman_style"
                     android:text="@string/reg"
                     android:textColor="@color/black"
                     android:textSize="13sp" />

@@ -95,6 +95,7 @@
                 android:gravity="center"
                 android:onClick="@{()-> viewModel.onFilterClick()}"
                 android:text="@string/filter_search"
+                style="@style/bold_style"
                 android:textColor="@color/white" />
 
 

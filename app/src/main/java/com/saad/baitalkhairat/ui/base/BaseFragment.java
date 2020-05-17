@@ -128,6 +128,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     protected void setUpToolbar(ToolbarBinding toolbar, String TAG, int title) {
         toolbar.toolbar.setTitle(title);
         toolbar.toolbarTitle.setVisibility(View.GONE);
+        toolbar.toolbar.setTitleTextAppearance(getContext(), R.style.bold_style);
         setUpToolbar(toolbar, TAG);
     }
 

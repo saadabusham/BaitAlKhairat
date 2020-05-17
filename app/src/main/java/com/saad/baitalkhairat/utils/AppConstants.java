@@ -94,5 +94,6 @@ public final class AppConstants {
 
         public static final String FILTER = "FILTER";
         public static final String NOTIFICATIONS = "NOTIFICATIONS";
+        public static final String DOCUMENT = "DOCUMENT";
     }
 }

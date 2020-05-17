@@ -25,6 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="-3dp"
                 android:layout_weight="1"
+                style="@style/bold_style"
                 android:background="@drawable/shape_rounded_tab_orange_right"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onDonorsClicked()}"
@@ -39,6 +40,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/shape_rounded_tab_empty_orange_left"
                 android:gravity="center"
+                style="@style/bold_style"
                 android:onClick="@{()->viewModel.onNeedyClicked()}"
                 android:text="@string/needy"
                 android:textSize="18sp" />

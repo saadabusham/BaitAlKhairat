@@ -109,6 +109,7 @@
                 android:enabled="false"
                 android:onClick="@{() -> viewModel.onSaveClick()}"
                 android:text="@string/sign_up"
+                style="@style/bold_style"
                 android:textColor="@color/login_text_gray" />
 
         </LinearLayout>

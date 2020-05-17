@@ -128,6 +128,8 @@
     <string name="graduation_day_is_required">تاريخ التخرج اجباري</string>
     <string name="specialization_is_required">التخصص اجباري</string>
     <string name="school_university_is_required">المدرسة/الجامعة اجبارية</string>
-
+    <string name="add_document">اضف مستندات</string>
+    <string name="back">رجوع</string>
+    <string name="remove">حذف الصورة</string>
 
 </resources>

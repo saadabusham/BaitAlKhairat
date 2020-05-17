@@ -121,6 +121,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     }
 
     public void setUpToolbar(Toolbar toolbar, int title, boolean withHome) {
+        toolbar.setTitleTextAppearance(this, R.style.bold_style);
         setSupportActionBar(toolbar);
         setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(withHome);

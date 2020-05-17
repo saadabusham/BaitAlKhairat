@@ -27,6 +27,7 @@
             android:background="@color/cases_grid_text_background"
             android:gravity="start|center"
             android:maxLines="3"
+            style="@style/bold_style"
             android:paddingStart="@dimen/_5sdp"
             android:paddingTop="@dimen/_3sdp"
             android:paddingEnd="@dimen/_5sdp"
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
+                style="@style/light_style"
                 android:text="@string/case_id"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -58,6 +60,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_toEndOf="@id/tvCaseIdText"
                 android:maxLines="3"
+                style="@style/bold_style"
                 android:text="1452"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -75,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
+                style="@style/light_style"
                 android:text="@string/case_type"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -87,6 +91,7 @@
                 android:layout_toEndOf="@id/tvCaseTypeText"
                 android:maxLines="3"
                 android:text="orphan"
+                style="@style/bold_style"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -103,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
+                style="@style/light_style"
                 android:text="@string/country"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -115,6 +121,7 @@
                 android:layout_toEndOf="@id/tvCountryText"
                 android:maxLines="3"
                 android:text="@string/jordan"
+                style="@style/bold_style"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -133,6 +140,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@id/tvAmount"
                 android:maxLines="3"
+                style="@style/light_style"
                 android:text="@string/amount"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -144,6 +152,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:maxLines="3"
+                style="@style/bold_style"
                 android:text="100 jd"
                 android:textColor="@color/green"
                 android:textSize="12sp" />
@@ -175,6 +184,7 @@
                 android:background="@color/orange"
                 android:gravity="center"
                 android:text="@string/donate"
+                style="@style/bold_style"
                 android:onClick="@{viewModel::onDonateClick}"
                 android:textColor="@color/white"
                 android:textSize="12sp" />

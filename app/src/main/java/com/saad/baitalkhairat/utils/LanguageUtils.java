@@ -3,7 +3,6 @@ package com.saad.baitalkhairat.utils;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.widget.TextView;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.helper.SessionManager;
@@ -43,13 +42,6 @@ public class LanguageUtils {
         return "ar";
     }
 
-    public static void setTextViewStyle(TextView textView, Context context) {
-        if (getLanguage(context).equals("ar")) {
-            textView.setTextAppearance(context, R.style.textview_arabic_style);
-        } else {
-            textView.setTextAppearance(context, R.style.bitter_regular);
-        }
-    }
 
     public static int getStyle(Context context) {
         String lang = getLanguage(context);
@@ -60,12 +52,4 @@ public class LanguageUtils {
         }
     }
 
-    public static int setBlackStyle(Context context) {
-        String lang = getLanguage(context);
-        if (lang.equals("ar")) {
-            return R.style.AppThemeBlackText;
-        } else {
-            return R.style.AppThemeBlackTextArabic;
-        }
-    }
 }

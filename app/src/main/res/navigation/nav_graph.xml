@@ -118,6 +118,9 @@
         <action
             android:id="@+id/action_myInfoListFragment_to_userDegreeFragment"
             app:destination="@id/userDegreeFragment" />
+        <action
+            android:id="@+id/action_myInfoListFragment_to_identificationDocumentFragment"
+            app:destination="@id/identificationDocumentFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -131,4 +134,16 @@
         android:id="@+id/userDegreeFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.userdegree.UserDegreeFragment"
         android:label="UserDegreeFragment" />
+    <fragment
+        android:id="@+id/identificationDocumentFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.identification_document.IdentificationDocumentFragment"
+        android:label="IdentificationDocumentFragment">
+        <action
+            android:id="@+id/action_identificationDocumentFragment_to_viewDocumentFragment"
+            app:destination="@id/viewDocumentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewDocumentFragment"
+        android:name="com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentFragment"
+        android:label="ViewDocumentFragment" />
 </navigation>

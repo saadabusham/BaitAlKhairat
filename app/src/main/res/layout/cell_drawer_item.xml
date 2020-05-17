@@ -38,6 +38,7 @@
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/imgIcon"
             android:gravity="center|start"
+            style="@style/bold_style"
             android:text="@{viewModel.menuItem.title}"
             android:textColor="@color/black"
             android:textSize="14sp" />
