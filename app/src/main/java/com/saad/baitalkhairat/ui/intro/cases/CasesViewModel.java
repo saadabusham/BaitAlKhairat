@@ -22,6 +22,7 @@ import com.saad.baitalkhairat.ui.adapter.CaseGridAdapter;
 import com.saad.baitalkhairat.ui.adapter.CaseListAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 import java.util.ArrayList;
 
@@ -74,8 +75,11 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
     }
 
     public void onFilterClicked() {
+        Bundle data = new Bundle();
+        data.putBoolean(AppConstants.BundleData.FILTER_WITH_CATEGORY,
+                getNavigator().getCategoryId() == 0);
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_casesFragment_to_filterCasesFragment);
+                .navigate(R.id.action_casesFragment_to_filterCasesFragment, data);
     }
 
     private void setUpRecycler() {
@@ -260,7 +264,8 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                 break;
 
             case DONATE:
-
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
                 break;
         }
     }

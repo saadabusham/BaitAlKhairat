@@ -14,6 +14,9 @@ import com.saad.baitalkhairat.ui.auth.registerJourney.register.RegisterViewModel
 import com.saad.baitalkhairat.ui.auth.signinholder.SignInHolderViewModel;
 import com.saad.baitalkhairat.ui.auth.verifyphonenumber.VerifyPhoneNumberViewModel;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
+import com.saad.baitalkhairat.ui.donatejourney.myneedsholder.MyDonationHolderViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulViewModel;
 import com.saad.baitalkhairat.ui.emptyactivity.EmptyActivityViewModel;
 import com.saad.baitalkhairat.ui.emptyfragment.EmptyFragmentViewModel;
 import com.saad.baitalkhairat.ui.filebox.FileBoxViewModel;
@@ -29,8 +32,10 @@ import com.saad.baitalkhairat.ui.menu.about_us.AboutUsViewModel;
 import com.saad.baitalkhairat.ui.menu.commonquastions.QuestionsViewModel;
 import com.saad.baitalkhairat.ui.menu.privacy_policy.PrivacyPolicyViewModel;
 import com.saad.baitalkhairat.ui.menu.servicecenter.ServiceCenterViewModel;
+import com.saad.baitalkhairat.ui.needjourney.applyneeds.ApplyNeedsViewModel;
 import com.saad.baitalkhairat.ui.needjourney.myneedsholder.MyNeedsHolderViewModel;
 import com.saad.baitalkhairat.ui.needjourney.myneedslist.MyNeedsListViewModel;
+import com.saad.baitalkhairat.ui.needjourney.needappliedsuccessful.NeedAppliedSuccessfulViewModel;
 import com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsViewModel;
 import com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
@@ -170,6 +175,21 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(MyNeedsListViewModel.class)) {
             //noinspection unchecked
             return (T) new MyNeedsListViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(MyDonationHolderViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MyDonationHolderViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(MyDonationListViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MyDonationListViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ApplyNeedsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ApplyNeedsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(NeedAppliedSuccessfulViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NeedAppliedSuccessfulViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(DonorAppliedSuccessfulViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DonorAppliedSuccessfulViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

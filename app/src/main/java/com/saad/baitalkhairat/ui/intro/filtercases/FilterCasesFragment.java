@@ -7,6 +7,7 @@ import com.saad.baitalkhairat.databinding.FragmentFilterCasesBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -80,4 +81,8 @@ public class FilterCasesFragment extends BaseFragment<FragmentFilterCasesBinding
         mViewModel.setUp();
     }
 
+    @Override
+    public boolean filterWithCategory() {
+        return getArguments().getBoolean(AppConstants.BundleData.FILTER_WITH_CATEGORY, false);
+    }
 }

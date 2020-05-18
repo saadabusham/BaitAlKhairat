@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemAmountViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearAmount"
+        viewBackground="@{viewModel.background}"
+        android:layout_width="75dp"
+        android:layout_height="46dp"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/background_with_shadow"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/roman_style"
+            textViewColor="@{viewModel.textColor}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@{viewModel.amountFormatted}"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</layout>

@@ -49,7 +49,7 @@
 
     <string name="change_phone_number">Change phone number</string>
     <string name="change_password">Change password</string>
-    <string name="home">Home</string>
+
     <string name="orders">orders</string>
     <string name="more">more</string>
     <string name="favorite">Favorite</string>
@@ -186,7 +186,7 @@
     <string name="old_password">Old password</string>
 
     <string name="confirm_new_password">Confirm new password</string>
-    <string name="type_here">Type here</string>
+
     <string name="extra_option">Extra options</string>
     <string name="cancel_this_order_will_cost_you">Cancel this order will cost you</string>
     <string name="worker_name">Worker name</string>
@@ -359,4 +359,25 @@
     <string name="delivered">Delivered</string>
     <string name="order_date">Order date</string>
     <string name="since">since</string>
+    <string name="current_donors">Current donors</string>
+    <string name="past_donors">Past donors</string>
+    <string name="apply_donor">Apply donor</string>
+    <string name="choose_your_financial_need">Choose your financial need</string>
+    <string name="the_desired_amount">The desired amount</string>
+    <string name="another_amount">Another amount</string>
+    <string name="case_details">Case details</string>
+    <string name="message_secured">All messages relating to you are reserved and confidential to us and cannot For anyone to see but those in charge of this platform (Khairat House platform)</string>
+    <string name="upload_your_documents">Upload your documents</string>
+    <string name="add_your_documents">Add your documents</string>
+    <string name="paper_types">Identity documents, identity, passport,etc.</string>
+    <string name="family">Family</string>
+    <string name="orphan">Orphan</string>
+    <string name="type_here">Type here</string>
+    <string name="thank_you">Thank you, </string>
+    <string name="control_panel">Control panel</string>
+    <string name="applied_successfully">Applied successfully</string>
+    <string name="home">Home</string>
+    <string name="you_will_receive_a_text_message_via_your_phone_or_e_mail_he_holds_your_order_number_and_one_of_our_team_will_contact_you_complete_the_request"><![CDATA[You will receive a text message via your phone or e-mail  He holds your order number and one of our team will contact you Complete the request.]]></string>
+    <string name="god_reward_you">God reward you,</string>
+    <string name="the_donation_has_been_made">The donation has been made</string>
 </resources>

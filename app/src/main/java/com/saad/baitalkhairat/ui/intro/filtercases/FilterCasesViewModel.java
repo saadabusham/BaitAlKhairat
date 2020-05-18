@@ -3,6 +3,7 @@ package com.saad.baitalkhairat.ui.intro.filtercases;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.databinding.ViewDataBinding;
@@ -42,7 +43,10 @@ public class FilterCasesViewModel extends BaseViewModel<FilterCasesNavigator, Fr
 
     @Override
     protected void setUp() {
-        setUpSpinnerCaseType();
+        if (getNavigator().filterWithCategory()) {
+            setUpSpinnerCaseType();
+            getViewBinding().spinnerCaseType.setVisibility(View.VISIBLE);
+        }
         setUpSpinnerGender();
         setUpSpinnerCountry();
     }

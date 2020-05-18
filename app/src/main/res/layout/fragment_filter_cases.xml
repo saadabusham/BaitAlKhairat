@@ -26,7 +26,6 @@
             android:layout_above="@id/linearTools"
             android:layout_below="@id/toolbar"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_10sdp">
 
             <LinearLayout
@@ -42,7 +41,9 @@
                     <Spinner
                         android:id="@+id/spinnerCaseType"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp" />
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout

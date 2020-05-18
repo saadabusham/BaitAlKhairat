@@ -25,6 +25,7 @@ import com.saad.baitalkhairat.ui.adapter.SliderImageAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivity;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,19 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
 
     public <V extends ViewDataBinding, N extends BaseNavigator> DonorsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (DonorsNavigator) navigation, (FragmentDonorsBinding) viewDataBinding);
+    }
+
+    @Override
+    protected void setUp() {
+        setUpRecycler();
+        getData();
+        getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRetring();
+                getData();
+            }
+        });
     }
 
     public void onViewAllClicked() {
@@ -192,13 +206,9 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     @Override
     public void onClick(Category category, int position) {
         Bundle data = new Bundle();
-//        data.putInt("categoryId", category.getId());
-//        data.putString("categoryName", category.getName());
-//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment).navigate(R.id.action_nav_home_to_servicesFragment,
-//                data);
+        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getId());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_home_to_cases_Fragment);
-
+                .navigate(R.id.action_nav_home_to_cases_Fragment, data);
     }
 
     public boolean isRefreshing() {
@@ -251,18 +261,5 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);
-    }
-
-    @Override
-    protected void setUp() {
-        setUpRecycler();
-        getData();
-        getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setRetring();
-                getData();
-            }
-        });
     }
 }

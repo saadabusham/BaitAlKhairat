@@ -12,22 +12,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentMyNeedsListBinding;
-import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
+import com.saad.baitalkhairat.model.MyNeeds;
 import com.saad.baitalkhairat.model.Notification;
 import com.saad.baitalkhairat.repository.DataManager;
-import com.saad.baitalkhairat.ui.adapter.NotificationsAdapter;
+import com.saad.baitalkhairat.ui.adapter.MyNeedsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
-import com.saad.baitalkhairat.ui.main.MainActivity;
 import com.saad.baitalkhairat.utils.AppConstants;
 
 
 public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, FragmentMyNeedsListBinding>
         implements RecyclerClick<Notification> {
 
-    NotificationsAdapter notificationsAdapter;
+    MyNeedsAdapter myNeedsAdapter;
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
@@ -38,12 +37,10 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
     @Override
     protected void setUp() {
-        SessionManager.setIsThereNotification(false);
-        ((MainActivity) getBaseActivity()).getViewDataBinding().appBarMain.drawerMainContent.bottomSheet.getMenu().getItem(2)
-                .setIcon(getMyContext().getResources().getDrawable(R.drawable.ic_notification_nav));
         setUpRecycler();
         getData();
     }
+
 
     private void setUpRecycler() {
         getViewBinding().swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -56,14 +53,14 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
         getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        notificationsAdapter = new NotificationsAdapter(getMyContext(), this, getViewBinding().recyclerView);
-        getViewBinding().recyclerView.setAdapter(notificationsAdapter);
-        notificationsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+        myNeedsAdapter = new MyNeedsAdapter(getMyContext(), getViewBinding().recyclerView);
+        getViewBinding().recyclerView.setAdapter(myNeedsAdapter);
+        myNeedsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                notificationsAdapter.addItem(null);
-                notificationsAdapter.notifyItemInserted(notificationsAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(notificationsAdapter.getItemCount() - 1);
+                myNeedsAdapter.addItem(null);
+                myNeedsAdapter.notifyItemInserted(myNeedsAdapter.getItemCount() - 1);
+                getViewBinding().recyclerView.scrollToPosition(myNeedsAdapter.getItemCount() - 1);
                 setLoadMore(true);
                 getData();
             }
@@ -72,24 +69,23 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     }
 
     private void getLocalData() {
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-        notificationsAdapter.addItem(new Notification());
-
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(2));
+        myNeedsAdapter.addItem(new MyNeeds(3));
+        myNeedsAdapter.addItem(new MyNeeds(4));
+        myNeedsAdapter.addItem(new MyNeeds(4));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(3));
+        myNeedsAdapter.addItem(new MyNeeds(2));
+        myNeedsAdapter.addItem(new MyNeeds(4));
+        myNeedsAdapter.addItem(new MyNeeds(4));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
+        myNeedsAdapter.addItem(new MyNeeds(1));
     }
 
     public void getData() {
@@ -139,7 +135,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
         getViewBinding().recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                notificationsAdapter.notifyDataSetChanged();
+                myNeedsAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -181,7 +177,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {
-            notificationsAdapter.clearItems();
+            myNeedsAdapter.clearItems();
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);

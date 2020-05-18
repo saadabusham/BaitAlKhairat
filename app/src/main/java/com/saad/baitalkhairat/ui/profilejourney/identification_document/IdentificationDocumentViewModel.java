@@ -132,12 +132,14 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
 
     public void addImage(String imagePath) {
         identificationDocumentAdapter.addItem(new IdentificationDocument(imagePath));
+        getViewBinding().recyclerView.scrollToPosition(identificationDocumentAdapter.getItemCount() - 1);
     }
 
     @Override
     public void onClick(boolean isDelete, IdentificationDocument object, int position) {
         if (isDelete) {
-
+            identificationDocumentAdapter.remove(position);
+            identificationDocumentAdapter.notifyDataSetChanged();
         } else {
             Bundle data = new Bundle();
             data.putSerializable(AppConstants.BundleData.DOCUMENT, object);

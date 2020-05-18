@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -94,18 +93,6 @@ public class GeneralFunction {
         textView.getPaint().setShader(shader);
     }
 
-    @BindingAdapter("imageUrl")
-    public static void setImageUrl(ImageView imageView, String url) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.ic_loading);
-        requestOptions.error(R.color.red);
-        Glide.with(imageView.getContext()).applyDefaultRequestOptions(requestOptions).load(url).into(imageView);
-    }
-
-    @BindingAdapter("imageResources")
-    public static void setImageResource(ImageView imageView, int resource) {
-        imageView.setImageResource(resource);
-    }
 
     public static void loadImage(Context mContext, String imgUrl, ImageView imageView) {
 

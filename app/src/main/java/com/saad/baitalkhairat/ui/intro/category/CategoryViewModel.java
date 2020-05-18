@@ -1,6 +1,7 @@
 package com.saad.baitalkhairat.ui.intro.category;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
@@ -18,6 +19,7 @@ import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 
 public class CategoryViewModel extends BaseViewModel<CategoryNavigator, FragmentCategoryBinding>
@@ -147,9 +149,10 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
 
     @Override
     public void onClick(Category category, int position) {
-//        Bundle data = new Bundle();
+        Bundle data = new Bundle();
+        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getId());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_category_to_cases_Fragment);
+                .navigate(R.id.action_nav_category_to_cases_Fragment, data);
 
     }
 

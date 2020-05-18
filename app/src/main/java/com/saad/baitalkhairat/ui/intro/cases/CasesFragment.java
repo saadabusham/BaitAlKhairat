@@ -11,6 +11,7 @@ import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -107,5 +108,10 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
     @Override
     public void callBack(int requestCode, int resultCode, Intent data) {
 
+    }
+
+    @Override
+    public int getCategoryId() {
+        return getArguments().getInt(AppConstants.BundleData.CATEGORY_ID, 0);
     }
 }

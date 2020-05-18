@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayout;
 import com.saad.baitalkhairat.R;
@@ -60,18 +61,19 @@ public class MyNeedsHolderViewModel extends BaseViewModel<MyNeedsHolderNavigator
         switch (position) {
             case 0:
                 bundle.putInt(AppConstants.BundleData.MY_NEEDS_TAB_TYPE, MyNeedsTabTypes.CURRENT.getType());
-                MyNeedsListFragment currentNeedsHolderFragment = new MyNeedsListFragment();
-                currentNeedsHolderFragment.setArguments(bundle);
-                return currentNeedsHolderFragment;
+                MyNeedsListFragment currentNeedsFragment = new MyNeedsListFragment();
+                currentNeedsFragment.setArguments(bundle);
+                return currentNeedsFragment;
             default:
                 bundle.putInt(AppConstants.BundleData.MY_NEEDS_TAB_TYPE, MyNeedsTabTypes.HISTORY.getType());
-                MyNeedsListFragment historyNeedsHolderFragment = new MyNeedsListFragment();
-                historyNeedsHolderFragment.setArguments(bundle);
-                return historyNeedsHolderFragment;
+                MyNeedsListFragment historyNeedsFragment = new MyNeedsListFragment();
+                historyNeedsFragment.setArguments(bundle);
+                return historyNeedsFragment;
         }
     }
 
     public void onApplyNeedClick() {
-
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_myNeedsHolderFragment_to_applyNeedsFragment);
     }
 }

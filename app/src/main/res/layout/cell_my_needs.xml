@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="252dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:background="@drawable/shape_rounded_empty_gray2"
         android:orientation="vertical"
@@ -209,18 +209,9 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                imageResources="@{()->viewModel.getProcessImage(processTypes.ORDER_RECEIVED)}"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-
-            <View
-                android:layout_width="78dp"
-                android:layout_height="4dp"
-                android:background="@color/process_gray" />
 
             <ImageView
-                imageResources="@{()->viewModel.getProcessImage}"
+                imageResources="@{viewModel.getProcessImage(processTypes.ORDER_RECEIVED.getStatus(),true)}"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 app:srcCompat="@drawable/ic_process_wait" />
@@ -228,21 +219,32 @@
             <View
                 android:layout_width="78dp"
                 android:layout_height="4dp"
-                android:background="@color/process_gray" />
+                viewBackground="@{viewModel.getProcessColor(processTypes.UNDER_STUDYING.getStatus())}" />
 
             <ImageView
-                imageResources="@{()->viewModel.getProcessImage}"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                imageResources="@{viewModel.getProcessImage(processTypes.UNDER_STUDYING.getStatus(),true)}"
                 app:srcCompat="@drawable/ic_process_wait" />
 
             <View
                 android:layout_width="78dp"
                 android:layout_height="4dp"
-                android:background="@color/process_gray" />
+                viewBackground="@{viewModel.getProcessColor(processTypes.IN_WAY.getStatus())}" />
 
             <ImageView
-                imageResources="@{()->viewModel.getProcessImage}"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                imageResources="@{viewModel.getProcessImage(processTypes.IN_WAY.getStatus(),true)}"
+                app:srcCompat="@drawable/ic_process_wait" />
+
+            <View
+                android:layout_width="78dp"
+                android:layout_height="4dp"
+                viewBackground="@{viewModel.getProcessColor(processTypes.FINISHED.getStatus())}" />
+
+            <ImageView
+                imageResources="@{viewModel.getProcessImage(processTypes.FINISHED.getStatus(),true)}"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 app:srcCompat="@drawable/ic_process_wait" />
@@ -260,34 +262,38 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/order_received"
-                android:textColor="@color/green"
+                textViewColor="@{viewModel.getProcessImage(processTypes.ORDER_RECEIVED.getStatus(),false)}"
                 android:textSize="10sp" />
 
             <TextView
+                style="@style/bold_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/Under_studying"
-                android:textColor="@color/process_gray"
+                textViewColor="@{viewModel.getProcessImage(processTypes.UNDER_STUDYING.getStatus(),false)}"
                 android:textSize="10dp" />
 
             <TextView
+                style="@style/bold_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/on_way"
-                android:textColor="@color/process_gray"
+                textViewColor="@{viewModel.getProcessImage(processTypes.IN_WAY.getStatus(),false)}"
+                android:textColor="@color/green"
                 android:textSize="10sp" />
 
             <TextView
+                style="@style/bold_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/delivered"
-                android:textColor="@color/process_gray"
+                textViewColor="@{viewModel.getProcessImage(processTypes.FINISHED.getStatus(),false)}"
                 android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>

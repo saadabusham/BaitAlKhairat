@@ -94,7 +94,7 @@
     <string name="about_us">من نحن</string>
     <string name="common_questions">الأسئلة الأكثر شيوعاً</string>
     <string name="membership_no">رقم العضوية</string>
-    <string name="hello">مرحبا بك, </string>
+    <string name="hello">مرحبا بك، </string>
     <string name="my_needs">احتياجاتي</string>
     <string name="my_donations">تبرعاتي</string>
     <string name="my_wallet">محفظتي</string>
@@ -141,5 +141,34 @@
     <string name="current_needs">احتياجات حالية</string>
     <string name="past_needs">تبرعات سابقة</string>
     <string name="apply_need">قدم احتياج</string>
-
+    <string name="order_received">إستلمنا الطلب</string>
+    <string name="Under_studying">تحت الدراسة</string>
+    <string name="on_way">على الطريق</string>
+    <string name="delivered">تم التوصيل</string>
+    <string name="order_date">تاريخ الطلب</string>
+    <string name="since">من</string>
+    <string name="current_donors">التبرعات الحالية</string>
+    <string name="past_donors">التبرعات السابقة</string>
+    <string name="apply_donor">قدم تبرع</string>
+    <string name="choose_your_financial_need">اختر حاجتك المالية</string>
+    <string name="the_desired_amount">المبلغ المراد</string>
+    <string name="another_amount">مبلغ آخر</string>
+    <string name="case_details">تفاصيل الحالة</string>
+    <string name="message_secured">كل الرسائل المتعلقة بك محفوظة وسرية بالنسبة لنا ولا يمكن
+لأحد الاطلاع عليها سوى القائمين على هذه المنصة  ( منصة بيت الخيرات ) </string>
+    <string name="upload_your_documents">حمل مستنداتك </string>
+    <string name="add_your_documents">اضف مستنداتك</string>
+    <string name="paper_types">الاوراق الثبوتية، الهوية، جواز السفر…الخ</string>
+    <string name="family">عائلة</string>
+    <string name="orphan">ايتام</string>
+    <string name="type_here">اكتب هنا</string>
+    <string name="thank_you">شكرا لك، </string>
+    <string name="control_panel">لوحة التحكم</string>
+    <string name="applied_successfully">تم التقديم بنجاح</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="you_will_receive_a_text_message_via_your_phone_or_e_mail_he_holds_your_order_number_and_one_of_our_team_will_contact_you_complete_the_request">سوف تصلك رسالة نصية عبر هاتفك او الابريد الاكتروني
+ يحمل رقم طلبك وسيتواصل معك احد من فريقنا
+الاتمام الطلب.</string>
+    <string name="god_reward_you">جزاك الله خيراً، </string>
+    <string name="the_donation_has_been_made">لقد تمت عملية التبرع</string>
 </resources>

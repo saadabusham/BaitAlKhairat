@@ -41,11 +41,18 @@
         <action
             android:id="@+id/action_casesFragment_to_filterCasesFragment"
             app:destination="@id/filterCasesFragment" />
+        <action
+            android:id="@+id/action_casesFragment_to_donorAppliedSuccessfulFragment"
+            app:destination="@id/donorAppliedSuccessfulFragment" />
     </fragment>
     <fragment
         android:id="@+id/caseDetailsFragment"
         android:name="com.saad.baitalkhairat.ui.intro.casedetails.CaseDetailsFragment"
-        android:label="CaseDetailsFragment" />
+        android:label="CaseDetailsFragment">
+        <action
+            android:id="@+id/action_caseDetailsFragment_to_donorAppliedSuccessfulFragment"
+            app:destination="@id/donorAppliedSuccessfulFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filterCasesFragment"
         android:name="com.saad.baitalkhairat.ui.intro.filtercases.FilterCasesFragment"
@@ -79,6 +86,9 @@
         <action
             android:id="@+id/action_nav_account_to_myNeedsHolderFragment"
             app:destination="@id/myNeedsHolderFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_myDonationHolderFragment"
+            app:destination="@id/myDonationHolderFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
@@ -156,9 +166,63 @@
         <action
             android:id="@+id/action_myNeedsHolderFragment_to_myNeedsListFragment"
             app:destination="@id/myNeedsListFragment" />
+        <action
+            android:id="@+id/action_myNeedsHolderFragment_to_applyNeedsFragment"
+            app:destination="@id/applyNeedsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myNeedsListFragment"
         android:name="com.saad.baitalkhairat.ui.needjourney.myneedslist.MyNeedsListFragment"
         android:label="MyNeedsListFragment" />
+    <fragment
+        android:id="@+id/myDonationHolderFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.myneedsholder.MyDonationHolderFragment"
+        android:label="MyDonationHolderFragment">
+        <action
+            android:id="@+id/action_myDonationHolderFragment_to_myDonationListFragment"
+            app:destination="@id/myDonationListFragment" />
+        <action
+            android:id="@+id/action_myDonationHolderFragment_to_casesFragment"
+            app:destination="@id/casesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myDonationListFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListFragment"
+        android:label="MyDonationListFragment" />
+    <fragment
+        android:id="@+id/applyNeedsFragment"
+        android:name="com.saad.baitalkhairat.ui.needjourney.applyneeds.ApplyNeedsFragment"
+        android:label="ApplyNeedsFragment">
+        <action
+            android:id="@+id/action_applyNeedsFragment_to_needAppliedFragment"
+            app:destination="@id/needAppliedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/needAppliedFragment"
+        android:name="com.saad.baitalkhairat.ui.needjourney.needappliedsuccessful.NeedAppliedSuccessfulFragment"
+        android:label="NeedAppliedFragment">
+        <action
+            android:id="@+id/action_needAppliedFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_needAppliedFragment_to_nav_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/donorAppliedSuccessfulFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulFragment"
+        android:label="DonorAppliedSuccessfulFragment">
+        <action
+            android:id="@+id/action_donorAppliedSuccessfulFragment_to_nav_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_donorAppliedSuccessfulFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

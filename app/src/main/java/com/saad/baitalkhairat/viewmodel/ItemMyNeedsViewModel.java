@@ -37,33 +37,80 @@ public class ItemMyNeedsViewModel extends BaseObservable {
 
     }
 
-    public int getProcessImage(int processType) {
+    public int getProcessImage(int processType, boolean isImage) {
         ProcessTypes processTypesObj = ProcessTypes.fromInt(processType);
         switch (processTypesObj) {
             case ORDER_RECEIVED:
-
-                break;
-
+                return imageOrTextColor(isImage, ProcessTypes.ORDER_RECEIVED.getStatus());
             case UNDER_STUDYING:
-
-                break;
-
+                return imageOrTextColor(isImage, ProcessTypes.UNDER_STUDYING.getStatus());
             case IN_WAY:
-
-                break;
-
-            case FINISHED:
-
-                break;
-        }
-        ProcessStatus processStatus = ProcessStatus.fromInt(myNeeds.getProcess());
-        switch (processStatus) {
-            case WAITING:
-                return R.drawable.ic_process_wait;
-            case IN_PROCESS:
-                return R.drawable.ic_process_start;
+                return imageOrTextColor(isImage, ProcessTypes.IN_WAY.getStatus());
             default:
-                return R.drawable.ic_process_done;
+                return imageOrTextColor(isImage, ProcessTypes.FINISHED.getStatus());
+        }
+    }
+
+    private int imageOrTextColor(boolean isImage, int status) {
+        if (isImage) {
+            return getImage(status);
+        } else {
+            return getTextColor(status);
+        }
+    }
+
+    private int getTextColor(int status) {
+        if (myNeeds.getProcess() >= status) {
+            return R.color.green;
+        } else {
+            return R.color.process_gray;
+        }
+    }
+
+    public int getProcessTextColor(int processType) {
+        ProcessTypes processTypesObj = ProcessTypes.fromInt(processType);
+        switch (processTypesObj) {
+            case ORDER_RECEIVED:
+                return getImage(ProcessTypes.ORDER_RECEIVED.getStatus());
+            case UNDER_STUDYING:
+                return getImage(ProcessTypes.UNDER_STUDYING.getStatus());
+            case IN_WAY:
+                return getImage(ProcessTypes.IN_WAY.getStatus());
+            default:
+                return getImage(ProcessTypes.FINISHED.getStatus());
+        }
+    }
+
+    private int getImage(int orderStatus) {
+        if (myNeeds.getProcess() == ProcessTypes.FINISHED.getStatus()) {
+            return R.drawable.ic_process_done;
+        }
+        if (myNeeds.getProcess() > orderStatus) {
+            return R.drawable.ic_process_done;
+        } else if (myNeeds.getProcess() == orderStatus) {
+            return R.drawable.ic_process_start;
+        } else {
+            return R.drawable.ic_process_wait;
+        }
+    }
+
+    public int getProcessColor(int processType) {
+        ProcessTypes processTypesObj = ProcessTypes.fromInt(processType);
+        switch (processTypesObj) {
+            case UNDER_STUDYING:
+                return getLineColor(ProcessTypes.UNDER_STUDYING.getStatus());
+            case IN_WAY:
+                return getLineColor(ProcessTypes.IN_WAY.getStatus());
+            default:
+                return getLineColor(ProcessTypes.FINISHED.getStatus());
+        }
+    }
+
+    private int getLineColor(int orderStatus) {
+        if (myNeeds.getProcess() >= orderStatus) {
+            return R.color.green;
+        } else {
+            return R.color.process_gray;
         }
     }
 

@@ -5,5 +5,6 @@ import com.saad.baitalkhairat.ui.base.BaseNavigator;
 
 public interface CasesNavigator extends BaseNavigator {
 
+    int getCategoryId();
 
 }

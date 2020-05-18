@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.needjourney.applyneeds.ApplyNeedsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarColoredBackArrowDark" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_15sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/choose_your_financial_need"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerCaseType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray_textview_light" />
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/the_desired_amount"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+                <include
+                    android:id="@+id/recyclerViewAmounts"
+                    layout="@layout/recycler_view" />
+
+                <EditText
+                    android:id="@+id/edUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:digits="0123456789."
+                    android:hint="@string/another_amount"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/case_details"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+
+                <EditText
+                    android:id="@+id/edCaseDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shape_rounded_empty_gray_light"
+                    android:gravity="start|top"
+                    android:hint="@string/type_here"
+                    android:minHeight="@dimen/_70sdp"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="13sp" />
+
+                <TextView
+                    style="@style/roman_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:text="@string/message_secured"
+                    android:textColor="@color/login_gray"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/upload_your_documents"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/roman_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:text="@string/add_your_documents"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            style="@style/roman_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:text="@string/paper_types"
+                            android:textColor="@color/login_gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/tvFilterSearch"
+                        style="@style/bold_style"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@color/black"
+                        android:gravity="center"
+                        android:onClick="@{()-> viewModel.onUploadDocClick()}"
+                        android:text="@string/upload_your_documents"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/recyclerViewDocuments"
+                    layout="@layout/recycler_view" />
+
+                <Button
+                    android:id="@+id/btnApplyNeed"
+                    style="@style/bold_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_40sdp"
+                    android:background="@color/orange"
+                    android:onClick="@{() -> viewModel.onApplyNeedClick()}"
+                    android:text="@string/apply_need"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

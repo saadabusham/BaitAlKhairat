@@ -76,7 +76,7 @@ public class MyNeedsHolderFragment extends BaseFragment<FragmentMyNeedsHolderBin
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
-        setUpToolbar(mViewBinding.toolbar, TAG, R.string.login_or_register);
+        setUpToolbar(mViewBinding.toolbar, TAG, R.string.my_needs);
         mViewModel.setUp();
     }
 

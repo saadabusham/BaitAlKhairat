@@ -63,6 +63,10 @@ public class AccountViewModel extends BaseViewModel<AccountNavigator, FragmentAc
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_nav_account_to_myNeedsHolderFragment);
                 break;
+            case 1:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_nav_account_to_myDonationHolderFragment);
+                break;
         }
     }
 

@@ -3,7 +3,9 @@ package com.saad.baitalkhairat.ui.intro.casedetails;
 import android.content.Context;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 
+import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCaseDetailsBinding;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
@@ -25,7 +27,8 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
     }
 
     public void onDonateClick() {
-
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_caseDetailsFragment_to_donorAppliedSuccessfulFragment);
     }
 
 }
