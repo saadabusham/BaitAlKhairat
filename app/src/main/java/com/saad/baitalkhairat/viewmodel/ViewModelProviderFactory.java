@@ -14,6 +14,7 @@ import com.saad.baitalkhairat.ui.auth.registerJourney.register.RegisterViewModel
 import com.saad.baitalkhairat.ui.auth.signinholder.SignInHolderViewModel;
 import com.saad.baitalkhairat.ui.auth.verifyphonenumber.VerifyPhoneNumberViewModel;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
+import com.saad.baitalkhairat.ui.cartjourney.cart.CartViewModel;
 import com.saad.baitalkhairat.ui.donatejourney.myneedsholder.MyDonationHolderViewModel;
 import com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListViewModel;
 import com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulViewModel;
@@ -190,6 +191,9 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(DonorAppliedSuccessfulViewModel.class)) {
             //noinspection unchecked
             return (T) new DonorAppliedSuccessfulViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(CartViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CartViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

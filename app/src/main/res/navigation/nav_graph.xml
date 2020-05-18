@@ -225,4 +225,12 @@
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.saad.baitalkhairat.ui.cartjourney.cart.CartFragment"
+        android:label="CartFragment">
+        <action
+            android:id="@+id/action_cartFragment_to_donorAppliedSuccessfulFragment"
+            app:destination="@id/donorAppliedSuccessfulFragment" />
+    </fragment>
 </navigation>

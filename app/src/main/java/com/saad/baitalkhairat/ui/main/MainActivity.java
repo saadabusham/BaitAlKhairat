@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity<ActivityDrawerMainBinding, MainAc
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCart:
-
+                openCart();
                 break;
             case R.id.itemSearch: {
 

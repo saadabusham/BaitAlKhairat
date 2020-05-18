@@ -171,4 +171,7 @@
 الاتمام الطلب.</string>
     <string name="god_reward_you">جزاك الله خيراً، </string>
     <string name="the_donation_has_been_made">لقد تمت عملية التبرع</string>
+    <string name="donations_cart">سلة تبرعاتي</string>
+    <string name="This_amount_will_be_deducted_automatically_in_your_wallet_After_completing_the_payment_process_you_will_receive_a_message_via_your_phone_with_the_amount_donated_and_may_god_reward_you">هذا المبلغ سوف يخصم تلقائيا في محفظتك بعد اكمال عملية الدفع، سوف تصلك رسالة عبر هاتفك بالمبلغ المتبرع فيه وجزاك الله خيرا.</string>
+    <string name="total_amount">المبلغ الاجمالي</string>
 </resources>

@@ -6,45 +6,31 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.viewmodel.ItemCaseViewModel" />
+            type="com.saad.baitalkhairat.viewmodel.ItemCartViewModel" />
     </data>
 
     <LinearLayout
         android:id="@+id/cardFavoriteCell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_7sdp"
-        android:background="@drawable/shape_rounded_empty_gray_light"
-        android:onClick="@{viewModel::onItemClick}"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/shape_rounded_empty_gray2"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/bold_style"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:src="@color/orange" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:gravity="start|center"
-                android:maxLines="3"
-                style="@style/bold_style"
-                android:text="@string/all_rights_reserved"
-                android:textColor="@color/subcategory_grid_text_color"
-                android:textSize="14sp" />
-
-        </LinearLayout>
+            android:gravity="start|top"
+            android:maxLines="3"
+            android:minHeight="@dimen/_50sdp"
+            android:text="@string/all_rights_reserved"
+            android:textColor="@color/subcategory_grid_text_color"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,22 +49,22 @@
 
                 <TextView
                     android:id="@+id/tvCaseIdText"
+                    style="@style/light_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:text="@string/case_id"
-                    style="@style/light_style"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvCaseId"
+                    style="@style/bold_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseIdText"
                     android:maxLines="3"
-                    style="@style/bold_style"
                     android:text="1452"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -94,22 +80,22 @@
 
                 <TextView
                     android:id="@+id/tvCaseTypeText"
+                    style="@style/light_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
-                    style="@style/light_style"
                     android:text="@string/case_type"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvCaseType"
+                    style="@style/bold_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseTypeText"
                     android:maxLines="3"
-                    style="@style/bold_style"
                     android:text="orphan"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -125,22 +111,22 @@
 
                 <TextView
                     android:id="@+id/tvCountryText"
+                    style="@style/light_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
-                    style="@style/light_style"
                     android:text="@string/country"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvCountry"
+                    style="@style/bold_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCountryText"
                     android:maxLines="3"
-                    style="@style/bold_style"
                     android:text="@string/jordan"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
@@ -150,72 +136,53 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_7sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+            android:background="@drawable/shape_rounded_empty_gray2_filled"
             android:gravity="center"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/tvAmountText"
+                    style="@style/bold_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:text="@string/amount"
-                    style="@style/light_style"
                     android:textColor="@color/subcategory_grid_text_color"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tvAmount"
+                    style="@style/bold_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:maxLines="3"
-                    style="@style/bold_style"
                     android:text="100 jd"
                     android:textColor="@color/green"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/imgAddToCart"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:background="@drawable/add_to_cart_background"
-                    android:padding="@dimen/_5sdp"
-                    android:onClick="@{viewModel::onAddToCartClick}"
-                    app:srcCompat="@drawable/ic_add_to_cart" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:background="@color/orange"
-                    android:gravity="center"
-                    style="@style/bold_style"
-                    android:text="@string/donate"
-                    android:onClick="@{viewModel::onDonateClick}"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imgAddToCart"
+                android:layout_width="10dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:onClick="@{viewModel::onRemoveClick}"
+                app:srcCompat="@drawable/ic_bin" />
 
         </LinearLayout>
 

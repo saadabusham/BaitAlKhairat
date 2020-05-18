@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
@@ -239,6 +240,11 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openCart() {
+        Navigation.findNavController(this, R.id.nav_host_fragment)
+                .navigate(R.id.cartFragment);
     }
 }
 

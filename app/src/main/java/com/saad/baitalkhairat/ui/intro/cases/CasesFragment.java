@@ -92,7 +92,7 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
         mViewBinding.toolbar.toolbar.findViewById(R.id.itemCart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getBaseActivity().openCart();
             }
         });
         mViewBinding.toolbar.toolbar.findViewById(R.id.itemSearch).setOnClickListener(new View.OnClickListener() {
