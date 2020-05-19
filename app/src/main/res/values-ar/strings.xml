@@ -206,5 +206,12 @@
     <string name="card_expiration">انتهاء صلاحية البطاقة</string>
     <string name="the_name_on_the_card">الاسم على البطاقة</string>
     <string name="card_number">رقم البطاقة</string>
+    <string name="charged_balance">الرصيدي المشحون</string>
+    <string name="the_value_of_donations_paid">قيمة التبرعات المدفوعة</string>
+    <string name="the_rest_of_my_donation_balance">باقي من رصيد تبرعاتي</string>
+    <string name="see_my_donation_transaction">معرفة حركات تبرعاتي</string>
+    <string name="account_number">رقم الحساب</string>
+    <string name="all_transactions">جميع حركاتي</string>
+    <string name="your_wallet_has_been_charged_at_value">لقد تم شحن محفظتك بقيمة</string>
 
 </resources>

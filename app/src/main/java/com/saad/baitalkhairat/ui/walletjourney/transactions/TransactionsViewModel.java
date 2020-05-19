@@ -1,34 +1,38 @@
-package com.saad.baitalkhairat.ui.needjourney.myneedslist;
+package com.saad.baitalkhairat.ui.walletjourney.transactions;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.saad.baitalkhairat.databinding.FragmentMyNeedsListBinding;
+import com.saad.baitalkhairat.R;
+import com.saad.baitalkhairat.databinding.FragmentTransactionsBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyNeeds;
 import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.Transaction;
 import com.saad.baitalkhairat.repository.DataManager;
-import com.saad.baitalkhairat.ui.adapter.MyNeedsAdapter;
+import com.saad.baitalkhairat.ui.adapter.TransactionAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 
-public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, FragmentMyNeedsListBinding>
+public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, FragmentTransactionsBinding>
         implements RecyclerClick<Notification> {
 
-    MyNeedsAdapter myNeedsAdapter;
+    TransactionAdapter transactionAdapter;
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
 
-    public <V extends ViewDataBinding, N extends BaseNavigator> MyNeedsListViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (MyNeedsListNavigator) navigation, (FragmentMyNeedsListBinding) viewDataBinding);
+    public <V extends ViewDataBinding, N extends BaseNavigator> TransactionsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
+        super(mContext, dataManager, (TransactionsNavigator) navigation, (FragmentTransactionsBinding) viewDataBinding);
     }
 
     @Override
@@ -36,7 +40,6 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
         setUpRecycler();
         getData();
     }
-
 
     private void setUpRecycler() {
         getViewBinding().swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -49,14 +52,14 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
         getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        myNeedsAdapter = new MyNeedsAdapter(getMyContext(), getViewBinding().recyclerView);
-        getViewBinding().recyclerView.setAdapter(myNeedsAdapter);
-        myNeedsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+        transactionAdapter = new TransactionAdapter(getMyContext(), getViewBinding().recyclerView);
+        getViewBinding().recyclerView.setAdapter(transactionAdapter);
+        transactionAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                myNeedsAdapter.addItem(null);
-                myNeedsAdapter.notifyItemInserted(myNeedsAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(myNeedsAdapter.getItemCount() - 1);
+                transactionAdapter.addItem(null);
+                transactionAdapter.notifyItemInserted(transactionAdapter.getItemCount() - 1);
+                getViewBinding().recyclerView.scrollToPosition(transactionAdapter.getItemCount() - 1);
                 setLoadMore(true);
                 getData();
             }
@@ -65,24 +68,20 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     }
 
     private void getLocalData() {
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(2));
-        myNeedsAdapter.addItem(new MyNeeds(3));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(3));
-        myNeedsAdapter.addItem(new MyNeeds(2));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
+        transactionAdapter.addItem(new Transaction());
     }
+
 
     public void getData() {
 //        if (!isRefreshing() && !isRetry()) {
@@ -123,7 +122,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
     private void showNoDataFound() {
         getViewBinding().swipeRefreshLayout.setEnabled(false);
-        getViewBinding().layoutNoDataFound.relativeListEmpty.setVisibility(View.VISIBLE);
+        getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.VISIBLE);
 
     }
 
@@ -131,14 +130,17 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
         getViewBinding().recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                myNeedsAdapter.notifyDataSetChanged();
+                transactionAdapter.notifyDataSetChanged();
             }
         });
     }
 
     @Override
     public void onClick(Notification notification, int position) {
-
+        Bundle data = new Bundle();
+        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
 
     }
 
@@ -170,7 +172,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {
-            myNeedsAdapter.clearItems();
+            transactionAdapter.clearItems();
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);

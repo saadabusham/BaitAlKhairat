@@ -4,7 +4,9 @@ import android.content.Context;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.Navigation;
 
+import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCreditCardBinding;
 import com.saad.baitalkhairat.model.DataExample;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -31,7 +33,8 @@ public class CreditCardViewModel extends BaseViewModel<CreditCardNavigator, Frag
     }
 
     public void onPayClicked() {
-
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.chargedSuccessfulFragment);
     }
 
 }

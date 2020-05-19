@@ -415,4 +415,11 @@
     <string name="card_expiration">Card expiration</string>
     <string name="the_name_on_the_card">The name on the card</string>
     <string name="card_number">Card number</string>
+    <string name="charged_balance">Charged balance</string>
+    <string name="the_value_of_donations_paid">The value of donations paid</string>
+    <string name="the_rest_of_my_donation_balance">The rest of my donation balance</string>
+    <string name="see_my_donation_transaction">See my donation transaction</string>
+    <string name="account_number">Account number</string>
+    <string name="all_transactions">All transactions</string>
+    <string name="your_wallet_has_been_charged_at_value">Your wallet has been charged at value</string>
 </resources>

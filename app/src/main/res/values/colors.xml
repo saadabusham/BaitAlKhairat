@@ -51,7 +51,7 @@
     <color name="bank_transfer_pink">#FFFADD</color>
     <color name="bank_transfer_stroke_pink">#F4D79E</color>
     <color name="copy_id_background_blue">#0095F8</color>
-
+    <color name="wallet_background_gray">#F3F3F3</color>
 
     <color name="order_cell_red">#D12323</color>
     <color name="red">#ee2c3c</color>

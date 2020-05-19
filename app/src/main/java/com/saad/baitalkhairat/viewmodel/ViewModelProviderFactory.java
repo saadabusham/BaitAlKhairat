@@ -49,9 +49,11 @@ import com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentViewMod
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.banktransfer.BankTransferViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.charge.ChargeViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.chargedsuccessful.ChargedSuccessfulViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.chargeto.ChargeToViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.creditcard.CreditCardViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.paymentholder.PaymentHolderViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.transactions.TransactionsViewModel;
 import com.saad.baitalkhairat.ui.walletjourney.wallet.WalletViewModel;
 
 import javax.inject.Inject;
@@ -218,6 +220,12 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(CreditCardViewModel.class)) {
             //noinspection unchecked
             return (T) new CreditCardViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(TransactionsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new TransactionsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ChargedSuccessfulViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ChargedSuccessfulViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

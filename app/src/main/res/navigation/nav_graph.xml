@@ -243,6 +243,15 @@
         <action
             android:id="@+id/action_walletFragment_to_chargeToFragment"
             app:destination="@id/chargeToFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_casesFragment"
+            app:destination="@id/casesFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_applyNeedsFragment"
+            app:destination="@id/applyNeedsFragment" />
     </fragment>
     <fragment
         android:id="@+id/chargeToFragment"
@@ -264,4 +273,30 @@
         android:id="@+id/paymentHolderFragment"
         android:name="com.saad.baitalkhairat.ui.walletjourney.paymentholder.PaymentHolderFragment"
         android:label="PaymentHolderFragment" />
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.transactions.TransactionsFragment"
+        android:label="TransactionsFragment"></fragment>
+    <fragment
+        android:id="@+id/chargedSuccessfulFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.chargedsuccessful.ChargedSuccessfulFragment"
+        android:label="ChargedSuccessfulFragment">
+        <action
+            android:id="@+id/action_chargedSuccessfulFragment_to_casesFragment"
+            app:destination="@id/casesFragment"
+            app:popUpTo="@+id/nav_home" />
+        <action
+            android:id="@+id/action_chargedSuccessfulFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/creditCardFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.creditcard.CreditCardFragment"
+        android:label="CreditCardFragment">
+        <action
+            android:id="@+id/action_creditCardFragment_to_chargedSuccessfulFragment"
+            app:destination="@id/chargedSuccessfulFragment" />
+    </fragment>
 </navigation>

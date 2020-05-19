@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemTransactionViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cardFavoriteCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/shape_rounded_empty_gray2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:gravity="center|start">
+
+            <TextView
+                style="@style/roman_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/account_number"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                style="@style/roman_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:maxLines="3"
+                android:text="10/4/2020"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAccountNumber"
+            style="@style/bold_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:gravity="start|top"
+            android:maxLines="3"
+            android:text="@string/all_rights_reserved"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/roman_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:gravity="start|top"
+            android:maxLines="3"
+            android:text="@string/all_rights_reserved"
+            android:textColor="@color/subcategory_grid_text_color"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:gravity="center|start">
+
+            <TextView
+                android:id="@+id/tvAmountText"
+                style="@style/bold_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@string/amount"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                style="@style/bold_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:maxLines="3"
+                android:text="100 jd"
+                android:textColor="@color/green"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
