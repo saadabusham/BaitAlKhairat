@@ -2,12 +2,14 @@
 package com.saad.baitalkhairat.viewmodel;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.utils.LanguageUtils;
 
 
 public class ItemNotificationViewModel extends BaseObservable {
@@ -37,5 +39,9 @@ public class ItemNotificationViewModel extends BaseObservable {
         mRecyclerClick.onClick(notification, position);
     }
 
+    public int getGravity() {
+        return LanguageUtils.getLanguage(context).equals("ar")
+                ? Gravity.RIGHT : Gravity.LEFT;
+    }
 
 }

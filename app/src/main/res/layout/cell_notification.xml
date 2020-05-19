@@ -25,6 +25,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="27–4 2020"
+            android:gravity="@{viewModel.gravity}"
             android:textColor="@color/notification_date_color"
             android:textSize="10sp" />
 
@@ -36,6 +37,7 @@
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_20sdp"
+            android:gravity="@{viewModel.getGravity}"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:drawablePadding="@dimen/_10sdp"
             android:text="أيام قليلة متبقية على رمضان 2020 -1441"

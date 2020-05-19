@@ -2,13 +2,14 @@
     android:width="22dp"
     android:height="22dp"
     android:viewportWidth="22"
+    android:autoMirrored="true"
     android:viewportHeight="22">
-    <path
-        android:fillColor="#f9a514"
-        android:pathData="M11,0L11,0A11,11 0,0 1,22 11L22,11A11,11 0,0 1,11 22L11,22A11,11 0,0 1,0 11L0,11A11,11 0,0 1,11 0z" />
-    <path
-        android:fillColor="#00000000"
-        android:pathData="M11.711,15.873 L7.3957,11.2028 11.8999,6.9502"
-        android:strokeWidth="2"
-        android:strokeColor="#fff" />
+  <path
+      android:fillColor="#f9a514"
+      android:pathData="M22,11h0A11,11 0,0 1,11 22h0A11,11 0,0 1,0 11H0A11,11 0,0 1,11 0h0A11,11 0,0 1,22 11Z" />
+  <path
+      android:fillColor="#00000000"
+      android:pathData="M10.1,7l4.5,4.25 -4.31,4.67"
+      android:strokeWidth="2"
+      android:strokeColor="#fff" />
 </vector>

@@ -24,6 +24,7 @@ import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.RateDialog;
 import com.saad.baitalkhairat.utils.DeviceUtils;
+import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.ArrayList;
 
@@ -79,7 +80,6 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
         menuItems.add(new MenuItem(R.string.share_app, R.drawable.ic_share_app, DrawerWithIconTypes.WITH_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.rate_app, R.drawable.ic_rate_app, DrawerWithIconTypes.WITH_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.use_language, R.drawable.ic_language, DrawerWithIconTypes.WITH_ICON.getMode()));
-        menuItems.add(new MenuItem(R.string.use_language, R.drawable.ic_language, DrawerWithIconTypes.HIDE_ITEM.getMode()));
         menuItems.add(new MenuItem(R.string.privacy_policy, R.drawable.ic_privacy_policy, DrawerWithIconTypes.NO_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.about_us, R.drawable.ic_terms_condition, DrawerWithIconTypes.NO_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.login, R.drawable.ic_logout, !SessionManager.isLoggedIn() ?
@@ -106,19 +106,22 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
             case 2:
                 showRateDialog();
                 break;
-            case 5:
+            case 3:
+                LanguageUtils.checkAndUpdateLanguage(getBaseActivity());
+                break;
+            case 4:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.privacyPolicyFragment);
                 break;
-            case 6:
+            case 5:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.aboutUsFragment);
                 break;
-            case 7:
+            case 6:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.signInHolderFragment);
                 break;
-            case 8:
+            case 7:
 
                 break;
         }

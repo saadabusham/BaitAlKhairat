@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentHomeBinding;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -29,37 +30,61 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator, FragmentHomeBind
     protected void setUp() {
         fragmentManager = getBaseActivity().getSupportFragmentManager().getFragments().get(0).getChildFragmentManager();
         setFragment(0);
+        setUpTablayout();
     }
 
     public void onDonorsClicked() {
         getViewBinding().btnDonors.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.shape_rounded_tab_orange_right));
+                .getResources().getDrawable(R.drawable.ic_tab_active_right));
 
         getViewBinding().btnNeedy.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.shape_rounded_tab_empty_orange_left));
+                .getResources().getDrawable(R.drawable.ic_tab_anactive_left));
         getViewBinding().btnDonors.setTextColor(getMyContext().getResources().getColor(R.color.white));
         getViewBinding().btnNeedy.setTextColor(getMyContext().getResources().getColor(R.color.black));
         setFragment(0);
     }
 
     public void onNeedyClicked() {
-        getViewBinding().btnNeedy.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.shape_rounded_tab_orange_left));
-
-        getViewBinding().btnDonors.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.shape_rounded_tab_empty_orange_right));
         getViewBinding().btnDonors.setTextColor(getMyContext().getResources().getColor(R.color.black));
         getViewBinding().btnNeedy.setTextColor(getMyContext().getResources().getColor(R.color.white));
-        setFragment(1);
     }
 
     private void setFragment(int index) {
         fragmentManager.beginTransaction().replace(R.id.fragment_tab, getItem(index)).commit();
     }
 
+    public void setUpTablayout() {
+        getViewBinding().tabLayout.addTab(getViewBinding().tabLayout.newTab(), 0, true);
+        getViewBinding().tabLayout.addTab(getViewBinding().tabLayout.newTab(), 1, false);
+        getViewBinding().tabLayout.setSelectedTabIndicatorHeight(0);
+        getViewBinding().tabLayout.getTabAt(0).setText(R.string.donors);
+        getViewBinding().tabLayout.getTabAt(1).setText(R.string.needy);
+        fragmentManager.beginTransaction().replace(R.id.fragment_tab, getItem(0)).commit();
+        getViewBinding().tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    getViewBinding().tabLayout.setBackground(getMyContext().getResources().getDrawable(R.drawable.ic_tab_active_left));
+                } else {
+                    getViewBinding().tabLayout.setBackground(getMyContext().getResources().getDrawable(R.drawable.ic_tab_active_right));
+                }
+                fragmentManager.beginTransaction().replace(R.id.fragment_tab, getItem(tab.getPosition())).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
-        getNavigator().getChildFragment().popBackStack();
+//        getNavigator().getChildFragment().popBackStack();
 
         switch (position) {
             case 0:

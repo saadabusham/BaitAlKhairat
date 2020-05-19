@@ -9,11 +9,13 @@ import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenActivity;
 import com.yariksoffice.lingver.Lingver;
 
+import java.util.Locale;
+
 public class LanguageUtils {
 
     public static void setAppLanguage(Application application) {
         String lang = getLanguage(application);
-        Lingver.init(application, "ar");
+        Lingver.init(application, lang);
 
     }
 
@@ -34,12 +36,11 @@ public class LanguageUtils {
 
     public static String getLanguage(Context context) {
         SessionManager.init(context);
-//        if (SessionManager.getisSetLanguage().isEmpty()) {
-//            return Locale.getDefault().getDisplayLanguage().equals("العربية") ? "ar" : "en";
-//        } else {
-//            return SessionManager.getLanguage();
-//        }
-        return "ar";
+        if (SessionManager.getisSetLanguage().isEmpty()) {
+            return Locale.getDefault().getDisplayLanguage().equals("العربية") ? "ar" : "en";
+        } else {
+            return SessionManager.getLanguage();
+        }
     }
 
 
@@ -52,4 +53,11 @@ public class LanguageUtils {
         }
     }
 
+    public static void checkAndUpdateLanguage(Activity mActivity) {
+        if (getLanguage(mActivity).equals("ar"))
+            updateLanguage(mActivity, "en");
+        else
+            updateLanguage(mActivity, "ar");
+
+    }
 }
