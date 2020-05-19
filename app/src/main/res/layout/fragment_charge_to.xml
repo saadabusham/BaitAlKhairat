@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.walletjourney.chargeto.ChargeToViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarColoredBackArrowDark" />
+
+        <TextView
+            style="@style/roman_style"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:gravity="center|start"
+            android:onClick="@{()->viewModel.onChargeMyWalletClick()}"
+            android:text="@string/charge_your_wallet_to_donate"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@color/black_light" />
+
+        <TextView
+            style="@style/roman_style"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:gravity="center|start"
+            android:onClick="@{()->viewModel.onBaitAccountClick()}"
+            android:text="@string/ship_to_bayt_al_khairat"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@color/black_light" />
+
+    </LinearLayout>
+
+</layout>

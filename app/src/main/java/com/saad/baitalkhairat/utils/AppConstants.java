@@ -98,5 +98,7 @@ public final class AppConstants {
         public static final String MY_NEEDS_TAB_TYPE = "MY_NEEDS_TAB_TYPE";
         public static final String CATEGORY_ID = "CATEGORY_ID";
         public static final String FILTER_WITH_CATEGORY = "FILTER_WITH_CATEGORY";
+        public static final String CHARGE_TO_TYPES = "CHARGE_TO_TYPES";
+        public static final String AMOUNT = "AMOUNT";
     }
 }

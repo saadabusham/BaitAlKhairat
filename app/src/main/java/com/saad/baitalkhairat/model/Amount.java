@@ -37,4 +37,8 @@ public class Amount implements Serializable {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
+    public String getAmountFormatted() {
+        return amount + " " + currency;
+    }
 }

@@ -47,6 +47,10 @@
     <color name="cart_background">#F7F7F7</color>
     <color name="cart_total_gray">#424242</color>
     <color name="cart_total_background">#F9F9FB</color>
+    <color name="wallet_empty_gray">#666565</color>
+    <color name="bank_transfer_pink">#FFFADD</color>
+    <color name="bank_transfer_stroke_pink">#F4D79E</color>
+    <color name="copy_id_background_blue">#0095F8</color>
 
 
     <color name="order_cell_red">#D12323</color>

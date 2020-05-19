@@ -47,6 +47,12 @@ import com.saad.baitalkhairat.ui.profilejourney.userdegree.UserDegreeViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentViewModel;
 import com.saad.baitalkhairat.ui.splashscreen.SplashScreenViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.banktransfer.BankTransferViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.charge.ChargeViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.chargeto.ChargeToViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.creditcard.CreditCardViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.paymentholder.PaymentHolderViewModel;
+import com.saad.baitalkhairat.ui.walletjourney.wallet.WalletViewModel;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -194,6 +200,24 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(CartViewModel.class)) {
             //noinspection unchecked
             return (T) new CartViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(WalletViewModel.class)) {
+            //noinspection unchecked
+            return (T) new WalletViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ChargeToViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ChargeToViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(ChargeViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ChargeViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(PaymentHolderViewModel.class)) {
+            //noinspection unchecked
+            return (T) new PaymentHolderViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(BankTransferViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BankTransferViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(CreditCardViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CreditCardViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

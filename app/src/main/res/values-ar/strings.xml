@@ -174,4 +174,37 @@
     <string name="donations_cart">سلة تبرعاتي</string>
     <string name="This_amount_will_be_deducted_automatically_in_your_wallet_After_completing_the_payment_process_you_will_receive_a_message_via_your_phone_with_the_amount_donated_and_may_god_reward_you">هذا المبلغ سوف يخصم تلقائيا في محفظتك بعد اكمال عملية الدفع، سوف تصلك رسالة عبر هاتفك بالمبلغ المتبرع فيه وجزاك الله خيرا.</string>
     <string name="total_amount">المبلغ الاجمالي</string>
+    <string name="your_wallet_is_empty_now">محفظتك الآن فارغة</string>
+    <string name="you_can_charge_your_wallet_and_then_donate">بإمكانك شحن محفظتك و من ثم التبرع</string>
+    <string name="charge">اشحن</string>
+    <string name="charge_your_wallet_to_donate">اشحن محفظتك للتبرع</string>
+    <string name="ship_to_bayt_al_khairat">اشحن لحساب بيت الخيرات</string>
+    <string name="charge_wallet">شحن المحفظة</string>
+    <string name="the_amount_to_be_charged_in_my_wallet">المبلغ المراد شحنه في محفظتي</string>
+    <string name="this_amount_will_be_added_to_your_portfolio_and_can_be_donated_at_any_time_to_any_needy_person">هذا المبلغ سوف يضاف الى محفظتك ويمكن من خلاله التبرع في اي وقت ولاي محتاج</string>
+    <string name="charge_to_bait_al_khairat">اشحن لحساب بيت الخيرات</string>
+    <string name="the_amount_to_be_charged_to_bait_al_khairatt">المبلغ المراد شحنه في حساب بيت الخيرات</string>
+    <string name="this_amount_will_be_added_to_the_House_of_Goodwill_account_and_the_House_of_Goodwill_will_dispose_of_this_amount_for_the_needy">هذا المبلغ سوف يضاف الى حساب بيت الخيرات وستقوم بيت الخيرات في التصرف بهذا المبلغ للمحتاجين</string>
+    <string name="amount_of_donation">ادخل مبلغ التبرع</string>
+    <string name="amount_is_required">ادخل المبلغ</string>
+    <string name="bank_transfer">تحويل بنكي</string>
+    <string name="credit_card">بطاقة ائتمانية</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="copy_information">انسخ المعلومات</string>
+    <string name="the_bank_transfer_process_will_take_from_three_to_five_days">عملية التحويل البنكي ستأخذ من ثلاث ايام الى خمسة ايام</string>
+    <string name="transfer_the_amount_from_your_account_to_the_House_of_Goodwill_account_to_charge_your_portfolio_and_then_donate"> المبلغ من حسابك الي حساب بيت الخيرات لشحن محفظتك و من ثم التبرع</string>
+    <string name="khairat_house_account_number">رقم حساب بيت الخيرات : </string>
+    <string name="copy_account_number">انسخ رقم الحساب</string>
+    <string name="bank_name">اسم البنك : </string>
+    <string name="bank_branch">فرع البنك : </string>
+    <string name="Country">البلد : </string>
+    <string name="attach_with_the_transfer_your_membership_number">ارفق مع التحويل رقم عضويتك</string>
+    <string name="safe_money_transfer_with_your_bank_account_Visa_Card_Master_Card_American_Express">تحويل أموال آمن باستخدام حسابك المصرفي. فيزا كارد ، ماستر كارد، أمريكان إكسبريس</string>
+    <string name="this_amount_will_be_added_automatically_to_your_wallet_after_completing_the_transfer_process_and_you_will_receive_a_message_via_your_phone_with_the_charged_amount">هذا المبلغ سوف يضاف تلقائيا الى محفظتك بعد اكمال عملية التحويل، وسوف تصلك رسالة عبر هاتفك بالمبلغ المشحون.</string>
+    <string name="pay">ادفع</string>
+    <string name="the_code_number_behind_the_card">رقم الكود خلف البطاقة</string>
+    <string name="card_expiration">انتهاء صلاحية البطاقة</string>
+    <string name="the_name_on_the_card">الاسم على البطاقة</string>
+    <string name="card_number">رقم البطاقة</string>
+
 </resources>

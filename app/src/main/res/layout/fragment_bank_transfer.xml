@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.walletjourney.banktransfer.BankTransferViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center|start"
+                    android:text="@string/bank_transfer"
+                    android:textColor="@color/login_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    style="@style/roman_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center|start"
+                    android:text="@string/transfer_the_amount_from_your_account_to_the_House_of_Goodwill_account_to_charge_your_portfolio_and_then_donate"
+                    android:textColor="@color/login_gray"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/cart_total_background"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|start"
+                        android:text="@string/khairat_house_account_number"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvAccountNumber"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|start"
+                        android:text="hsmklmlkmcklmckldmlkdvd12345678"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/copy_id_background_blue"
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.onCopyClick()}"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            app:srcCompat="@drawable/ic_copy" />
+
+                        <TextView
+                            style="@style/bold_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:gravity="center"
+                            android:text="@string/copy_account_number"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tvBankNameText"
+                        style="@style/roman_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/bank_name"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvBankName"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvBankNameText"
+                        android:maxLines="3"
+                        android:text="البنك الكويتي الاسلامي"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tvBankBranchText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/bank_branch"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvBankBranch"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvBankBranchText"
+                        android:maxLines="3"
+                        android:text="البنك الكويتي الاسلامي الفرع الرئيسي"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tvCountryText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/Country"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvCountryText"
+                        android:maxLines="3"
+                        android:text="الكويت"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tvMemberShipText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/attach_with_the_transfer_your_membership_number"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvMemberShip"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvMemberShipText"
+                        android:maxLines="3"
+                        android:text="1455522"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/roman_style"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="-2dp"
+                android:layout_marginEnd="-2dp"
+                android:background="@drawable/shape_rounded_pink"
+                android:gravity="center"
+                android:maxLines="3"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/the_bank_transfer_process_will_take_from_three_to_five_days"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="11sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cart_total_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAmountText"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/total_amount"
+                        android:textColor="@color/cart_total_gray"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvAmount"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:maxLines="3"
+                        android:text="0"
+                        android:textColor="@color/green"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="145dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/shape_rectangle"
+                    android:backgroundTint="@color/orange"
+                    android:gravity="center"
+                    android:onClick="@{()->viewModel.onCopyInformationClick()}"
+                    android:text="@string/copy_information"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_nav_account_to_myDonationHolderFragment"
             app:destination="@id/myDonationHolderFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_walletFragment"
+            app:destination="@id/walletFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
@@ -233,4 +236,32 @@
             android:id="@+id/action_cartFragment_to_donorAppliedSuccessfulFragment"
             app:destination="@id/donorAppliedSuccessfulFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.wallet.WalletFragment"
+        android:label="WalletFragment">
+        <action
+            android:id="@+id/action_walletFragment_to_chargeToFragment"
+            app:destination="@id/chargeToFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargeToFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.chargeto.ChargeToFragment"
+        android:label="ChargeToFragment">
+        <action
+            android:id="@+id/action_chargeToFragment_to_chargeFragment"
+            app:destination="@id/chargeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargeFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.charge.ChargeFragment"
+        android:label="ChargeFragment">
+        <action
+            android:id="@+id/action_chargeFragment_to_paymentHolderFragment"
+            app:destination="@id/paymentHolderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentHolderFragment"
+        android:name="com.saad.baitalkhairat.ui.walletjourney.paymentholder.PaymentHolderFragment"
+        android:label="PaymentHolderFragment" />
 </navigation>

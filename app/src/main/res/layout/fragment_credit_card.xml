@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.walletjourney.creditcard.CreditCardViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/credit_card"
+                        android:textColor="@color/login_gray"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_payment_methods" />
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/roman_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center|start"
+                    android:text="@string/safe_money_transfer_with_your_bank_account_Visa_Card_Master_Card_American_Express"
+                    android:textColor="@color/login_gray"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/edCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/card_number"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/the_name_on_the_card"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edExpiry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:hint="@string/card_expiration"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/edittextUnderline"
+                    android:digits="0123456789"
+                    android:hint="@string/the_code_number_behind_the_card"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/roman_style"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="-2dp"
+                android:layout_marginEnd="-2dp"
+                android:background="@color/cart_total_background"
+                android:gravity="center"
+                android:maxLines="3"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/this_amount_will_be_added_automatically_to_your_wallet_after_completing_the_transfer_process_and_you_will_receive_a_message_via_your_phone_with_the_charged_amount"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="11sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cart_total_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAmountText"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/total_amount"
+                        android:textColor="@color/cart_total_gray"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvAmount"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:maxLines="3"
+                        android:text="0"
+                        android:textColor="@color/green"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="145dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/shape_rectangle"
+                    android:backgroundTint="@color/orange"
+                    android:gravity="center"
+                    android:onClick="@{()->viewModel.onPayClicked()}"
+                    android:text="@string/pay"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>
