@@ -422,4 +422,28 @@
     <string name="account_number">Account number</string>
     <string name="all_transactions">All transactions</string>
     <string name="your_wallet_has_been_charged_at_value">Your wallet has been charged at value</string>
+    <string name="about_bait_al_khairat">About Bait Al Khairat</string>
+    <string name="about_p1">The Khairat House platform is an international non-governmental organization working in the field of development and humanitarian assistance since 1999 in accordance with the laws regulating the non-profit sector in the State of Kuwait. Khairat Charitable House was established as an institutional expression of a civil will that derives its components from the values, principles and cultural and civilizational heritage of Kuwaiti society in order to do good and participate in the international solidarity series effectively and efficiently in addressing the most important humanitarian and development challenges faced by poor and needy people across the world, where at the top of these priorities was to help Children are victims of crises and disasters, before the areas of Bayt Al-Khairat can expand to include various humanitarian and development sectors. The House of Good Deeds has spent more than $ 1.2 billion on humanitarian and development work over the past five years, and more than 29 million people worldwide have benefited from it in various humanitarian and development fields such as education, health, water and sanitation, food, economic empowerment, childhood, and social welfare And social harmony.</string>
+    <string name="our_vision">Our vision</string>
+    <string name="about_p2">Bait Al Khairatplatform carries a vision of a world in which individuals, all individuals and without any discrimination, have their basic rights that enable them to live in dignity and in all circumstances, a world in which peoples and societies enjoy their full rights to development and peace, and also their right to protection and assistance whenever faced with exceptional circumstances during disasters And crises.</string>
+    <string name="our_message">Our message</string>
+    <string name="about_p3">To embody this vision, Bait Al Khairatplatform carries out a message based on it as an international development and humanitarian organization that draws from various optimal human experiences to achieve the strongest impact for the most impact, working to embody responsible solidarity with the most needy social groups, especially children in difficult situations. The Khairat platform supports the most needy social groups in accordance with the principles of human dignity and social justice, in cooperation with development and humanitarian action partners.</string>
+    <string name="bait_alkhairat_resources">Bait Al Khairat resources</string>
+    <string name="about_p4">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions to ensure the legitimacy of its funding sources. In general, the Bayt Al Khairat platform benefits from two important sources of financing: individual financing and institutional financing</string>
+    <string name="funding_sources">Funding sources</string>
+    <string name="bait_alkhairat_managers">Bait Al Khairat managers</string>
+    <string name="about_p5">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="international_donor_financing">International donor financing</string>
+    <string name="about_p6">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="private_companies">Private companies</string>
+    <string name="about_p7">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="governmental_and_non_governmental_donor_institutions">Governmental and non-governmental donor institutions</string>
+    <string name="about_p8">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="individuals">Individuals</string>
+    <string name="about_p9">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="organizations">Organizations</string>
+    <string name="about_p10">Bait Al Khairat platform opens up to various legitimate sources of financing. According to the law, the association takes all necessary precautions</string>
+    <string name="our_human_values">Our human values</string>
+
+
 </resources>

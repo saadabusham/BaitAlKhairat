@@ -108,7 +108,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             DataManager.getInstance().getAuthService().updateFirebaseToken(getApplicationContext(), false, new APICallBack() {
                 @Override
                 public void onSuccess(Object response) {
-
                 }
 
                 @Override

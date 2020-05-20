@@ -46,8 +46,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center|start"
-                    android:text="عن منصة بيت الخيرات"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_bait_al_khairat"
                     android:textSize="17sp" />
 
                 <TextView
@@ -55,8 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="منصة بيت الخيرات غير حكومية دولية تعمل في مجال المساعدات التنموية والإنسانية منذ عام ١٩٩٩ وفقا للقوانين المنظمة للقطاع غير الربحي في دولة الكويت. أنشئت بيت الخيرات الخيرية كتعبير مؤسسي لإرادة أهلية تستمد مقوماتها من القيم والمبادئ والموروث الثقافي والحضاري للمجتمع الكويتي من أجل عمل الخير والمشاركة في مسلسل التضامن الدولي بفعالية وكفاءة في التصدي لأهم التحديات الإنسانية والإنمائية التي تواجهها الشعوب الفقيرة والمحتاجة عبر العالم، حيث كان في مقدمة هذه الأولويات مساعدة الأطفال ضحايا الأزمات والكوارث، قبل أن تتوسع مجالات عمل بيت الخيرات لتشمل قطاعات إنسانية وتنموية متنوعة. وقد أنفقت منصة بيت الخيرات على الاعمال الإنسانية والتنموية خلال الأعوام الخمس الماضية أكثر من 1.2 مليار دولار، واستفاد منها أكثر من 29 مليون شخص حول العالم في مجالات إنسانية وتنموية متعددة مثل التعليم، والصحة، والمياه والإصحاح، والغذاء، والتمكين الاقتصادي، والطفولة، والرعاية الاجتماعي والوئام الاجتماعي."
                     android:textColor="@color/black"
+                    style="@style/roman_style"
+                    android:text="@string/about_p1"
                     android:textSize="13sp" />
 
                 <ImageView
@@ -64,15 +66,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/give" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center|start"
-                    android:text="رؤيتنا"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/our_vision"
                     android:textSize="17sp" />
 
                 <TextView
@@ -80,8 +83,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تحمل منصة بيت الخيرات رؤية لعالم يتمتع فيه الأفراد، كل الأفراد وبدون أي تمييز كان، بحقوقهم الأساسية التي تمكنهم من العيش بكرامة وفي كل الظروف، عالم تتمتع فيه الشعوب والمجتمعات بكامل حقوقها في التنمية والسلم، وبحقها أيضا في الحماية والمساعدة كلما واجهتها ظروف استثنائية أثناء الكوارث والأزمات."
+                    style="@style/roman_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_p2"
                     android:textSize="13sp" />
 
                 <ImageView
@@ -89,15 +93,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bottle" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center|start"
-                    android:text="رسالتنا"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/our_message"
                     android:textSize="17sp" />
 
                 <TextView
@@ -105,26 +110,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تجسيدا لهذه الرؤية تضطلع منصة بيت الخيرات برسالة تقوم على أنها منظمة تنموية وإنسانية دولية تنهل من مختلف التجارب البشرية المثلى لتحقيق أقوى تأثير من أجل أبلغ أثر، تعمل على تجسيد التضامن المسؤول مع أكثر الفئات الاجتماعية احتياجا، خصوصا الأطفال الذين هم في وضعية صعبة. تدعم منصة بيت الخيرات الفئات الاجتماعية الأكثر احتياجاً وفقاً لمبادئ الكرامة الإنسانية والعدالة الاجتماعية، بالتعاون مع شركاء التنمية والعمل الإنساني. "
+                    style="@style/roman_style"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center|start"
-                    android:text="موارد بيت الخيرات"
-                    android:textColor="@color/black"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة للتأكد من شرعية مصادر تمويلها. بشكل عام، وتستفيد منصة بيت الخيرات من مصدرين مهمين من مصادر التمويل: تمويل الأفراد، والتمويل المؤسسي"
-                    android:textColor="@color/black"
+                    android:text="@string/about_p3"
                     android:textSize="13sp" />
 
                 <TextView
@@ -132,17 +120,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center|start"
-                    android:text=" مصادر التمويل"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    android:text="ادارة بيت الخيرات "
-                    android:textColor="@color/black"
+                    android:text="@string/bait_alkhairat_resources"
                     android:textSize="17sp" />
 
                 <TextView
@@ -150,8 +130,39 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
                     android:textColor="@color/black"
+                    style="@style/roman_style"
+                    android:text="@string/about_p4"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center|start"
+                    style="@style/bold_style"
+                    android:textColor="@color/black"
+                    android:text="@string/funding_sources"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_17sdp"
+                    android:gravity="center|start"
+                    style="@style/bold_style"
+                    android:textColor="@color/black"
+                    android:text="@string/bait_alkhairat_managers"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center|start"
+                    android:textColor="@color/black"
+                    style="@style/roman_style"
+                    android:text="@string/about_p5"
                     android:textSize="13sp" />
 
 
@@ -160,8 +171,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="تمويل الجهات المانحة الدولية"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/international_donor_financing"
                     android:textSize="17sp" />
 
                 <TextView
@@ -169,8 +181,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
+                    style="@style/roman_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_p6"
                     android:textSize="13sp" />
 
                 <TextView
@@ -178,8 +191,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="القطاعات الخاصة"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/private_companies"
                     android:textSize="17sp" />
 
                 <TextView
@@ -187,8 +201,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
                     android:textColor="@color/black"
+                    style="@style/roman_style"
+                    android:text="@string/about_p7"
                     android:textSize="13sp" />
 
                 <TextView
@@ -196,8 +211,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="المؤسسات المانحة الحكومية والغير حكومية"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/governmental_and_non_governmental_donor_institutions"
                     android:textSize="17sp" />
 
                 <TextView
@@ -205,8 +221,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
+                    style="@style/roman_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_p8"
                     android:textSize="13sp" />
 
                 <TextView
@@ -214,8 +231,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="الافراد"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/individuals"
                     android:textSize="17sp" />
 
                 <TextView
@@ -223,8 +241,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
+                    style="@style/roman_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_p9"
                     android:textSize="13sp" />
 
                 <TextView
@@ -232,8 +251,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="المنظمات"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
+                    android:text="@string/organizations"
                     android:textSize="17sp" />
 
                 <TextView
@@ -241,8 +261,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
-                    android:text="تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة"
+                    style="@style/roman_style"
                     android:textColor="@color/black"
+                    android:text="@string/about_p10"
                     android:textSize="13sp" />
 
                 <TextView
@@ -250,9 +271,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_17sdp"
                     android:gravity="center|start"
-                    android:text="قيمنا الإنسانية"
+                    style="@style/bold_style"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:text="@string/our_human_values"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -260,7 +283,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_30sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/roles" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
