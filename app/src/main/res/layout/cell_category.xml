@@ -17,13 +17,11 @@
         android:background="@android:color/transparent"
         android:onClick="@{viewModel::onItemClick}"
         app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="@dimen/_3sdp"
         app:cardElevation="0dp">
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical">
@@ -44,8 +42,7 @@
                 android:text="saad"
                 style="@style/bold_style"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -29,25 +29,10 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator, FragmentHomeBind
     @Override
     protected void setUp() {
         fragmentManager = getBaseActivity().getSupportFragmentManager().getFragments().get(0).getChildFragmentManager();
-        setFragment(0);
+
         setUpTablayout();
     }
 
-    public void onDonorsClicked() {
-        getViewBinding().btnDonors.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.ic_tab_active_right));
-
-        getViewBinding().btnNeedy.setBackground(getMyContext()
-                .getResources().getDrawable(R.drawable.ic_tab_anactive_left));
-        getViewBinding().btnDonors.setTextColor(getMyContext().getResources().getColor(R.color.white));
-        getViewBinding().btnNeedy.setTextColor(getMyContext().getResources().getColor(R.color.black));
-        setFragment(0);
-    }
-
-    public void onNeedyClicked() {
-        getViewBinding().btnDonors.setTextColor(getMyContext().getResources().getColor(R.color.black));
-        getViewBinding().btnNeedy.setTextColor(getMyContext().getResources().getColor(R.color.white));
-    }
 
     private void setFragment(int index) {
         fragmentManager.beginTransaction().replace(R.id.fragment_tab, getItem(index)).commit();

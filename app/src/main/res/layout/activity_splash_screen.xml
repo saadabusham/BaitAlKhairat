@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -26,14 +26,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/bait_alkhairat_app"
                 android:textColor="@color/gray"
-                android:textSize="20sp" />
+                style="@style/bold_style"
+                android:textSize="17sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/all_rights_reserved"
                 android:textColor="@color/gray_light"
-                android:textSize="14sp" />
+                style="@style/roman_style"
+                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 
