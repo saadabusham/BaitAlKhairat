@@ -7,9 +7,9 @@ import com.saad.baitalkhairat.model.LoginObject;
 import com.saad.baitalkhairat.model.ProfileResponse;
 import com.saad.baitalkhairat.model.RegisterResponse;
 import com.saad.baitalkhairat.model.User;
-import com.saad.baitalkhairat.model.VerifyPhoneResponse;
 import com.saad.baitalkhairat.model.errormodel.LoginError;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
+import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
@@ -99,7 +99,9 @@ public class AuthService {
     public interface DataApi {
 
         @POST(ApiConstants.apiAuthService.VERIFY_PHONE)
-        Single<Response<GeneralResponse<VerifyPhoneResponse>>> verifyPhone(@Query("phone_number") String phoneNumber);
+        Single<Response<GeneralResponseNew<String, VerifyPhoneError>>> verifyPhone(@Query("phone") String phone,
+                                                                                   @Query("country_code") String country_code,
+                                                                                   @Query("verificationCode") String verificationCode);
 
         @POST(ApiConstants.apiAuthService.VERIFY_CODE)
         Single<Response<GeneralResponseNew<User, RegisterError>>> verifyCode(@Body User user);
@@ -107,6 +109,10 @@ public class AuthService {
         @POST(ApiConstants.apiAuthService.RESEND_CODE)
         Single<Response<GeneralResponse<String>>> resendCode(@Query("phone") String phone,
                                                              @Query("country_code") String country_code);
+
+        @POST(ApiConstants.apiAuthService.RESEND_CODE_TP_FORGET_PASSWORD)
+        Single<Response<GeneralResponse<String>>> resendCodeToForgetPassword(@Query("phone") String phone,
+                                                                             @Query("country_code") String country_code);
 
         @POST(ApiConstants.apiAuthService.REGISTER_USER)
         Single<Response<GeneralResponseNew<User, RegisterError>>> registerUser(@Body User user);
@@ -120,10 +126,13 @@ public class AuthService {
         Single<Response<GeneralResponse<RegisterResponse>>> loginWithSocial(@Body LoginObject socialLogin);
 
         @POST(ApiConstants.apiAuthService.FORGET_PASSWORD)
-        Single<Response<GeneralResponse<VerifyPhoneResponse>>> forgetPassword(@Query("phone_number") String phoneNumber);
+        Single<Response<GeneralResponseNew<String, VerifyPhoneError>>>
+        forgetPassword(@Query("phone_number") String phoneNumber,
+                       @Query("country_code") String country_code);
 
         @POST(ApiConstants.apiAuthService.CREATE_PASSWORD)
-        Single<Response<GeneralResponse<String>>> createPassword(@Query("password") String password,
+        Single<Response<GeneralResponse<String>>> createPassword(@Query("mobile") String mobile,
+                                                                 @Query("password") String password,
                                                                  @Query("password_confirmation") String phone_number,
                                                                  @Query("token") String token);
 

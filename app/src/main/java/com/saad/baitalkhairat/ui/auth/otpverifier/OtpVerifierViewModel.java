@@ -12,6 +12,7 @@ import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
+import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
@@ -61,68 +62,124 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
         this.type = type;
     }
 
-    public void verifyCode() {
+    public void onVerifyCodeClicked() {
         if (isValidate()) {
-            User.getInstance().setVerificationCode(getOtp());
-            getDataManager().getAuthService().getDataApi().verifyCode(User.getInstance())
-                    .toObservable()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponseNew<User, RegisterError>(getMyContext(), true, new APICallBackNew
-                            <User>() {
-                        @Override
-                        public void onSuccess(User response) {
-                            if (type == PhoneNumberTypes.REGISTER.getValue()) {
-                                User user = response;
-                                User.getInstance().setObjUser(user);
-                                SessionManager.createUserLoginSession();
-                                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                        .navigate(R.id.action_otpVerifierFragment_to_nav_home);
-                            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
-//                                getMyContext().startActivity
-//                                        (CreatePasswordActivity.newIntent(getMyContext(), token));
-                            }
-                        }
-
-                        @Override
-                        public void onError(String error, int errorCode) {
-                            showToast(error);
-                        }
-
-                        @Override
-                        public void onNetworkError(String error, int errorCode) {
-                            showToast(error);
-                        }
-                    }));
-
-//            }
-        }
-        if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
-            Bundle data = new Bundle();
-            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                    .navigate(R.id.createPasswordFragment, data);
+            if (type == PhoneNumberTypes.REGISTER.getValue()) {
+                verifyCodeToRegister();
+            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
+                verifyCodeToForgetPassword();
+            }
         }
     }
-    public void resendCode() {
-        if (milliToFinish == 0) {
-            getDataManager().getAuthService().getDataApi().resendCode(User.getInstance().getPhone(), User.getInstance().getCountry_code())
-                    .toObservable()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
-                        @Override
-                        public void onSuccess(String response) {
-                            milliToFinish = 90000;
-                            countDownTimer.start();
-                            getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.black));
-                        }
 
-                        @Override
-                        public void onError(String error, int errorCode) {
-                            showToast(error);
-                        }
-                    }));
+    private void verifyCodeToRegister() {
+        User.getInstance().setVerificationCode(getOtp());
+        getDataManager().getAuthService().getDataApi().verifyCode(User.getInstance())
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNew<User, RegisterError>(getMyContext(), true, new APICallBackNew
+                        <User>() {
+                    @Override
+                    public void onSuccess(User response) {
+                        User user = response;
+                        User.getInstance().setObjUser(user);
+                        SessionManager.createUserLoginSession();
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.action_otpVerifierFragment_to_nav_home);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showToast(error);
+                    }
+
+                    @Override
+                    public void onNetworkError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                }));
+    }
+
+    private void verifyCodeToForgetPassword() {
+        getDataManager().getAuthService().getDataApi().verifyPhone(User.getInstance().getPhone(),
+                User.getInstance().getCountry_code(),
+                getOtp())
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNew<String, VerifyPhoneError>(getMyContext(), true, new APICallBackNew
+                        <String>() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Bundle data = new Bundle();
+                        data.putString("token", response);
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.createPasswordFragment, data);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showToast(error);
+                    }
+
+                    @Override
+                    public void onNetworkError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                }));
+    }
+
+    public void onResendCodeClicked() {
+        if (milliToFinish == 0) {
+            if (type == PhoneNumberTypes.REGISTER.getValue()) {
+                resendCode();
+            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
+                resendCodeToForgetPassword();
+            }
         }
+    }
+
+    public void resendCode() {
+        getDataManager().getAuthService().getDataApi().resendCode(User.getInstance().getPhone(), User.getInstance().getCountry_code())
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
+                    @Override
+                    public void onSuccess(String response) {
+                        milliToFinish = 90000;
+                        countDownTimer.start();
+                        getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.black));
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                }));
+    }
+
+    public void resendCodeToForgetPassword() {
+        getDataManager().getAuthService().getDataApi().resendCodeToForgetPassword(
+                User.getInstance().getPhone(),
+                User.getInstance().getCountry_code())
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
+                    @Override
+                    public void onSuccess(String response) {
+                        milliToFinish = 90000;
+                        countDownTimer.start();
+                        getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.black));
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                }));
     }
 
     public void onEditClick() {

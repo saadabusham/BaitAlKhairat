@@ -6,12 +6,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 
-import androidx.databinding.ViewDataBinding;
-
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCreatePasswordBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
@@ -21,6 +20,7 @@ import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
+import androidx.databinding.ViewDataBinding;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -89,7 +89,9 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
 
     public void createPassword() {
         if (isValid()) {
-            getDataManager().getAuthService().getDataApi().createPassword(getViewBinding().edNewPassword.getText().toString(),
+            getDataManager().getAuthService().getDataApi().createPassword(
+                    User.getInstance().getPhone(),
+                    getViewBinding().edNewPassword.getText().toString(),
                     getViewBinding().edConfirmPassword.getText().toString(), token)
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())

@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:onClick="@{() -> viewModel.resendCode()}"
+                    android:onClick="@{() -> viewModel.onResendCodeClicked()}"
                     android:text="@string/resend_code"
                     android:textColor="@color/black"
                     style="@style/bold_style"
@@ -195,7 +195,7 @@
                 android:background="@color/tablayout_gray"
                 android:enabled="false"
                 style="@style/bold_style"
-                android:onClick="@{() -> viewModel.verifyCode()}"
+                android:onClick="@{() -> viewModel.onVerifyCodeClicked()}"
                 android:text="@string/verify_code"
                 android:textColor="@color/login_text_gray" />
         </LinearLayout>

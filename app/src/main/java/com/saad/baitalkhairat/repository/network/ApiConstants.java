@@ -8,14 +8,15 @@ public class ApiConstants {
     public static final String PASSPORT_CLIENT_SECRET = "4fGfUW0QpJP57HJPD67fQEy6s3IBUJA6M9zw6imL";
 
     public class apiAuthService {
-        public static final String VERIFY_PHONE = "auth/verifyPhone";
+        public static final String VERIFY_PHONE = "member/password/mobile/otp/verify";
         public static final String VERIFY_CODE = "member/register/otp/verify";
         public static final String RESEND_CODE = "member/register/otp/resend";
+        public static final String RESEND_CODE_TP_FORGET_PASSWORD = "member/password/mobile/otp/resend";
         public static final String REGISTER_USER = "member/register";
         public static final String LOGIN_USER = "member/login";
         public static final String LOGIN_SOCIAL = "auth/login/socialMedia";
-        public static final String FORGET_PASSWORD = "auth/forgotPassword/verifyPhone";
-        public static final String CREATE_PASSWORD = "auth/forgotPassword/update/password";
+        public static final String FORGET_PASSWORD = "member/password/mobile";
+        public static final String CREATE_PASSWORD = "member/password/reset/mobile";
         public static final String UPDATE_FIREBASE_TOKEN = "user/update/device-token";
         public static final String LOGOUT = "user/logout";
         public static final String UPDATE_PASSWORD = "user/update/password";

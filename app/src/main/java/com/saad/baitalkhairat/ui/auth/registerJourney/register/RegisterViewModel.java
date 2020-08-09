@@ -188,11 +188,13 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
                     public void onError(String error, int errorCode) {
                         RegisterError registerError = new Gson().fromJson(error, RegisterError.class);
                         showToast(registerError.toString());
+                        SessionManager.logoutUser();
                     }
 
                     @Override
                     public void onNetworkError(String error, int errorCode) {
                         showToast(error);
+                        SessionManager.logoutUser();
                     }
 
                 }));

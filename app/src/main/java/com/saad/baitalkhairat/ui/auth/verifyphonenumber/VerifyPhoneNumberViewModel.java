@@ -6,26 +6,32 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-
+import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentVerifyPhoneNumberBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
-import com.saad.baitalkhairat.model.VerifyPhoneResponse;
+import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.country.countrycode.ListItem;
+import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
 import java.util.ArrayList;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class VerifyPhoneNumberViewModel extends BaseViewModel<VerifyPhoneNumberNavigator, FragmentVerifyPhoneNumberBinding> {
 
+    ArrayList<ListItem> countryCodeList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryCodeAdapter;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> VerifyPhoneNumberViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (VerifyPhoneNumberNavigator) navigation, (FragmentVerifyPhoneNumberBinding) viewDataBinding);
@@ -58,34 +64,65 @@ public class VerifyPhoneNumberViewModel extends BaseViewModel<VerifyPhoneNumberN
     }
 
     public void sendCode() {
-//        checkPhoneForForgetPassword();
-        Bundle data = new Bundle();
-        data.putInt("type", PhoneNumberTypes.FORGET_PASSWORD.getValue());
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.otpVerifierFragment, data);
+        if (isValidate())
+            checkPhoneForForgetPassword();
+
     }
 
     private void setUpSpinnerCountry() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan_code));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountryCode.setAdapter(adapter);
+        countryCodeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryCodeList);
+        countryCodeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCountryCode.setAdapter(countryCodeAdapter);
+        getCountryCodes();
+    }
+
+    private void getCountryCodes() {
+        getDataManager().getAppService().getCountryCode(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryCodeAdapter.addAll(response.getList());
+                countryCodeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     public void checkPhoneForForgetPassword() {
-        getDataManager().getAuthService().getDataApi().forgetPassword(getViewBinding().edPhoneNumber.getText().toString().trim())
+        getDataManager().getAuthService().getDataApi()
+                .forgetPassword(getViewBinding().edPhoneNumber.getText().toString().trim(),
+                        countryCodeAdapter.getItem(
+                                getViewBinding().spinnerCountryCode
+                                        .getSelectedItemPosition()).getValue())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponse<VerifyPhoneResponse>(getMyContext(), true, new APICallBack<VerifyPhoneResponse>() {
+                .subscribe(new CustomObserverResponseNew<String, VerifyPhoneError>(getMyContext(),
+                        true, new APICallBackNew<String>() {
                     @Override
-                    public void onSuccess(VerifyPhoneResponse response) {
+                    public void onSuccess(String response) {
+                        Bundle data = new Bundle();
+                        data.putInt("type", PhoneNumberTypes.FORGET_PASSWORD.getValue());
 
+                        User.getInstance().setPhone(getViewBinding().edPhoneNumber.getText().toString());
+                        User.getInstance().setCountry_code(countryCodeAdapter.getItem(
+                                getViewBinding().spinnerCountryCode
+                                        .getSelectedItemPosition()).getValue());
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.otpVerifierFragment, data);
                     }
 
                     @Override
                     public void onError(String error, int errorCode) {
+                        VerifyPhoneError verifyPhoneError = new Gson().fromJson(error, VerifyPhoneError.class);
+                        showToast(verifyPhoneError.toString());
+                    }
+
+                    @Override
+                    public void onNetworkError(String error, int errorCode) {
                         showToast(error);
                     }
                 }));
