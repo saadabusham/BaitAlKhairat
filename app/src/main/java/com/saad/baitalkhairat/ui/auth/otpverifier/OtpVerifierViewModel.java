@@ -6,20 +6,23 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
-import com.saad.baitalkhairat.model.VerifyPhoneResponse;
+import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.TimeUtils;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -27,7 +30,7 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
 
     int type;
     long milliToFinish = 90000;
-    String token = "";
+
 
     CountDownTimer countDownTimer = new CountDownTimer(milliToFinish, 1000) {
         @Override
@@ -51,7 +54,7 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
 
     @Override
     protected void setUp() {
-        token = getNavigator().getToken();
+
     }
 
     public void setType(int type) {
@@ -59,47 +62,56 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
     }
 
     public void verifyCode() {
-//        if (isValidate()) {
-//            getDataManager().getAuthService().getDataApi().verifyCode(token, getOtp())
-//                    .toObservable()
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribeOn(Schedulers.io())
-//                    .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
-//                        @Override
-//                        public void onSuccess(String response) {
-//                            if (type == PhoneNumberTypes.REGISTER.getValue()) {
-//
-//                            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
+        if (isValidate()) {
+            User.getInstance().setVerificationCode(getOtp());
+            getDataManager().getAuthService().getDataApi().verifyCode(User.getInstance())
+                    .toObservable()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new CustomObserverResponseNew<User, RegisterError>(getMyContext(), true, new APICallBackNew
+                            <User>() {
+                        @Override
+                        public void onSuccess(User response) {
+                            if (type == PhoneNumberTypes.REGISTER.getValue()) {
+                                User user = response;
+                                User.getInstance().setObjUser(user);
+                                SessionManager.createUserLoginSession();
+                                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                        .navigate(R.id.action_otpVerifierFragment_to_nav_home);
+                            } else if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
 //                                getMyContext().startActivity
 //                                        (CreatePasswordActivity.newIntent(getMyContext(), token));
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onError(String error, int errorCode) {
-//                            showToast(error);
-//                        }
-//                    }));
-//
-////            }
-//        }
+                            }
+                        }
+
+                        @Override
+                        public void onError(String error, int errorCode) {
+                            showToast(error);
+                        }
+
+                        @Override
+                        public void onNetworkError(String error, int errorCode) {
+                            showToast(error);
+                        }
+                    }));
+
+//            }
+        }
         if (type == PhoneNumberTypes.FORGET_PASSWORD.getValue()) {
             Bundle data = new Bundle();
-            data.putString("token", token);
             Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                     .navigate(R.id.createPasswordFragment, data);
         }
     }
     public void resendCode() {
         if (milliToFinish == 0) {
-            getDataManager().getAuthService().getDataApi().resendCode(token)
+            getDataManager().getAuthService().getDataApi().resendCode(User.getInstance().getPhone(), User.getInstance().getCountry_code())
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponse<VerifyPhoneResponse>(getMyContext(), true, new APICallBack<VerifyPhoneResponse>() {
+                    .subscribe(new CustomObserverResponse<String>(getMyContext(), true, new APICallBack<String>() {
                         @Override
-                        public void onSuccess(VerifyPhoneResponse response) {
-                            token = response.getToken();
+                        public void onSuccess(String response) {
                             milliToFinish = 90000;
                             countDownTimer.start();
                             getViewBinding().tvResend.setTextColor(getMyContext().getResources().getColor(R.color.black));

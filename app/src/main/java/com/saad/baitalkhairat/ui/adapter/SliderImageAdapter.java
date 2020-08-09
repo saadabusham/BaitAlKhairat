@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.viewpager.widget.PagerAdapter;
-
 import com.saad.baitalkhairat.databinding.CellSliderImageBinding;
 import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.model.Slider;
+import com.saad.baitalkhairat.model.slider.Slider;
 
 import java.util.ArrayList;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 public class SliderImageAdapter extends PagerAdapter {
     private Context mContext;
@@ -41,7 +41,7 @@ public class SliderImageAdapter extends PagerAdapter {
         CellSliderImageBinding cellSliderImageBinding = CellSliderImageBinding
                 .inflate(inflater, container, false);
         Slider slider = sliderArrayList.get(position);
-        GeneralFunction.loadImage(mContext, slider.getImage(), cellSliderImageBinding.imgPhoto);
+        GeneralFunction.loadImage(mContext, slider.getImage().getPath(), cellSliderImageBinding.imgPhoto);
         container.addView(cellSliderImageBinding.getRoot(), 0);
         return cellSliderImageBinding.getRoot();
 

@@ -6,28 +6,34 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private static User objUser = null;
-    @SerializedName("token")
-    String token;
-    @SerializedName("avatar")
-    String avatar = "";
-    @SerializedName("is_blocked")
-    boolean is_blocked;
-    @SerializedName("")
-    boolean isSocial;
     @SerializedName("id")
     private long userID;
+    @SerializedName("token")
+    String token;
     @SerializedName("email")
     private String email = "";
-    @SerializedName("social_id")
-    private String social_id;
-    @SerializedName("phone_number")
-    private String phone = "";
+    @SerializedName("avatar")
+    String avatar = "";
     @SerializedName("name")
     private String name = "";
+    @SerializedName("gender")
+    private int gender;
+    @SerializedName("phone")
+    private String phone = "";
+    @SerializedName("country_code")
+    private String country_code;
+    @SerializedName("birth_date")
+    private String birth_date;
+    @SerializedName("nationality")
+    private String nationality;
+    @SerializedName("country_of_residence")
+    private String country_of_residence;
     @SerializedName("password")
     private String password = "";
     @SerializedName("password_confirmation")
     private String password_confirmation = "";
+    @SerializedName("verificationCode")
+    private String verificationCode;
 
     private User() {
 
@@ -115,28 +121,51 @@ public class User implements Serializable {
         return getName();
     }
 
-
-    public String getSocial_id() {
-        return social_id;
+    public int getGender() {
+        return gender;
     }
 
-    public void setSocial_id(String social_id) {
-        this.social_id = social_id;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
-    public boolean isIs_blocked() {
-        return is_blocked;
+    public String getCountry_code() {
+        return country_code;
     }
 
-    public void setIs_blocked(boolean is_blocked) {
-        this.is_blocked = is_blocked;
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
     }
 
-    public boolean isSocial() {
-        return isSocial;
+    public String getBirth_date() {
+        return birth_date;
     }
 
-    public void setSocial(boolean social) {
-        isSocial = social;
+    public void setBirth_date(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getCountry_of_residence() {
+        return country_of_residence;
+    }
+
+    public void setCountry_of_residence(String country_of_residence) {
+        this.country_of_residence = country_of_residence;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 }

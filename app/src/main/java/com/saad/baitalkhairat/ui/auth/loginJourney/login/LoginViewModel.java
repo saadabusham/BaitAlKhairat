@@ -8,30 +8,37 @@ import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-
+import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentLoginBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
-import com.saad.baitalkhairat.model.RegisterResponse;
+import com.saad.baitalkhairat.model.LoginObject;
 import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.country.countrycode.ListItem;
+import com.saad.baitalkhairat.model.errormodel.LoginError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
+import com.saad.baitalkhairat.repository.network.ApiConstants;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.ArrayList;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginBinding> {
 
     private static final String TAG = "LoginViewModel";
-
+    ArrayList<ListItem> countryCodeList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryCodeAdapter;
     TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,49 +90,73 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
     }
 
     private void setUpSpinnerCountry() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan_code));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountryCode.setAdapter(adapter);
+        countryCodeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryCodeList);
+        countryCodeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCountryCode.setAdapter(countryCodeAdapter);
+        getCountryCodes();
     }
 
+    private void getCountryCodes() {
+        getDataManager().getAppService().getCountryCode(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryCodeAdapter.addAll(response.getList());
+                countryCodeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
 
     public void loginClick() {
         if (isValidate()) {
-            getDataManager().getAuthService().getDataApi().loginUser(getViewBinding().edPhoneNumber.getText().toString().trim(),
-                    getViewBinding().edPassword.getText().toString())
+            getDataManager().getAuthService().getDataApi().loginUser(getLoginObj(), ApiConstants.PASSPORT_CLIENT_ID, ApiConstants.PASSPORT_CLIENT_SECRET)
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponse<RegisterResponse>(getMyContext(), true, new APICallBack<RegisterResponse>() {
+                    .subscribe(new CustomObserverResponseNew<User, LoginError>(getMyContext(), true, new APICallBackNew<User>() {
                         @Override
-                        public void onSuccess(RegisterResponse response) {
-                            User user = response.getUser();
-                            user.setToken(response.getJwt_token());
-                            User.getInstance().setObjUser(user);
+                        public void onSuccess(User response) {
+                            User.getInstance().setObjUser(response);
                             SessionManager.createUserLoginSession();
-                            getDataManager().getAuthService().reInit();
-                            getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
-                                @Override
-                                public void onSuccess(Object response) {
-                                    getBaseActivity().finishAffinity();
-//                                    getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
-                                }
-
-                                @Override
-                                public void onError(String error, int errorCode) {
-                                    showToast(error);
-                                }
-                            });
+                            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                    .navigate(R.id.action_loginFragment_to_nav_home);
+//                            getDataManager().getAuthService().reInit();
+//                            getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
+//                                @Override
+//                                public void onSuccess(Object response) {
+//                                    getBaseActivity().finishAffinity();
+////                                    getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
+//                                }
+//
+//                                @Override
+//                                public void onError(String error, int errorCode) {
+//                                    showToast(error);
+//                                }
+//                            });
                         }
 
                         @Override
                         public void onError(String error, int errorCode) {
+                            LoginError loginError = new Gson().fromJson(error, LoginError.class);
+                            showToast(error);
+                        }
+
+                        @Override
+                        public void onNetworkError(String error, int errorCode) {
                             showToast(error);
                         }
                     }));
         }
+    }
+
+    private LoginObject getLoginObj() {
+        return new LoginObject(getViewBinding().edPhoneNumber.getText().toString().trim(),
+                countryCodeAdapter.getItem(getViewBinding().spinnerCountryCode.getSelectedItemPosition()).getValue(),
+                getViewBinding().edPassword.getText().toString(), DeviceUtils.getMacAddr());
     }
 
     private boolean isValidate() {

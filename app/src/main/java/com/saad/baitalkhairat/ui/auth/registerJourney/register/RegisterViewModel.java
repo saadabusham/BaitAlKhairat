@@ -12,18 +12,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-
+import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentRegisterBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
-import com.saad.baitalkhairat.model.RegisterResponse;
 import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.country.countrycode.ListItem;
+import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.LanguageUtils;
@@ -31,12 +32,24 @@ import com.saad.baitalkhairat.utils.LanguageUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class RegisterViewModel extends BaseViewModel<RegisterNavigator, FragmentRegisterBinding> {
 
 
+    ArrayList<ListItem> countryNameList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryNameAdapter;
+
+    ArrayList<ListItem> countryCodeList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryCodeAdapter;
+
+    ArrayList<ListItem> genderList = new ArrayList<>();
+    ArrayAdapter<ListItem> genderAdapter;
+
+    String birth_date = "";
 
     public <V extends ViewDataBinding, N extends BaseNavigator> RegisterViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (RegisterNavigator) navigation, (FragmentRegisterBinding) viewDataBinding);
@@ -60,31 +73,67 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
         getViewBinding().spinnerCountry.setOnItemSelectedListener(onItemSelectedListener);
     }
 
+    DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+
+        getViewBinding().edDay.setText(String.valueOf(dayOfMonth));
+        getViewBinding().edMonth.setText(String.valueOf(monthOfYear + 1));
+        getViewBinding().edYear.setText(String.valueOf(year));
+        birth_date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+        isValid();
+    };
+
     private void setUpSpinnerGender() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.gender));
-        arrayList.add(getMyContext().getResources().getString(R.string.male));
-        arrayList.add(getMyContext().getResources().getString(R.string.female));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerGender.setAdapter(adapter);
+        genderList.add(new ListItem(getMyContext().getResources().getString(R.string.gender)));
+        genderAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, genderList);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerGender.setAdapter(genderAdapter);
+        getGenders();
+    }
+
+    private void getGenders() {
+        getDataManager().getAppService().getGenders(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                genderAdapter.addAll(response.getList());
+                genderAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpSpinnerCountry() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.country_original));
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountry.setAdapter(adapter);
+        countryNameList.add(new ListItem(getMyContext().getResources().getString(R.string.country_original)));
+        countryNameAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryNameList);
+        countryNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCountry.setAdapter(countryNameAdapter);
+
+        getCountryNames();
+    }
+
+    private void getCountryNames() {
+        getDataManager().getAppService().getCountryName(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryNameAdapter.addAll(response.getList());
+                countryNameAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpSpinnerCountryCode() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan_code));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountryCode.setAdapter(adapter);
+        countryCodeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryCodeList);
+        countryCodeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCountryCode.setAdapter(countryCodeAdapter);
+        getCountryCodes();
     }
 
     public void openDatePicker() {
@@ -97,13 +146,24 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
         dialog.show();
     }
 
+    private void getCountryCodes() {
+        getDataManager().getAppService().getCountryCode(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryCodeAdapter.addAll(response.getList());
+                countryCodeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
+
     public void registerClicked() {
         if (isValid()) {
-            Bundle data = new Bundle();
-            data.putInt("type", PhoneNumberTypes.REGISTER.getValue());
-            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                    .navigate(R.id.otpVerifierFragment, data);
-//            registerUser();
+            registerUser();
         }
     }
 
@@ -112,42 +172,30 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponse<RegisterResponse>(getMyContext(), true, new APICallBack<RegisterResponse>() {
+                .subscribe(new CustomObserverResponseNew<User, RegisterError>(getMyContext(), true, new APICallBackNew<User>() {
                     @Override
-                    public void onSuccess(RegisterResponse response) {
-                        User user = response.getUser();
-                        user.setToken(response.getJwt_token());
+                    public void onSuccess(User response) {
+                        User user = response;
                         User.getInstance().setObjUser(user);
                         SessionManager.createUserLoginSession();
-//                        getDataManager().getAuthervice().setObjNull();
-                        getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
-                            @Override
-                            public void onSuccess(Object response) {
-                                getBaseActivity().finishAffinity();
-//                                getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
-                            }
-
-                            @Override
-                            public void onError(String error, int errorCode) {
-                                showToast(error);
-                            }
-                        });
+                        Bundle data = new Bundle();
+                        data.putInt("type", PhoneNumberTypes.REGISTER.getValue());
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.otpVerifierFragment, data);
                     }
 
                     @Override
                     public void onError(String error, int errorCode) {
+                        RegisterError registerError = new Gson().fromJson(error, RegisterError.class);
+                        showToast(registerError.toString());
+                    }
+
+                    @Override
+                    public void onNetworkError(String error, int errorCode) {
                         showToast(error);
                     }
-                }));
-    }
 
-    private User getUserObj() {
-        User user = User.getInstance();
-        user.setEmail(getViewBinding().edEmail.getText().toString().trim());
-        user.setName(getViewBinding().edUserName.getText().toString());
-        user.setPassword(getViewBinding().edPassword.getText().toString());
-        user.setPassword_confirmation(getViewBinding().edConfirmPassword.getText().toString());
-        return user;
+                }));
     }
 
     AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -195,13 +243,21 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
 
         }
     };
-    DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
 
-        getViewBinding().edDay.setText(String.valueOf(dayOfMonth));
-        getViewBinding().edMonth.setText(String.valueOf(monthOfYear + 1));
-        getViewBinding().edYear.setText(String.valueOf(year));
-        isValid();
-    };
+    private User getUserObj() {
+        User user = User.getInstance();
+        user.setName(getViewBinding().edUserName.getText().toString());
+        user.setEmail(getViewBinding().edEmail.getText().toString().trim());
+        user.setGender(Integer.parseInt(genderAdapter.getItem(getViewBinding().spinnerGender.getSelectedItemPosition()).getValue()));
+        user.setPhone(getViewBinding().edPhoneNumber.getText().toString());
+        user.setCountry_code(countryCodeAdapter.getItem(getViewBinding().spinnerCountryCode.getSelectedItemPosition()).getValue());
+        user.setBirth_date(birth_date);
+        user.setCountry_of_residence(countryNameAdapter.getItem(getViewBinding().spinnerCountry.getSelectedItemPosition()).getValue());
+        user.setNationality(countryNameAdapter.getItem(getViewBinding().spinnerCountry.getSelectedItemPosition()).getValue());
+        user.setPassword(getViewBinding().edPassword.getText().toString());
+        user.setPassword_confirmation(getViewBinding().edConfirmPassword.getText().toString());
+        return user;
+    }
 
     public boolean isValid() {
         int error = 0;

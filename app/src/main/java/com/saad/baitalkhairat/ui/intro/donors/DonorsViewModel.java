@@ -5,20 +5,14 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
-
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentDonorsBinding;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Category;
-import com.saad.baitalkhairat.model.Slider;
+import com.saad.baitalkhairat.model.slider.Slider;
+import com.saad.baitalkhairat.model.slider.SliderResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
 import com.saad.baitalkhairat.ui.adapter.DotAdapter;
 import com.saad.baitalkhairat.ui.adapter.SliderImageAdapter;
@@ -29,6 +23,14 @@ import com.saad.baitalkhairat.utils.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
 
 public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDonorsBinding> implements RecyclerClick<Category> {
 
@@ -49,12 +51,27 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     @Override
     protected void setUp() {
         setUpRecycler();
+        getSliders();
         getData();
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setRetring();
                 getData();
+            }
+        });
+    }
+
+    private void getSliders() {
+        getDataManager().getAppService().getSlider(getMyContext(), true, new APICallBack<SliderResponse>() {
+            @Override
+            public void onSuccess(SliderResponse response) {
+                setUpViewPager(response.getData());
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
             }
         });
     }

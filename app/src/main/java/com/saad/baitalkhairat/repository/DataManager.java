@@ -3,6 +3,7 @@ package com.saad.baitalkhairat.repository;
 
 import com.saad.baitalkhairat.App;
 import com.saad.baitalkhairat.repository.db.database.LogDatabase;
+import com.saad.baitalkhairat.repository.network.services.AppService;
 import com.saad.baitalkhairat.repository.network.services.AuthService;
 import com.saad.baitalkhairat.repository.network.services.DataExampleService;
 
@@ -39,6 +40,10 @@ public class DataManager {
 
     public AuthService getAuthService() {
         return AuthService.getInstance();
+    }
+
+    public AppService getAppService() {
+        return AppService.getInstance();
     }
 
 }

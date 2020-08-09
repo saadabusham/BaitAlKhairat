@@ -3,15 +3,18 @@ package com.saad.baitalkhairat.repository.network.services;
 import android.content.Context;
 
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.LoginObject;
 import com.saad.baitalkhairat.model.ProfileResponse;
 import com.saad.baitalkhairat.model.RegisterResponse;
-import com.saad.baitalkhairat.model.SocialLogin;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.VerifyPhoneResponse;
+import com.saad.baitalkhairat.model.errormodel.LoginError;
+import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
 
 import io.reactivex.Single;
@@ -99,21 +102,22 @@ public class AuthService {
         Single<Response<GeneralResponse<VerifyPhoneResponse>>> verifyPhone(@Query("phone_number") String phoneNumber);
 
         @POST(ApiConstants.apiAuthService.VERIFY_CODE)
-        Single<Response<GeneralResponse<String>>> verifyCode(@Query("token") String token,
-                                                             @Query("code") String code);
+        Single<Response<GeneralResponseNew<User, RegisterError>>> verifyCode(@Body User user);
 
         @POST(ApiConstants.apiAuthService.RESEND_CODE)
-        Single<Response<GeneralResponse<VerifyPhoneResponse>>> resendCode(@Query("token") String token);
+        Single<Response<GeneralResponse<String>>> resendCode(@Query("phone") String phone,
+                                                             @Query("country_code") String country_code);
 
         @POST(ApiConstants.apiAuthService.REGISTER_USER)
-        Single<Response<GeneralResponse<RegisterResponse>>> registerUser(@Body User user);
+        Single<Response<GeneralResponseNew<User, RegisterError>>> registerUser(@Body User user);
 
         @POST(ApiConstants.apiAuthService.LOGIN_USER)
-        Single<Response<GeneralResponse<RegisterResponse>>> loginUser(@Query("phone_number") String phone_number,
-                                                                      @Query("password") String password);
+        Single<Response<GeneralResponseNew<User, LoginError>>> loginUser(@Body LoginObject loginObject,
+                                                                         @Query("client_id") int client_id,
+                                                                         @Query("client_secret") String client_secret);
 
         @POST(ApiConstants.apiAuthService.LOGIN_SOCIAL)
-        Single<Response<GeneralResponse<RegisterResponse>>> loginWithSocial(@Body SocialLogin socialLogin);
+        Single<Response<GeneralResponse<RegisterResponse>>> loginWithSocial(@Body LoginObject socialLogin);
 
         @POST(ApiConstants.apiAuthService.FORGET_PASSWORD)
         Single<Response<GeneralResponse<VerifyPhoneResponse>>> forgetPassword(@Query("phone_number") String phoneNumber);

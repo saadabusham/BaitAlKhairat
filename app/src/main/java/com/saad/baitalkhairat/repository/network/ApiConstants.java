@@ -1,16 +1,18 @@
 package com.saad.baitalkhairat.repository.network;
 
 public class ApiConstants {
-    public static final String BASE_URL = "http://dev.365khadmat.tech/api/";
+    public static final String BASE_URL = "http://bayt.anasomush.de/api/v1/";
     public static final String GET_DATA = "user/1/categories";
     public static final String PLATFORM = "android";
+    public static final int PASSPORT_CLIENT_ID = 2;
+    public static final String PASSPORT_CLIENT_SECRET = "4fGfUW0QpJP57HJPD67fQEy6s3IBUJA6M9zw6imL";
 
     public class apiAuthService {
         public static final String VERIFY_PHONE = "auth/verifyPhone";
-        public static final String VERIFY_CODE = "auth/verifyPhone/check-code";
-        public static final String RESEND_CODE = "auth/verifyPhone/reset-code";
-        public static final String REGISTER_USER = "auth/register";
-        public static final String LOGIN_USER = "auth/login";
+        public static final String VERIFY_CODE = "member/register/otp/verify";
+        public static final String RESEND_CODE = "member/register/otp/resend";
+        public static final String REGISTER_USER = "member/register";
+        public static final String LOGIN_USER = "member/login";
         public static final String LOGIN_SOCIAL = "auth/login/socialMedia";
         public static final String FORGET_PASSWORD = "auth/forgotPassword/verifyPhone";
         public static final String CREATE_PASSWORD = "auth/forgotPassword/update/password";
@@ -54,7 +56,10 @@ public class ApiConstants {
     }
 
     public class apiAppService {
-        public static final String PRIVACY_POLICY = "app/privacy-policy";
+        public static final String COUNTRY_CODE = "lists/countries-code";
+        public static final String COUNTRY_NAME = "lists/countries-name";
+        public static final String GENDERS = "lists/gender";
+        public static final String SLIDERS = "banners";
         public static final String TERMS_AND_CONDITION = "app/terms-and-condations";
         public static final String ABOUT_US = "app/about-us";
 

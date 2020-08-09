@@ -1,7 +1,6 @@
 package com.saad.baitalkhairat.ui.auth.otpverifier;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
@@ -19,19 +18,9 @@ public class OtpVerifierFragment extends BaseFragment<FragmentOtpVerifierBinding
 
     @Inject
     ViewModelProviderFactory factory;
-    String phone = "";
-    int type;
-    String token = "";
     private OtpVerifierViewModel mOtpViewModel;
     private FragmentOtpVerifierBinding mViewBinding;
 
-    public static Intent getStartIntent(Context context, String phone, int type, String token) {
-        Intent intent = new Intent(context, OtpVerifierFragment.class);
-        intent.putExtra("phone", phone);
-        intent.putExtra("type", type);
-        intent.putExtra("token", token);
-        return intent;
-    }
 
     @Override
     public int getBindingVariable() {
@@ -83,25 +72,9 @@ public class OtpVerifierFragment extends BaseFragment<FragmentOtpVerifierBinding
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
-//        phone = getIntent().getStringExtra("phone");
-//        token = getIntent().getStringExtra("token");
-        type = getArguments().getInt("type", 0);
-        mOtpViewModel.setType(type);
+        mOtpViewModel.setType(getArguments().getInt("type", 0));
         setUpToolbar(mViewBinding.toolbar, TAG, R.string.verification_code);
         mOtpViewModel.setUp();
     }
 
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    @Override
-    public String getToken() {
-        return token;
-    }
 }
