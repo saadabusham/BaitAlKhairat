@@ -12,14 +12,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentRegisterBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
-import com.saad.baitalkhairat.model.country.countrycode.ListItem;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -32,8 +35,6 @@ import com.saad.baitalkhairat.utils.LanguageUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

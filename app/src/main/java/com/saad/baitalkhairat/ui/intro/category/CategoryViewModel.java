@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCategoryBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Category;
+import com.saad.baitalkhairat.model.donors.CategoryResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class CategoryViewModel extends BaseViewModel<CategoryNavigator, FragmentCategoryBinding>
@@ -64,74 +68,44 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
         categoryAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                categoryAdapter.addItem(null);
-                categoryAdapter.notifyItemInserted(categoryAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(categoryAdapter.getItemCount() - 1);
-                setLoadMore(true);
-                getData();
+//                categoryAdapter.addItem(null);
+//                categoryAdapter.notifyItemInserted(categoryAdapter.getItemCount() - 1);
+//                getViewBinding().recyclerView.scrollToPosition(categoryAdapter.getItemCount() - 1);
+//                setLoadMore(true);
+//                getData();
             }
         });
-        getLocalData();
-    }
-
-    private void getLocalData() {
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
     }
 
     public void getData() {
-//        if (!isRefreshing() && !isRetry()) {
-//            enableLoading = true;
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(getMyContext(), enableLoading, new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-////                        homeAdapter.addItems(response.getCategoryList());
-////                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (homeAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.ok),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
-    }
+        if (!isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getDonorsService().getCategory(getMyContext(), enableLoading, new APICallBack<CategoryResponse>() {
+            @Override
+            public void onSuccess(CategoryResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                categoryAdapter.addItems(response.getList());
+                notifiAdapter();
+            }
 
+            @Override
+            public void onError(String error, int errorCode) {
+                if (categoryAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.OK),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
+    }
     private void showNoDataFound() {
         getViewBinding().swipeRefreshLayout.setEnabled(false);
         getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.VISIBLE);
@@ -150,7 +124,7 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
     @Override
     public void onClick(Category category, int position) {
         Bundle data = new Bundle();
-        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getId());
+        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getValue());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                 .navigate(R.id.action_nav_category_to_cases_Fragment, data);
 

@@ -6,13 +6,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentVerifyPhoneNumberBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
+import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
-import com.saad.baitalkhairat.model.country.countrycode.ListItem;
 import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -23,8 +26,6 @@ import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
 import java.util.ArrayList;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

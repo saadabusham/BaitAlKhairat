@@ -39,7 +39,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center"
-                android:text="saad"
+                android:text="@{viewModel.category.label}"
                 style="@style/bold_style"
                 android:textColor="@color/black"
                 android:textSize="15sp" />

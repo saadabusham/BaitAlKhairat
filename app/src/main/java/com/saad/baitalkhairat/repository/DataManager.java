@@ -6,6 +6,7 @@ import com.saad.baitalkhairat.repository.db.database.LogDatabase;
 import com.saad.baitalkhairat.repository.network.services.AppService;
 import com.saad.baitalkhairat.repository.network.services.AuthService;
 import com.saad.baitalkhairat.repository.network.services.DataExampleService;
+import com.saad.baitalkhairat.repository.network.services.DonorsService;
 
 import javax.inject.Singleton;
 
@@ -44,6 +45,10 @@ public class DataManager {
 
     public AppService getAppService() {
         return AppService.getInstance();
+    }
+
+    public DonorsService getDonorsService() {
+        return DonorsService.getInstance();
     }
 
 }

@@ -18,16 +18,19 @@ public class CustomObserverResponseNoStandard<T> extends CustomDialogUtils imple
 
     APICallBack apiCallBack;
     Context context;
-
+    boolean withProgress;
     public CustomObserverResponseNoStandard(Context mContext, boolean withProgress, APICallBack apiCallBack) {
         super(mContext, withProgress, false);
         context = mContext;
         this.apiCallBack = apiCallBack;
+        this.withProgress = withProgress;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-        showProgress();
+        if (withProgress) {
+            showProgress();
+        }
     }
 
     @Override
@@ -44,7 +47,9 @@ public class CustomObserverResponseNoStandard<T> extends CustomDialogUtils imple
 
     @Override
     public void onError(Throwable e) {
-        hideProgress();
+        if (withProgress) {
+            hideProgress();
+        }
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             int statusCode = httpException.code();
@@ -63,7 +68,9 @@ public class CustomObserverResponseNoStandard<T> extends CustomDialogUtils imple
 
     @Override
     public void onComplete() {
-        hideProgress();
+        if (withProgress) {
+            hideProgress();
+        }
     }
 
     private void errorHandler(int code) {

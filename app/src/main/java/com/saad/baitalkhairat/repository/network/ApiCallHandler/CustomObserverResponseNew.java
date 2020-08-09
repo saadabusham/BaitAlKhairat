@@ -22,11 +22,12 @@ public class CustomObserverResponseNew<T, E> extends CustomDialogUtils implement
 
     APICallBackNew apiCallBack;
     Context context;
-
+    boolean withProgress;
     public CustomObserverResponseNew(Context mContext, boolean withProgress, APICallBackNew apiCallBack) {
         super(mContext, withProgress, false);
         context = mContext;
         this.apiCallBack = apiCallBack;
+        this.withProgress = withProgress;
     }
 //    public CustomObserverResponse(APICallBack apiCallBack) {
 //        this.apiCallBack = apiCallBack;
@@ -34,7 +35,9 @@ public class CustomObserverResponseNew<T, E> extends CustomDialogUtils implement
 
     @Override
     public void onSubscribe(Disposable d) {
-        showProgress();
+        if (withProgress) {
+            showProgress();
+        }
     }
 
     @Override
@@ -63,7 +66,9 @@ public class CustomObserverResponseNew<T, E> extends CustomDialogUtils implement
 
     @Override
     public void onError(Throwable e) {
-        hideProgress();
+        if (withProgress) {
+            hideProgress();
+        }
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             int statusCode = httpException.code();
@@ -82,7 +87,9 @@ public class CustomObserverResponseNew<T, E> extends CustomDialogUtils implement
 
     @Override
     public void onComplete() {
-        hideProgress();
+        if (withProgress) {
+            hideProgress();
+        }
     }
 
     private void errorHandler(int code, GeneralResponseNew errorBody, String jsonError) {

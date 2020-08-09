@@ -8,14 +8,17 @@ import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentLoginBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.LoginObject;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
-import com.saad.baitalkhairat.model.country.countrycode.ListItem;
 import com.saad.baitalkhairat.model.errormodel.LoginError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -29,8 +32,6 @@ import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.ArrayList;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

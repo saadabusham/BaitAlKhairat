@@ -5,10 +5,20 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentDonorsBinding;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Category;
+import com.saad.baitalkhairat.model.donors.CategoryResponse;
 import com.saad.baitalkhairat.model.slider.Slider;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -20,17 +30,10 @@ import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivity;
 import com.saad.baitalkhairat.utils.AppConstants;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
 
 public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDonorsBinding> implements RecyclerClick<Category> {
 
@@ -77,8 +80,6 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     }
 
     public void onViewAllClicked() {
-//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                .navigate(R.id.action_nav_home_to_categoryFragment);
         ((MainActivity) getBaseActivity()).moveBottomNavigation(R.id.nav_category);
     }
 
@@ -163,46 +164,33 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     }
 
     public void getData() {
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-        categoryAdapter.addItem(new Category());
-//        if (!isRefreshing() && !isRetry()) {
-//            showLoading();
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-//                        categoryAdapter.addItems(response.getCategoryList());
-//                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (categoryAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.OK),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
+        if (!isRefreshing() && !isRetry()) {
+            showLoading();
+        }
+        getDataManager().getDonorsService().getCategory(getMyContext(), true, new APICallBack<CategoryResponse>() {
+            @Override
+            public void onSuccess(CategoryResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                categoryAdapter.addItems(response.getList());
+                notifiAdapter();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (categoryAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.OK),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
     private void showNoDataFound() {
@@ -223,7 +211,7 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     @Override
     public void onClick(Category category, int position) {
         Bundle data = new Bundle();
-        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getId());
+        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getValue());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                 .navigate(R.id.action_nav_home_to_cases_Fragment, data);
     }

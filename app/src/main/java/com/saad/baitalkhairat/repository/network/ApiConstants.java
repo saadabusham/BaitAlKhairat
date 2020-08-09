@@ -1,7 +1,7 @@
 package com.saad.baitalkhairat.repository.network;
 
 public class ApiConstants {
-    public static final String BASE_URL = "http://bayt.anasomush.de/api/v1/";
+    public static final String BASE_URL = "https://test-1.baytalkhayrat.net/api/v1/";
     public static final String GET_DATA = "user/1/categories";
     public static final String PLATFORM = "android";
     public static final int PASSPORT_CLIENT_ID = 2;
@@ -63,6 +63,11 @@ public class ApiConstants {
         public static final String SLIDERS = "banners";
         public static final String TERMS_AND_CONDITION = "app/terms-and-condations";
         public static final String ABOUT_US = "app/about-us";
+
+    }
+
+    public class apiDonorsService {
+        public static final String NEEDS_CATEGORIES = "lists/need-request/type";
 
     }
 

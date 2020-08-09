@@ -1,24 +1,24 @@
-package com.saad.baitalkhairat.model.country.countrycode;
+package com.saad.baitalkhairat.model.donors;
 
 import com.google.gson.annotations.SerializedName;
-import com.saad.baitalkhairat.model.ListItem;
+import com.saad.baitalkhairat.model.Category;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class CountryCodeResponse implements Serializable {
+public class CategoryResponse implements Serializable {
 
     @SerializedName("selected_value")
     private String selectedValue;
 
     @SerializedName("list")
-    private List<ListItem> list;
+    private List<Category> list;
 
     public String getSelectedValue() {
         return selectedValue;
     }
 
-    public List<ListItem> getList() {
+    public List<Category> getList() {
         return list;
     }
 }
