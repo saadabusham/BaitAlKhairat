@@ -100,5 +100,7 @@ public final class AppConstants {
         public static final String FILTER_WITH_CATEGORY = "FILTER_WITH_CATEGORY";
         public static final String CHARGE_TO_TYPES = "CHARGE_TO_TYPES";
         public static final String AMOUNT = "AMOUNT";
+        public static final String CATEGORY_NAME = "CATEGORY_NAME";
+        public static final String CASE = "CASE";
     }
 }

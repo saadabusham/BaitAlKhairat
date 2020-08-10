@@ -68,6 +68,7 @@ public class ApiConstants {
 
     public class apiDonorsService {
         public static final String NEEDS_CATEGORIES = "lists/need-request/type";
+        public static final String CATEGORY_CASES = "need-requests";
 
     }
 

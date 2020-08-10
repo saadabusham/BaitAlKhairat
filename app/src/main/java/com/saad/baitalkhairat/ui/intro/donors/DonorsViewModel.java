@@ -212,6 +212,7 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     public void onClick(Category category, int position) {
         Bundle data = new Bundle();
         data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getValue());
+        data.putString(AppConstants.BundleData.CATEGORY_NAME, category.getLabel());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                 .navigate(R.id.action_nav_home_to_cases_Fragment, data);
     }

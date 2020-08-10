@@ -86,7 +86,7 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
-        setUpToolbar(mViewBinding.toolbar, TAG, R.string.privacy_policy);
+        setUpToolbar(mViewBinding.toolbar, TAG, getCategoryName());
 
         mViewBinding.toolbar.toolbar.inflateMenu(R.menu.main_menu);
         mViewBinding.toolbar.toolbar.findViewById(R.id.itemCart).setOnClickListener(new View.OnClickListener() {
@@ -114,4 +114,9 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
     public int getCategoryId() {
         return getArguments().getInt(AppConstants.BundleData.CATEGORY_ID, 0);
     }
+
+    public String getCategoryName() {
+        return getArguments().getString(AppConstants.BundleData.CATEGORY_NAME, "");
+    }
+
 }

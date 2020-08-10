@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.intro.casedetails.CaseDetailsViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.cases.Case" />
     </data>
 
     <RelativeLayout
@@ -39,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|center"
-                    android:text="@string/all_rights_reserved"
+                    android:text="@{data.title}"
                     android:textColor="@color/black"
                     style="@style/bold_style"
                     android:textSize="18sp" />
@@ -76,7 +80,7 @@
                             android:layout_toEndOf="@id/tvCaseIdText"
                             android:maxLines="3"
                             style="@style/bold_style"
-                            android:text="1452"
+                            android:text="@{data.caseId}"
                             android:textColor="@color/subcategory_grid_text_color"
                             android:textSize="12sp" />
                     </RelativeLayout>
@@ -106,7 +110,7 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_toEndOf="@id/tvCaseTypeText"
                             android:maxLines="3"
-                            android:text="orphan"
+                            android:text="@{data.typeLabel}"
                             style="@style/bold_style"
                             android:textColor="@color/subcategory_grid_text_color"
                             android:textSize="12sp" />
@@ -137,7 +141,7 @@
                             android:layout_toEndOf="@id/tvCountryText"
                             android:maxLines="3"
                             style="@style/bold_style"
-                            android:text="@string/jordan"
+                            android:text="@{data.countryLabel}"
                             android:textColor="@color/subcategory_grid_text_color"
                             android:textSize="12sp" />
                     </RelativeLayout>
@@ -156,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="start|center"
-                    android:text="@string/all_rights_reserved"
+                    android:text="@{data.description}"
                     android:textColor="@color/black"
                     style="@style/light_style"
                     android:textSize="14sp" />
@@ -198,7 +202,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:maxLines="3"
-                    android:text="100 jd"
+                    android:text="@{data.amount}"
                     android:textColor="@color/green"
                     android:textSize="16sp" />
             </LinearLayout>

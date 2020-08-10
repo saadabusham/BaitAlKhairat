@@ -32,7 +32,7 @@
             android:paddingTop="@dimen/_3sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:paddingBottom="@dimen/_3sdp"
-            android:text="@string/all_rights_reserved"
+            android:text="@{viewModel.caseItem.title}"
             android:textColor="@color/subcategory_grid_text_color"
             android:textSize="12sp" />
 
@@ -61,7 +61,7 @@
                 android:layout_toEndOf="@id/tvCaseIdText"
                 android:maxLines="3"
                 style="@style/bold_style"
-                android:text="1452"
+                android:text="@{viewModel.caseItem.caseId}"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -90,7 +90,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_toEndOf="@id/tvCaseTypeText"
                 android:maxLines="3"
-                android:text="orphan"
+                android:text="@{viewModel.caseItem.typeLabel}"
                 style="@style/bold_style"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -120,7 +120,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_toEndOf="@id/tvCountryText"
                 android:maxLines="3"
-                android:text="@string/jordan"
+                android:text="@{viewModel.caseItem.countryLabel}"
                 style="@style/bold_style"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="12sp" />
@@ -153,7 +153,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:maxLines="3"
                 style="@style/bold_style"
-                android:text="100 jd"
+                android:text="@{viewModel.caseItem.amount}"
                 android:textColor="@color/green"
                 android:textSize="12sp" />
         </RelativeLayout>

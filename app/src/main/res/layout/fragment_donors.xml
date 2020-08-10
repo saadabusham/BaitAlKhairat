@@ -26,9 +26,7 @@
                 android:fitsSystemWindows="true"
                 android:orientation="vertical">
 
-                <include
-                    android:id="@+id/layoutNoDataFound"
-                    layout="@layout/no_data_found" />
+
 
                 <include
                     android:id="@+id/imageSlider"
@@ -103,6 +101,13 @@
                         android:textColor="@color/blue"
                         android:textSize="17sp" />
                 </RelativeLayout>
+
+                <include
+                    android:id="@+id/layoutNoDataFound"
+                    layout="@layout/no_data_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_50sdp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"

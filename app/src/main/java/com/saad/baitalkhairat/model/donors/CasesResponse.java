@@ -1,7 +1,7 @@
 package com.saad.baitalkhairat.model.donors;
 
 import com.google.gson.annotations.SerializedName;
-import com.saad.baitalkhairat.model.Case;
+import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.model.listdetails.Links;
 import com.saad.baitalkhairat.model.listdetails.Meta;
 

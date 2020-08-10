@@ -12,7 +12,7 @@ import com.saad.baitalkhairat.databinding.CellCaseGridBinding;
 import com.saad.baitalkhairat.databinding.CellLoadMoreCaseGridBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
-import com.saad.baitalkhairat.model.Case;
+import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemCaseViewModel;
 

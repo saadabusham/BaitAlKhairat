@@ -30,7 +30,7 @@
             <ImageView
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
-                android:src="@color/orange" />
+                imageUrl="@{viewModel.caseItem.listImage.thumbnail}" />
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -40,7 +40,7 @@
                 android:gravity="start|center"
                 android:maxLines="3"
                 style="@style/bold_style"
-                android:text="@string/all_rights_reserved"
+                android:text="@{viewModel.caseItem.title}"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="14sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_toEndOf="@id/tvCaseIdText"
                     android:maxLines="3"
                     style="@style/bold_style"
-                    android:text="1452"
+                    android:text="@{viewModel.caseItem.caseId}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -110,7 +110,7 @@
                     android:layout_toEndOf="@id/tvCaseTypeText"
                     android:maxLines="3"
                     style="@style/bold_style"
-                    android:text="orphan"
+                    android:text="@{viewModel.caseItem.typeLabel}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -141,7 +141,7 @@
                     android:layout_toEndOf="@id/tvCountryText"
                     android:maxLines="3"
                     style="@style/bold_style"
-                    android:text="@string/jordan"
+                    android:text="@{viewModel.caseItem.countryLabel}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -184,7 +184,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:maxLines="3"
                     style="@style/bold_style"
-                    android:text="100 jd"
+                    android:text="@{viewModel.caseItem.amount}"
                     android:textColor="@color/green"
                     android:textSize="12sp" />
             </LinearLayout>

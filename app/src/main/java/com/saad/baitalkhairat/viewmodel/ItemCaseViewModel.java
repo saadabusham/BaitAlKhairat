@@ -8,7 +8,7 @@ import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
 import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
-import com.saad.baitalkhairat.model.Case;
+import com.saad.baitalkhairat.model.cases.Case;
 
 
 public class ItemCaseViewModel extends BaseObservable {

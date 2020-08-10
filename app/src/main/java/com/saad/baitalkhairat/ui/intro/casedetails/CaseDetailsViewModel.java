@@ -19,7 +19,7 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
 
     @Override
     protected void setUp() {
-
+        getViewBinding().setData(getNavigator().getCase());
     }
 
     public void onAddToCartClick() {

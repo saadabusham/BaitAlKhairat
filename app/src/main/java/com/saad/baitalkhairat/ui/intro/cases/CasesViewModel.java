@@ -17,7 +17,7 @@ import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
-import com.saad.baitalkhairat.model.Case;
+import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -106,20 +106,21 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
 
 
     public void getData() {
-        if (!isRefreshing() && !isRetry()) {
+        if (!isLoadMore && !isRefreshing() && !isRetry()) {
             enableLoading = true;
         }
-        getDataManager().getDonorsService().getCases(getMyContext(), enableLoading, getNavigator().getCategoryId(), new APICallBack<CasesResponse>() {
-            @Override
-            public void onSuccess(CasesResponse response) {
-                checkIsLoadMoreAndRefreshing(true);
-                if (response.getData() != null && response.getData().size() > 0) {
-                    caseArrayList.addAll(response.getData());
-                    notifiAdapter();
-                } else {
-                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
-                }
-            }
+        getDataManager().getDonorsService().getCases(getMyContext(), enableLoading,
+                getNavigator().getCategoryId(), new APICallBack<CasesResponse>() {
+                    @Override
+                    public void onSuccess(CasesResponse response) {
+                        checkIsLoadMoreAndRefreshing(true);
+                        if (response.getData() != null && response.getData().size() > 0) {
+                            caseArrayList.addAll(response.getData());
+                            notifiAdapter();
+                        } else {
+                            onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                        }
+                    }
 
             @Override
             public void onError(String error, int errorCode) {
@@ -217,12 +218,12 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
 
     @Override
     public void onLoadMore() {
-        caseArrayList.add(null);
-        caseGridAdapter.notifyItemInserted(caseArrayList.size() - 1);
-        caseListAdapter.notifyItemInserted(caseArrayList.size() - 1);
-        getViewBinding().recyclerView.scrollToPosition(caseArrayList.size() - 1);
-        setLoadMore(true);
-        getData();
+//        caseArrayList.add(null);
+//        caseGridAdapter.notifyItemInserted(caseArrayList.size() - 1);
+//        caseListAdapter.notifyItemInserted(caseArrayList.size() - 1);
+//        getViewBinding().recyclerView.scrollToPosition(caseArrayList.size() - 1);
+//        setLoadMore(true);
+//        getData();
     }
 
     @Override
@@ -234,6 +235,7 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
         switch (casesTypes) {
 
             case DETAILS:
+                data.putSerializable(AppConstants.BundleData.CASE, aCase);
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .navigate(R.id.action_casesFragment_to_caseDetailsFragment,
                                 data);

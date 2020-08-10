@@ -95,7 +95,7 @@ public class DonorsService {
         @GET(ApiConstants.apiDonorsService.NEEDS_CATEGORIES)
         Single<Response<CategoryResponse>> categories();
 
-        @GET(ApiConstants.apiDonorsService.NEEDS_CATEGORIES)
+        @GET(ApiConstants.apiDonorsService.CATEGORY_CASES)
         Single<Response<CasesResponse>> cases(@Query("type") int type);
 
     }

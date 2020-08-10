@@ -5,8 +5,10 @@ import android.content.Context;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCaseDetailsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -76,4 +78,8 @@ public class CaseDetailsFragment extends BaseFragment<FragmentCaseDetailsBinding
         mViewModel.setUp();
     }
 
+    @Override
+    public Case getCase() {
+        return (Case) getArguments().getSerializable(AppConstants.BundleData.CASE);
+    }
 }
