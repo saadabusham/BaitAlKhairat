@@ -9,12 +9,15 @@ import android.view.View;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
 import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewModel>
@@ -107,7 +110,9 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
 
     @Override
     public void callBack(int requestCode, int resultCode, Intent data) {
-
+        if (resultCode == RESULT_OK) {
+            mHomeViewModel.updateFilter((Filter) data.getSerializableExtra(AppConstants.BundleData.FILTER));
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.saad.baitalkhairat.repository.network.services;
 
 import android.content.Context;
 
+import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
 import com.saad.baitalkhairat.model.donors.CategoryResponse;
@@ -69,8 +70,8 @@ public class DonorsService {
                 .subscribe(new CustomObserverResponseNoStandard<CategoryResponse>(mContext, withProgress, apiCallBack));
     }
 
-    public void getCases(Context mContext, boolean withProgress, int type, APICallBack<CasesResponse> apiCallBack) {
-        getDataApi().cases(type)
+    public void getCases(Context mContext, boolean withProgress, Filter filter, APICallBack<CasesResponse> apiCallBack) {
+        getDataApi().cases(filter.getType(), filter.getGender(), filter.getCountry())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -96,7 +97,9 @@ public class DonorsService {
         Single<Response<CategoryResponse>> categories();
 
         @GET(ApiConstants.apiDonorsService.CATEGORY_CASES)
-        Single<Response<CasesResponse>> cases(@Query("type") int type);
+        Single<Response<CasesResponse>> cases(@Query("type") int type,
+                                              @Query("gender") String gender,
+                                              @Query("country") String country);
 
     }
 }

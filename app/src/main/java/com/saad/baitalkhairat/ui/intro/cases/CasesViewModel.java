@@ -17,6 +17,7 @@ import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
+import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -43,12 +44,15 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
 
     ArrayList<Case> caseArrayList;
 
+    Filter filter;
     public <V extends ViewDataBinding, N extends BaseNavigator> CasesViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (CasesNavigator) navigation, (FragmentCasesBinding) viewDataBinding);
     }
 
     @Override
     protected void setUp() {
+        filter = new Filter();
+        filter.setType(getNavigator().getCategoryId());
         setUpRecycler();
         getData();
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
@@ -110,9 +114,11 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
             enableLoading = true;
         }
         getDataManager().getDonorsService().getCases(getMyContext(), enableLoading,
-                getNavigator().getCategoryId(), new APICallBack<CasesResponse>() {
+                filter, new APICallBack<CasesResponse>() {
                     @Override
                     public void onSuccess(CasesResponse response) {
+                        if (isRefreshing())
+                            getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
                         checkIsLoadMoreAndRefreshing(true);
                         if (response.getData() != null && response.getData().size() > 0) {
                             caseArrayList.addAll(response.getData());
@@ -250,5 +256,12 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                         .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
                 break;
         }
+    }
+
+    public void updateFilter(Filter filter) {
+        this.filter.setFilter(filter);
+        getViewBinding().swipeRefreshLayout.setRefreshing(true);
+        setIsRefreshing(true);
+        getData();
     }
 }
