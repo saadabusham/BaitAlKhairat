@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.menu.servicecenter.ServiceCenterViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.app.ContactUs" />
     </data>
 
     <RelativeLayout
@@ -77,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:text="962787901166"
+                        android:text="@{data.mobile}"
                         android:textColor="@color/notification_title_gray"
                         style="@style/bold_style"
                         android:textSize="13sp" />
@@ -114,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:text="sa2edabusham87@gmail.com"
+                        android:text="@{data.email}"
                         android:textColor="@color/notification_title_gray"
                         style="@style/bold_style"
                         android:textSize="13sp" />

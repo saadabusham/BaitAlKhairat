@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.walletjourney.banktransfer.BankTransferViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.app.AppBank" />
     </data>
 
     <LinearLayout
@@ -71,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center|start"
-                        android:text="hsmklmlkmcklmckldmlkdvd12345678"
+                        android:text="@{data.accountNumber}"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -134,7 +138,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@id/tvBankNameText"
                         android:maxLines="3"
-                        android:text="البنك الكويتي الاسلامي"
+                        android:text="@{data.name}"
                         android:textColor="@color/subcategory_grid_text_color"
                         android:textSize="12sp" />
                 </RelativeLayout>
@@ -164,7 +168,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@id/tvBankBranchText"
                         android:maxLines="3"
-                        android:text="البنك الكويتي الاسلامي الفرع الرئيسي"
+                        android:text="@{data.branch}"
                         android:textColor="@color/subcategory_grid_text_color"
                         android:textSize="12sp" />
                 </RelativeLayout>
@@ -194,7 +198,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@id/tvCountryText"
                         android:maxLines="3"
-                        android:text="الكويت"
+                        android:text="@{data.country}"
                         android:textColor="@color/subcategory_grid_text_color"
                         android:textSize="12sp" />
                 </RelativeLayout>

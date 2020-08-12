@@ -3,32 +3,41 @@ package com.saad.baitalkhairat.ui.walletjourney.banktransfer;
 import android.content.Context;
 
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.MutableLiveData;
 
 import com.saad.baitalkhairat.databinding.FragmentBankTransferBinding;
-import com.saad.baitalkhairat.model.DataExample;
+import com.saad.baitalkhairat.model.app.AppBank;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.DeviceUtils;
 
-import java.util.List;
-
 public class BankTransferViewModel extends BaseViewModel<BankTransferNavigator, FragmentBankTransferBinding> {
-
-    private MutableLiveData<Boolean> isLoading;
-    private MutableLiveData<List<DataExample>> dataExampleList;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> BankTransferViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (BankTransferNavigator) navigation, (FragmentBankTransferBinding) viewDataBinding);
-        isLoading = new MutableLiveData<>();
-        dataExampleList = new MutableLiveData<>();
+
     }
 
 
     @Override
     protected void setUp() {
         getViewBinding().tvAmount.setText(getNavigator().getAmount().getAmountFormatted());
+        getData();
+    }
+
+    private void getData() {
+        getDataManager().getAppService().getAppBankInfo(getMyContext(), true, new APICallBack<AppBank>() {
+            @Override
+            public void onSuccess(AppBank response) {
+                getViewBinding().setData(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     public void onCopyClick() {

@@ -5,7 +5,9 @@ import android.content.Context;
 import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.databinding.FragmentAboutUsBinding;
+import com.saad.baitalkhairat.model.app.AboutUs;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
@@ -19,5 +21,20 @@ public class AboutUsViewModel extends BaseViewModel<AboutUsNavigator, FragmentAb
     @Override
     protected void setUp() {
 
+        getData();
+    }
+
+    private void getData() {
+        getDataManager().getAppService().getAboutUs(getMyContext(), true, new APICallBack<AboutUs>() {
+            @Override
+            public void onSuccess(AboutUs response) {
+                getViewBinding().setData(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 }

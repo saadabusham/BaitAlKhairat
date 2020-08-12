@@ -12,7 +12,7 @@ import com.saad.baitalkhairat.databinding.CellCommonQuastionsBinding;
 import com.saad.baitalkhairat.databinding.CellLoadMoreBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Question;
+import com.saad.baitalkhairat.model.quastion.Question;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemQuestionViewModel;
 

@@ -195,4 +195,9 @@ public class DeviceUtils {
             //e.toString();
         }
     }
+
+    public static void openUrl(Context myContext, String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        myContext.startActivity(browserIntent);
+    }
 }

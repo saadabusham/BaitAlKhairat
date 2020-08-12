@@ -69,7 +69,8 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
         getDataManager().getAppService().getSlider(getMyContext(), true, new APICallBack<SliderResponse>() {
             @Override
             public void onSuccess(SliderResponse response) {
-                setUpViewPager(response.getData());
+                if (response.getData() != null && response.getData().size() > 0)
+                    setUpViewPager(response.getData());
             }
 
             @Override

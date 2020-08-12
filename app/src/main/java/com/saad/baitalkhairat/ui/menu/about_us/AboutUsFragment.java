@@ -73,6 +73,7 @@ public class AboutUsFragment extends BaseFragment<FragmentAboutUsBinding, AboutU
     protected void setUp() {
         mViewBinding = getViewDataBinding();
         setUpToolbar(mViewBinding.toolbar, TAG, R.string.about_us);
+        mViewModel.setUp();
     }
 
 }

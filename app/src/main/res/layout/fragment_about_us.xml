@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.menu.about_us.AboutUsViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.app.AboutUs" />
     </data>
 
     <RelativeLayout
@@ -40,7 +44,6 @@
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/ic_logo" />
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,238 +56,245 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center|start"
                     android:textColor="@color/black"
                     style="@style/roman_style"
-                    android:text="@string/about_p1"
+                    android:text="@{data.description}"
                     android:textSize="13sp" />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/our_vision"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p2"
-                    android:textSize="13sp" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/our_message"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p3"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/bait_alkhairat_resources"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    android:textColor="@color/black"
-                    style="@style/roman_style"
-                    android:text="@string/about_p4"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/funding_sources"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/bait_alkhairat_managers"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    android:textColor="@color/black"
-                    style="@style/roman_style"
-                    android:text="@string/about_p5"
-                    android:textSize="13sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/international_donor_financing"
-                    android:textSize="17sp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p6"
-                    android:textSize="13sp" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/our_vision"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/private_companies"
-                    android:textSize="17sp" />
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p2"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    android:textColor="@color/black"
-                    style="@style/roman_style"
-                    android:text="@string/about_p7"
-                    android:textSize="13sp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/governmental_and_non_governmental_donor_institutions"
-                    android:textSize="17sp" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/our_message"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p8"
-                    android:textSize="13sp" />
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p3"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/individuals"
-                    android:textSize="17sp" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/bait_alkhairat_resources"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p9"
-                    android:textSize="13sp" />
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p4"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/organizations"
-                    android:textSize="17sp" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/funding_sources"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center|start"
-                    style="@style/roman_style"
-                    android:textColor="@color/black"
-                    android:text="@string/about_p10"
-                    android:textSize="13sp" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/bait_alkhairat_managers"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_17sdp"
-                    android:gravity="center|start"
-                    style="@style/bold_style"
-                    android:textColor="@color/black"
-                    android:text="@string/our_human_values"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p5"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_30sdp"
-                    android:scaleType="fitXY"
-                    android:visibility="gone" />
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/international_donor_financing"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
 
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p6"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/private_companies"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p7"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/governmental_and_non_governmental_donor_institutions"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p8"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/individuals"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p9"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/organizations"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/roman_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="@string/about_p10"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:gravity="center|start"
+                        android:text="@string/our_human_values"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_30sdp"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
+
+                </LinearLayout>
             </LinearLayout>
 
 

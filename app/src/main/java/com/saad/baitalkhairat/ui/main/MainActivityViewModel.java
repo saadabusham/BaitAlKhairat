@@ -19,6 +19,7 @@ import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.MenuItem;
 import com.saad.baitalkhairat.model.Rate;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.DrawerAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -122,7 +123,17 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                         .navigate(R.id.signInHolderFragment);
                 break;
             case 7:
+                getDataManager().getAuthService().logout(getMyContext(), new APICallBack() {
+                    @Override
+                    public void onSuccess(Object response) {
+                        SessionManager.logoutUser();
+                    }
 
+                    @Override
+                    public void onError(String error, int errorCode) {
+
+                    }
+                });
                 break;
         }
     }

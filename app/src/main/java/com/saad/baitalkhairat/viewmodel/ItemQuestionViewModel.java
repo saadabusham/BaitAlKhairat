@@ -8,7 +8,7 @@ import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.databinding.CellCommonQuastionsBinding;
 import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.model.Question;
+import com.saad.baitalkhairat.model.quastion.Question;
 
 
 public class ItemQuestionViewModel extends BaseObservable {
