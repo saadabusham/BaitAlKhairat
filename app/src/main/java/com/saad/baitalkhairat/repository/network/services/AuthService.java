@@ -32,6 +32,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
@@ -186,8 +187,9 @@ public class AuthService {
                                                                          @Query("name") String name);
 
         @Multipart
-        @POST(ApiConstants.apiAuthService.UPDATE_PROFILE_PICTURE)
-        Single<Response<GeneralResponse<ProfileResponse>>> updateProfilePicture(@Part MultipartBody.Part image);
+        @PUT(ApiConstants.apiAuthService.UPDATE_PROFILE_PICTURE)
+        Single<Response<GeneralResponse<ProfileResponse>>> updateProfilePicture(@Part MultipartBody.Part image,
+                                                                                @Query("binding_key") String uuid);
 
         @POST(ApiConstants.apiAuthService.REFRESH_TOKEN)
         Single<Response<TokenResponse>> refreshToken(@Query("refresh_token") String refresh_token,

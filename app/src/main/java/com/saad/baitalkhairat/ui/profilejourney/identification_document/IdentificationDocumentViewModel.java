@@ -11,19 +11,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentIdentificationDocumentBinding;
 import com.saad.baitalkhairat.enums.PickImageTypes;
-import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
 import com.saad.baitalkhairat.model.IdentificationDocument;
-import com.saad.baitalkhairat.model.ProfileResponse;
-import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.ui.adapter.IdentificationDocumentAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -32,10 +25,6 @@ import com.saad.baitalkhairat.ui.dialog.PickImageFragmentDialog;
 import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.PickImageUtility;
 import com.saad.baitalkhairat.utils.ProgressRequestBody;
-import com.saad.baitalkhairat.utils.SnackViewBulider;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 public class IdentificationDocumentViewModel extends BaseViewModel<IdentificationDocumentNavigator,
         FragmentIdentificationDocumentBinding>
@@ -69,33 +58,33 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
 
     public void uploadProfilePicture(Uri uri) {
         customUploadingDialog.showProgress();
-        getDataManager().getAuthService().getDataApi().updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(), "avatar", this))
-                .toObservable()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), false,
-                        new APICallBack<ProfileResponse>() {
-                            @Override
-                            public void onSuccess(ProfileResponse response) {
-//                                response.getUser().setAccess_token(User.getInstance().getAccess_token());
-                                User.getInstance().setObjUser(response.getUser());
-                                SessionManager.createUserLoginSession();
-                                customUploadingDialog.setProgress(100);
-                            }
-
-                            @Override
-                            public void onError(String error, int errorCode) {
-                                showSnackBar(getMyContext().getString(R.string.error),
-                                        error, getMyContext().getResources().getString(R.string.OK),
-                                        new SnackViewBulider.SnackbarCallback() {
-                                            @Override
-                                            public void onActionClick(Snackbar snackbar) {
-                                                snackbar.dismiss();
-                                            }
-                                        });
-                                customUploadingDialog.setProgress(100);
-                            }
-                        }));
+//        getDataManager().getAuthService().getDataApi().updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(), "avatar", this))
+//                .toObservable()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), false,
+//                        new APICallBack<ProfileResponse>() {
+//                            @Override
+//                            public void onSuccess(ProfileResponse response) {
+////                                response.getUser().setAccess_token(User.getInstance().getAccess_token());
+//                                User.getInstance().setObjUser(response.getUser());
+//                                SessionManager.createUserLoginSession();
+//                                customUploadingDialog.setProgress(100);
+//                            }
+//
+//                            @Override
+//                            public void onError(String error, int errorCode) {
+//                                showSnackBar(getMyContext().getString(R.string.error),
+//                                        error, getMyContext().getResources().getString(R.string.OK),
+//                                        new SnackViewBulider.SnackbarCallback() {
+//                                            @Override
+//                                            public void onActionClick(Snackbar snackbar) {
+//                                                snackbar.dismiss();
+//                                            }
+//                                        });
+//                                customUploadingDialog.setProgress(100);
+//                            }
+//                        }));
 
     }
 

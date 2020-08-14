@@ -35,6 +35,7 @@ import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.CustomUploadingDialog;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.ui.dialog.PickImageFragmentDialog;
+import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.PickImageUtility;
 import com.saad.baitalkhairat.utils.ProgressRequestBody;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
@@ -264,7 +265,9 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
 
     public void uploadProfilePicture(Uri uri) {
         customUploadingDialog.showProgress();
-        getDataManager().getAuthService().getDataApi().updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(), "profile_img", this))
+        getDataManager().getAuthService().getDataApi()
+                .updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(),
+                        "profile_img", this), DeviceUtils.getUDID(getBaseActivity()))
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -113,7 +113,7 @@ public class EditProfileFragment extends BaseFragment<FragmentEditProfileBinding
 //                    mEditProfileViewModel.uploadProfilePicture(result.getUri());
 //                    mViewBinding.imgPicture.setImageURI(result.getUri());
                     GeneralFunction.loadImage(getMyContext(), result.getUri().toString(), mViewBinding.imgPicture);
-
+                    mEditProfileViewModel.uploadProfilePicture(result.getUri());
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     Exception error = result.getError();
                 }
