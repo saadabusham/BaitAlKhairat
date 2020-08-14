@@ -7,6 +7,7 @@ import com.saad.baitalkhairat.repository.network.services.AppService;
 import com.saad.baitalkhairat.repository.network.services.AuthService;
 import com.saad.baitalkhairat.repository.network.services.DataExampleService;
 import com.saad.baitalkhairat.repository.network.services.DonorsService;
+import com.saad.baitalkhairat.repository.network.services.WalletService;
 
 import javax.inject.Singleton;
 
@@ -51,4 +52,7 @@ public class DataManager {
         return DonorsService.getInstance();
     }
 
+    public WalletService getWalletService() {
+        return WalletService.getInstance();
+    }
 }

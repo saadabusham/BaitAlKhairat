@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.walletjourney.wallet.WalletViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.wallet.Wallet" />
     </data>
 
     <LinearLayout
@@ -72,7 +76,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="1"
                         android:gravity="@{viewModel.getGravity()}"
-                        android:text="545454JOD"
+                        android:text="@{data.balance}"
                         android:textColor="@color/green"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -108,7 +112,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="1"
                         android:gravity="@{viewModel.getGravity()}"
-                        android:text="545454JOD"
+                        android:text="@{data.donationPaid}"
                         android:textColor="@color/green"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -144,7 +148,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_weight="1"
                         android:gravity="@{viewModel.getGravity()}"
-                        android:text="545454JOD"
+                        android:text="@{data.remainingBalance}"
                         android:textColor="@color/green"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -159,7 +163,8 @@
                     android:backgroundTint="@color/white"
                     android:gravity="center"
                     android:onClick="@{()->viewModel.onTransactionsClick()}"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{data.isEmpty}">
 
                     <TextView
                         style="@style/bold_style"

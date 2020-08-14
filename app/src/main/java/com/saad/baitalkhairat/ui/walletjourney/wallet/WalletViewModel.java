@@ -9,7 +9,9 @@ import androidx.navigation.Navigation;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentWalletBinding;
+import com.saad.baitalkhairat.model.wallet.Wallet;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
@@ -24,7 +26,21 @@ public class WalletViewModel extends BaseViewModel<WalletNavigator, FragmentWall
     @Override
     protected void setUp() {
         getViewBinding().layoutNoDataFound.setViewModel(this);
+        getWalletData();
+    }
 
+    private void getWalletData() {
+        getDataManager().getWalletService().getWallet(getMyContext(), new APICallBack<Wallet>() {
+            @Override
+            public void onSuccess(Wallet response) {
+                getViewBinding().setData(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
 

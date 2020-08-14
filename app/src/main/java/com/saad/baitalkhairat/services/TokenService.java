@@ -30,12 +30,12 @@ public class TokenService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(new CheckForConnection(), 0, 10000);
+        mTimer.scheduleAtFixedRate(new CheckForTokenAvailability(), 0, 10000);
 
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void isNetworkAvailable() {
+    private void isTokenAvailable() {
         SessionManager.init(getApplicationContext());
         SessionManager.getUserDetails();
         if (User.getInstance().getTokenResponse() != null &&
@@ -55,10 +55,10 @@ public class TokenService extends Service {
     }
 
 
-    class CheckForConnection extends TimerTask {
+    class CheckForTokenAvailability extends TimerTask {
         @Override
         public void run() {
-            isNetworkAvailable();
+            isTokenAvailable();
         }
     }
 }

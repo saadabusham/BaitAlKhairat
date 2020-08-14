@@ -12,10 +12,14 @@ import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.databinding.ActivitySplashScreenBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivity;
+import com.saad.baitalkhairat.utils.TimeUtils;
+
+import java.util.Calendar;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -54,8 +58,6 @@ public class SplashScreenViewModel extends BaseViewModel<SplashScreenNavigator, 
 
     public void doSplash() {
         new Handler().postDelayed(() -> {
-            SessionManager.init(getMyContext());
-            SessionManager.getUserDetails();
             getBaseActivity().finish();
             getMyContext().startActivity(MainActivity.newIntent(getMyContext()));
 
@@ -71,6 +73,18 @@ public class SplashScreenViewModel extends BaseViewModel<SplashScreenNavigator, 
 
     @Override
     protected void setUp() {
+        SessionManager.init(getMyContext());
+        SessionManager.getUserDetails();
+        if (User.getInstance().getTokenResponse() != null &&
+                User.getInstance().getTokenResponse().getToken_generated_date() +
+                        TimeUtils.secToMillisecond(User.getInstance().getTokenResponse().getExpiresIn())
+                        >= Calendar.getInstance().getTimeInMillis()) {
+            refreshToken();
+        }
+    }
 
+    private void refreshToken() {
+        DataManager.getInstance().getAuthService().refreshToken(getMyContext(),
+                User.getInstance().getTokenResponse().getRefreshToken());
     }
 }

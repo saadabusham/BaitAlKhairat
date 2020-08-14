@@ -15,7 +15,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.ActivityDrawerMainBinding;
+import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.services.TokenService;
 import com.saad.baitalkhairat.ui.base.BaseActivity;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
@@ -33,6 +35,12 @@ public class MainActivity extends BaseActivity<ActivityDrawerMainBinding, MainAc
 
     public static Intent newIntent(Context context) {
         return new Intent(context, MainActivity.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, TokenService.class));
     }
 
     @Override
@@ -74,7 +82,15 @@ public class MainActivity extends BaseActivity<ActivityDrawerMainBinding, MainAc
                 new AppBarConfiguration.Builder(navController.getGraph())
                         .build();
         NavigationUI.setupWithNavController(getViewDataBinding().appBarMain.drawerMainContent.bottomSheet, navController);
+//        startTokenService();
         mMainViewModel.setUp();
+    }
+
+    private void startTokenService() {
+        if (User.getInstance().getTokenResponse() != null) {
+            Intent intent = new Intent(getMyContext(), TokenService.class);
+            startService(intent);
+        }
     }
 
     public void onActivityResultFromFragment(int requestCode, int resultCode, @Nullable Intent data) {

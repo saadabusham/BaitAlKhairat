@@ -1,6 +1,7 @@
 package com.saad.baitalkhairat.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,10 @@ import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.MenuItem;
 import com.saad.baitalkhairat.model.Rate;
+import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
+import com.saad.baitalkhairat.services.TokenService;
 import com.saad.baitalkhairat.ui.adapter.DrawerAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -96,6 +99,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
             @Override
             public void onChanged(Boolean aBoolean) {
                 checkLoginStatus(true);
+                startTokenService();
             }
         });
         getViewBinding().appBarMain.drawerMainContent.bottomSheet.setItemIconTintList(null);
@@ -107,7 +111,14 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                 getBaseActivity(), getViewBinding().drawerLayout, getViewBinding().appBarMain.toolbar.toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         initDrawer(toggle, getViewBinding().drawerLayout);
+        startTokenService();
+    }
 
+    private void startTokenService() {
+        if (User.getInstance().getTokenResponse() != null) {
+            Intent intent = new Intent(getMyContext(), TokenService.class);
+            getBaseActivity().startService(intent);
+        }
     }
 
     public void initDrawer(ActionBarDrawerToggle toggle, DrawerLayout drawer) {
@@ -215,4 +226,6 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                 .navigate(id, null, navOptions);
     }
+
+
 }

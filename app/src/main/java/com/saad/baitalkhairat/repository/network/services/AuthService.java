@@ -15,15 +15,16 @@ import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandardLogin;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
 
 import java.util.Calendar;
 
+import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
@@ -108,18 +109,29 @@ public class AuthService {
                 refreshToken, ApiConstants.PASSPORT_CLIENT_ID, ApiConstants.PASSPORT_CLIENT_SECRET)
                 .toObservable()
                 .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponseNoStandardLogin<TokenResponse>(mContext, true, new APICallBack<TokenResponse>() {
+                .subscribe(new Observer<Response<TokenResponse>>() {
                     @Override
-                    public void onSuccess(TokenResponse response) {
-                        response.setToken_generated_date(Calendar.getInstance().getTimeInMillis());
-                        User.getInstance().setTokenResponse(response);
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Response<TokenResponse> tokenResponseResponse) {
+                        tokenResponseResponse.body().setToken_generated_date(Calendar.getInstance().getTimeInMillis());
+                        User.getInstance().setTokenResponse(tokenResponseResponse.body());
                         SessionManager.createUserLoginSession();
                     }
 
                     @Override
-                    public void onError(String error, int errorCode) {
+                    public void onError(Throwable e) {
+
                     }
-                }));
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public DataApi getDataApi() {

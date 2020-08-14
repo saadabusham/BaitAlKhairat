@@ -32,7 +32,7 @@ public class ApiConstants {
     }
 
     public class apiWalletService {
-        public static final String WALLET = "user/profile";
+        public static final String WALLET = "member/wallets";
     }
 
     public class apiAddressService {
