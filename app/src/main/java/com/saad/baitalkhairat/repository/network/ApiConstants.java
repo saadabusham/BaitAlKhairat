@@ -4,8 +4,8 @@ public class ApiConstants {
     public static final String BASE_URL = "https://test-1.baytalkhayrat.net/api/v1/";
     public static final String GET_DATA = "user/1/categories";
     public static final String PLATFORM = "android";
-    public static final int PASSPORT_CLIENT_ID = 2;
-    public static final String PASSPORT_CLIENT_SECRET = "4fGfUW0QpJP57HJPD67fQEy6s3IBUJA6M9zw6imL";
+    public static final int PASSPORT_CLIENT_ID = 1;
+    public static final String PASSPORT_CLIENT_SECRET = "7i5HrPXnIZo5pl8MXxIXDmmrwLDRyHov6yFmuONc";
 
     public class apiAuthService {
         public static final String VERIFY_PHONE = "member/password/mobile/otp/verify";
@@ -21,7 +21,9 @@ public class ApiConstants {
         public static final String LOGOUT = "member/logout";
         public static final String UPDATE_PASSWORD = "user/update/password";
         public static final String UPDATE_PROFILE = "user/update/profile";
-        public static final String UPDATE_PROFILE_PICTURE = "user/update/avatar";
+        public static final String UPDATE_PROFILE_PICTURE = "member/my-profile";
+        public static final String REFRESH_TOKEN = "member/refresh-token";
+        public static final String MY_PROFILE = "member/my-profile";
     }
 
     public class apiHomeService {
@@ -60,6 +62,7 @@ public class ApiConstants {
         public static final String COUNTRY_CODE = "lists/countries-code";
         public static final String COUNTRY_NAME = "lists/countries-name";
         public static final String GENDERS = "lists/gender";
+        public static final String MARITALS = "lists/marital-status";
         public static final String SLIDERS = "banners";
         public static final String QUESTION = "faqs";
         public static final String TERMS_AND_CONDITION = "app/terms-and-condations";

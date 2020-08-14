@@ -77,7 +77,7 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                         new APICallBack<ProfileResponse>() {
                             @Override
                             public void onSuccess(ProfileResponse response) {
-                                response.getUser().setToken(User.getInstance().getToken());
+//                                response.getUser().setAccess_token(User.getInstance().getAccess_token());
                                 User.getInstance().setObjUser(response.getUser());
                                 SessionManager.createUserLoginSession();
                                 customUploadingDialog.setProgress(100);

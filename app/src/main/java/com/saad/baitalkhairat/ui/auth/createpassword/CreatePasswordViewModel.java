@@ -1,32 +1,30 @@
 package com.saad.baitalkhairat.ui.auth.createpassword;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCreatePasswordBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
-import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
-import com.saad.baitalkhairat.ui.auth.loginJourney.login.LoginFragment;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
-import androidx.databinding.ViewDataBinding;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigator, FragmentCreatePasswordBinding> {
 
-    String token = "";
 
     TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -51,7 +49,6 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
 
     @Override
     protected void setUp() {
-        token = getNavigator().getToken();
         getViewBinding().edNewPassword.addTextChangedListener(textWatcher);
         getViewBinding().edConfirmPassword.addTextChangedListener(textWatcher);
     }
@@ -90,9 +87,9 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
     public void createPassword() {
         if (isValid()) {
             getDataManager().getAuthService().getDataApi().createPassword(
-                    User.getInstance().getPhone(),
+                    getNavigator().getMobile(),
                     getViewBinding().edNewPassword.getText().toString(),
-                    getViewBinding().edConfirmPassword.getText().toString(), token)
+                    getViewBinding().edConfirmPassword.getText().toString(), getNavigator().getToken())
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
@@ -103,9 +100,9 @@ public class CreatePasswordViewModel extends BaseViewModel<CreatePasswordNavigat
                             new OnLineDialog(getMyContext()) {
                                 @Override
                                 public void onPositiveButtonClicked() {
-                                    getBaseActivity().finishAffinity();
-                                    getBaseActivity().startActivity(new Intent(getMyContext(),
-                                            LoginFragment.class));
+                                    dismiss();
+                                    Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                            .navigate(R.id.action_createPasswordFragment_to_signInHolderFragment);
                                 }
 
                                 @Override

@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.user.UserResponse" />
     </data>
 
     <LinearLayout
@@ -54,7 +58,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/ic_profile" />
+                            imageUrl="@{data.profileImage.path}" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -86,6 +90,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/edittextUnderline"
                             android:hint="@string/user_name"
+                            android:text="@{data.name}"
                             android:maxLines="1"
                             android:padding="10dp"
                             android:textColor="@color/edittextUnderline"
@@ -144,6 +149,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:backgroundTint="@color/edittextUnderline"
                             android:hint="@string/enter_email"
+                            android:text="@{data.email}"
                             android:maxLines="1"
                             android:padding="10dp"
                             android:textColor="@color/edittextUnderline"
@@ -179,6 +185,7 @@
                                 android:focusedByDefault="false"
                                 android:gravity="center"
                                 android:hint="@string/day"
+                                android:text="@{data.birthDay}"
                                 android:onClick="@{()->viewModel.openDatePicker()}"
                                 android:textColor="@color/edittextUnderline"
                                 android:textColorHint="@color/edittextUnderline"
@@ -197,6 +204,7 @@
                                 android:focusedByDefault="false"
                                 android:gravity="center"
                                 android:hint="@string/month"
+                                android:text="@{data.birthMonth}"
                                 android:onClick="@{()->viewModel.openDatePicker()}"
                                 android:textColor="@color/edittextUnderline"
                                 android:textColorHint="@color/edittextUnderline"
@@ -215,6 +223,7 @@
                                 android:focusedByDefault="false"
                                 android:gravity="center"
                                 android:hint="@string/year"
+                                android:text="@{data.birthYear}"
                                 android:onClick="@{()->viewModel.openDatePicker()}"
                                 android:textColor="@color/edittextUnderline"
                                 android:textColorHint="@color/edittextUnderline"
@@ -238,6 +247,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:background="@color/pink"
                             android:gravity="start|top"
+                            android:text="@{data.description}"
                             android:minHeight="@dimen/_100sdp"
                             android:padding="@dimen/_5sdp"
                             android:textColor="@color/black"

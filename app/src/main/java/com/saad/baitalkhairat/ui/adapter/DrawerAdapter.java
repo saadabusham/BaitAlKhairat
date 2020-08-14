@@ -14,6 +14,7 @@ import com.saad.baitalkhairat.helper.GeneralFunction;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.MenuItem;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
+import com.saad.baitalkhairat.utils.ScreenUtils;
 import com.saad.baitalkhairat.viewmodel.ItemDrawerViewModel;
 
 import java.util.ArrayList;
@@ -80,12 +81,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (arrayListMenuItems.get(position).isWithIcon == DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode()) {
                 mBinding.relativeCellDrawer.setVisibility(View.GONE);
                 mBinding.relativeCellDrawer.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            } else {
+                RecyclerView.LayoutParams layoutParams =
+                        new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0, (int) ScreenUtils.pxFromDp(mContext, 10), 0, (int) ScreenUtils.pxFromDp(mContext, 10));
+                mBinding.relativeCellDrawer.setVisibility(View.VISIBLE);
+                mBinding.relativeCellDrawer.setLayoutParams(layoutParams);
             }
-//            else {
-//                mBinding.relativeCellDrawer.setVisibility(View.VISIBLE);
-//                mBinding.relativeCellDrawer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//            }
         }
+
 
     }
 

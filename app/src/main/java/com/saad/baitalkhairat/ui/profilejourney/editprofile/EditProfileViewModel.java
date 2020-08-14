@@ -23,8 +23,10 @@ import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.enums.PickImageTypes;
 import com.saad.baitalkhairat.helper.GeneralFunction;
 import com.saad.baitalkhairat.helper.SessionManager;
+import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.ProfileResponse;
 import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
@@ -47,6 +49,15 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         implements ProgressRequestBody.UploadCallbacks {
 
     CustomUploadingDialog customUploadingDialog;
+
+    ArrayList<ListItem> countryNameList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryNameAdapter;
+
+    ArrayList<ListItem> maritalList = new ArrayList<>();
+    ArrayAdapter<ListItem> maritalAdapter;
+
+    ArrayList<ListItem> genderList = new ArrayList<>();
+    ArrayAdapter<ListItem> genderAdapter;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> EditProfileViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (EditProfileNavigator) navigation, (FragmentEditProfileBinding) viewDataBinding);
@@ -89,6 +100,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
 
     @Override
     protected void setUp() {
+        getViewBinding().setData(getNavigator().getUser());
         customUploadingDialog = new CustomUploadingDialog(getMyContext());
         setUpSpinnerGender();
         setUpSpinnerCountry();
@@ -108,22 +120,52 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
     }
 
     private void setUpSpinnerGender() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.gender));
-        arrayList.add(getMyContext().getResources().getString(R.string.male));
-        arrayList.add(getMyContext().getResources().getString(R.string.female));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerGender.setAdapter(adapter);
+        genderList.add(new ListItem(getMyContext().getResources().getString(R.string.gender)));
+        genderAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, genderList);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerGender.setAdapter(genderAdapter);
+        getGenders();
+    }
+
+    private void getGenders() {
+        getDataManager().getAppService().getGenders(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                genderAdapter.addAll(response.getList());
+                genderAdapter.notifyDataSetChanged();
+                getViewBinding().spinnerGender.setSelection(getNavigator().getUser().getMyGender(response.getList()));
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpSpinnerCountry() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.country_original));
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountry.setAdapter(adapter);
+        countryNameList.add(new ListItem(getMyContext().getResources().getString(R.string.country_original)));
+        countryNameAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryNameList);
+        countryNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCountry.setAdapter(countryNameAdapter);
+
+        getCountryNames();
+    }
+
+    private void getCountryNames() {
+        getDataManager().getAppService().getCountryName(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryNameAdapter.addAll(response.getList());
+                countryNameAdapter.notifyDataSetChanged();
+                getViewBinding().spinnerCountry.setSelection(getNavigator().getUser().getMyCountry(response.getList()));
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpSpinnerCity() {
@@ -136,17 +178,29 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
     }
 
     private void setUpSpinnerSocialStatus() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.social_status));
-        arrayList.add(getMyContext().getResources().getString(R.string.single));
-        arrayList.add(getMyContext().getResources().getString(R.string.engaged));
-        arrayList.add(getMyContext().getResources().getString(R.string.married));
-        arrayList.add(getMyContext().getResources().getString(R.string.widower));
-        arrayList.add(getMyContext().getResources().getString(R.string.deforced));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerSocialStatus.setAdapter(adapter);
+        maritalList.add(new ListItem(getMyContext().getResources().getString(R.string.social_status)));
+        maritalAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, maritalList);
+        maritalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerSocialStatus.setAdapter(maritalAdapter);
+        getMaritals();
     }
+
+    private void getMaritals() {
+        getDataManager().getAppService().getMaritals(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                maritalAdapter.addAll(response.getList());
+                maritalAdapter.notifyDataSetChanged();
+                getViewBinding().spinnerSocialStatus.setSelection(getNavigator().getUser().getMyMarital(response.getList()));
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
+
 
     public void openDatePicker() {
         DatePickerDialog dialog = new DatePickerDialog(getMyContext(), AlertDialog.THEME_HOLO_LIGHT, date,
@@ -169,7 +223,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
                     .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), true, new APICallBack<ProfileResponse>() {
                         @Override
                         public void onSuccess(ProfileResponse response) {
-                            response.getUser().setToken(User.getObjUser().getToken());
+//                            response.getUser().setAccess_token(User.getObjUser().getAccess_token());
                             User.getInstance().setObjUser(response.getUser());
                             SessionManager.createUserLoginSession();
 //                            ((MainActivity) getMyContext()).setToolbarUserName();
@@ -210,7 +264,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
 
     public void uploadProfilePicture(Uri uri) {
         customUploadingDialog.showProgress();
-        getDataManager().getAuthService().getDataApi().updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(), "avatar", this))
+        getDataManager().getAuthService().getDataApi().updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(), "profile_img", this))
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -218,7 +272,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
                         new APICallBack<ProfileResponse>() {
                             @Override
                             public void onSuccess(ProfileResponse response) {
-                                response.getUser().setToken(User.getInstance().getToken());
+//                                response.getUser().setAccess_token(User.getInstance().getAccess_token());
                                 User.getInstance().setObjUser(response.getUser());
                                 SessionManager.createUserLoginSession();
                                 customUploadingDialog.setProgress(100);
@@ -301,13 +355,10 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         if (getViewBinding().spinnerCountry.getSelectedItemPosition() == 0) {
             error = +1;
         }
-        if (getViewBinding().spinnerSocialStatus.getSelectedItemPosition() == 0) {
-            error = +1;
-        }
 
-        if (getViewBinding().spinnerCity.getSelectedItemPosition() == 0) {
-            error = +1;
-        }
+//        if (getViewBinding().spinnerCity.getSelectedItemPosition() == 0) {
+//            error = +1;
+//        }
 
         if (getViewBinding().spinnerGender.getSelectedItemPosition() == 0) {
             error = +1;

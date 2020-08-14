@@ -65,6 +65,14 @@ public class AppService {
                 .subscribe(new CustomObserverResponseNoStandard<CountryCodeResponse>(mContext, withProgress, apiCallBack));
     }
 
+    public void getMaritals(Context mContext, boolean withProgress, APICallBack<CountryCodeResponse> apiCallBack) {
+        getDataApi().maritals()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<CountryCodeResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public void getSlider(Context mContext, boolean withProgress, APICallBack<SliderResponse> apiCallBack) {
         getDataApi().sliders()
                 .toObservable()
@@ -123,6 +131,9 @@ public class AppService {
 
         @GET(ApiConstants.apiAppService.GENDERS)
         Single<Response<CountryCodeResponse>> genders();
+
+        @GET(ApiConstants.apiAppService.MARITALS)
+        Single<Response<CountryCodeResponse>> maritals();
 
         @GET(ApiConstants.apiAppService.SLIDERS)
         Single<Response<SliderResponse>> sliders();

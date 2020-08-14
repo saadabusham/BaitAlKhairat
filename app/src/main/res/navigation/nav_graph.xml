@@ -70,6 +70,11 @@
             app:destination="@id/nav_home"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_otpVerifierFragment_to_signInHolderFragment"
+            app:destination="@id/signInHolderFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/verifyPhoneNumberFragment"
@@ -78,7 +83,13 @@
     <fragment
         android:id="@+id/createPasswordFragment"
         android:name="com.saad.baitalkhairat.ui.auth.createpassword.CreatePasswordFragment"
-        android:label="CreatePasswordFragment" />
+        android:label="CreatePasswordFragment">
+        <action
+            android:id="@+id/action_createPasswordFragment_to_signInHolderFragment"
+            app:destination="@id/signInHolderFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/nav_account"
         android:name="com.saad.baitalkhairat.ui.profilejourney.account.AccountFragment"

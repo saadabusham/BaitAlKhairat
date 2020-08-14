@@ -20,8 +20,8 @@ public class ApiClient {
     public static Retrofit getRetrofitClient(String baseUrl) {
         OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request.Builder ongoing = chain.request().newBuilder();
-            if (User.getInstance().getUserID() > 0) {
-                ongoing.addHeader("Authorization", "Bearer " + User.getInstance().getToken());
+            if (User.getInstance().getTokenResponse() != null) {
+                ongoing.addHeader("Authorization", "Bearer " + User.getInstance().getTokenResponse().getAccessToken());
             } else {
                 ongoing.addHeader("Authorization", "Bearer " + "");
             }

@@ -5,8 +5,10 @@ import android.content.Context;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentMyInfoListBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -79,4 +81,8 @@ public class MyInfoListFragment extends BaseFragment<FragmentMyInfoListBinding, 
     }
 
 
+    @Override
+    public UserResponse getUser() {
+        return (UserResponse) getArguments().getSerializable(AppConstants.BundleData.USER);
+    }
 }

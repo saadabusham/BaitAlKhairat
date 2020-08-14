@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.widget.ArrayAdapter;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
@@ -17,13 +18,13 @@ import com.saad.baitalkhairat.databinding.FragmentLoginBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.LoginObject;
+import com.saad.baitalkhairat.model.TokenResponse;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.errormodel.LoginError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
-import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandardLogin;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -31,11 +32,15 @@ import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginBinding> {
+
+    NavOptions navOptions;
+    NavOptions.Builder navBuilder = new NavOptions.Builder();
 
     private static final String TAG = "LoginViewModel";
     ArrayList<ListItem> countryCodeList = new ArrayList<>();
@@ -64,6 +69,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
 
     @Override
     protected void setUp() {
+        navOptions = navBuilder.setPopUpTo(R.id.nav_graph, false).build();
         SpannableString content = new SpannableString(getMyContext().getResources().getString(R.string.forget_password));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         getViewBinding().tvForgetPassword.setText(content);
@@ -118,37 +124,40 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new CustomObserverResponseNew<User, LoginError>(getMyContext(), true, new APICallBackNew<User>() {
+                    .subscribe(new CustomObserverResponseNoStandardLogin<TokenResponse>(getMyContext(), true, new APICallBack<TokenResponse>() {
                         @Override
-                        public void onSuccess(User response) {
-                            User.getInstance().setObjUser(response);
-                            SessionManager.createUserLoginSession();
-                            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                    .navigate(R.id.action_loginFragment_to_nav_home);
-//                            getDataManager().getAuthService().reInit();
-//                            getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
-//                                @Override
-//                                public void onSuccess(Object response) {
-//                                    getBaseActivity().finishAffinity();
-////                                    getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
-//                                }
-//
-//                                @Override
-//                                public void onError(String error, int errorCode) {
-//                                    showToast(error);
-//                                }
-//                            });
+                        public void onSuccess(TokenResponse response) {
+                            if (response.getLoginError() == null) {
+                                response.setToken_generated_date(Calendar.getInstance().getTimeInMillis());
+                                User.getInstance().setTokenResponse(response);
+                                SessionManager.createUserLoginSession();
+                                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                        .navigate(R.id.nav_home, null, navOptions);
+                            } else {
+                                showToast(response.getLoginError().toString());
+
+                                if (response.getLoginError().getPhone() != null && response.getLoginError().getPhone().size() > 0) {
+                                    getViewBinding().edPhoneNumber.setError(response.getLoginError().getPhone().toString());
+                                }
+                                if (response.getLoginError().getPassword() != null && response.getLoginError().getPassword().size() > 0) {
+                                    getViewBinding().edPassword.setError(response.getLoginError().getPassword().toString());
+                                }
+                            }
                         }
 
                         @Override
                         public void onError(String error, int errorCode) {
-                            LoginError loginError = new Gson().fromJson(error, LoginError.class);
-                            showToast(error);
-                        }
+                            if (errorCode == 7777) {
+                                LoginError loginError = new Gson().fromJson(error, LoginError.class);
+                                if (loginError.getPhone() != null && loginError.getPhone().size() > 0) {
+                                    getViewBinding().edPhoneNumber.setError(loginError.getPhone().toString());
+                                }
+                                if (loginError.getPassword() != null && loginError.getPassword().size() > 0) {
+                                    getViewBinding().edPassword.setError(loginError.getPassword().toString());
+                                }
 
-                        @Override
-                        public void onNetworkError(String error, int errorCode) {
-                            showToast(error);
+                                showToast(error);
+                            }
                         }
                     }));
         }
@@ -157,7 +166,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
     private LoginObject getLoginObj() {
         return new LoginObject(getViewBinding().edPhoneNumber.getText().toString().trim(),
                 countryCodeAdapter.getItem(getViewBinding().spinnerCountryCode.getSelectedItemPosition()).getValue(),
-                getViewBinding().edPassword.getText().toString(), DeviceUtils.getMacAddr());
+                getViewBinding().edPassword.getText().toString(), DeviceUtils.getUDID(getBaseActivity()));
     }
 
     private boolean isValidate() {
@@ -186,4 +195,6 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
         return LanguageUtils.getLanguage(getMyContext()).equals("ar")
                 ? Gravity.RIGHT : Gravity.LEFT;
     }
+
+
 }

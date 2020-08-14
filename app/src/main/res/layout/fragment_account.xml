@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.user.UserResponse" />
     </data>
 
     <LinearLayout
@@ -29,7 +33,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/_55sdp"
                 android:layout_height="@dimen/_55sdp"
-                android:src="@drawable/ic_otp_message" />
+                imageUrl="@{data.profileImage.path}" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -60,7 +64,7 @@
                         android:gravity="@{viewModel.getGravity()}"
                         android:singleLine="true"
                         style="@style/bold_style"
-                        android:text="saad abu sham"
+                        android:text="@{data.name}"
                         android:textColor="@color/account_green"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -83,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:singleLine="true"
-                        android:text="123456"
+                        android:text="@{data.idString}"
                         style="@style/bold_style"
                         android:textColor="@color/account_green"
                         android:textSize="13sp" />

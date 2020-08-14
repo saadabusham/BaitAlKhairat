@@ -102,5 +102,6 @@ public final class AppConstants {
         public static final String AMOUNT = "AMOUNT";
         public static final String CATEGORY_NAME = "CATEGORY_NAME";
         public static final String CASE = "CASE";
+        public static final String USER = "USER";
     }
 }

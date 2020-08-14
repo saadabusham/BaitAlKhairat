@@ -6,16 +6,21 @@ import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.LoginObject;
 import com.saad.baitalkhairat.model.ProfileResponse;
 import com.saad.baitalkhairat.model.RegisterResponse;
+import com.saad.baitalkhairat.model.TokenResponse;
 import com.saad.baitalkhairat.model.User;
-import com.saad.baitalkhairat.model.errormodel.LoginError;
+import com.saad.baitalkhairat.model.VerifyPhoneResponeResponse;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandardLogin;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
+
+import java.util.Calendar;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,6 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -69,6 +75,14 @@ public class AuthService {
                 }));
     }
 
+    public void getProfile(Context mContext, boolean withProgress, APICallBack<UserResponse> apiCallBack) {
+        getDataApi().getProfile()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<UserResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public void logout(Context mContext, APICallBack apiCallBack) {
         getDataApi().logout(
                 SessionManager.getKeyFirebaseToken())
@@ -88,6 +102,25 @@ public class AuthService {
                 }));
     }
 
+    public void refreshToken(Context mContext, String refreshToken) {
+        getDataApi().refreshToken(
+                refreshToken, ApiConstants.PASSPORT_CLIENT_ID, ApiConstants.PASSPORT_CLIENT_SECRET)
+                .toObservable()
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandardLogin<TokenResponse>(mContext, true, new APICallBack<TokenResponse>() {
+                    @Override
+                    public void onSuccess(TokenResponse response) {
+                        response.setToken_generated_date(Calendar.getInstance().getTimeInMillis());
+                        User.getInstance().setTokenResponse(response);
+                        SessionManager.createUserLoginSession();
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                    }
+                }));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -99,9 +132,9 @@ public class AuthService {
     public interface DataApi {
 
         @POST(ApiConstants.apiAuthService.VERIFY_PHONE)
-        Single<Response<GeneralResponseNew<String, VerifyPhoneError>>> verifyPhone(@Query("phone") String phone,
-                                                                                   @Query("country_code") String country_code,
-                                                                                   @Query("verificationCode") String verificationCode);
+        Single<Response<VerifyPhoneResponeResponse>> verifyPhone(@Query("phone") String phone,
+                                                                 @Query("country_code") String country_code,
+                                                                 @Query("verificationCode") String verificationCode);
 
         @POST(ApiConstants.apiAuthService.VERIFY_CODE)
         Single<Response<GeneralResponseNew<User, RegisterError>>> verifyCode(@Body User user);
@@ -118,16 +151,16 @@ public class AuthService {
         Single<Response<GeneralResponseNew<User, RegisterError>>> registerUser(@Body User user);
 
         @POST(ApiConstants.apiAuthService.LOGIN_USER)
-        Single<Response<GeneralResponseNew<User, LoginError>>> loginUser(@Body LoginObject loginObject,
-                                                                         @Query("client_id") int client_id,
-                                                                         @Query("client_secret") String client_secret);
+        Single<Response<TokenResponse>> loginUser(@Body LoginObject loginObject,
+                                                  @Query("client_id") int client_id,
+                                                  @Query("client_secret") String client_secret);
 
         @POST(ApiConstants.apiAuthService.LOGIN_SOCIAL)
         Single<Response<GeneralResponse<RegisterResponse>>> loginWithSocial(@Body LoginObject socialLogin);
 
         @POST(ApiConstants.apiAuthService.FORGET_PASSWORD)
         Single<Response<GeneralResponseNew<String, VerifyPhoneError>>>
-        forgetPassword(@Query("phone_number") String phoneNumber,
+        forgetPassword(@Query("phone") String phoneNumber,
                        @Query("country_code") String country_code);
 
         @POST(ApiConstants.apiAuthService.CREATE_PASSWORD)
@@ -155,6 +188,14 @@ public class AuthService {
         @Multipart
         @POST(ApiConstants.apiAuthService.UPDATE_PROFILE_PICTURE)
         Single<Response<GeneralResponse<ProfileResponse>>> updateProfilePicture(@Part MultipartBody.Part image);
+
+        @POST(ApiConstants.apiAuthService.REFRESH_TOKEN)
+        Single<Response<TokenResponse>> refreshToken(@Query("refresh_token") String refresh_token,
+                                                     @Query("client_id") int client_id,
+                                                     @Query("client_secret") String client_secret);
+
+        @GET(ApiConstants.apiAuthService.MY_PROFILE)
+        Single<Response<GeneralResponse<UserResponse>>> getProfile();
 
     }
 }

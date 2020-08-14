@@ -81,6 +81,11 @@ public class CreatePasswordFragment extends BaseFragment<FragmentCreatePasswordB
 
     @Override
     public String getToken() {
-        return token;
+        return getArguments().getString("token");
+    }
+
+    @Override
+    public String getMobile() {
+        return getArguments().getString("mobile");
     }
 }

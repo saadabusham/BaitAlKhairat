@@ -6,24 +6,26 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.VerifyPhoneResponeResponse;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
-import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandardLogin;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.TimeUtils;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -108,14 +110,22 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new CustomObserverResponseNew<String, VerifyPhoneError>(getMyContext(), true, new APICallBackNew
-                        <String>() {
+                .subscribe(new CustomObserverResponseNoStandardLogin<VerifyPhoneResponeResponse>(getMyContext(), true, new APICallBack
+                        <VerifyPhoneResponeResponse>() {
                     @Override
-                    public void onSuccess(String response) {
-                        Bundle data = new Bundle();
-                        data.putString("token", response);
-                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                .navigate(R.id.createPasswordFragment, data);
+                    public void onSuccess(VerifyPhoneResponeResponse response) {
+                        if (response.getVerifyPhoneError() == null) {
+                            Bundle data = new Bundle();
+                            data.putString("token", response.getToken());
+                            data.putString("mobile", response.getMobile());
+                            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                    .navigate(R.id.createPasswordFragment, data);
+                        } else {
+                            if (response.getVerifyPhoneError().getVerificationCode() != null &&
+                                    response.getVerifyPhoneError().getVerificationCode().size() > 0) {
+                                showErrorSnackBar(response.getVerifyPhoneError().getVerificationCode().toString());
+                            }
+                        }
                     }
 
                     @Override
@@ -123,10 +133,6 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
                         showToast(error);
                     }
 
-                    @Override
-                    public void onNetworkError(String error, int errorCode) {
-                        showToast(error);
-                    }
                 }));
     }
 

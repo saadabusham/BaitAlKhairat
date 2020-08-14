@@ -1,6 +1,7 @@
 package com.saad.baitalkhairat.ui.profilejourney.myinfolist;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.Navigation;
@@ -14,6 +15,7 @@ import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.adapter.MyInfoAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 import java.util.ArrayList;
 
@@ -52,22 +54,24 @@ public class MyInfoListViewModel extends BaseViewModel<MyInfoListNavigator, Frag
     @Override
     public void onClick(int position) {
 
+        Bundle data = new Bundle();
+        data.putSerializable(AppConstants.BundleData.USER, getNavigator().getUser());
         switch (position) {
             case 0:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.action_myInfoListFragment_to_editProfileFragment);
+                        .navigate(R.id.action_myInfoListFragment_to_editProfileFragment, data);
                 break;
             case 1:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.action_myInfoListFragment_to_userDegreeFragment);
+                        .navigate(R.id.action_myInfoListFragment_to_userDegreeFragment, data);
                 break;
             case 2:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.action_myInfoListFragment_to_userSocialLinksFragment);
+                        .navigate(R.id.action_myInfoListFragment_to_userSocialLinksFragment, data);
                 break;
             case 3:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.action_myInfoListFragment_to_identificationDocumentFragment);
+                        .navigate(R.id.action_myInfoListFragment_to_identificationDocumentFragment, data);
                 break;
 
         }

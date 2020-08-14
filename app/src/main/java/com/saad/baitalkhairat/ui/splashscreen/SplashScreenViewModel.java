@@ -55,6 +55,7 @@ public class SplashScreenViewModel extends BaseViewModel<SplashScreenNavigator, 
     public void doSplash() {
         new Handler().postDelayed(() -> {
             SessionManager.init(getMyContext());
+            SessionManager.getUserDetails();
             getBaseActivity().finish();
             getMyContext().startActivity(MainActivity.newIntent(getMyContext()));
 

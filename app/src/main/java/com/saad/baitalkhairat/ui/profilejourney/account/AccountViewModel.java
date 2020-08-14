@@ -3,8 +3,10 @@ package com.saad.baitalkhairat.ui.profilejourney.account;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,12 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentAccountBinding;
 import com.saad.baitalkhairat.enums.SignTypes;
+import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.AccountItem;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.AccountItemsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.ArrayList;
@@ -33,12 +39,37 @@ public class AccountViewModel extends BaseViewModel<AccountNavigator, FragmentAc
 
     @Override
     protected void setUp() {
+        SessionManager.isLoggedIn.observe(getBaseActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (!aBoolean) {
+                    getViewBinding().layoutUserNotRegister.relativeUserNotRegistered.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         getViewBinding().layoutUserNotRegister.setViewModel(this);
-//        if (!SessionManager.isLoggedIn())
-//            getViewBinding().layoutUserNotRegister.relativeUserNotRegistered.setVisibility(View.VISIBLE);
-//        else
-//            getViewBinding().layoutUserNotRegister.relativeUserNotRegistered.setVisibility(View.GONE);
-        setUpRecycler();
+        if (!SessionManager.isLoggedIn())
+            getViewBinding().layoutUserNotRegister.relativeUserNotRegistered.setVisibility(View.VISIBLE);
+        else {
+            getViewBinding().layoutUserNotRegister.relativeUserNotRegistered.setVisibility(View.GONE);
+            setUpRecycler();
+            getMyProfile();
+        }
+
+    }
+
+    private void getMyProfile() {
+        getDataManager().getAuthService().getProfile(getMyContext(), true, new APICallBack<UserResponse>() {
+            @Override
+            public void onSuccess(UserResponse response) {
+                getViewBinding().setData(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpRecycler() {
@@ -90,8 +121,10 @@ public class AccountViewModel extends BaseViewModel<AccountNavigator, FragmentAc
     }
 
     public void onEditClick() {
+        Bundle data = new Bundle();
+        data.putSerializable(AppConstants.BundleData.USER, getViewBinding().getData());
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_account_to_myInfoListFragment);
+                .navigate(R.id.action_nav_account_to_myInfoListFragment, data);
     }
 
     public int getGravity() {

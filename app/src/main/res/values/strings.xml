@@ -446,5 +446,7 @@
     <string name="our_human_values">Our human values</string>
     <string name="ok">Ok</string>
 
+    <string name="go_to_login">Go To Login ?</string>
+    <string name="login_is_required">Login is required</string>
 
 </resources>

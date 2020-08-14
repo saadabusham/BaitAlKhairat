@@ -3,14 +3,18 @@ package com.saad.baitalkhairat.ui.main;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.ActivityDrawerMainBinding;
 import com.saad.baitalkhairat.enums.DrawerWithIconTypes;
@@ -35,6 +39,8 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
     ArrayList<MenuItem> menuItems;
 
     DrawerAdapter drawerAdapter;
+    NavOptions navOptions;
+    NavOptions.Builder navBuilder = new NavOptions.Builder();
 
     public <V extends ViewDataBinding, N extends BaseNavigator> MainActivityViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (MainActivityNavigator) navigation, (ActivityDrawerMainBinding) viewDataBinding);
@@ -43,10 +49,55 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
 
     @Override
     protected void setUp() {
+        navOptions = navBuilder.setPopUpTo(R.id.nav_home, false).build();
+        getViewBinding().appBarMain.drawerMainContent.bottomSheet.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem menuItem) {
+
+                if (Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .getCurrentDestination().getId() != menuItem.getItemId()) {
+                    navigate(menuItem.getItemId());
+//                    if (menuItem.getItemId() == R.id.nav_account) {
+//                        if (SessionManager.isLoggedIn()) {
+//                            navigate(menuItem.getItemId());
+//                        } else {
+//                            new OnLineDialog(getBaseActivity()) {
+//                                @Override
+//                                public void onPositiveButtonClicked() {
+//                                    getViewBinding().appBarMain.drawerMainContent.bottomSheet.setSelectedItemId(Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                                            .getCurrentDestination().getId());
+//                                    dismiss();
+//                                    Navigation.findNavController(getBaseActivity(),R.id.nav_host_fragment)
+//                                            .navigate(R.id.signInHolderFragment);
+//                                }
+//
+//                                @Override
+//                                public void onNegativeButtonClicked() {
+//                                    getViewBinding().appBarMain.drawerMainContent.bottomSheet.setSelectedItemId(Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                                            .getCurrentDestination().getId());
+//                                    dismiss();
+//                                }
+//                            }.showConfirmationDialog(DialogTypes.OK_CANCEL, getMyContext().getResources().getString(R.string.login_is_required),
+//                                    getMyContext().getResources().getString(R.string.go_to_login));
+//                        }
+//                    } else {
+//                        navigate(menuItem.getItemId());
+//                    }
+                }
+                return true;
+            }
+        });
+
         if (SessionManager.getIsThereNotification())
             getViewBinding().appBarMain.drawerMainContent.bottomSheet.getMenu().getItem(2)
                     .setIcon(getMyContext().getResources().getDrawable(R.drawable.ic_notification_active_nav));
 
+        SessionManager.isLoggedIn.observe(getBaseActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                checkLoginStatus(true);
+            }
+        });
         getViewBinding().appBarMain.drawerMainContent.bottomSheet.setItemIconTintList(null);
         menuItems = getDrawerList();
         drawerAdapter = new DrawerAdapter(getMyContext(), menuItems, this);
@@ -127,6 +178,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                     @Override
                     public void onSuccess(Object response) {
                         SessionManager.logoutUser();
+                        checkLoginStatus(false);
                     }
 
                     @Override
@@ -138,6 +190,17 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
         }
     }
 
+    private void checkLoginStatus(boolean status) {
+        menuItems.get(6).setWithIcon(!SessionManager.isLoggedIn() ?
+                DrawerWithIconTypes.NO_ICON.getMode() :
+                DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode());
+        menuItems.get(7).setWithIcon(SessionManager.isLoggedIn() ?
+                DrawerWithIconTypes.WITH_ICON.getMode() :
+                DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode());
+        drawerAdapter.notifyItemChanged(6);
+        drawerAdapter.notifyItemChanged(7);
+    }
+
     private void showRateDialog() {
         RateDialog rateDialog = new RateDialog(getMyContext(), new RateDialog.RateCallback() {
             @Override
@@ -146,5 +209,10 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
             }
         });
         rateDialog.showRateDialog();
+    }
+
+    private void navigate(int id) {
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(id, null, navOptions);
     }
 }

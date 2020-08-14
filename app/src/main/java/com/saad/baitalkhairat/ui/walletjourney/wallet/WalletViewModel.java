@@ -24,7 +24,9 @@ public class WalletViewModel extends BaseViewModel<WalletNavigator, FragmentWall
     @Override
     protected void setUp() {
         getViewBinding().layoutNoDataFound.setViewModel(this);
+
     }
+
 
     public void onChargeClick() {
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)

@@ -8,8 +8,6 @@ public class User implements Serializable {
     private static User objUser = null;
     @SerializedName("id")
     private long userID;
-    @SerializedName("token")
-    String token;
     @SerializedName("email")
     private String email = "";
     @SerializedName("avatar")
@@ -35,6 +33,9 @@ public class User implements Serializable {
     @SerializedName("verificationCode")
     private String verificationCode;
 
+    @SerializedName("tokenObject")
+    TokenResponse tokenResponse;
+
     private User() {
 
     }
@@ -59,14 +60,6 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getEmail() {
@@ -167,5 +160,14 @@ public class User implements Serializable {
 
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+
+    public TokenResponse getTokenResponse() {
+        return tokenResponse;
+    }
+
+    public void setTokenResponse(TokenResponse tokenResponse) {
+        this.tokenResponse = tokenResponse;
     }
 }

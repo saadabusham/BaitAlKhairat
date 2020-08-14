@@ -91,6 +91,10 @@ public class TimeUtils {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
     }
 
+    public static long secToMillisecond(long second) {
+        return TimeUnit.SECONDS.toMillis(second);
+    }
+
     public static String toTwoDigit(int number) {
         return String.format("%02d", number);
     }

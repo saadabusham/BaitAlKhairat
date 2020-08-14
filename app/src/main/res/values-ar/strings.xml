@@ -235,5 +235,7 @@
     <string name="organizations">المنظمات</string>
     <string name="about_p10">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
     <string name="our_human_values">قيمنا الإنسانية</string>
-
+    <string name="ok">حسنا</string>
+    <string name="go_to_login">انتقل إلى تسجيل الدخول؟</string>
+    <string name="login_is_required">تسجيل الدخول مطلوب</string>
 </resources>

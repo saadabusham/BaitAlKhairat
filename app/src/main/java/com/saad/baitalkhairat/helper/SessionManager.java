@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.Navigation;
+
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.App;
+import com.saad.baitalkhairat.R;
+import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 
 public class SessionManager {
     private static final String PREF_NAME = "com.selwantech.spring_nights";
@@ -25,7 +31,7 @@ public class SessionManager {
     // Shared mSharedPref mode
     int PRIVATE_MODE = 0;
 
-
+    public static MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<Boolean>();
     // Constructor
 
     private SessionManager() {
@@ -44,7 +50,7 @@ public class SessionManager {
         editor.commit();
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
-
+        isLoggedIn.postValue(true);
         // commit changes
         editor.commit();
     }
@@ -81,10 +87,33 @@ public class SessionManager {
         String oldToken = getKeyFirebaseToken();
         editor.clear();
         editor.commit();
+        isLoggedIn.postValue(false);
         saveFireBaseToken(oldToken);
 
     }
 
+
+    public static boolean isLoggedInAndLogin(Activity activity) {
+        if (isLoggedIn()) {
+            return true;
+        } else {
+            new OnLineDialog(activity) {
+                @Override
+                public void onPositiveButtonClicked() {
+                    dismiss();
+                    Navigation.findNavController(activity, R.id.nav_host_fragment)
+                            .navigate(R.id.signInHolderFragment);
+                }
+
+                @Override
+                public void onNegativeButtonClicked() {
+                    dismiss();
+                }
+            }.showConfirmationDialog(DialogTypes.OK_CANCEL, activity.getResources().getString(R.string.login_is_required),
+                    activity.getResources().getString(R.string.go_to_login));
+            return false;
+        }
+    }
 
     public static boolean isLoggedIn() {
         return mSharedPref.getBoolean(IS_LOGIN, false);

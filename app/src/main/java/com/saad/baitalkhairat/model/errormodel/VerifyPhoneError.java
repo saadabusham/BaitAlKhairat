@@ -13,6 +13,9 @@ public class VerifyPhoneError implements Serializable {
     @SerializedName("phone")
     private List<String> phone;
 
+    @SerializedName("verificationCode")
+    private List<String> verificationCode;
+
     public List<String> getCountry_code() {
         return country_code;
     }
@@ -27,6 +30,14 @@ public class VerifyPhoneError implements Serializable {
 
     public void setPhone(List<String> phone) {
         this.phone = phone;
+    }
+
+    public List<String> getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(List<String> verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override
