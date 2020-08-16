@@ -2,6 +2,7 @@ package com.saad.baitalkhairat.repository.network.services;
 
 import android.content.Context;
 
+import com.saad.baitalkhairat.model.wallet.CheckCharge;
 import com.saad.baitalkhairat.model.wallet.Wallet;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
@@ -13,6 +14,7 @@ import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 
 public class WalletService {
@@ -40,6 +42,13 @@ public class WalletService {
                 .subscribe(new CustomObserverResponse<Wallet>(mContext, true, apiCallBack));
     }
 
+    public void checkCharge(Context mContext, int type, double amount, APICallBack<CheckCharge> apiCallBack) {
+        getDataApi().checkCharge(amount, type)
+                .toObservable()
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<CheckCharge>(mContext, true, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -48,6 +57,10 @@ public class WalletService {
 
         @GET(ApiConstants.apiWalletService.WALLET)
         Single<Response<GeneralResponse<Wallet>>> getWallet();
+
+        @GET(ApiConstants.apiWalletService.WALLET)
+        Single<Response<GeneralResponse<CheckCharge>>> checkCharge(@Query("amount") double amount,
+                                                                   @Query("charge_type") int charge_type);
 
     }
 }

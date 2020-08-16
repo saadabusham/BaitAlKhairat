@@ -9,8 +9,24 @@
             type="com.saad.baitalkhairat.ui.menu.about_us.AboutUsViewModel" />
 
         <variable
-            name="data"
-            type="com.saad.baitalkhairat.model.app.AboutUs" />
+            name="aboutUs"
+            type="com.saad.baitalkhairat.model.app.aboutus.AboutUs" />
+
+        <variable
+            name="aboutUsSections"
+            type="com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse" />
+
+        <variable
+            name="baitAlkhairatResources"
+            type="com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources" />
+
+        <variable
+            name="fundingResources"
+            type="com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse" />
+
+        <variable
+            name="ourHumanity"
+            type="com.saad.baitalkhairat.model.app.aboutus.OurHumanityResponse" />
     </data>
 
     <RelativeLayout
@@ -25,7 +41,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/ToolbarColoredBackArrowDark" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
@@ -61,22 +77,21 @@
                     android:gravity="center|start"
                     android:textColor="@color/black"
                     style="@style/roman_style"
-                    android:text="@{data.description}"
+                    android:text="@{aboutUs.description}"
                     android:textSize="13sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        imageUrl="@{aboutUsSections.data.get(0).image.path}"
                         android:layout_marginTop="@dimen/_30sdp"
-                        android:scaleType="fitXY"
-                        android:visibility="gone" />
+                        android:layout_height="@dimen/_150sdp" />
 
                     <TextView
                         style="@style/bold_style"
@@ -84,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
-                        android:text="@string/our_vision"
+                        android:text="@{aboutUsSections.data.get(0).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -94,16 +109,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p2"
+                        android:text="@{aboutUsSections.data.get(0).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        imageUrl="@{aboutUsSections.data.get(1).image.path}"
                         android:layout_marginTop="@dimen/_30sdp"
                         android:scaleType="fitXY"
-                        android:visibility="gone" />
+                        android:layout_height="@dimen/_150sdp" />
 
                     <TextView
                         style="@style/bold_style"
@@ -111,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
-                        android:text="@string/our_message"
+                        android:text="@{aboutUsSections.data.get(1).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -121,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p3"
+                        android:text="@{aboutUsSections.data.get(1).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -141,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p4"
+                        android:text="@{baitAlkhairatResources.description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -161,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/bait_alkhairat_managers"
+                        android:text="@{fundingResources.data.get(0).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -171,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p5"
+                        android:text="@{fundingResources.data.get(0).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -181,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/international_donor_financing"
+                        android:text="@{fundingResources.data.get(1).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -191,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p6"
+                        android:text="@{fundingResources.data.get(1).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -201,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/private_companies"
+                        android:text="@{fundingResources.data.get(2).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -211,7 +226,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p7"
+                        android:text="@{fundingResources.data.get(2).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -221,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/governmental_and_non_governmental_donor_institutions"
+                        android:text="@{fundingResources.data.get(3).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -231,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p8"
+                        android:text="@{fundingResources.data.get(3).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -241,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/individuals"
+                        android:text="@{fundingResources.data.get(4).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -251,7 +266,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p9"
+                        android:text="@{fundingResources.data.get(4).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -261,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_17sdp"
                         android:gravity="center|start"
-                        android:text="@string/organizations"
+                        android:text="@{fundingResources.data.get(4).title}"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -271,7 +286,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
-                        android:text="@string/about_p10"
+                        android:text="@{fundingResources.data.get(4).description}"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -298,7 +313,7 @@
             </LinearLayout>
 
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 
 </layout>

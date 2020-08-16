@@ -1,6 +1,7 @@
 package com.saad.baitalkhairat.model.slider;
 
 import com.google.gson.annotations.SerializedName;
+import com.saad.baitalkhairat.model.Image;
 
 import java.io.Serializable;
 

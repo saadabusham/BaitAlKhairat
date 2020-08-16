@@ -45,6 +45,8 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
     ArrayList<Case> caseArrayList;
 
     Filter filter;
+    CasesResponse casesResponse;
+
     public <V extends ViewDataBinding, N extends BaseNavigator> CasesViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (CasesNavigator) navigation, (FragmentCasesBinding) viewDataBinding);
     }
@@ -54,12 +56,12 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
         filter = new Filter();
         filter.setType(getNavigator().getCategoryId());
         setUpRecycler();
-        getData();
+        getData(1);
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setRetring();
-                getData();
+                getData(1);
             }
         });
     }
@@ -96,7 +98,7 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                getData(1);
             }
         });
 
@@ -109,18 +111,19 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
     }
 
 
-    public void getData() {
-        if (!isLoadMore && !isRefreshing() && !isRetry()) {
+    public void getData(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
             enableLoading = true;
         }
         getDataManager().getDonorsService().getCases(getMyContext(), enableLoading,
-                filter, new APICallBack<CasesResponse>() {
+                filter, page, new APICallBack<CasesResponse>() {
                     @Override
                     public void onSuccess(CasesResponse response) {
                         if (isRefreshing())
                             getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
                         checkIsLoadMoreAndRefreshing(true);
                         if (response.getData() != null && response.getData().size() > 0) {
+                            casesResponse = response;
                             caseArrayList.addAll(response.getData());
                             notifiAdapter();
                         } else {
@@ -191,9 +194,21 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
             finishRefreshing(isSuccess);
         } else if (isRetry()) {
             finishRetry(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
         } else {
             enableLoading = false;
         }
+    }
+
+    public void finishLoadMore() {
+        caseArrayList.remove(caseArrayList.size() - 1);
+        caseListAdapter.notifyItemRemoved(caseArrayList.size() - 1);
+        caseGridAdapter.notifyItemRemoved(caseArrayList.size() - 1);
+        getViewBinding().swipeRefreshLayout.setRefreshing(false);
+        caseGridAdapter.setLoaded();
+        caseListAdapter.setLoaded();
+        setLoadMore(false);
     }
 
     protected void setRetring() {
@@ -224,12 +239,15 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
 
     @Override
     public void onLoadMore() {
-//        caseArrayList.add(null);
-//        caseGridAdapter.notifyItemInserted(caseArrayList.size() - 1);
-//        caseListAdapter.notifyItemInserted(caseArrayList.size() - 1);
-//        getViewBinding().recyclerView.scrollToPosition(caseArrayList.size() - 1);
-//        setLoadMore(true);
-//        getData();
+        if (casesResponse != null &&
+                casesResponse.getMeta().getCurrentPage() < casesResponse.getMeta().getLastPage()) {
+            caseArrayList.add(null);
+            caseGridAdapter.notifyItemInserted(caseArrayList.size() - 1);
+            caseListAdapter.notifyItemInserted(caseArrayList.size() - 1);
+            getViewBinding().recyclerView.scrollToPosition(caseArrayList.size() - 1);
+            setLoadMore(true);
+            getData(casesResponse.getMeta().getCurrentPage() + 1);
+        }
     }
 
     @Override
@@ -262,6 +280,6 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
         this.filter.setFilter(filter);
         getViewBinding().swipeRefreshLayout.setRefreshing(true);
         setIsRefreshing(true);
-        getData();
+        getData(1);
     }
 }

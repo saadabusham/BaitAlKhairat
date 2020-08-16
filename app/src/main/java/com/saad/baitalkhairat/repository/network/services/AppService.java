@@ -2,9 +2,12 @@ package com.saad.baitalkhairat.repository.network.services;
 
 import android.content.Context;
 
-import com.saad.baitalkhairat.model.app.AboutUs;
 import com.saad.baitalkhairat.model.app.AppBank;
 import com.saad.baitalkhairat.model.app.ContactUs;
+import com.saad.baitalkhairat.model.app.aboutus.AboutUs;
+import com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse;
+import com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources;
+import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.quastion.QuestionResponse;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
@@ -20,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 
 public class AppService {
@@ -81,8 +85,8 @@ public class AppService {
                 .subscribe(new CustomObserverResponseNoStandard<SliderResponse>(mContext, withProgress, apiCallBack));
     }
 
-    public void getQuestions(Context mContext, boolean withProgress, APICallBack<QuestionResponse> apiCallBack) {
-        getDataApi().questions()
+    public void getQuestions(Context mContext, boolean withProgress, int page, APICallBack<QuestionResponse> apiCallBack) {
+        getDataApi().questions(page)
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -95,6 +99,30 @@ public class AppService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CustomObserverResponse<AboutUs>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getAboutUsSections(Context mContext, boolean withProgress, APICallBack<AboutUsSectionsResponse> apiCallBack) {
+        getDataApi().about_us_sections()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<AboutUsSectionsResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getFundingResource(Context mContext, boolean withProgress, APICallBack<FundingResourceResponse> apiCallBack) {
+        getDataApi().funding_resource()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<FundingResourceResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getBaitResource(Context mContext, boolean withProgress, APICallBack<BaitAlKhairatResources> apiCallBack) {
+        getDataApi().bait_resource()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<BaitAlKhairatResources>(mContext, withProgress, apiCallBack));
     }
 
     public void getContactUs(Context mContext, boolean withProgress, APICallBack<ContactUs> apiCallBack) {
@@ -139,10 +167,19 @@ public class AppService {
         Single<Response<SliderResponse>> sliders();
 
         @GET(ApiConstants.apiAppService.QUESTION)
-        Single<Response<QuestionResponse>> questions();
+        Single<Response<QuestionResponse>> questions(@Query("page") int page);
 
         @GET(ApiConstants.apiAppService.ABOUT_US)
         Single<Response<GeneralResponse<AboutUs>>> about_us();
+
+        @GET(ApiConstants.apiAppService.ABOUT_US_SECTIONS)
+        Single<Response<AboutUsSectionsResponse>> about_us_sections();
+
+        @GET(ApiConstants.apiAppService.FUNDING_RESOURCE)
+        Single<Response<FundingResourceResponse>> funding_resource();
+
+        @GET(ApiConstants.apiAppService.BAIT_RESOURCE)
+        Single<Response<GeneralResponse<BaitAlKhairatResources>>> bait_resource();
 
         @GET(ApiConstants.apiAppService.CONTACT_US)
         Single<Response<GeneralResponse<ContactUs>>> contact_us();

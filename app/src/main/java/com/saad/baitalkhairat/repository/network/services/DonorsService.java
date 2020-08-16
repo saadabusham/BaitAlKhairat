@@ -70,8 +70,8 @@ public class DonorsService {
                 .subscribe(new CustomObserverResponseNoStandard<CategoryResponse>(mContext, withProgress, apiCallBack));
     }
 
-    public void getCases(Context mContext, boolean withProgress, Filter filter, APICallBack<CasesResponse> apiCallBack) {
-        getDataApi().cases(filter.getType(), filter.getGender(), filter.getCountry())
+    public void getCases(Context mContext, boolean withProgress, Filter filter, int page, APICallBack<CasesResponse> apiCallBack) {
+        getDataApi().cases(filter.getType(), filter.getGender(), filter.getCountry(), page)
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -99,7 +99,8 @@ public class DonorsService {
         @GET(ApiConstants.apiDonorsService.CATEGORY_CASES)
         Single<Response<CasesResponse>> cases(@Query("type") int type,
                                               @Query("gender") String gender,
-                                              @Query("country") String country);
+                                              @Query("country") String country,
+                                              @Query("page") int page);
 
     }
 }

@@ -117,9 +117,12 @@ public class AuthService {
 
                     @Override
                     public void onNext(Response<TokenResponse> tokenResponseResponse) {
-                        tokenResponseResponse.body().setToken_generated_date(Calendar.getInstance().getTimeInMillis());
-                        User.getInstance().setTokenResponse(tokenResponseResponse.body());
-                        SessionManager.createUserLoginSession();
+                        if (tokenResponseResponse.code() == 200 &&
+                                tokenResponseResponse.body() != null) {
+                            tokenResponseResponse.body().setToken_generated_date(Calendar.getInstance().getTimeInMillis());
+                            User.getInstance().setTokenResponse(tokenResponseResponse.body());
+                            SessionManager.createUserLoginSession();
+                        }
                     }
 
                     @Override

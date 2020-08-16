@@ -13,7 +13,9 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentChargeBinding;
 import com.saad.baitalkhairat.enums.ChargeToTypes;
 import com.saad.baitalkhairat.model.Amount;
+import com.saad.baitalkhairat.model.wallet.CheckCharge;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
@@ -78,13 +80,30 @@ public class ChargeViewModel extends BaseViewModel<ChargeNavigator, FragmentChar
     }
 
     public void onChargeClick() {
-        Bundle data = new Bundle();
-        data.putInt(AppConstants.BundleData.CHARGE_TO_TYPES, getNavigator().getChargeTo());
-        Amount amount = new Amount(getViewBinding().edAmount.getText().toString(),
-                arrayList.get(getViewBinding().spinnerCountryCurrency.getSelectedItemPosition()));
-        data.putSerializable(AppConstants.BundleData.AMOUNT, amount);
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_chargeFragment_to_paymentHolderFragment, data);
+        checkCharge();
+    }
+
+    private void checkCharge() {
+        getDataManager().getWalletService().checkCharge(getMyContext(),
+                getNavigator().getChargeTo() == ChargeToTypes.MY_WALLET.getType() ? 1 : 2
+                , Double.valueOf(getViewBinding().edAmount.getText().toString()),
+                new APICallBack<CheckCharge>() {
+                    @Override
+                    public void onSuccess(CheckCharge response) {
+                        Bundle data = new Bundle();
+                        data.putInt(AppConstants.BundleData.CHARGE_TO_TYPES, getNavigator().getChargeTo());
+                        Amount amount = new Amount(getViewBinding().edAmount.getText().toString(),
+                                arrayList.get(getViewBinding().spinnerCountryCurrency.getSelectedItemPosition()));
+                        data.putSerializable(AppConstants.BundleData.AMOUNT, amount);
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.action_chargeFragment_to_paymentHolderFragment, data);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showErrorSnackBar(error);
+                    }
+                });
     }
 
     public boolean isValid() {

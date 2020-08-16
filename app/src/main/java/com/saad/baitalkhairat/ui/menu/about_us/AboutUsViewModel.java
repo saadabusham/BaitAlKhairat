@@ -5,7 +5,10 @@ import android.content.Context;
 import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.databinding.FragmentAboutUsBinding;
-import com.saad.baitalkhairat.model.app.AboutUs;
+import com.saad.baitalkhairat.model.app.aboutus.AboutUs;
+import com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse;
+import com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources;
+import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
@@ -21,14 +24,59 @@ public class AboutUsViewModel extends BaseViewModel<AboutUsNavigator, FragmentAb
     @Override
     protected void setUp() {
 
-        getData();
+        getAboutUs();
+        getAboutUsSections();
+        getFundingResource();
+        getBaitAlkhairatResource();
     }
 
-    private void getData() {
+    private void getAboutUs() {
         getDataManager().getAppService().getAboutUs(getMyContext(), true, new APICallBack<AboutUs>() {
             @Override
             public void onSuccess(AboutUs response) {
-                getViewBinding().setData(response);
+                getViewBinding().setAboutUs(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
+
+    private void getAboutUsSections() {
+        getDataManager().getAppService().getAboutUsSections(getMyContext(), true, new APICallBack<AboutUsSectionsResponse>() {
+            @Override
+            public void onSuccess(AboutUsSectionsResponse response) {
+                getViewBinding().setAboutUsSections(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
+
+    private void getFundingResource() {
+        getDataManager().getAppService().getFundingResource(getMyContext(), true, new APICallBack<FundingResourceResponse>() {
+            @Override
+            public void onSuccess(FundingResourceResponse response) {
+                getViewBinding().setFundingResources(response);
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
+    }
+
+    private void getBaitAlkhairatResource() {
+        getDataManager().getAppService().getBaitResource(getMyContext(), true, new APICallBack<BaitAlKhairatResources>() {
+            @Override
+            public void onSuccess(BaitAlKhairatResources response) {
+                getViewBinding().setBaitAlkhairatResources(response);
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.model.app;
+package com.saad.baitalkhairat.model.app.aboutus;
 
 import com.google.gson.annotations.SerializedName;
 

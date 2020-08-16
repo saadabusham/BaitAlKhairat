@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.model.slider;
+package com.saad.baitalkhairat.model;
 
 import com.google.gson.annotations.SerializedName;
 

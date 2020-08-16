@@ -37,6 +37,7 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
     boolean enableLoading = false;
     boolean isLoadMore = false;
 
+    QuestionResponse questionResponse;
     public <V extends ViewDataBinding, N extends BaseNavigator> QuestionsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (QuestionsNavigator) navigation, (FragmentCommonQuastionsBinding) viewDataBinding);
     }
@@ -47,12 +48,12 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
         ((MainActivity) getBaseActivity()).getViewDataBinding().appBarMain.drawerMainContent.bottomSheet.getMenu().getItem(2)
                 .setIcon(getMyContext().getResources().getDrawable(R.drawable.ic_notification_nav));
         setUpRecycler();
-        getData();
+        getData(1);
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setRetring();
-                getData();
+                getData(1);
             }
         });
     }
@@ -62,7 +63,7 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                getData(1);
             }
         });
 
@@ -73,24 +74,28 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
         questionsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-//                questionsAdapter.addItem(null);
-//                questionsAdapter.notifyItemInserted(questionsAdapter.getItemCount() - 1);
-//                getViewBinding().recyclerView.scrollToPosition(questionsAdapter.getItemCount() - 1);
-//                setLoadMore(true);
-//                getData();
+                if (questionResponse != null &&
+                        questionResponse.getMeta().getCurrentPage() < questionResponse.getMeta().getLastPage()) {
+                    questionsAdapter.addItem(null);
+                    questionsAdapter.notifyItemInserted(questionsAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(questionsAdapter.getItemCount() - 1);
+                    setLoadMore(true);
+                    getData(questionResponse.getMeta().getCurrentPage() + 1);
+                }
             }
         });
     }
 
-    public void getData() {
-        if (!isRefreshing() && !isRetry()) {
+    public void getData(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
             enableLoading = true;
         }
-        getDataManager().getAppService().getQuestions(getMyContext(), true, new APICallBack<QuestionResponse>() {
+        getDataManager().getAppService().getQuestions(getMyContext(), true, page, new APICallBack<QuestionResponse>() {
             @Override
             public void onSuccess(QuestionResponse response) {
                 checkIsLoadMoreAndRefreshing(true);
                 if (response.getData() != null && response.getData().size() > 0) {
+                    questionResponse = response;
                     questionsAdapter.addItems(response.getData());
                     notifiAdapter();
                 } else {
@@ -169,9 +174,18 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
             finishRefreshing(isSuccess);
         } else if (isRetry()) {
             finishRetry(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
         } else {
             enableLoading = false;
         }
+    }
+
+    public void finishLoadMore() {
+        questionsAdapter.remove(questionsAdapter.getItemCount() - 1);
+        questionsAdapter.notifyItemRemoved(questionsAdapter.getItemCount());
+        questionsAdapter.setLoaded();
+        setLoadMore(false);
     }
 
     protected void setRetring() {

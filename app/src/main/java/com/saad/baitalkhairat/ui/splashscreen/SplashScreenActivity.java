@@ -72,6 +72,7 @@ public class SplashScreenActivity extends BaseActivity<ActivitySplashScreenBindi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewBinding = getViewDataBinding();
+        mSplashViewModel.setUp();
         printHash();
     }
 

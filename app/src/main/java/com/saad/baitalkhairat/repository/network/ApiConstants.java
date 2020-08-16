@@ -67,6 +67,9 @@ public class ApiConstants {
         public static final String QUESTION = "faqs";
         public static final String TERMS_AND_CONDITION = "app/terms-and-condations";
         public static final String ABOUT_US = "system-information/about-us";
+        public static final String ABOUT_US_SECTIONS = "about-us-sections";
+        public static final String FUNDING_RESOURCE = "funding-sources";
+        public static final String BAIT_RESOURCE = "system-information/funding-source";
         public static final String CONTACT_US = "system-information/contact-us";
         public static final String APP_BANK_INFO = "system-information/bank";
 

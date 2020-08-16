@@ -17,7 +17,7 @@ public class AdapterBinding {
     public static void setImageUrl(ImageView imageView, String url) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.drawable.ic_loading);
-        requestOptions.error(R.color.red);
+        requestOptions.error(R.color.gray);
         Glide.with(imageView.getContext()).applyDefaultRequestOptions(requestOptions).load(url).into(imageView);
     }
 

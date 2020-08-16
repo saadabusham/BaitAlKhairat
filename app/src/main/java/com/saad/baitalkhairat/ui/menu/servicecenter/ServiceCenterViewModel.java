@@ -61,11 +61,11 @@ public class ServiceCenterViewModel extends BaseViewModel<ServiceCenterNavigator
     }
 
     public void onPhoneClicked() {
-        DeviceUtils.copyToClipboard(getMyContext(), getViewBinding().tvPhone.getText().toString());
+        DeviceUtils.openDialer(getMyContext(), getViewBinding().tvPhone.getText().toString());
     }
 
     public void onEmailClick() {
-        DeviceUtils.copyToClipboard(getMyContext(), getViewBinding().tvEmail.getText().toString());
+        DeviceUtils.intentEmail(getMyContext(), getViewBinding().tvEmail.getText().toString());
 
     }
 }
