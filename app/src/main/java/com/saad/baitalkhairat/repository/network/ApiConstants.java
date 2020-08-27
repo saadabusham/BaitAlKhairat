@@ -72,12 +72,19 @@ public class ApiConstants {
         public static final String BAIT_RESOURCE = "system-information/funding-source";
         public static final String CONTACT_US = "system-information/contact-us";
         public static final String APP_BANK_INFO = "system-information/bank";
-
+        public static final String CASE_TYPE = "lists/need-request/type";
+        public static final String DEGREE = "lists/need-request/degree";
     }
 
     public class apiDonorsService {
         public static final String NEEDS_CATEGORIES = "lists/need-request/type";
         public static final String CATEGORY_CASES = "need-requests";
+
+    }
+
+    public class apiNeedsService {
+        public static final String ADD_NEED = "member/need-requests";
+        public static final String ADD_NEED_DOCS = "member/need-requests/attachments";
 
     }
 

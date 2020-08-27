@@ -24,6 +24,10 @@ public class AmountAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     int selectedItemPosition;
 
+    public Amount getSelectedItem() {
+        return amountList.get(selectedItemPosition);
+    }
+
     public AmountAdapter(Context mContext, RecyclerClick mRecyclerClick) {
         this.amountList = new ArrayList<>();
         this.mContext = mContext;

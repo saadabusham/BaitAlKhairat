@@ -69,6 +69,10 @@ public class DocumentAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         documentsList.remove(position);
     }
 
+    public IdentificationDocument getItem(int position) {
+        return documentsList.get(position);
+    }
+
     public class CellViewHolder extends BaseViewHolder {
 
         private final CellDocumentBinding mBinding;

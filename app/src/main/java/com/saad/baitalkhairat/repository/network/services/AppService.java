@@ -141,6 +141,23 @@ public class AppService {
                 .subscribe(new CustomObserverResponse<AppBank>(mContext, withProgress, apiCallBack));
     }
 
+    public void getCaseType(Context mContext, boolean withProgress, APICallBack<CountryCodeResponse> apiCallBack) {
+        getDataApi().caseType()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<CountryCodeResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getDegree(Context mContext, boolean withProgress, APICallBack<CountryCodeResponse> apiCallBack) {
+        getDataApi().degree()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<CountryCodeResponse>(mContext, withProgress, apiCallBack));
+    }
+
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -150,6 +167,12 @@ public class AppService {
     }
 
     public interface DataApi {
+
+        @GET(ApiConstants.apiAppService.DEGREE)
+        Single<Response<CountryCodeResponse>> degree();
+
+        @GET(ApiConstants.apiAppService.CASE_TYPE)
+        Single<Response<CountryCodeResponse>> caseType();
 
         @GET(ApiConstants.apiAppService.COUNTRY_NAME)
         Single<Response<CountryCodeResponse>> countryName();

@@ -37,12 +37,44 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/choose_your_country"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/choose_your_financial_need"
                     android:textColor="@color/login_gray"
                     android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/spinnerCaseType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/choose_your_need_degree"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerDegree"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_10sdp" />
@@ -67,7 +99,7 @@
                     layout="@layout/recycler_view" />
 
                 <EditText
-                    android:id="@+id/edUserName"
+                    android:id="@+id/edAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -81,6 +113,31 @@
                     android:textColorHint="@color/edittextUnderline"
                     android:textSize="16sp" />
 
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/case_title"
+                    android:textColor="@color/login_gray"
+                    android:textSize="16sp" />
+
+
+                <EditText
+                    android:id="@+id/edCaseTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shape_rounded_empty_gray_light"
+                    android:gravity="start|top"
+                    android:hint="@string/type_here"
+                    android:minHeight="@dimen/_40sdp"
+                    android:padding="10dp"
+                    android:textColor="@color/edittextUnderline"
+                    android:textColorHint="@color/edittextUnderline"
+                    android:textSize="13sp" />
 
                 <TextView
                     style="@style/bold_style"

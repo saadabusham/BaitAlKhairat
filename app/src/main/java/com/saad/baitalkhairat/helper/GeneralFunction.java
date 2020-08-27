@@ -30,6 +30,7 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -234,5 +235,9 @@ public class GeneralFunction {
         animation.setDuration(200);
         animation.setFillAfter(true);
         imageView.startAnimation(animation);
+    }
+
+    public static String generateUUID() {
+        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
     }
 }

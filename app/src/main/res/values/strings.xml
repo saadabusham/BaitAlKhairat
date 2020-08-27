@@ -448,5 +448,8 @@
 
     <string name="go_to_login">Go To Login ?</string>
     <string name="login_is_required">Login is required</string>
+    <string name="choose_your_country">Choose your country</string>
+    <string name="choose_your_need_degree">Choose your need degree</string>
+    <string name="case_title">Case title</string>
 
 </resources>
