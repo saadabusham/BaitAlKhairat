@@ -96,10 +96,6 @@ public class CustomObserverResponseNew<T, E> extends CustomDialogUtils implement
         switch (code) {
             case 401:
             case 403:
-                if (errorBody != null &&
-                        errorBody.getMessage() != null) {
-                    this.apiCallBack.onError(jsonError, code);
-                } else
                     this.apiCallBack.onNetworkError(App.getInstance().getApplicationContext()
                             .getResources().getString(R.string.unauthorized), code);
                 break;

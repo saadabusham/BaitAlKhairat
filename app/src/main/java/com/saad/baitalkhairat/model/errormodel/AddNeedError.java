@@ -48,4 +48,16 @@ public class AddNeedError implements Serializable {
     public List<String> getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "AddNeedError{" +
+                "country=" + country +
+                ", bindingKey=" + bindingKey +
+                ", amount=" + amount +
+                ", description=" + description +
+                ", title=" + title +
+                ", type=" + type +
+                '}';
+    }
 }

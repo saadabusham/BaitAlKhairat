@@ -20,7 +20,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -69,7 +68,7 @@ public class NeedsService {
 
     public interface DataApi {
 
-        @GET(ApiConstants.apiNeedsService.ADD_NEED)
+        @POST(ApiConstants.apiNeedsService.ADD_NEED)
         Single<Response<GeneralResponseNew<String, AddNeedError>>> addNeed(@Body AddNeed addNeed);
 
         @Multipart

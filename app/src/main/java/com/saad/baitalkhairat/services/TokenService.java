@@ -39,9 +39,9 @@ public class TokenService extends Service {
         SessionManager.init(getApplicationContext());
         SessionManager.getUserDetails();
         if (User.getInstance().getTokenResponse() != null &&
-                User.getInstance().getTokenResponse().getToken_generated_date() +
-                        TimeUtils.secToMillisecond(User.getInstance().getTokenResponse().getExpiresIn())
-                        >= Calendar.getInstance().getTimeInMillis()) {
+                (Calendar.getInstance().getTimeInMillis() >=
+                        (User.getInstance().getTokenResponse().getToken_generated_date() +
+                                TimeUtils.secToMillisecond(User.getInstance().getTokenResponse().getExpiresIn())))) {
             isTokenExpired.postValue(true);
             refreshToken();
         } else {
