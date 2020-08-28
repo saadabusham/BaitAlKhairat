@@ -5,11 +5,13 @@ import android.content.Context;
 import com.saad.baitalkhairat.model.errormodel.AddNeedError;
 import com.saad.baitalkhairat.model.needs.AddNeed;
 import com.saad.baitalkhairat.model.needs.AddNeedDocResponse;
+import com.saad.baitalkhairat.model.needs.NeedResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandard;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
@@ -20,6 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -61,6 +64,22 @@ public class NeedsService {
                 .subscribe(new CustomObserverResponse<AddNeedDocResponse>(mContext, withProgress, apiCallBack));
     }
 
+    public void getCurrentNeeds(Context mContext, boolean withProgress, int page, APICallBack<NeedResponse> apiCallBack) {
+        getDataApi().currentNeeds(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<NeedResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getHistoryNeeds(Context mContext, boolean withProgress, int page, APICallBack<NeedResponse> apiCallBack) {
+        getDataApi().historyNeeds(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<NeedResponse>(mContext, withProgress, apiCallBack));
+    }
+
 
     public DataApi getDataApi() {
         return mDataApi;
@@ -75,6 +94,12 @@ public class NeedsService {
         @POST(ApiConstants.apiNeedsService.ADD_NEED_DOCS)
         Single<Response<GeneralResponse<AddNeedDocResponse>>> addNeedDocs(@Part MultipartBody.Part image,
                                                                           @Query("binding_key") String bindingKey);
+
+        @GET(ApiConstants.apiNeedsService.CURRENT_NEEDS)
+        Single<Response<NeedResponse>> currentNeeds(@Query("page") int page);
+
+        @GET(ApiConstants.apiNeedsService.HISTORY_NEEDS)
+        Single<Response<NeedResponse>> historyNeeds(@Query("page") int page);
     }
 }
 

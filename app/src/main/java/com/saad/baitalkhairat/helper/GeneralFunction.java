@@ -238,6 +238,7 @@ public class GeneralFunction {
     }
 
     public static String generateUUID() {
-        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+//        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+        return UUID.randomUUID().toString();
     }
 }

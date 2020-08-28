@@ -155,8 +155,6 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
                                 if (loginError.getPassword() != null && loginError.getPassword().size() > 0) {
                                     getViewBinding().edPassword.setError(loginError.getPassword().toString());
                                 }
-
-                                showToast(error);
                             }
                         }
                     }));

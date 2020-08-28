@@ -203,6 +203,16 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
                 @Override
                 public void onError(String error, int errorCode) {
                     AddNeedError registerError = new Gson().fromJson(error, AddNeedError.class);
+                    if (registerError.getTitle() != null) {
+                        getViewBinding().edCaseTitle.setError(registerError.getTitle().toString());
+                    }
+                    if (registerError.getDescription() != null) {
+                        getViewBinding().edCaseDetails.setError(registerError.getDescription().toString());
+                    }
+                    if (registerError.getAmount() != null) {
+                        getViewBinding().edAmount.setError(registerError.getDescription().toString());
+                    }
+
                     showToast(registerError.toString());
                 }
 

@@ -1,9 +1,9 @@
-package com.saad.baitalkhairat.ui.donatejourney.myneedslist;
+package com.saad.baitalkhairat.ui.donatejourney.donationappliedsuccessful;
 
 import android.content.Context;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentMyDonationListBinding;
+import com.saad.baitalkhairat.databinding.FragmentDonorAppliedSuccessfulBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
@@ -12,15 +12,14 @@ import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 import javax.inject.Inject;
 
 
-public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListBinding, MyDonationListViewModel> implements MyDonationListNavigator {
+public class DonorAppliedSuccessfulFragment extends BaseFragment<FragmentDonorAppliedSuccessfulBinding, DonorAppliedSuccessfulViewModel> implements DonorAppliedSuccessfulNavigator {
 
-    private static final String TAG = MyDonationListFragment.class.getSimpleName();
+    private static final String TAG = DonorAppliedSuccessfulFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private MyDonationListViewModel mViewModel;
-    private FragmentMyDonationListBinding mViewBinding;
-
+    private DonorAppliedSuccessfulViewModel mViewModel;
+    private FragmentDonorAppliedSuccessfulBinding mViewBinding;
 
     @Override
     public boolean hasOptionMenu() {
@@ -36,7 +35,6 @@ public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListB
     public boolean hideToolbar() {
         return true;
     }
-
 
     @Override
     public boolean hideBottomSheet() {
@@ -55,13 +53,13 @@ public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListB
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_my_donation_list;
+        return R.layout.fragment_donor_applied_successful;
     }
 
     @Override
-    public MyDonationListViewModel getViewModel() {
-        mViewModel = (MyDonationListViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(MyDonationListViewModel.class, getViewDataBinding(), this);
+    public DonorAppliedSuccessfulViewModel getViewModel() {
+        mViewModel = (DonorAppliedSuccessfulViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(DonorAppliedSuccessfulViewModel.class, getViewDataBinding(), this);
         return mViewModel;
     }
 
@@ -70,12 +68,10 @@ public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListB
         return getContext();
     }
 
-
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
         mViewModel.setUp();
     }
-
 
 }

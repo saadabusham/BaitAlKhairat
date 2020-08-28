@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListViewModel" />
+            type="com.saad.baitalkhairat.ui.donatejourney.mydonationslist.MyDonationListViewModel" />
     </data>
 
     <LinearLayout

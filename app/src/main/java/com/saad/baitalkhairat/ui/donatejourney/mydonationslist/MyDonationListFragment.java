@@ -1,26 +1,25 @@
-package com.saad.baitalkhairat.ui.needjourney.myneedslist;
+package com.saad.baitalkhairat.ui.donatejourney.mydonationslist;
 
 import android.content.Context;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentMyNeedsListBinding;
+import com.saad.baitalkhairat.databinding.FragmentMyDonationListBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
-import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
 
-public class MyNeedsListFragment extends BaseFragment<FragmentMyNeedsListBinding, MyNeedsListViewModel> implements MyNeedsListNavigator {
+public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListBinding, MyDonationListViewModel> implements MyDonationListNavigator {
 
-    private static final String TAG = MyNeedsListFragment.class.getSimpleName();
+    private static final String TAG = MyDonationListFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private MyNeedsListViewModel mViewModel;
-    private FragmentMyNeedsListBinding mViewBinding;
+    private MyDonationListViewModel mViewModel;
+    private FragmentMyDonationListBinding mViewBinding;
 
 
     @Override
@@ -56,13 +55,13 @@ public class MyNeedsListFragment extends BaseFragment<FragmentMyNeedsListBinding
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_my_needs_list;
+        return R.layout.fragment_my_donation_list;
     }
 
     @Override
-    public MyNeedsListViewModel getViewModel() {
-        mViewModel = (MyNeedsListViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(MyNeedsListViewModel.class, getViewDataBinding(), this);
+    public MyDonationListViewModel getViewModel() {
+        mViewModel = (MyDonationListViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(MyDonationListViewModel.class, getViewDataBinding(), this);
         return mViewModel;
     }
 
@@ -79,8 +78,4 @@ public class MyNeedsListFragment extends BaseFragment<FragmentMyNeedsListBinding
     }
 
 
-    @Override
-    public int getNeedType() {
-        return getArguments().getInt(AppConstants.BundleData.MY_NEEDS_TAB_TYPE, 0);
-    }
 }

@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.donatejourney.myneedslist;
+package com.saad.baitalkhairat.ui.donatejourney.mydonationslist;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import com.saad.baitalkhairat.databinding.FragmentMyDonationListBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.MyDonors;
-import com.saad.baitalkhairat.model.Notification;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.adapter.MyDonorsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
@@ -24,7 +23,7 @@ import com.saad.baitalkhairat.utils.AppConstants;
 
 
 public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigator, FragmentMyDonationListBinding>
-        implements RecyclerClick<Notification> {
+        implements RecyclerClick<MyDonors> {
 
     MyDonorsAdapter myDonorsAdapter;
     boolean isRefreshing = false;
@@ -52,7 +51,7 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
 
         getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        myDonorsAdapter = new MyDonorsAdapter(getMyContext(), getViewBinding().recyclerView);
+        myDonorsAdapter = new MyDonorsAdapter(getMyContext(), this, getViewBinding().recyclerView);
         getViewBinding().recyclerView.setAdapter(myDonorsAdapter);
         myDonorsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -140,11 +139,11 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
     }
 
     @Override
-    public void onClick(Notification notification, int position) {
+    public void onClick(MyDonors myDonors, int position) {
         Bundle data = new Bundle();
-        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
+        data.putSerializable(AppConstants.BundleData.DONORS, myDonors);
         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
+                .navigate(R.id.donorsDetailsFragment, data);
 
     }
 

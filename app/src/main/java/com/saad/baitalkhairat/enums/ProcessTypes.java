@@ -1,10 +1,10 @@
 package com.saad.baitalkhairat.enums;
 
 public enum ProcessTypes {
-    ORDER_RECEIVED(1),
-    UNDER_STUDYING(2),
-    IN_WAY(3),
-    FINISHED(4);
+    ORDER_RECEIVED(0),
+    UNDER_STUDYING(1),
+    IN_WAY(2),
+    FINISHED(3);
 
     private int status;
 

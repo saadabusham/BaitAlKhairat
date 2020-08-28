@@ -15,9 +15,10 @@ import com.saad.baitalkhairat.ui.auth.signinholder.SignInHolderViewModel;
 import com.saad.baitalkhairat.ui.auth.verifyphonenumber.VerifyPhoneNumberViewModel;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.cartjourney.cart.CartViewModel;
-import com.saad.baitalkhairat.ui.donatejourney.myneedsholder.MyDonationHolderViewModel;
-import com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListViewModel;
-import com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.donationappliedsuccessful.DonorAppliedSuccessfulViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.donordetails.DonorsDetailsViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.mydonationsholder.MyDonationHolderViewModel;
+import com.saad.baitalkhairat.ui.donatejourney.mydonationslist.MyDonationListViewModel;
 import com.saad.baitalkhairat.ui.emptyactivity.EmptyActivityViewModel;
 import com.saad.baitalkhairat.ui.emptyfragment.EmptyFragmentViewModel;
 import com.saad.baitalkhairat.ui.filebox.FileBoxViewModel;
@@ -226,6 +227,9 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(ChargedSuccessfulViewModel.class)) {
             //noinspection unchecked
             return (T) new ChargedSuccessfulViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(DonorsDetailsViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DonorsDetailsViewModel(mContext, dataManager, viewDataBinding, navigation);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

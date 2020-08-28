@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="1/1/2011"
+                android:text="@{viewModel.myNeeds.createdAt}"
                 android:textColor="@color/notification_title_gray"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:gravity="start|center"
             android:maxLines="3"
-            android:text="@string/all_rights_reserved"
+            android:text="@{viewModel.myNeeds.title}"
             android:textColor="@color/subcategory_grid_text_color"
             android:textSize="14sp" />
 
@@ -103,7 +103,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseIdText"
                     android:maxLines="3"
-                    android:text="1452"
+                    android:text="@{viewModel.myNeeds.caseId}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -134,7 +134,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCaseTypeText"
                     android:maxLines="3"
-                    android:text="orphan"
+                    android:text="@{viewModel.myNeeds.typeLabel}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -165,7 +165,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@id/tvCountryText"
                     android:maxLines="3"
-                    android:text="@string/jordan"
+                    android:text="@{viewModel.myNeeds.countryLabel}"
                     android:textColor="@color/subcategory_grid_text_color"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -195,7 +195,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:maxLines="3"
-                android:text="100 jd"
+                android:text="@{viewModel.myNeeds.amount}"
                 android:textColor="@color/green"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -283,7 +283,6 @@
                 android:gravity="center"
                 android:text="@string/on_way"
                 textViewColor="@{viewModel.getProcessImage(processTypes.IN_WAY.getStatus(),false)}"
-                android:textColor="@color/green"
                 android:textSize="10sp" />
 
             <TextView

@@ -188,6 +188,18 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
                     @Override
                     public void onError(String error, int errorCode) {
                         RegisterError registerError = new Gson().fromJson(error, RegisterError.class);
+                        if (registerError.getName() != null) {
+                            getViewBinding().edUserName.setError(registerError.getName().toString());
+                        }
+                        if (registerError.getEmail() != null) {
+                            getViewBinding().edEmail.setError(registerError.getName().toString());
+                        }
+                        if (registerError.getPhone() != null) {
+                            getViewBinding().edPhoneNumber.setError(registerError.getName().toString());
+                        }
+                        if (registerError.getPassword() != null) {
+                            getViewBinding().edPassword.setError(registerError.getName().toString());
+                        }
                         showToast(registerError.toString());
                         SessionManager.logoutUser();
                     }

@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.Navigation;
 
+import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
@@ -93,7 +94,8 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
 
                     @Override
                     public void onError(String error, int errorCode) {
-                        showToast(error);
+                        RegisterError registerError = new Gson().fromJson(error, RegisterError.class);
+                        showToast(registerError.toString());
                     }
 
                     @Override

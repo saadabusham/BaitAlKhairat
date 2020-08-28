@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.donatejourney.myneedsholder;
+package com.saad.baitalkhairat.ui.donatejourney.mydonationsholder;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.saad.baitalkhairat.enums.MyNeedsTabTypes;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
-import com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListFragment;
+import com.saad.baitalkhairat.ui.donatejourney.mydonationslist.MyDonationListFragment;
 import com.saad.baitalkhairat.utils.AppConstants;
 
 public class MyDonationHolderViewModel extends BaseViewModel<MyDonationHolderNavigator, FragmentMyDonationHolderBinding> {

@@ -1,43 +1,30 @@
-
-package com.saad.baitalkhairat.viewmodel;
+package com.saad.baitalkhairat.ui.donatejourney.donordetails;
 
 import android.content.Context;
-import android.view.View;
 
-import androidx.databinding.BaseObservable;
+import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.R;
+import com.saad.baitalkhairat.databinding.FragmentDonorsDetailsBinding;
 import com.saad.baitalkhairat.enums.ProcessTypes;
-import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.ui.base.BaseNavigator;
+import com.saad.baitalkhairat.ui.base.BaseViewModel;
 
+public class DonorsDetailsViewModel extends BaseViewModel<DonorsDetailsNavigator, FragmentDonorsDetailsBinding> {
 
-public class ItemMyDonorsViewModel extends BaseObservable {
-
-    private final Context mContext;
-    private MyDonors myDonors;
-    private int position;
-    private RecyclerClick mRecyclerClick;
-
-    public ItemMyDonorsViewModel(Context context, MyDonors myDonors, int position, RecyclerClick mRecyclerClick) {
-        this.mContext = context;
-        this.myDonors = myDonors;
-        this.position = position;
-        this.mRecyclerClick = mRecyclerClick;
+    public <V extends ViewDataBinding, N extends BaseNavigator> DonorsDetailsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
+        super(mContext, dataManager, (DonorsDetailsNavigator) navigation, (FragmentDonorsDetailsBinding) viewDataBinding);
     }
 
-    public MyDonors getMyDonors() {
-        return myDonors;
+    @Override
+    protected void setUp() {
+
     }
 
-    public void setMyDonors(MyDonors myDonors, int position) {
-        this.myDonors = myDonors;
-        this.position = position;
-        notifyChange();
-    }
-
-    public void onItemClick(View view) {
-        mRecyclerClick.onClick(myDonors, position);
+    private MyDonors getDonorsObj() {
+        return getNavigator().getDonorsObj();
     }
 
     public int getProcessImage(int processType, boolean isImage) {
@@ -63,12 +50,12 @@ public class ItemMyDonorsViewModel extends BaseObservable {
     }
 
     private int getImage(int orderStatus) {
-        if (myDonors.getProcess() == ProcessTypes.FINISHED.getStatus()) {
+        if (getDonorsObj().getProcess() == ProcessTypes.FINISHED.getStatus()) {
             return R.drawable.ic_process_done;
         }
-        if (myDonors.getProcess() > orderStatus) {
+        if (getDonorsObj().getProcess() > orderStatus) {
             return R.drawable.ic_process_done;
-        } else if (myDonors.getProcess() == orderStatus) {
+        } else if (getDonorsObj().getProcess() == orderStatus) {
             return R.drawable.ic_process_start;
         } else {
             return R.drawable.ic_process_wait;
@@ -88,11 +75,10 @@ public class ItemMyDonorsViewModel extends BaseObservable {
     }
 
     private int getColor(int orderStatus) {
-        if (myDonors.getProcess() >= orderStatus) {
+        if (getDonorsObj().getProcess() >= orderStatus) {
             return R.color.green;
         } else {
             return R.color.process_gray;
         }
     }
-
 }

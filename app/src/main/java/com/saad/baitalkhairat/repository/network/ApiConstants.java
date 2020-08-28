@@ -85,7 +85,8 @@ public class ApiConstants {
     public class apiNeedsService {
         public static final String ADD_NEED = "member/need-requests";
         public static final String ADD_NEED_DOCS = "member/need-requests/attachments";
-
+        public static final String CURRENT_NEEDS = "member/need-requests/current";
+        public static final String HISTORY_NEEDS = "member/need-requests/previous";
     }
 
 }

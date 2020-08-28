@@ -54,9 +54,6 @@ public class AddNeedError implements Serializable {
         return "AddNeedError{" +
                 "country=" + country +
                 ", bindingKey=" + bindingKey +
-                ", amount=" + amount +
-                ", description=" + description +
-                ", title=" + title +
                 ", type=" + type +
                 '}';
     }

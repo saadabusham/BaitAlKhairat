@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful;
+package com.saad.baitalkhairat.ui.donatejourney.donationappliedsuccessful;
 
 import android.content.Context;
 

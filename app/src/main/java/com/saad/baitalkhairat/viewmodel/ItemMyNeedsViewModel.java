@@ -9,7 +9,7 @@ import androidx.databinding.BaseObservable;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.enums.ProcessStatus;
 import com.saad.baitalkhairat.enums.ProcessTypes;
-import com.saad.baitalkhairat.model.MyNeeds;
+import com.saad.baitalkhairat.model.needs.MyNeeds;
 
 
 public class ItemMyNeedsViewModel extends BaseObservable {
@@ -28,8 +28,9 @@ public class ItemMyNeedsViewModel extends BaseObservable {
         return myNeeds;
     }
 
-    public void setMyNeeds(MyNeeds myNeeds) {
+    public void setMyNeeds(MyNeeds myNeeds, int position) {
         this.myNeeds = myNeeds;
+        this.position = position;
         notifyChange();
     }
 
@@ -60,7 +61,7 @@ public class ItemMyNeedsViewModel extends BaseObservable {
     }
 
     private int getTextColor(int status) {
-        if (myNeeds.getProcess() >= status) {
+        if (myNeeds.getStatus() >= status) {
             return R.color.green;
         } else {
             return R.color.process_gray;
@@ -82,12 +83,12 @@ public class ItemMyNeedsViewModel extends BaseObservable {
     }
 
     private int getImage(int orderStatus) {
-        if (myNeeds.getProcess() == ProcessTypes.FINISHED.getStatus()) {
+        if (myNeeds.getStatus() == ProcessTypes.FINISHED.getStatus()) {
             return R.drawable.ic_process_done;
         }
-        if (myNeeds.getProcess() > orderStatus) {
+        if (myNeeds.getStatus() > orderStatus) {
             return R.drawable.ic_process_done;
-        } else if (myNeeds.getProcess() == orderStatus) {
+        } else if (myNeeds.getStatus() == orderStatus) {
             return R.drawable.ic_process_start;
         } else {
             return R.drawable.ic_process_wait;
@@ -107,7 +108,7 @@ public class ItemMyNeedsViewModel extends BaseObservable {
     }
 
     private int getLineColor(int orderStatus) {
-        if (myNeeds.getProcess() >= orderStatus) {
+        if (myNeeds.getStatus() >= orderStatus) {
             return R.color.green;
         } else {
             return R.color.process_gray;
@@ -134,7 +135,7 @@ public class ItemMyNeedsViewModel extends BaseObservable {
 //        }
 //    }
     public int getProcessTextColor() {
-        ProcessStatus processStatus = ProcessStatus.fromInt(myNeeds.getProcess());
+        ProcessStatus processStatus = ProcessStatus.fromInt(myNeeds.getStatus());
         switch (processStatus) {
             case WAITING:
                 return R.color.green;

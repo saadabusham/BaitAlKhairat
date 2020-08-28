@@ -22,6 +22,7 @@
     <color name="needy_background_stroke">#B6BDC2</color>
     <color name="login_text_gray">#B9B9B9</color>
     <color name="gray_textview_light">#707070</color>
+    <color name="gray_textview_light2">#0D707070</color>
     <color name="otp_background">#EEEEEE</color>
     <color name="otv_verification_gray">#394951</color>
     <color name="register_divider">#61A2ACAF</color>

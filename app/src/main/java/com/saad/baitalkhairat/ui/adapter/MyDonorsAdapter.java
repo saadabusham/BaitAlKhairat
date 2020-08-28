@@ -30,10 +30,10 @@ public class MyDonorsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private boolean loading;
     private OnLoadMoreListener loadMoreListener;
 
-    public MyDonorsAdapter(Context mContext, RecyclerView recyclerView) {
+    public MyDonorsAdapter(Context mContext, RecyclerClick mRecyclerClick, RecyclerView recyclerView) {
         this.myDonorsList = new ArrayList<>();
         this.mContext = mContext;
-
+        this.mRecyclerClick = mRecyclerClick;
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
 
             final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView
@@ -133,9 +133,9 @@ public class MyDonorsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             if (mBinding.getViewModel() == null) {
-                mBinding.setViewModel(new ItemMyDonorsViewModel(mContext, myDonorsList.get(position), position));
+                mBinding.setViewModel(new ItemMyDonorsViewModel(mContext, myDonorsList.get(position), position, mRecyclerClick));
             } else {
-                mBinding.getViewModel().setMyDonors(myDonorsList.get(position));
+                mBinding.getViewModel().setMyDonors(myDonorsList.get(position), position);
             }
         }
 

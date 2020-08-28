@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="processTypes"
+            type="com.saad.baitalkhairat.enums.ProcessTypes" />
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.donatejourney.donordetails.DonorsDetailsViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:theme="@style/ToolbarColoredBackArrowDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_7sdp"
+            android:background="@drawable/shape_rounded_empty_gray2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    app:srcCompat="@drawable/ic_calender" />
+
+                <TextView
+                    style="@style/roman_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/order_date"
+                    android:textColor="@color/gray_light2"
+                    android:textSize="10sp" />
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/since"
+                    android:textColor="@color/notification_title_gray"
+                    android:textSize="11sp" />
+
+                <TextView
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="1/1/2011"
+                    android:textColor="@color/notification_title_gray"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/bold_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="start|center"
+                android:maxLines="3"
+                android:text="@string/all_rights_reserved"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDetails"
+                style="@style/light_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="start|center"
+                android:maxLines="3"
+                android:text="@string/all_rights_reserved"
+                android:textColor="@color/subcategory_grid_text_color"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/divider_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|start">
+
+                    <TextView
+                        android:id="@+id/tvCaseIdText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/case_id"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvCaseId"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvCaseIdText"
+                        android:maxLines="3"
+                        android:text="1452"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvCaseTypeText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/case_type"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvCaseType"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvCaseTypeText"
+                        android:maxLines="3"
+                        android:text="orphan"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|end">
+
+                    <TextView
+                        android:id="@+id/tvCountryText"
+                        style="@style/light_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="@string/country"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        style="@style/bold_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvCountryText"
+                        android:maxLines="3"
+                        android:text="@string/jordan"
+                        android:textColor="@color/subcategory_grid_text_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:id="@+id/tvAmountText"
+                    style="@style/light_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:text="@string/amount"
+                    android:textColor="@color/subcategory_grid_text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    style="@style/bold_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:maxLines="3"
+                    android:text="100 jd"
+                    android:textColor="@color/green"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_rounded_empty_dark_gray"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        imageResources="@{viewModel.getProcessImage(processTypes.ORDER_RECEIVED.getStatus(),true)}"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_process_wait" />
+
+                    <View
+                        viewBackground="@{viewModel.getProcessColor(processTypes.UNDER_STUDYING.getStatus())}"
+                        android:layout_width="78dp"
+                        android:layout_height="4dp" />
+
+                    <ImageView
+                        imageResources="@{viewModel.getProcessImage(processTypes.UNDER_STUDYING.getStatus(),true)}"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_process_wait" />
+
+                    <View
+                        viewBackground="@{viewModel.getProcessColor(processTypes.IN_WAY.getStatus())}"
+                        android:layout_width="78dp"
+                        android:layout_height="4dp" />
+
+                    <ImageView
+                        imageResources="@{viewModel.getProcessImage(processTypes.IN_WAY.getStatus(),true)}"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_process_wait" />
+
+                    <View
+                        viewBackground="@{viewModel.getProcessColor(processTypes.FINISHED.getStatus())}"
+                        android:layout_width="78dp"
+                        android:layout_height="4dp" />
+
+                    <ImageView
+                        imageResources="@{viewModel.getProcessImage(processTypes.FINISHED.getStatus(),true)}"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_process_wait" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bold_style"
+                        textViewColor="@{viewModel.getProcessImage(processTypes.ORDER_RECEIVED.getStatus(),false)}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/order_received"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        textViewColor="@{viewModel.getProcessImage(processTypes.UNDER_STUDYING.getStatus(),false)}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/Under_studying"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        textViewColor="@{viewModel.getProcessImage(processTypes.IN_WAY.getStatus(),false)}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/on_way"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        style="@style/bold_style"
+                        textViewColor="@{viewModel.getProcessImage(processTypes.FINISHED.getStatus(),false)}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/delivered"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

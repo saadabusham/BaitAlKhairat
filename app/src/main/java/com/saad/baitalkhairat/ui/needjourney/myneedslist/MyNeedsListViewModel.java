@@ -8,15 +8,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentMyNeedsListBinding;
+import com.saad.baitalkhairat.enums.MyNeedsTabTypes;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyNeeds;
 import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.needs.NeedResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.MyNeedsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, FragmentMyNeedsListBinding>
@@ -26,7 +31,9 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
+    boolean isRetry = false;
 
+    NeedResponse needResponse;
     public <V extends ViewDataBinding, N extends BaseNavigator> MyNeedsListViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (MyNeedsListNavigator) navigation, (FragmentMyNeedsListBinding) viewDataBinding);
     }
@@ -34,7 +41,16 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     @Override
     protected void setUp() {
         setUpRecycler();
-        getData();
+        MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+        switch (myNeedsTabTypes) {
+            case CURRENT:
+                getCurrentNeeds(1);
+                break;
+            case HISTORY:
+                getHistoryNeeds(1);
+                break;
+        }
+
     }
 
 
@@ -43,7 +59,15 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+                switch (myNeedsTabTypes) {
+                    case CURRENT:
+                        getCurrentNeeds(1);
+                        break;
+                    case HISTORY:
+                        getHistoryNeeds(1);
+                        break;
+                }
             }
         });
 
@@ -54,71 +78,95 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
         myNeedsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                myNeedsAdapter.addItem(null);
-                myNeedsAdapter.notifyItemInserted(myNeedsAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(myNeedsAdapter.getItemCount() - 1);
-                setLoadMore(true);
-                getData();
+                if (needResponse != null &&
+                        needResponse.getMeta().getCurrentPage() < needResponse.getMeta().getLastPage()) {
+                    myNeedsAdapter.addItem(null);
+                    myNeedsAdapter.notifyItemInserted(myNeedsAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(myNeedsAdapter.getItemCount() - 1);
+                    setLoadMore(true);
+                    MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+                    switch (myNeedsTabTypes) {
+                        case CURRENT:
+                            getCurrentNeeds(needResponse.getMeta().getCurrentPage() + 1);
+                            break;
+                        case HISTORY:
+                            getHistoryNeeds(needResponse.getMeta().getCurrentPage() + 1);
+                            break;
+                    }
+                }
             }
         });
-        getLocalData();
     }
 
-    private void getLocalData() {
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(2));
-        myNeedsAdapter.addItem(new MyNeeds(3));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(3));
-        myNeedsAdapter.addItem(new MyNeeds(2));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(4));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
-        myNeedsAdapter.addItem(new MyNeeds(1));
+
+    public void getCurrentNeeds(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getNeedsService().getCurrentNeeds(getMyContext(), true, page, new APICallBack<NeedResponse>() {
+            @Override
+            public void onSuccess(NeedResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    needResponse = response;
+                    myNeedsAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (myNeedsAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.ok),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
-    public void getData() {
-//        if (!isRefreshing() && !isRetry()) {
-//            enableLoading = true;
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(getMyContext(), enableLoading, new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-////                        homeAdapter.addItems(response.getCategoryList());
-////                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (homeAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.ok),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
+    public void getHistoryNeeds(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getNeedsService().getHistoryNeeds(getMyContext(), true, page, new APICallBack<NeedResponse>() {
+            @Override
+            public void onSuccess(NeedResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    needResponse = response;
+                    myNeedsAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (myNeedsAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.ok),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
     private void showNoDataFound() {
@@ -158,6 +206,13 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
         isRefreshing = refreshing;
     }
 
+    public boolean isRetry() {
+        return isRetry;
+    }
+
+    public void setRetry(boolean retry) {
+        isRetry = retry;
+    }
 
     private void checkIsLoadMoreAndRefreshing(boolean isSuccess) {
         if (isRefreshing()) {

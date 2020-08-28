@@ -196,7 +196,7 @@
         android:label="MyNeedsListFragment" />
     <fragment
         android:id="@+id/myDonationHolderFragment"
-        android:name="com.saad.baitalkhairat.ui.donatejourney.myneedsholder.MyDonationHolderFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.mydonationsholder.MyDonationHolderFragment"
         android:label="MyDonationHolderFragment">
         <action
             android:id="@+id/action_myDonationHolderFragment_to_myDonationListFragment"
@@ -207,7 +207,7 @@
     </fragment>
     <fragment
         android:id="@+id/myDonationListFragment"
-        android:name="com.saad.baitalkhairat.ui.donatejourney.myneedslist.MyDonationListFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.mydonationslist.MyDonationListFragment"
         android:label="MyDonationListFragment" />
     <fragment
         android:id="@+id/applyNeedsFragment"
@@ -233,7 +233,7 @@
     </fragment>
     <fragment
         android:id="@+id/donorAppliedSuccessfulFragment"
-        android:name="com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.donationappliedsuccessful.DonorAppliedSuccessfulFragment"
         android:label="DonorAppliedSuccessfulFragment">
         <action
             android:id="@+id/action_donorAppliedSuccessfulFragment_to_nav_account"
@@ -326,4 +326,8 @@
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/donorsDetailsFragment"
+        android:name="com.saad.baitalkhairat.ui.donatejourney.donordetails.DonorsDetailsFragment"
+        android:label="DonorsDetailsFragment" />
 </navigation>

@@ -6,4 +6,5 @@ import com.saad.baitalkhairat.ui.base.BaseNavigator;
 public interface MyNeedsListNavigator extends BaseNavigator {
 
 
+    int getNeedType();
 }

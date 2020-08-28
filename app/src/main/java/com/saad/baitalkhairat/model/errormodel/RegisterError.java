@@ -79,17 +79,20 @@ public class RegisterError implements Serializable {
 
     @Override
     public String toString() {
-        return "RegisterError{" +
-                "countryCode=" + countryCode +
-                ", password=" + password +
-                ", gender=" + gender +
-                ", nationality=" + nationality +
-                ", countryOfResidence=" + countryOfResidence +
-                ", phone=" + phone +
-                ", birthDate=" + birthDate +
-                ", name=" + name +
-                ", email=" + email +
-                ", verificationCode=" + verificationCode +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        if (countryCode != null)
+            stringBuilder.append("countryCode=" + countryCode);
+        if (gender != null)
+            stringBuilder.append("gender=" + gender);
+        if (nationality != null)
+            stringBuilder.append("nationality=" + nationality);
+        if (countryOfResidence != null)
+            stringBuilder.append("countryOfResidence=" + countryOfResidence);
+        if (birthDate != null)
+            stringBuilder.append("birthDate=" + birthDate);
+        if (verificationCode != null)
+            stringBuilder.append("verificationCode=" + verificationCode);
+
+        return stringBuilder.toString();
     }
 }

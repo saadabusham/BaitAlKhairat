@@ -12,7 +12,7 @@ import com.saad.baitalkhairat.databinding.CellLoadMoreBinding;
 import com.saad.baitalkhairat.databinding.CellMyNeedsBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyNeeds;
+import com.saad.baitalkhairat.model.needs.MyNeeds;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemMyNeedsViewModel;
 
@@ -135,7 +135,7 @@ public class MyNeedsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (mBinding.getViewModel() == null) {
                 mBinding.setViewModel(new ItemMyNeedsViewModel(mContext, myNeedsList.get(position), position));
             } else {
-                mBinding.getViewModel().setMyNeeds(myNeedsList.get(position));
+                mBinding.getViewModel().setMyNeeds(myNeedsList.get(position), position);
             }
         }
 

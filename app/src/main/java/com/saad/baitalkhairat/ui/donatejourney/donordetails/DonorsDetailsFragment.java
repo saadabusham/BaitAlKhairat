@@ -1,25 +1,28 @@
-package com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful;
+package com.saad.baitalkhairat.ui.donatejourney.donordetails;
 
 import android.content.Context;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentDonorAppliedSuccessfulBinding;
+import com.saad.baitalkhairat.databinding.FragmentDonorsDetailsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.MyDonors;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
 
-public class DonorAppliedSuccessfulFragment extends BaseFragment<FragmentDonorAppliedSuccessfulBinding, DonorAppliedSuccessfulViewModel> implements DonorAppliedSuccessfulNavigator {
+public class DonorsDetailsFragment extends BaseFragment<FragmentDonorsDetailsBinding, DonorsDetailsViewModel> implements DonorsDetailsNavigator {
 
-    private static final String TAG = DonorAppliedSuccessfulFragment.class.getSimpleName();
+    private static final String TAG = DonorsDetailsFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private DonorAppliedSuccessfulViewModel mViewModel;
-    private FragmentDonorAppliedSuccessfulBinding mViewBinding;
+    private DonorsDetailsViewModel mViewModel;
+    private FragmentDonorsDetailsBinding mViewBinding;
+
 
     @Override
     public boolean hasOptionMenu() {
@@ -53,13 +56,13 @@ public class DonorAppliedSuccessfulFragment extends BaseFragment<FragmentDonorAp
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_donor_applied_successful;
+        return R.layout.fragment_donors_details;
     }
 
     @Override
-    public DonorAppliedSuccessfulViewModel getViewModel() {
-        mViewModel = (DonorAppliedSuccessfulViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(DonorAppliedSuccessfulViewModel.class, getViewDataBinding(), this);
+    public DonorsDetailsViewModel getViewModel() {
+        mViewModel = (DonorsDetailsViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(DonorsDetailsViewModel.class, getViewDataBinding(), this);
         return mViewModel;
     }
 
@@ -71,7 +74,12 @@ public class DonorAppliedSuccessfulFragment extends BaseFragment<FragmentDonorAp
     @Override
     protected void setUp() {
         mViewBinding = getViewDataBinding();
+        setUpToolbar(mViewBinding.toolbar, TAG, R.string.my_donations);
         mViewModel.setUp();
     }
 
+    @Override
+    public MyDonors getDonorsObj() {
+        return (MyDonors) getArguments().getSerializable(AppConstants.BundleData.DONORS);
+    }
 }

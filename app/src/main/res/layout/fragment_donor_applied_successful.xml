@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.donatejourney.needappliedsuccessful.DonorAppliedSuccessfulViewModel" />
+            type="com.saad.baitalkhairat.ui.donatejourney.donationappliedsuccessful.DonorAppliedSuccessfulViewModel" />
     </data>
 
     <LinearLayout
