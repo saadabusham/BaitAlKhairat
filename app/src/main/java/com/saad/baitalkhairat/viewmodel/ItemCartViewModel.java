@@ -27,8 +27,9 @@ public class ItemCartViewModel extends BaseObservable {
         return cart;
     }
 
-    public void setCart(Cart cart) {
+    public void setCart(Cart cart, int position) {
         this.cart = cart;
+        this.position = position;
         notifyChange();
     }
 

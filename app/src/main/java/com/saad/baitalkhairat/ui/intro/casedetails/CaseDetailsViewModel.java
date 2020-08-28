@@ -3,10 +3,8 @@ package com.saad.baitalkhairat.ui.intro.casedetails;
 import android.content.Context;
 
 import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
-import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCaseDetailsBinding;
 import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -34,8 +32,9 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
                 , new APICallBackNew<Object>() {
                     @Override
                     public void onSuccess(Object response) {
-                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
+//                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
+                        popUp();
                     }
 
                     @Override

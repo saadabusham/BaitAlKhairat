@@ -50,4 +50,28 @@ public class CartResponse implements Serializable {
     public int getTotal_item_shortcut() {
         return total_item_shortcut;
     }
+
+    public void setData(ArrayList<Cart> data) {
+        this.data = data;
+    }
+
+    public void setLinks(Links links) {
+        this.links = links;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
+
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public void setTotal_item(int total_item) {
+        this.total_item = total_item;
+    }
+
+    public void setTotal_item_shortcut(int total_item_shortcut) {
+        this.total_item_shortcut = total_item_shortcut;
+    }
 }

@@ -22,6 +22,7 @@ import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverRe
 import com.saad.baitalkhairat.ui.adapter.CartAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -85,8 +86,24 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     }
 
     public void onDonateClick() {
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_cartFragment_to_donorAppliedSuccessfulFragment);
+        makeDonation();
+    }
+
+    private void makeDonation() {
+        getDataManager().getDonorsService().checkout(getMyContext(), true,
+                DeviceUtils.getUDID(getMyContext()),
+                new APICallBack<String>() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.action_cartFragment_to_donorAppliedSuccessfulFragment);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                });
     }
 
     public void getData(int page) {
@@ -132,6 +149,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     private void showNoDataFound() {
         getViewBinding().swipeRefreshLayout.setEnabled(false);
         getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.VISIBLE);
+        getViewBinding().linearTools.setVisibility(View.GONE);
 
     }
 
@@ -146,11 +164,30 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
 
     @Override
     public void onClick(Cart cart, int position) {
-//        Bundle data = new Bundle();
-//        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, cart);
-//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
+        removeCart(cart, position);
+    }
 
+    private void removeCart(Cart cart, int position) {
+        getDataManager().getDonorsService().deleteCart(getMyContext(), true,
+                DeviceUtils.getUDID(getMyContext()), cart.getId(),
+                new APICallBack<CartResponse>() {
+                    @Override
+                    public void onSuccess(CartResponse response) {
+                        if (cartAdapter.getItemCount() - 1 == 0) {
+                            showNoDataFound();
+                        } else {
+                            cartAdapter.remove(position);
+                            getViewBinding().getData().setTotal_amount(response.getTotal_amount());
+                            getViewBinding().getData().setTotal_item(response.getTotal_item());
+                            getViewBinding().setData(getViewBinding().getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        showErrorSnackBar(error);
+                    }
+                });
     }
 
 
@@ -212,6 +249,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
         if (isSuccess) {
             cartAdapter.clearItems();
             getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
+            getViewBinding().linearTools.setVisibility(View.VISIBLE);
             getViewBinding().swipeRefreshLayout.setEnabled(true);
         }
     }

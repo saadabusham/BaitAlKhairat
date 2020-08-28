@@ -3,6 +3,7 @@ package com.saad.baitalkhairat.ui.walletjourney.wallet;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.Navigation;
@@ -34,6 +35,11 @@ public class WalletViewModel extends BaseViewModel<WalletNavigator, FragmentWall
             @Override
             public void onSuccess(Wallet response) {
                 getViewBinding().setData(response);
+                if (Double.valueOf(response.getBalance()) > 0) {
+                    getViewBinding().layoutNoDataFound.relativeListEmpty.setVisibility(View.GONE);
+                } else {
+                    getViewBinding().layoutNoDataFound.relativeListEmpty.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

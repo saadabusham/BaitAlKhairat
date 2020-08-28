@@ -286,8 +286,8 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                         ? anotherAmount : aCase.getAmount(), new APICallBackNew<Object>() {
                     @Override
                     public void onSuccess(Object response) {
-                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
+//                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
                     }
 
                     @Override

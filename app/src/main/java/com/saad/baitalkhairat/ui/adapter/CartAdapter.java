@@ -123,6 +123,7 @@ public class CartAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public void remove(int position) {
         cartList.remove(position);
+        notifyDataSetChanged();
     }
 
     public class CartCellViewHolder extends BaseViewHolder {
@@ -139,7 +140,7 @@ public class CartAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (mBinding.getViewModel() == null) {
                 mBinding.setViewModel(new ItemCartViewModel(mContext, cartList.get(position), position, mRecyclerClick));
             } else {
-                mBinding.getViewModel().setCart(cartList.get(position));
+                mBinding.getViewModel().setCart(cartList.get(position), position);
             }
         }
 

@@ -10,8 +10,10 @@ import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandard;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponseNew;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
 
@@ -19,6 +21,7 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -71,6 +74,22 @@ public class DonorsService {
                 .subscribe(new CustomObserverResponseNew<Object, AddToCartError>(mContext, withProgress, apiCallBack));
     }
 
+    public void deleteCart(Context mContext, boolean withProgress, String UUID, int id, APICallBack<CartResponse> apiCallBack) {
+        getDataApi().deleteCart(UUID, id)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<CartResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void checkout(Context mContext, boolean withProgress, String UUID, APICallBack<String> apiCallBack) {
+        getDataApi().checkout(UUID)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<String>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -93,6 +112,13 @@ public class DonorsService {
 
         @GET(ApiConstants.apiDonorsService.GET_CART)
         Single<Response<CartResponse>> getCart(@Query("page") int page);
+
+        @DELETE(ApiConstants.apiDonorsService.DELETE_CART)
+        Single<Response<CartResponse>> deleteCart(@Header("platform-id") String platform_id,
+                                                  @Path("id") int id);
+
+        @POST(ApiConstants.apiDonorsService.CHECKOUT)
+        Single<Response<GeneralResponse<String>>> checkout(@Header("platform-id") String platform_id);
     }
 }
 

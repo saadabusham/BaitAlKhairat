@@ -83,6 +83,8 @@ public class ApiConstants {
         public static final String CATEGORY_CASES = "need-requests";
         public static final String ADD_TO_CART = "need-requests/{id}/add-to-cart";
         public static final String GET_CART = "carts";
+        public static final String DELETE_CART = "carts/{id}/destroy";
+        public static final String CHECKOUT = "carts/checkout";
     }
 
     public class apiNeedsService {
