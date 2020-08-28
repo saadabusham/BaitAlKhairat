@@ -31,9 +31,22 @@ public class FilterCasesViewModel extends BaseViewModel<FilterCasesNavigator, Fr
     ArrayList<ListItem> genderList = new ArrayList<>();
     ArrayAdapter<ListItem> genderAdapter;
 
+    ArrayList<ListItem> caseList = new ArrayList<>();
+    ArrayAdapter<ListItem> caseAdapter;
+
     public <V extends ViewDataBinding, N extends BaseNavigator> FilterCasesViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (FilterCasesNavigator) navigation, (FragmentFilterCasesBinding) viewDataBinding);
 
+    }
+
+    @Override
+    protected void setUp() {
+        if (getNavigator().filterWithCategory()) {
+            setUpSpinnerCaseType();
+            getViewBinding().spinnerCaseType.setVisibility(View.VISIBLE);
+        }
+        setUpSpinnerGender();
+        setUpSpinnerCountry();
     }
 
     public void onFilterClick() {
@@ -50,28 +63,36 @@ public class FilterCasesViewModel extends BaseViewModel<FilterCasesNavigator, Fr
             if (getViewBinding().spinnerCountry.getSelectedItemPosition() > 0) {
                 filter.setCountry(countryNameAdapter.getItem(getViewBinding().spinnerCountry.getSelectedItemPosition()).getValue());
             }
+            if (getNavigator().filterWithCategory()) {
+                filter.setType(Integer.parseInt(caseAdapter.getItem(getViewBinding().spinnerCaseType.getSelectedItemPosition()).getValue()));
+            }
             data.putExtra(AppConstants.BundleData.FILTER, filter);
             ((MainActivity) getBaseActivity()).onActivityResultFromFragment(
                     1, Activity.RESULT_OK, data);
         }
     }
 
-    @Override
-    protected void setUp() {
-        if (getNavigator().filterWithCategory()) {
-            setUpSpinnerCaseType();
-            getViewBinding().spinnerCaseType.setVisibility(View.VISIBLE);
-        }
-        setUpSpinnerGender();
-        setUpSpinnerCountry();
+    private void setUpSpinnerCaseType() {
+        caseAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, caseList);
+        caseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerCaseType.setAdapter(caseAdapter);
+
+        getCaseType();
     }
 
-    private void setUpSpinnerCaseType() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.case_type_original));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCaseType.setAdapter(adapter);
+    private void getCaseType() {
+        getDataManager().getAppService().getCaseType(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                caseAdapter.addAll(response.getList());
+                caseAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     private void setUpSpinnerGender() {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
@@ -20,13 +21,16 @@ import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
 import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.model.cases.Case;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
+import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.ui.adapter.CaseGridAdapter;
 import com.saad.baitalkhairat.ui.adapter.CaseListAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
+import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 import java.util.ArrayList;
@@ -266,7 +270,7 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                 break;
 
             case ADD_TO_CART:
-
+                addToCart(aCase);
                 break;
 
             case DONATE:
@@ -276,8 +280,30 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
         }
     }
 
+    private void addToCart(Case aCase) {
+        getDataManager().getDonorsService().addToCart(getMyContext(), true,
+                DeviceUtils.getUDID(getBaseActivity()), aCase.getId(), "100", new APICallBackNew<Object>() {
+                    @Override
+                    public void onSuccess(Object response) {
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        AddToCartError addToCartError = new Gson().fromJson(error, AddToCartError.class);
+                        showToast(addToCartError.toString());
+                    }
+
+                    @Override
+                    public void onNetworkError(String error, int errorCode) {
+                        showToast(error);
+                    }
+                });
+    }
+
     public void updateFilter(Filter filter) {
-        this.filter.setFilter(filter);
+        this.filter.setFilter(filter, getNavigator().getCategoryId() == 0);
         getViewBinding().swipeRefreshLayout.setRefreshing(true);
         setIsRefreshing(true);
         getData(1);

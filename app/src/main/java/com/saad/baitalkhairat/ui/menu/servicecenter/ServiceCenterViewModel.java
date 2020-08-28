@@ -49,15 +49,18 @@ public class ServiceCenterViewModel extends BaseViewModel<ServiceCenterNavigator
     }
 
     public void onFacebookClick() {
-        DeviceUtils.openUrl(getMyContext(), contactUs.getFacebookLink());
+        if (contactUs != null && contactUs.getFacebookLink() != null && !contactUs.getFacebookLink().isEmpty())
+            DeviceUtils.openUrl(getMyContext(), contactUs.getFacebookLink());
     }
 
     public void onInstagramClick() {
-        DeviceUtils.openUrl(getMyContext(), contactUs.getLinkedinLink());
+        if (contactUs != null && contactUs.getLinkedinLink() != null && !contactUs.getLinkedinLink().isEmpty())
+            DeviceUtils.openUrl(getMyContext(), contactUs.getLinkedinLink());
     }
 
     public void onTwitterClick() {
-        DeviceUtils.openUrl(getMyContext(), contactUs.getTwitterLink());
+        if (contactUs != null && contactUs.getTwitterLink() != null && !contactUs.getTwitterLink().isEmpty())
+            DeviceUtils.openUrl(getMyContext(), contactUs.getTwitterLink());
     }
 
     public void onPhoneClicked() {

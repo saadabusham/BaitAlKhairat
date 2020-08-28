@@ -15,9 +15,11 @@ public class Filter implements Serializable {
     @SerializedName("country")
     String country = "";
 
-    public void setFilter(Filter filter) {
+    public void setFilter(Filter filter, boolean withType) {
         setGender(filter.getGender());
         setCountry(filter.getCountry());
+        if (withType)
+            setType(filter.getType());
     }
 
     public String getGender() {

@@ -172,7 +172,9 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
             @Override
             public void onSuccess(CategoryResponse response) {
                 checkIsLoadMoreAndRefreshing(true);
-                categoryAdapter.addItems(response.getList());
+                if (response.getList().size() > 6) {
+                    categoryAdapter.addItems(response.getList().subList(0, 6));
+                }
                 notifiAdapter();
             }
 
