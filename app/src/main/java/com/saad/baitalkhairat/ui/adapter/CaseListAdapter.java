@@ -134,7 +134,7 @@ public class CaseListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             if (mBinding.getViewModel() == null) {
-                mBinding.setViewModel(new ItemCaseViewModel(mContext, caseList.get(position), position, mRecyclerClick));
+                mBinding.setViewModel(new ItemCaseViewModel(mContext, caseList.get(position), position, mRecyclerClick, mBinding));
             } else {
                 mBinding.getViewModel().setCaseItem(caseList.get(position));
             }

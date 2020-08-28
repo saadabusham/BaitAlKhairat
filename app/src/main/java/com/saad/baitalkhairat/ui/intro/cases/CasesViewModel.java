@@ -255,7 +255,7 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
     }
 
     @Override
-    public void onClick(Case aCase, int position, int caseNumber) {
+    public void onClick(Case aCase, int position, int caseNumber, String anotherAmount) {
         Bundle data = new Bundle();
 
 
@@ -270,7 +270,7 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                 break;
 
             case ADD_TO_CART:
-                addToCart(aCase);
+                addToCart(aCase, anotherAmount);
                 break;
 
             case DONATE:
@@ -280,9 +280,10 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
         }
     }
 
-    private void addToCart(Case aCase) {
+    private void addToCart(Case aCase, String anotherAmount) {
         getDataManager().getDonorsService().addToCart(getMyContext(), true,
-                DeviceUtils.getUDID(getBaseActivity()), aCase.getId(), "100", new APICallBackNew<Object>() {
+                DeviceUtils.getUDID(getBaseActivity()), aCase.getId(), !anotherAmount.isEmpty()
+                        ? anotherAmount : aCase.getAmount(), new APICallBackNew<Object>() {
                     @Override
                     public void onSuccess(Object response) {
                         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)

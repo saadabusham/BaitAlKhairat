@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.cartjourney.cart.CartViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.cart.CartResponse" />
     </data>
 
     <LinearLayout
@@ -99,7 +103,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:maxLines="3"
-                        android:text="100 jd"
+                        android:text="@{data.total_amount}"
                         android:textColor="@color/green"
                         android:textSize="22sp" />
                 </LinearLayout>

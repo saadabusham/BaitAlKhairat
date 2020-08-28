@@ -3,6 +3,7 @@ package com.saad.baitalkhairat.repository.network.services;
 import android.content.Context;
 
 import com.saad.baitalkhairat.model.Filter;
+import com.saad.baitalkhairat.model.cart.CartResponse;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
 import com.saad.baitalkhairat.model.donors.CategoryResponse;
 import com.saad.baitalkhairat.model.errormodel.AddToCartError;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -86,8 +88,11 @@ public class DonorsService {
 
         @POST(ApiConstants.apiDonorsService.ADD_TO_CART)
         Single<Response<GeneralResponseNew<Object, AddToCartError>>> addToCart(@Header("platform-id") String platform_id,
-                                                                               @Query("id") int id,
+                                                                               @Path("id") int id,
                                                                                @Query("donation_amount") String donation_amount);
+
+        @GET(ApiConstants.apiDonorsService.GET_CART)
+        Single<Response<CartResponse>> getCart(@Query("page") int page);
     }
 }
 

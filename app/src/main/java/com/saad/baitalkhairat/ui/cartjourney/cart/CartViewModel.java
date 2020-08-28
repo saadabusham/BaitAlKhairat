@@ -9,14 +9,23 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCartBinding;
+import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Cart;
+import com.saad.baitalkhairat.model.cart.Cart;
+import com.saad.baitalkhairat.model.cart.CartResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandard;
 import com.saad.baitalkhairat.ui.adapter.CartAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBinding>
@@ -24,7 +33,11 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
 
     CartAdapter cartAdapter;
     boolean isRefreshing = false;
+    boolean enableLoading = false;
+    boolean isLoadMore = false;
     boolean isRetry = false;
+
+    CartResponse cartResponse;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> CartViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (CartNavigator) navigation, (FragmentCartBinding) viewDataBinding);
@@ -33,12 +46,11 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     @Override
     protected void setUp() {
         setUpRecycler();
-        getData();
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setRetring();
-                getData();
+                getData(1);
             }
         });
     }
@@ -48,7 +60,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                getData(1);
             }
         });
 
@@ -56,7 +68,20 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
         cartAdapter = new CartAdapter(getMyContext(), this, getViewBinding().recyclerView);
         getViewBinding().recyclerView.setAdapter(cartAdapter);
-        getLocalData();
+        cartAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                if (cartResponse != null &&
+                        cartResponse.getMeta().getCurrentPage() < cartResponse.getMeta().getLastPage()) {
+                    cartAdapter.addItem(null);
+                    cartAdapter.notifyItemInserted(cartAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(cartAdapter.getItemCount() - 1);
+                    setLoadMore(true);
+                    getData(cartResponse.getMeta().getCurrentPage() + 1);
+                }
+            }
+        });
+        getData(1);
     }
 
     public void onDonateClick() {
@@ -64,57 +89,44 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
                 .navigate(R.id.action_cartFragment_to_donorAppliedSuccessfulFragment);
     }
 
-    private void getLocalData() {
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
-        cartAdapter.addItem(new Cart());
+    public void getData(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getDonorsService().getDataApi().getCart(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<CartResponse>(getMyContext(), enableLoading, new APICallBack<CartResponse>() {
+                    @Override
+                    public void onSuccess(CartResponse response) {
+                        checkIsLoadMoreAndRefreshing(true);
+                        if (response.getData() != null && response.getData().size() > 0) {
+                            getViewBinding().setData(response);
+                            cartResponse = response;
+                            cartAdapter.addItems(response.getData());
+                            notifiAdapter();
+                        } else {
+                            onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                        }
+                    }
 
-    }
-
-    public void getData() {
-//        if (!isRefreshing() && !isRetry()) {
-//            enableLoading = true;
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(getMyContext(), enableLoading, new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-////                        homeAdapter.addItems(response.getCategoryList());
-////                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (homeAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.ok),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        if (cartAdapter.getItemCount() == 0) {
+                            showNoDataFound();
+                        }
+                        showSnackBar(getMyContext().getString(R.string.error),
+                                error, getMyContext().getResources().getString(R.string.ok),
+                                new SnackViewBulider.SnackbarCallback() {
+                                    @Override
+                                    public void onActionClick(Snackbar snackbar) {
+                                        snackbar.dismiss();
+                                    }
+                                });
+                        checkIsLoadMoreAndRefreshing(false);
+                    }
+                }));
     }
 
     private void showNoDataFound() {
@@ -142,6 +154,15 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     }
 
 
+    public boolean isLoadMore() {
+        return isLoadMore;
+    }
+
+    public void setLoadMore(boolean loadMore) {
+        isLoadMore = loadMore;
+    }
+
+
     public boolean isRefreshing() {
         return isRefreshing;
     }
@@ -163,7 +184,18 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
             finishRefreshing(isSuccess);
         } else if (isRetry()) {
             finishRetry(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
+        } else {
+            enableLoading = false;
         }
+    }
+
+    public void finishLoadMore() {
+        cartAdapter.remove(cartAdapter.getItemCount() - 1);
+        cartAdapter.notifyItemRemoved(cartAdapter.getItemCount());
+        cartAdapter.setLoaded();
+        setLoadMore(false);
     }
 
     protected void setRetring() {

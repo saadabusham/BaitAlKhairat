@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Cart;
+import com.saad.baitalkhairat.model.cart.Cart;
 
 public class ItemCartViewModel extends BaseObservable {
 

@@ -217,11 +217,20 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     private void checkIsLoadMoreAndRefreshing(boolean isSuccess) {
         if (isRefreshing()) {
             finishRefreshing(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
         } else {
             enableLoading = false;
         }
     }
 
+
+    public void finishLoadMore() {
+        myNeedsAdapter.remove(myNeedsAdapter.getItemCount() - 1);
+        myNeedsAdapter.notifyItemRemoved(myNeedsAdapter.getItemCount());
+        myNeedsAdapter.setLoaded();
+        setLoadMore(false);
+    }
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {

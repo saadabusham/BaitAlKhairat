@@ -48,7 +48,7 @@ public class DeviceUtils {
     }
 
     @SuppressLint("HardwareIds")
-    public static String getUDID(Activity activity) {
+    public static String getUDID(Context activity) {
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             TelephonyManager tm = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
             @SuppressLint("MissingPermission") String tmDevice = "" + (tm != null ? tm.getDeviceId() : null);

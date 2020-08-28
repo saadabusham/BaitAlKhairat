@@ -160,34 +160,54 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp">
 
-            <ImageView
-                android:id="@+id/imgAddToCart"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentStart="true"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@drawable/add_to_cart_background"
-                android:padding="@dimen/_5sdp"
-                android:onClick="@{viewModel::onAddToCartClick}"
-                app:srcCompat="@drawable/ic_add_to_cart" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:background="@color/orange"
                 android:gravity="center"
-                android:text="@string/donate"
-                style="@style/bold_style"
-                android:onClick="@{viewModel::onDonateClick}"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:onClick="@{viewModel::onAddToCartClick}"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_add_to_cart" />
+
+                <TextView
+                    android:id="@+id/imgAddToCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/add_to_cart"
+                    android:textColor="@color/white"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/tvAnotherAmount"
+                style="@style/light_style"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/shape_rounded_empty"
+                android:digits="0123456789."
+                android:hint="@string/another_amount"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="8sp" />
         </LinearLayout>
     </LinearLayout>
 

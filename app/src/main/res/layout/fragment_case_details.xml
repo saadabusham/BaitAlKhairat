@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -209,32 +210,54 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
 
-                <Button
-                    android:id="@+id/tvAddToCart"
+                <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/add_to_cart_background"
+                    android:onClick="@{()-> viewModel.onAddToCartClick()}"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:tint="@color/white"
+                        app:srcCompat="@drawable/ic_add_to_cart" />
+
+                    <TextView
+                        android:id="@+id/imgAddToCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/add_to_cart"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/edAnotherAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    style="@style/light_style"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:background="@color/case_background"
                     android:gravity="center"
-                    android:onClick="@{()-> viewModel.onAddToCartClick()}"
-                    android:text="@string/add_to_cart"
-                    android:textColor="@color/black" />
-
-                <Button
-                    android:id="@+id/tvDonateNow"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_weight="1"
-                    android:background="@color/orange"
-                    android:gravity="center"
-                    android:onClick="@{()-> viewModel.onDonateClick()}"
-                    android:text="@string/donate"
-                    android:textColor="@color/white" />
+                    android:background="@drawable/shape_rounded_empty"
+                    android:digits="0123456789."
+                    android:hint="@string/another_amount"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

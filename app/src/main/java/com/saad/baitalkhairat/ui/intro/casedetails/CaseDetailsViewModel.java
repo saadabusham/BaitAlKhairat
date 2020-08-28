@@ -28,7 +28,10 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
 
     public void onAddToCartClick() {
         getDataManager().getDonorsService().addToCart(getMyContext(), true,
-                DeviceUtils.getUDID(getBaseActivity()), getNavigator().getCase().getId(), "100", new APICallBackNew<Object>() {
+                DeviceUtils.getUDID(getBaseActivity()), getNavigator().getCase().getId(),
+                !getViewBinding().edAnotherAmount.getText().toString().isEmpty() ?
+                        getViewBinding().edAnotherAmount.getText().toString() : getNavigator().getCase().getAmount()
+                , new APICallBackNew<Object>() {
                     @Override
                     public void onSuccess(Object response) {
                         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
@@ -47,10 +50,4 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
                     }
                 });
     }
-
-    public void onDonateClick() {
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_caseDetailsFragment_to_donorAppliedSuccessfulFragment);
-    }
-
 }
