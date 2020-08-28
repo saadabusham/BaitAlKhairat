@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.saad.baitalkhairat.databinding.CellIdentifecationDocumentBinding;
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemIdentificationDocumentViewModel;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class IdentificationDocumentAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
 
-    private final List<IdentificationDocument> identificationDocuments;
+    private final List<File> identificationDocuments;
     Context mContext;
     RecycleDeleteClick mRecyclerClick;
 
@@ -52,12 +52,12 @@ public class IdentificationDocumentAdapter extends RecyclerView.Adapter<BaseView
         return new CellViewHolder(cellBinding);
     }
 
-    public void addItems(List<IdentificationDocument> repoList) {
+    public void addItems(List<File> repoList) {
         identificationDocuments.addAll(repoList);
         notifyDataSetChanged();
     }
 
-    public void addItem(IdentificationDocument identificationPaper) {
+    public void addItem(File identificationPaper) {
         identificationDocuments.add(identificationPaper);
         notifyDataSetChanged();
     }
@@ -68,6 +68,15 @@ public class IdentificationDocumentAdapter extends RecyclerView.Adapter<BaseView
 
     public void remove(int position) {
         identificationDocuments.remove(position);
+    }
+
+    public File getItem(int position) {
+        return identificationDocuments.get(position);
+    }
+
+    public void replaceLastItem(File response) {
+        identificationDocuments.set(identificationDocuments.size() - 1, response);
+        notifyDataSetChanged();
     }
 
     public class CellViewHolder extends BaseViewHolder {

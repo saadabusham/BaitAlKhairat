@@ -14,7 +14,6 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentVerifyPhoneNumberBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.model.ListItem;
-import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -23,6 +22,7 @@ import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNew;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 
 import java.util.ArrayList;
 
@@ -107,9 +107,8 @@ public class VerifyPhoneNumberViewModel extends BaseViewModel<VerifyPhoneNumberN
                     public void onSuccess(String response) {
                         Bundle data = new Bundle();
                         data.putInt("type", PhoneNumberTypes.FORGET_PASSWORD.getValue());
-
-                        User.getInstance().setPhone(getViewBinding().edPhoneNumber.getText().toString());
-                        User.getInstance().setCountry_code(countryCodeAdapter.getItem(
+                        data.putString(AppConstants.BundleData.PHONE, getViewBinding().edPhoneNumber.getText().toString());
+                        data.putString(AppConstants.BundleData.COUNTRY_CODE, countryCodeAdapter.getItem(
                                 getViewBinding().spinnerCountryCode
                                         .getSelectedItemPosition()).getValue());
                         Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)

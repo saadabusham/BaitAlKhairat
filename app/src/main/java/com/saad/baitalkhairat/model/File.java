@@ -1,8 +1,11 @@
-package com.saad.baitalkhairat.model.needs;
+package com.saad.baitalkhairat.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class File {
+import java.io.Serializable;
+
+public class File implements Serializable {
+
 
     @SerializedName("path")
     private String path;
@@ -12,6 +15,10 @@ public class File {
 
     @SerializedName("id")
     private int id;
+
+    public File(String path) {
+        this.path = path;
+    }
 
     public String getPath() {
         return path;

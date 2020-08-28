@@ -5,8 +5,10 @@ import android.content.Context;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentUserDegreeBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -17,7 +19,7 @@ public class UserDegreeFragment extends BaseFragment<FragmentUserDegreeBinding, 
     private static final String TAG = UserDegreeFragment.class.getSimpleName();
     @Inject
     ViewModelProviderFactory factory;
-    private UserDegreeViewModel mRegisterViewModel;
+    private UserDegreeViewModel mViewModel;
     private FragmentUserDegreeBinding mViewBinding;
 
 
@@ -58,9 +60,9 @@ public class UserDegreeFragment extends BaseFragment<FragmentUserDegreeBinding, 
 
     @Override
     public UserDegreeViewModel getViewModel() {
-        mRegisterViewModel = (UserDegreeViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+        mViewModel = (UserDegreeViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
                 .create(UserDegreeViewModel.class, getViewDataBinding(), this);
-        return mRegisterViewModel;
+        return mViewModel;
     }
 
     @Override
@@ -72,6 +74,11 @@ public class UserDegreeFragment extends BaseFragment<FragmentUserDegreeBinding, 
     protected void setUp() {
         mViewBinding = getViewDataBinding();
         setUpToolbar(mViewBinding.toolbar, TAG, R.string.information_about_my_degree);
-        mRegisterViewModel.setUp();
+        mViewModel.setUp();
+    }
+
+    @Override
+    public UserResponse getUser() {
+        return (UserResponse) getArguments().getSerializable(AppConstants.BundleData.USER);
     }
 }

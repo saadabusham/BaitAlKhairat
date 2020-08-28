@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
@@ -19,14 +18,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentEditProfileBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
-import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.enums.PickImageTypes;
 import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.ProfileResponse;
-import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
@@ -35,7 +32,6 @@ import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.dialog.CustomUploadingDialog;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.ui.dialog.PickImageFragmentDialog;
-import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.PickImageUtility;
 import com.saad.baitalkhairat.utils.ProgressRequestBody;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
@@ -60,6 +56,10 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
     ArrayList<ListItem> genderList = new ArrayList<>();
     ArrayAdapter<ListItem> genderAdapter;
 
+    String bindingKey = "";
+
+    String birth_date = "";
+
     public <V extends ViewDataBinding, N extends BaseNavigator> EditProfileViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (EditProfileNavigator) navigation, (FragmentEditProfileBinding) viewDataBinding);
     }
@@ -69,6 +69,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         getViewBinding().edDay.setText(String.valueOf(dayOfMonth));
         getViewBinding().edMonth.setText(String.valueOf(monthOfYear + 1));
         getViewBinding().edYear.setText(String.valueOf(year));
+        birth_date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
         isValid();
     };
     TextWatcher textWatcher = new TextWatcher() {
@@ -101,6 +102,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
 
     @Override
     protected void setUp() {
+        bindingKey = GeneralFunction.generateUUID();
         getViewBinding().setData(getNavigator().getUser());
         customUploadingDialog = new CustomUploadingDialog(getMyContext());
         setUpSpinnerGender();
@@ -213,26 +215,21 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         dialog.show();
     }
 
-    public void onBtnClick() {
+    public void updateClicked() {
         if (isValid()) {
-            getDataManager().getAuthService().getDataApi().updateProfile(
-                    getViewBinding().edEmail.getText().toString(),
-                    getViewBinding().edUserName.getText().toString())
+            getDataManager().getAuthService().getDataApi().updateProfile(getUserObj())
                     .toObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), true, new APICallBack<ProfileResponse>() {
                         @Override
                         public void onSuccess(ProfileResponse response) {
-//                            response.getUser().setAccess_token(User.getObjUser().getAccess_token());
-                            User.getInstance().setObjUser(response.getUser());
-                            SessionManager.createUserLoginSession();
-//                            ((MainActivity) getMyContext()).setToolbarUserName();
                             new OnLineDialog(getMyContext()) {
                                 @Override
                                 public void onPositiveButtonClicked() {
                                     dismiss();
-                                    Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment).popBackStack();
+                                    Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                            .navigate(R.id.action_editProfileFragment_to_nav_account);
                                 }
 
                                 @Override
@@ -258,6 +255,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         }
     }
 
+
     public void changePasswordClicked() {
 //        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
 //                .navigate(R.id.action_editProfileFragment_to_changePasswordFragment);
@@ -267,7 +265,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         customUploadingDialog.showProgress();
         getDataManager().getAuthService().getDataApi()
                 .updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(),
-                        "profile_img", this), DeviceUtils.getUDID(getBaseActivity()))
+                        "profile_img", this), bindingKey)
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -275,9 +273,6 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
                         new APICallBack<ProfileResponse>() {
                             @Override
                             public void onSuccess(ProfileResponse response) {
-//                                response.getUser().setAccess_token(User.getInstance().getAccess_token());
-                                User.getInstance().setObjUser(response.getUser());
-                                SessionManager.createUserLoginSession();
                                 customUploadingDialog.setProgress(100);
                             }
 
@@ -327,14 +322,21 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         customUploadingDialog.setProgress(100);
     }
 
-    public void registerClicked() {
-        if (isValid()) {
-            Bundle data = new Bundle();
-            data.putInt("type", PhoneNumberTypes.REGISTER.getValue());
-            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                    .navigate(R.id.otpVerifierFragment, data);
-//            registerUser();
-        }
+    private UserResponse getUserObj() {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setBinding_key(bindingKey);
+        userResponse.setEmail(getViewBinding().edEmail.getText().toString());
+        userResponse.setName(getViewBinding().edUserName.getText().toString());
+        userResponse.setBirthDate(!birth_date.isEmpty() ? birth_date : getNavigator().getUser().getBirthDate());
+        userResponse.setCountryOfResidence(getViewBinding().spinnerCountry.getSelectedItemPosition() != 0 ?
+                countryNameAdapter.getItem(getViewBinding().spinnerCountry
+                        .getSelectedItemPosition()).getValue() : getNavigator().getUser().getCountryOfResidence());
+        userResponse.setGender(getViewBinding().spinnerGender.getSelectedItemPosition() != 0 ?
+                Integer.parseInt(genderAdapter.getItem(getViewBinding()
+                        .spinnerGender.getSelectedItemPosition()).getValue())
+                : getNavigator().getUser().getGender());
+        userResponse.setDescription(getViewBinding().edAboutMe.getText().toString());
+        return userResponse;
     }
 
     public boolean isValid() {

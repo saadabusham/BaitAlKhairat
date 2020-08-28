@@ -5,7 +5,7 @@ import android.content.Context;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentViewDocumentBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
 import com.saad.baitalkhairat.utils.AppConstants;
@@ -80,7 +80,7 @@ public class ViewDocumentFragment extends BaseFragment<FragmentViewDocumentBindi
 
 
     @Override
-    public IdentificationDocument getDocument() {
-        return (IdentificationDocument) getArguments().getSerializable(AppConstants.BundleData.DOCUMENT);
+    public File getDocument() {
+        return (File) getArguments().getSerializable(AppConstants.BundleData.DOCUMENT);
     }
 }

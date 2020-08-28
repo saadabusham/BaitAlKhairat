@@ -20,10 +20,12 @@ public class ApiConstants {
         public static final String UPDATE_FIREBASE_TOKEN = "user/update/device-token";
         public static final String LOGOUT = "member/logout";
         public static final String UPDATE_PASSWORD = "user/update/password";
-        public static final String UPDATE_PROFILE = "user/update/profile";
+        public static final String UPDATE_PROFILE = "member/my-profile";
         public static final String UPDATE_PROFILE_PICTURE = "member/my-profile";
         public static final String REFRESH_TOKEN = "member/refresh-token";
         public static final String MY_PROFILE = "member/my-profile";
+        public static final String ADD_ATTACHMENT = "member/my-profile/attachments";
+        public static final String DELETE_ATTACHMENT = "member/my-profile/attachments/{id}/delete";
     }
 
     public class apiHomeService {

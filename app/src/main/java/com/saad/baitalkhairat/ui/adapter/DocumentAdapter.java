@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.saad.baitalkhairat.databinding.CellDocumentBinding;
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemIdentificationDocumentViewModel;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class DocumentAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
 
-    private final List<IdentificationDocument> documentsList;
+    private final List<File> documentsList;
     Context mContext;
     RecycleDeleteClick mRecyclerClick;
 
@@ -51,12 +51,12 @@ public class DocumentAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return new CellViewHolder(cellBinding);
     }
 
-    public void addItems(List<IdentificationDocument> repoList) {
+    public void addItems(List<File> repoList) {
         documentsList.addAll(repoList);
         notifyDataSetChanged();
     }
 
-    public void addItem(IdentificationDocument identificationPaper) {
+    public void addItem(File identificationPaper) {
         documentsList.add(identificationPaper);
         notifyDataSetChanged();
     }
@@ -69,7 +69,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         documentsList.remove(position);
     }
 
-    public IdentificationDocument getItem(int position) {
+    public File getItem(int position) {
         return documentsList.get(position);
     }
 

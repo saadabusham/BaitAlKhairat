@@ -1,9 +1,11 @@
 package com.saad.baitalkhairat.model.user;
 
 import com.google.gson.annotations.SerializedName;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.model.ListItem;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserResponse implements Serializable {
@@ -17,8 +19,8 @@ public class UserResponse implements Serializable {
     @SerializedName("country_of_residence")
     private String countryOfResidence;
 
-    @SerializedName("documents")
-    private List<Object> documents;
+    @SerializedName("binding_key")
+    String binding_key;
 
     @SerializedName("birth_date")
     private String birthDate;
@@ -106,7 +108,8 @@ public class UserResponse implements Serializable {
 
     @SerializedName("social_twitter_link")
     private String socialTwitterLink;
-
+    @SerializedName("documents")
+    private ArrayList<File> documents;
 
     public int getMyGender(List<ListItem> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -136,6 +139,17 @@ public class UserResponse implements Serializable {
         return 0;
     }
 
+    public int getStudyCountry(List<ListItem> list) {
+        if (getEducationCountry() != null && !getEducationCountry().isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getValue().equals(getEducationCountry())) {
+                    return i + 1;
+                }
+            }
+        }
+        return 0;
+    }
+
     public String getSocialYoutubeLink() {
         return socialYoutubeLink;
     }
@@ -148,7 +162,9 @@ public class UserResponse implements Serializable {
         return countryOfResidence;
     }
 
-    public List<Object> getDocuments() {
+    public List<File> getDocuments() {
+        if (documents == null)
+            documents = new ArrayList<>();
         return documents;
     }
 
@@ -282,5 +298,175 @@ public class UserResponse implements Serializable {
 
     public String getBirthDay() {
         return birthDate.split("-")[2];
+    }
+
+    public void setDocuments(ArrayList<File> documents) {
+        this.documents = documents;
+    }
+
+    public String getEducationStartYear() {
+        return educationStartDate != null && !educationStartDate.isEmpty() ?
+                educationStartDate.split("-")[0] : "";
+    }
+
+    public String getEducationStartMonth() {
+        return educationStartDate != null && !educationStartDate.isEmpty() ?
+                educationStartDate.split("-")[1] : "";
+    }
+
+    public String getEducationStartDay() {
+        return educationStartDate != null && !educationStartDate.isEmpty() ?
+                educationStartDate.split("-")[2] : "";
+    }
+
+    public String getEducationEndYear() {
+        return educationEndDate != null && !educationEndDate.isEmpty() ?
+                educationEndDate.split("-")[0] : "";
+    }
+
+    public String getEducationEndMonth() {
+        return educationEndDate != null && !educationEndDate.isEmpty() ?
+                educationEndDate.split("-")[1] : "";
+    }
+
+    public String getEducationEndDay() {
+        return educationEndDate != null && !educationEndDate.isEmpty() ?
+                educationEndDate.split("-")[2] : "";
+    }
+
+    public void setSocialYoutubeLink(String socialYoutubeLink) {
+        this.socialYoutubeLink = socialYoutubeLink;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public void setCountryOfResidence(String countryOfResidence) {
+        this.countryOfResidence = countryOfResidence;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setEducationStartDate(String educationStartDate) {
+        this.educationStartDate = educationStartDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setWorkSite(String workSite) {
+        this.workSite = workSite;
+    }
+
+    public void setWorkStartDate(String workStartDate) {
+        this.workStartDate = workStartDate;
+    }
+
+    public void setMaritalStatusLabel(String maritalStatusLabel) {
+        this.maritalStatusLabel = maritalStatusLabel;
+    }
+
+    public void setEducationSpecialty(String educationSpecialty) {
+        this.educationSpecialty = educationSpecialty;
+    }
+
+    public void setWorkPlace(String workPlace) {
+        this.workPlace = workPlace;
+    }
+
+    public void setCountryOfResidenceLabel(String countryOfResidenceLabel) {
+        this.countryOfResidenceLabel = countryOfResidenceLabel;
+    }
+
+    public void setProfileImage(ProfileImage profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public void setSocialInstagramLink(String socialInstagramLink) {
+        this.socialInstagramLink = socialInstagramLink;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEducationCountry(String educationCountry) {
+        this.educationCountry = educationCountry;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setGenderLabel(String genderLabel) {
+        this.genderLabel = genderLabel;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setNationalityLabel(String nationalityLabel) {
+        this.nationalityLabel = nationalityLabel;
+    }
+
+    public void setEducationCountryLabel(String educationCountryLabel) {
+        this.educationCountryLabel = educationCountryLabel;
+    }
+
+    public void setSocialLinkedinLink(String socialLinkedinLink) {
+        this.socialLinkedinLink = socialLinkedinLink;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setSocialFacebookLink(String socialFacebookLink) {
+        this.socialFacebookLink = socialFacebookLink;
+    }
+
+    public void setEducationEndDate(String educationEndDate) {
+        this.educationEndDate = educationEndDate;
+    }
+
+    public void setWorkEndDate(String workEndDate) {
+        this.workEndDate = workEndDate;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEducationUniversity(String educationUniversity) {
+        this.educationUniversity = educationUniversity;
+    }
+
+    public void setSocialTwitterLink(String socialTwitterLink) {
+        this.socialTwitterLink = socialTwitterLink;
+    }
+
+    public String getBinding_key() {
+        return binding_key;
+    }
+
+    public void setBinding_key(String binding_key) {
+        this.binding_key = binding_key;
     }
 }

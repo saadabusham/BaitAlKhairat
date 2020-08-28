@@ -11,6 +11,7 @@ import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.VerifyPhoneResponeResponse;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.model.errormodel.VerifyPhoneError;
+import com.saad.baitalkhairat.model.needs.AddNeedDocResponse;
 import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
@@ -35,6 +36,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -94,6 +96,24 @@ public class AuthService {
                 .subscribe(new CustomObserverResponse<String>(mContext, true, new APICallBack<String>() {
                     @Override
                     public void onSuccess(String response) {
+                        apiCallBack.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                        apiCallBack.onError(error, errorCode);
+                    }
+                }));
+    }
+
+    public void removeDocument(Context mContext, boolean withProgress, int docId, String binding_key, APICallBack<Object> apiCallBack) {
+        getDataApi().removeDocument(docId, binding_key)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<Object>(mContext, withProgress, new APICallBack<Object>() {
+                    @Override
+                    public void onSuccess(Object response) {
                         apiCallBack.onSuccess(response);
                     }
 
@@ -193,19 +213,27 @@ public class AuthService {
         @POST(ApiConstants.apiAuthService.LOGOUT)
         Single<Response<GeneralResponse<String>>> logout(@Query("token") String token);
 
+        @POST(ApiConstants.apiAuthService.DELETE_ATTACHMENT)
+        Single<Response<GeneralResponse<Object>>> removeDocument(@Path("id") int id,
+                                                                 @Query("binding_key") String binding_key);
+
         @PATCH(ApiConstants.apiAuthService.UPDATE_PASSWORD)
         Single<Response<GeneralResponse<String>>> updatePassword(@Query("password") String password,
                                                                  @Query("password_confirmation") String password_confirmation,
                                                                  @Query("current_password") String current_password);
 
-        @PATCH(ApiConstants.apiAuthService.UPDATE_PROFILE)
-        Single<Response<GeneralResponse<ProfileResponse>>> updateProfile(@Query("email") String email,
-                                                                         @Query("name") String name);
+        @PUT(ApiConstants.apiAuthService.UPDATE_PROFILE)
+        Single<Response<GeneralResponse<ProfileResponse>>> updateProfile(@Body UserResponse user);
 
         @Multipart
         @PUT(ApiConstants.apiAuthService.UPDATE_PROFILE_PICTURE)
         Single<Response<GeneralResponse<ProfileResponse>>> updateProfilePicture(@Part MultipartBody.Part image,
                                                                                 @Query("binding_key") String uuid);
+
+        @Multipart
+        @POST(ApiConstants.apiAuthService.ADD_ATTACHMENT)
+        Single<Response<GeneralResponse<AddNeedDocResponse>>> addAttachment(@Part MultipartBody.Part image,
+                                                                            @Query("binding_key") String uuid);
 
         @POST(ApiConstants.apiAuthService.REFRESH_TOKEN)
         Single<Response<TokenResponse>> refreshToken(@Query("refresh_token") String refresh_token,

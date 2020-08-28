@@ -7,6 +7,7 @@ import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -77,4 +78,13 @@ public class OtpVerifierFragment extends BaseFragment<FragmentOtpVerifierBinding
         mOtpViewModel.setUp();
     }
 
+    @Override
+    public String getPhone() {
+        return getArguments().getString(AppConstants.BundleData.PHONE);
+    }
+
+    @Override
+    public String getCountryCode() {
+        return getArguments().getString(AppConstants.BundleData.COUNTRY_CODE);
+    }
 }

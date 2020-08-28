@@ -6,34 +6,30 @@ import android.content.Context;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 
 
 public class ItemIdentificationDocumentViewModel extends BaseObservable {
 
     private final Context context;
     RecycleDeleteClick mRecyclerClick;
-    private IdentificationDocument identificationDocument;
+    private File identificationDocument;
     private int position;
 
-    public ItemIdentificationDocumentViewModel(Context context, IdentificationDocument identificationPaper, int position, RecycleDeleteClick mRecyclerClick) {
+    public ItemIdentificationDocumentViewModel(Context context, File identificationPaper, int position, RecycleDeleteClick mRecyclerClick) {
         this.context = context;
         this.identificationDocument = identificationPaper;
         this.position = position;
         this.mRecyclerClick = mRecyclerClick;
     }
 
-    public IdentificationDocument getIdentificationDocument() {
+    public File getIdentificationDocument() {
         return identificationDocument;
     }
 
-    public void setIdentificationDocument(IdentificationDocument identificationDocument) {
+    public void setIdentificationDocument(File identificationDocument) {
         this.identificationDocument = identificationDocument;
         notifyChange();
-    }
-
-    public String getImage() {
-        return identificationDocument.getImage();
     }
 
     public void onItemClick(boolean isRemove) {

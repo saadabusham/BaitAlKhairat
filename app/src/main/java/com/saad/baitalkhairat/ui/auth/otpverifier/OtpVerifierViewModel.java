@@ -106,8 +106,8 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
     }
 
     private void verifyCodeToForgetPassword() {
-        getDataManager().getAuthService().getDataApi().verifyPhone(User.getInstance().getPhone(),
-                User.getInstance().getCountry_code(),
+        getDataManager().getAuthService().getDataApi().verifyPhone(getNavigator().getPhone(),
+                getNavigator().getCountryCode(),
                 getOtp())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -170,8 +170,8 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
 
     public void resendCodeToForgetPassword() {
         getDataManager().getAuthService().getDataApi().resendCodeToForgetPassword(
-                User.getInstance().getPhone(),
-                User.getInstance().getCountry_code())
+                getNavigator().getPhone(),
+                getNavigator().getCountryCode())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

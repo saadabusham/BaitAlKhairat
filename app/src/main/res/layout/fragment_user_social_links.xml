@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.user.UserResponse" />
     </data>
 
     <LinearLayout
@@ -44,6 +48,7 @@
                     android:padding="10dp"
                     android:textColor="@color/edittextUnderline"
                     android:textColorHint="@color/edittextUnderline"
+                    android:text="@{data.socialFacebookLink}"
                     android:textSize="16sp" />
 
                 <EditText
@@ -57,6 +62,7 @@
                     android:padding="10dp"
                     android:textColor="@color/edittextUnderline"
                     android:textColorHint="@color/edittextUnderline"
+                    android:text="@{data.socialTwitterLink}"
                     android:textSize="16sp" />
 
                 <EditText
@@ -70,6 +76,7 @@
                     android:padding="10dp"
                     android:textColor="@color/edittextUnderline"
                     android:textColorHint="@color/edittextUnderline"
+                    android:text="@{data.socialYoutubeLink}"
                     android:textSize="16sp" />
 
                 <EditText
@@ -83,6 +90,7 @@
                     android:padding="10dp"
                     android:textColor="@color/edittextUnderline"
                     android:textColorHint="@color/edittextUnderline"
+                    android:text="@{data.socialInstagramLink}"
                     android:textSize="16sp" />
 
                 <EditText
@@ -96,19 +104,20 @@
                     android:padding="10dp"
                     android:textColor="@color/edittextUnderline"
                     android:textColorHint="@color/edittextUnderline"
+                    android:text="@{data.socialLinkedinLink}"
                     android:textSize="16sp" />
 
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnSignup"
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/tablayout_gray"
                 android:enabled="false"
                 android:onClick="@{() -> viewModel.onSaveClick()}"
-                android:text="@string/sign_up"
+                android:text="@string/save_changes"
                 style="@style/bold_style"
                 android:textColor="@color/login_text_gray" />
 

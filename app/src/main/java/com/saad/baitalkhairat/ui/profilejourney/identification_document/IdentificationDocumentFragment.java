@@ -6,8 +6,10 @@ import android.content.Intent;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentIdentificationDocumentBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.PickImageUtility;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -100,12 +102,17 @@ public class IdentificationDocumentFragment extends BaseFragment<FragmentIdentif
             case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE: {
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 if (resultCode == RESULT_OK) {
-                    mEditProfileViewModel.addImage(result.getUri().toString());
+                    mEditProfileViewModel.addImage(result.getUri().getPath());
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     Exception error = result.getError();
                 }
             }
         }
+    }
+
+    @Override
+    public UserResponse getUser() {
+        return (UserResponse) getArguments().getSerializable(AppConstants.BundleData.USER);
     }
 }

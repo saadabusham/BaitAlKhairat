@@ -264,7 +264,7 @@
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:background="@color/tablayout_gray"
                         android:enabled="false"
-                        android:onClick="@{() -> viewModel.registerClicked()}"
+                        android:onClick="@{() -> viewModel.updateClicked()}"
                         android:text="@string/save"
                         android:textColor="@color/login_text_gray" />
 

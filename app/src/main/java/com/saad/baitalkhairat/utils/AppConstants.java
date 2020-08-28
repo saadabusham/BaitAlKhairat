@@ -104,5 +104,7 @@ public final class AppConstants {
         public static final String CASE = "CASE";
         public static final String USER = "USER";
         public static final String DONORS = "DONORS";
+        public static final String PHONE = "PHONE";
+        public static final String COUNTRY_CODE = "COUNTRY_CODE";
     }
 }

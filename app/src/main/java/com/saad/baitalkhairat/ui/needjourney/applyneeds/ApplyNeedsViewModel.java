@@ -16,7 +16,7 @@ import com.saad.baitalkhairat.helper.GeneralFunction;
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Amount;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.model.ListItem;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.errormodel.AddNeedError;
@@ -35,7 +35,7 @@ import com.saad.baitalkhairat.utils.PickImageUtility;
 import java.util.ArrayList;
 
 public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, FragmentApplyNeedsBinding>
-        implements RecyclerClick<Amount>, RecycleDeleteClick<IdentificationDocument> {
+        implements RecyclerClick<Amount>, RecycleDeleteClick<File> {
 
     AmountAdapter amountAdapter;
     DocumentAdapter documentAdapter;
@@ -228,7 +228,7 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
 
         for (int i = 0; i < documentAdapter.getItemCount(); i++) {
             getDataManager().getNeedsService().addNeedDocs(getMyContext(), false,
-                    GeneralFunction.getImageMultipart(documentAdapter.getItem(i).getImage(), "attachment"),
+                    GeneralFunction.getImageMultipart(documentAdapter.getItem(i).getPath(), "attachment"),
                     bindingKey, new APICallBack<AddNeedDocResponse>() {
                         @Override
                         public void onSuccess(AddNeedDocResponse response) {
@@ -297,7 +297,7 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
     }
 
     @Override
-    public void onClick(boolean isDelete, IdentificationDocument object, int position) {
+    public void onClick(boolean isDelete, File object, int position) {
         if (isDelete) {
             documentAdapter.remove(position);
             documentAdapter.notifyDataSetChanged();
@@ -305,7 +305,7 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
     }
 
     public void addImage(String imagePath) {
-        documentAdapter.addItem(new IdentificationDocument(imagePath));
+        documentAdapter.addItem(new File(imagePath));
         getViewBinding().recyclerViewDocuments.recyclerView.scrollToPosition(documentAdapter.getItemCount() - 1);
     }
 }

@@ -3,7 +3,6 @@ package com.saad.baitalkhairat.ui.profilejourney.userdegree;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -11,25 +10,42 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentUserDegreeBinding;
-import com.saad.baitalkhairat.enums.PhoneNumberTypes;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.enums.DialogTypes;
+import com.saad.baitalkhairat.helper.GeneralFunction;
+import com.saad.baitalkhairat.model.ListItem;
+import com.saad.baitalkhairat.model.ProfileResponse;
+import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.user.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.utils.LanguageUtils;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class UserDegreeViewModel extends BaseViewModel<UserDegreeNavigator, FragmentUserDegreeBinding> {
 
+    ArrayList<ListItem> countryNameList = new ArrayList<>();
+    ArrayAdapter<ListItem> countryNameAdapter;
 
     boolean isStartDateClicked = true;
+    String bindingKey = "";
+    String start_date = "", end_date = "";
+
     AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -63,10 +79,12 @@ public class UserDegreeViewModel extends BaseViewModel<UserDegreeNavigator, Frag
             getViewBinding().edStartDay.setText(String.valueOf(dayOfMonth));
             getViewBinding().edStartMonth.setText(String.valueOf(monthOfYear + 1));
             getViewBinding().edStartYear.setText(String.valueOf(year));
+            start_date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
         } else {
             getViewBinding().edFinishDay.setText(String.valueOf(dayOfMonth));
             getViewBinding().edFinishMonth.setText(String.valueOf(monthOfYear + 1));
             getViewBinding().edFinishYear.setText(String.valueOf(year));
+            end_date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
         }
         isValid();
     };
@@ -77,6 +95,8 @@ public class UserDegreeViewModel extends BaseViewModel<UserDegreeNavigator, Frag
 
     @Override
     protected void setUp() {
+        bindingKey = GeneralFunction.generateUUID();
+        getViewBinding().setData(getNavigator().getUser());
         setUpSpinnerCountry();
         setUpWatcher();
     }
@@ -88,12 +108,28 @@ public class UserDegreeViewModel extends BaseViewModel<UserDegreeNavigator, Frag
     }
 
     private void setUpSpinnerCountry() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getMyContext().getResources().getString(R.string.country_original));
-        arrayList.add(getMyContext().getResources().getString(R.string.jordan));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyContext(), android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerStudyCountry.setAdapter(adapter);
+        countryNameList.add(new ListItem(getMyContext().getResources().getString(R.string.country_original)));
+        countryNameAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryNameList);
+        countryNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        getViewBinding().spinnerStudyCountry.setAdapter(countryNameAdapter);
+
+        getCountryNames();
+    }
+
+    private void getCountryNames() {
+        getDataManager().getAppService().getCountryName(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+            @Override
+            public void onSuccess(CountryCodeResponse response) {
+                countryNameAdapter.addAll(response.getList());
+                countryNameAdapter.notifyDataSetChanged();
+                getViewBinding().spinnerStudyCountry.setSelection(getNavigator().getUser().getStudyCountry(response.getList()));
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                showErrorSnackBar(error);
+            }
+        });
     }
 
     public void openDatePicker(boolean isStartDateClicked) {
@@ -107,53 +143,57 @@ public class UserDegreeViewModel extends BaseViewModel<UserDegreeNavigator, Frag
         dialog.show();
     }
 
-    public void registerClicked() {
+    public void onSaveClick() {
         if (isValid()) {
-            Bundle data = new Bundle();
-            data.putInt("type", PhoneNumberTypes.REGISTER.getValue());
-            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                    .navigate(R.id.otpVerifierFragment, data);
-//            registerUser();
+            getDataManager().getAuthService().getDataApi().updateProfile(getUserObj())
+                    .toObservable()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), true, new APICallBack<ProfileResponse>() {
+                        @Override
+                        public void onSuccess(ProfileResponse response) {
+                            new OnLineDialog(getMyContext()) {
+                                @Override
+                                public void onPositiveButtonClicked() {
+                                    dismiss();
+                                    Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                            .navigate(R.id.action_userDegreeFragment_to_nav_account);
+                                }
+
+                                @Override
+                                public void onNegativeButtonClicked() {
+
+                                }
+                            }.showConfirmationDialog(DialogTypes.OK, getMyContext().getResources().getString(R.string.update_successfully),
+                                    getMyContext().getResources().getString(R.string.your_profile_has_been_updated_successfully));
+                        }
+
+                        @Override
+                        public void onError(String error, int errorCode) {
+                            showSnackBar(getMyContext().getString(R.string.error),
+                                    error, getMyContext().getResources().getString(R.string.OK),
+                                    new SnackViewBulider.SnackbarCallback() {
+                                        @Override
+                                        public void onActionClick(Snackbar snackbar) {
+                                            snackbar.dismiss();
+                                        }
+                                    });
+                        }
+                    }));
         }
     }
 
-    public void registerUser() {
-//        getDataManager().getAuthService().getDataApi().registerUser(getUserObj())
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<RegisterResponse>(getMyContext(), true, new APICallBack<RegisterResponse>() {
-//                    @Override
-//                    public void onSuccess(RegisterResponse response) {
-//                        User user = response.getUser();
-//                        user.setToken(response.getJwt_token());
-//                        User.getInstance().setObjUser(user);
-//                        SessionManager.createUserLoginSession();
-////                        getDataManager().getAuthervice().setObjNull();
-//                        getDataManager().getAuthService().updateFirebaseToken(getMyContext(), true, new APICallBack() {
-//                            @Override
-//                            public void onSuccess(Object response) {
-//                                getBaseActivity().finishAffinity();
-////                                getBaseActivity().startActivity(MainActivity.newIntent(getMyContext()));
-//                            }
-//
-//                            @Override
-//                            public void onError(String error, int errorCode) {
-//                                showToast(error);
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        showToast(error);
-//                    }
-//                }));
-    }
+    private UserResponse getUserObj() {
+        getNavigator().getUser().setBinding_key(bindingKey);
 
-    private User getUserObj() {
-        User user = User.getInstance();
-        return user;
+        getNavigator().getUser().setEducationUniversity(getViewBinding().edSchoolUniversity.getText().toString());
+        getNavigator().getUser().setEducationCountry(countryNameAdapter.getItem(getViewBinding().spinnerStudyCountry.getSelectedItemPosition()).getValue());
+        getNavigator().getUser().setEducationStartDate(!start_date.isEmpty() ? start_date :
+                getNavigator().getUser().getEducationStartDate());
+        getNavigator().getUser().setEducationEndDate(!end_date.isEmpty() ? end_date :
+                getNavigator().getUser().getEducationEndDate());
+        getNavigator().getUser().setEducationSpecialty(getViewBinding().edSpecialization.getText().toString());
+        return getNavigator().getUser();
     }
 
     private void checkValidate(boolean isValid) {

@@ -8,7 +8,7 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentViewDocumentBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.helper.GeneralFunction;
-import com.saad.baitalkhairat.model.IdentificationDocument;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -16,7 +16,7 @@ import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 
 public class ViewDocumentViewModel extends BaseViewModel<ViewDocumentNavigator, FragmentViewDocumentBinding> {
 
-    IdentificationDocument identificationDocument;
+    File identificationDocument;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> ViewDocumentViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (ViewDocumentNavigator) navigation, (FragmentViewDocumentBinding) viewDataBinding);
@@ -26,10 +26,10 @@ public class ViewDocumentViewModel extends BaseViewModel<ViewDocumentNavigator, 
     @Override
     protected void setUp() {
         identificationDocument = getNavigator().getDocument();
-        GeneralFunction.loadImage(getMyContext(), identificationDocument.getImage(), getViewBinding().imgDocument);
+        GeneralFunction.loadImage(getMyContext(), identificationDocument.getPath(), getViewBinding().imgDocument);
     }
 
-    public IdentificationDocument getIdentificationDocument() {
+    public File getIdentificationDocument() {
         return identificationDocument;
     }
 

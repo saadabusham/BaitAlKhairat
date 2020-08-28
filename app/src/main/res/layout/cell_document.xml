@@ -27,7 +27,7 @@
 
             <ImageView
                 android:id="@+id/imgTitle"
-                imageUrl="@{viewModel.identificationDocument.image}"
+                imageUrl="@{viewModel.identificationDocument.path}"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:onClick="@{()->viewModel.onItemClick(false)}" />

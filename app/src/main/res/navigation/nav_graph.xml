@@ -158,15 +158,33 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment">
+        <action
+            android:id="@+id/action_editProfileFragment_to_nav_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/userSocialLinksFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.usersociallinks.UserSocialLinksFragment"
-        android:label="UserSocialLinksFragment" />
+        android:label="UserSocialLinksFragment">
+        <action
+            android:id="@+id/action_userSocialLinksFragment_to_nav_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/userDegreeFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.userdegree.UserDegreeFragment"
-        android:label="UserDegreeFragment" />
+        android:label="UserDegreeFragment">
+        <action
+            android:id="@+id/action_userDegreeFragment_to_nav_account"
+            app:destination="@id/nav_account"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/identificationDocumentFragment"
         android:name="com.saad.baitalkhairat.ui.profilejourney.identification_document.IdentificationDocumentFragment"
