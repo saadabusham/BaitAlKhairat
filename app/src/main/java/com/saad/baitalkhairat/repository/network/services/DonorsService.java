@@ -6,6 +6,7 @@ import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.model.cart.CartResponse;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
 import com.saad.baitalkhairat.model.donors.CategoryResponse;
+import com.saad.baitalkhairat.model.donors.DonorResponse;
 import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
@@ -90,6 +91,22 @@ public class DonorsService {
                 .subscribe(new CustomObserverResponse<String>(mContext, withProgress, apiCallBack));
     }
 
+    public void getCurrentNeeds(Context mContext, boolean withProgress, int page, APICallBack<DonorResponse> apiCallBack) {
+        getDataApi().currentNeeds(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<DonorResponse>(mContext, withProgress, apiCallBack));
+    }
+
+    public void getHistoryNeeds(Context mContext, boolean withProgress, int page, APICallBack<DonorResponse> apiCallBack) {
+        getDataApi().historyNeeds(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<DonorResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -119,6 +136,12 @@ public class DonorsService {
 
         @POST(ApiConstants.apiDonorsService.CHECKOUT)
         Single<Response<GeneralResponse<String>>> checkout(@Header("platform-id") String platform_id);
+
+        @GET(ApiConstants.apiDonorsService.CURRENT_NEEDS)
+        Single<Response<DonorResponse>> currentNeeds(@Query("page") int page);
+
+        @GET(ApiConstants.apiDonorsService.HISTORY_NEEDS)
+        Single<Response<DonorResponse>> historyNeeds(@Query("page") int page);
     }
 }
 

@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Transaction;
+import com.saad.baitalkhairat.model.wallet.Transaction;
 
 public class ItemTransactionViewModel extends BaseObservable {
 

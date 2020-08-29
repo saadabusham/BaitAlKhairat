@@ -35,6 +35,7 @@ public class ApiConstants {
 
     public class apiWalletService {
         public static final String WALLET = "member/wallets";
+        public static final String TRANSACTIONS = "member/wallets/statements";
     }
 
     public class apiAddressService {
@@ -85,6 +86,8 @@ public class ApiConstants {
         public static final String GET_CART = "carts";
         public static final String DELETE_CART = "carts/{id}/destroy";
         public static final String CHECKOUT = "carts/checkout";
+        public static final String HISTORY_NEEDS = "member/donations/previous";
+        public static final String CURRENT_NEEDS = "member/donations/current";
     }
 
     public class apiNeedsService {

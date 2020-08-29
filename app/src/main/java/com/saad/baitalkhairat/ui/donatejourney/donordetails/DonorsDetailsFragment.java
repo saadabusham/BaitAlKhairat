@@ -5,7 +5,7 @@ import android.content.Context;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentDonorsDetailsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
-import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.model.donors.MyDonors;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
 import com.saad.baitalkhairat.utils.AppConstants;

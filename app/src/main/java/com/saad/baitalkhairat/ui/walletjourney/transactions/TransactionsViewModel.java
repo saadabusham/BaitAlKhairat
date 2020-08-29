@@ -10,17 +10,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentTransactionsBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.Notification;
-import com.saad.baitalkhairat.model.Transaction;
+import com.saad.baitalkhairat.model.wallet.TransactionResponse;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.TransactionAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, FragmentTransactionsBinding>
@@ -30,6 +33,8 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
+    boolean isRetry = false;
+    TransactionResponse transactionResponse;
 
     public <V extends ViewDataBinding, N extends BaseNavigator> TransactionsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (TransactionsNavigator) navigation, (FragmentTransactionsBinding) viewDataBinding);
@@ -38,7 +43,7 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
     @Override
     protected void setUp() {
         setUpRecycler();
-        getData();
+        getData(1);
     }
 
     private void setUpRecycler() {
@@ -46,7 +51,7 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                getData(1);
             }
         });
 
@@ -57,67 +62,52 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
         transactionAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                transactionAdapter.addItem(null);
-                transactionAdapter.notifyItemInserted(transactionAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(transactionAdapter.getItemCount() - 1);
-                setLoadMore(true);
-                getData();
+                if (transactionResponse != null &&
+                        transactionResponse.getMeta().getCurrentPage() < transactionResponse.getMeta().getLastPage()) {
+                    transactionAdapter.addItem(null);
+                    transactionAdapter.notifyItemInserted(transactionAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(transactionAdapter.getItemCount() - 1);
+                    setLoadMore(true);
+                    getData(transactionResponse.getMeta().getCurrentPage() + 1);
+                }
             }
         });
-        getLocalData();
-    }
-
-    private void getLocalData() {
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
-        transactionAdapter.addItem(new Transaction());
     }
 
 
-    public void getData() {
-//        if (!isRefreshing() && !isRetry()) {
-//            enableLoading = true;
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(getMyContext(), enableLoading, new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-////                        homeAdapter.addItems(response.getCategoryList());
-////                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (homeAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.ok),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
+    public void getData(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getWalletService().getTransactions(getMyContext(), true, page, new APICallBack<TransactionResponse>() {
+            @Override
+            public void onSuccess(TransactionResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    transactionResponse = response;
+                    transactionAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (transactionAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.ok),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
     private void showNoDataFound() {
@@ -161,12 +151,30 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
     }
 
 
+    public boolean isRetry() {
+        return isRetry;
+    }
+
+    public void setRetry(boolean retry) {
+        isRetry = retry;
+    }
+
     private void checkIsLoadMoreAndRefreshing(boolean isSuccess) {
         if (isRefreshing()) {
             finishRefreshing(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
         } else {
             enableLoading = false;
         }
+    }
+
+
+    public void finishLoadMore() {
+        transactionAdapter.remove(transactionAdapter.getItemCount() - 1);
+        transactionAdapter.notifyItemRemoved(transactionAdapter.getItemCount());
+        transactionAdapter.setLoaded();
+        setLoadMore(false);
     }
 
 

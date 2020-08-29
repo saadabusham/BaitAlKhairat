@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentDonorsDetailsBinding;
 import com.saad.baitalkhairat.enums.ProcessTypes;
-import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.model.donors.MyDonors;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -50,12 +50,12 @@ public class DonorsDetailsViewModel extends BaseViewModel<DonorsDetailsNavigator
     }
 
     private int getImage(int orderStatus) {
-        if (getDonorsObj().getProcess() == ProcessTypes.FINISHED.getStatus()) {
+        if (getDonorsObj().getStatus() == ProcessTypes.FINISHED.getStatus()) {
             return R.drawable.ic_process_done;
         }
-        if (getDonorsObj().getProcess() > orderStatus) {
+        if (getDonorsObj().getStatus() > orderStatus) {
             return R.drawable.ic_process_done;
-        } else if (getDonorsObj().getProcess() == orderStatus) {
+        } else if (getDonorsObj().getStatus() == orderStatus) {
             return R.drawable.ic_process_start;
         } else {
             return R.drawable.ic_process_wait;
@@ -75,7 +75,7 @@ public class DonorsDetailsViewModel extends BaseViewModel<DonorsDetailsNavigator
     }
 
     private int getColor(int orderStatus) {
-        if (getDonorsObj().getProcess() >= orderStatus) {
+        if (getDonorsObj().getStatus() >= orderStatus) {
             return R.color.green;
         } else {
             return R.color.process_gray;

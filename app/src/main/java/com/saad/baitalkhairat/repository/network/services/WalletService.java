@@ -3,10 +3,12 @@ package com.saad.baitalkhairat.repository.network.services;
 import android.content.Context;
 
 import com.saad.baitalkhairat.model.wallet.CheckCharge;
+import com.saad.baitalkhairat.model.wallet.TransactionResponse;
 import com.saad.baitalkhairat.model.wallet.Wallet;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.ApiClient;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponse;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandard;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.GeneralResponse;
 import com.saad.baitalkhairat.repository.network.ApiConstants;
 
@@ -52,6 +54,14 @@ public class WalletService {
                 .subscribe(new CustomObserverResponse<CheckCharge>(mContext, true, apiCallBack));
     }
 
+    public void getTransactions(Context mContext, boolean withProgress, int page, APICallBack<TransactionResponse> apiCallBack) {
+        getDataApi().getTransactions(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<TransactionResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -64,6 +74,9 @@ public class WalletService {
         @GET(ApiConstants.apiWalletService.WALLET)
         Single<Response<GeneralResponse<CheckCharge>>> checkCharge(@Query("amount") double amount,
                                                                    @Query("charge_type") int charge_type);
+
+        @GET(ApiConstants.apiWalletService.TRANSACTIONS)
+        Single<Response<TransactionResponse>> getTransactions(@Query("page") int page);
 
     }
 }

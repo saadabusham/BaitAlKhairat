@@ -7,6 +7,7 @@ import com.saad.baitalkhairat.databinding.FragmentMyDonationListBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -77,5 +78,8 @@ public class MyDonationListFragment extends BaseFragment<FragmentMyDonationListB
         mViewModel.setUp();
     }
 
-
+    @Override
+    public int getNeedType() {
+        return getArguments().getInt(AppConstants.BundleData.MY_NEEDS_TAB_TYPE, 0);
+    }
 }

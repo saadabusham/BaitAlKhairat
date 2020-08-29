@@ -10,16 +10,21 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentMyDonationListBinding;
+import com.saad.baitalkhairat.enums.MyNeedsTabTypes;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.model.donors.DonorResponse;
+import com.saad.baitalkhairat.model.donors.MyDonors;
 import com.saad.baitalkhairat.repository.DataManager;
+import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.MyDonorsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.utils.AppConstants;
+import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigator, FragmentMyDonationListBinding>
@@ -29,7 +34,9 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
+    boolean isRetry = false;
 
+    DonorResponse donorResponse;
     public <V extends ViewDataBinding, N extends BaseNavigator> MyDonationListViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (MyDonationListNavigator) navigation, (FragmentMyDonationListBinding) viewDataBinding);
     }
@@ -37,7 +44,15 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
     @Override
     protected void setUp() {
         setUpRecycler();
-        getData();
+        MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+        switch (myNeedsTabTypes) {
+            case CURRENT:
+                getCurrentNeeds(1);
+                break;
+            case HISTORY:
+                getHistoryNeeds(1);
+                break;
+        }
     }
 
     private void setUpRecycler() {
@@ -45,7 +60,15 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
             @Override
             public void onRefresh() {
                 setIsRefreshing(true);
-                getData();
+                MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+                switch (myNeedsTabTypes) {
+                    case CURRENT:
+                        getCurrentNeeds(1);
+                        break;
+                    case HISTORY:
+                        getHistoryNeeds(1);
+                        break;
+                }
             }
         });
 
@@ -56,71 +79,94 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
         myDonorsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                myDonorsAdapter.addItem(null);
-                myDonorsAdapter.notifyItemInserted(myDonorsAdapter.getItemCount() - 1);
-                getViewBinding().recyclerView.scrollToPosition(myDonorsAdapter.getItemCount() - 1);
-                setLoadMore(true);
-                getData();
+                if (donorResponse != null &&
+                        donorResponse.getMeta().getCurrentPage() < donorResponse.getMeta().getLastPage()) {
+                    myDonorsAdapter.addItem(null);
+                    myDonorsAdapter.notifyItemInserted(myDonorsAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(myDonorsAdapter.getItemCount() - 1);
+                    setLoadMore(true);
+                    MyNeedsTabTypes myNeedsTabTypes = MyNeedsTabTypes.fromInt(getNavigator().getNeedType());
+                    switch (myNeedsTabTypes) {
+                        case CURRENT:
+                            getCurrentNeeds(donorResponse.getMeta().getCurrentPage() + 1);
+                            break;
+                        case HISTORY:
+                            getHistoryNeeds(donorResponse.getMeta().getCurrentPage() + 1);
+                            break;
+                    }
+                }
             }
         });
-        getLocalData();
     }
 
-    private void getLocalData() {
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(2));
-        myDonorsAdapter.addItem(new MyDonors(3));
-        myDonorsAdapter.addItem(new MyDonors(4));
-        myDonorsAdapter.addItem(new MyDonors(4));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(3));
-        myDonorsAdapter.addItem(new MyDonors(2));
-        myDonorsAdapter.addItem(new MyDonors(4));
-        myDonorsAdapter.addItem(new MyDonors(4));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
-        myDonorsAdapter.addItem(new MyDonors(1));
+    public void getCurrentNeeds(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getDonorsService().getCurrentNeeds(getMyContext(), true, page, new APICallBack<DonorResponse>() {
+            @Override
+            public void onSuccess(DonorResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    donorResponse = response;
+                    myDonorsAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (myDonorsAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.ok),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
-    public void getData() {
-//        if (!isRefreshing() && !isRetry()) {
-//            enableLoading = true;
-//        }
-//        getDataManager().getHomeService().getDataApi().getHomeCategories()
-//                .toObservable()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new CustomObserverResponse<Home>(getMyContext(), enableLoading, new APICallBack<Home>() {
-//                    @Override
-//                    public void onSuccess(Home response) {
-//                        checkIsLoadMoreAndRefreshing(true);
-////                        homeAdapter.addItems(response.getCategoryList());
-////                        notifiAdapter();
-//                        if (response.getSliderList().size() > 0) {
-//                            setUpViewPager(response.getSliderList());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String error, int errorCode) {
-//                        if (homeAdapter.getItemCount() == 0) {
-//                            showNoDataFound();
-//                        }
-//                        showSnackBar(getMyContext().getString(R.string.error),
-//                                error, getMyContext().getResources().getString(R.string.ok),
-//                                new SnackViewBulider.SnackbarCallback() {
-//                                    @Override
-//                                    public void onActionClick(Snackbar snackbar) {
-//                                        snackbar.dismiss();
-//                                    }
-//                                });
-//                        checkIsLoadMoreAndRefreshing(false);
-//                    }
-//                }));
+    public void getHistoryNeeds(int page) {
+        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+            enableLoading = true;
+        }
+        getDataManager().getDonorsService().getHistoryNeeds(getMyContext(), true, page, new APICallBack<DonorResponse>() {
+            @Override
+            public void onSuccess(DonorResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    donorResponse = response;
+                    myDonorsAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
+                if (myDonorsAdapter.getItemCount() == 0) {
+                    showNoDataFound();
+                }
+                showSnackBar(getMyContext().getString(R.string.error),
+                        error, getMyContext().getResources().getString(R.string.ok),
+                        new SnackViewBulider.SnackbarCallback() {
+                            @Override
+                            public void onActionClick(Snackbar snackbar) {
+                                snackbar.dismiss();
+                            }
+                        });
+                checkIsLoadMoreAndRefreshing(false);
+            }
+        });
     }
 
     private void showNoDataFound() {
@@ -163,15 +209,30 @@ public class MyDonationListViewModel extends BaseViewModel<MyDonationListNavigat
         isRefreshing = refreshing;
     }
 
+    public boolean isRetry() {
+        return isRetry;
+    }
+
+    public void setRetry(boolean retry) {
+        isRetry = retry;
+    }
 
     private void checkIsLoadMoreAndRefreshing(boolean isSuccess) {
         if (isRefreshing()) {
             finishRefreshing(isSuccess);
+        } else if (isLoadMore()) {
+            finishLoadMore();
         } else {
             enableLoading = false;
         }
     }
 
+    public void finishLoadMore() {
+        myDonorsAdapter.remove(myDonorsAdapter.getItemCount() - 1);
+        myDonorsAdapter.notifyItemRemoved(myDonorsAdapter.getItemCount());
+        myDonorsAdapter.setLoaded();
+        setLoadMore(false);
+    }
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {

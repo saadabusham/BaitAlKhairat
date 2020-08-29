@@ -118,10 +118,10 @@ public class MainActivity extends BaseActivity<ActivityDrawerMainBinding, MainAc
             case R.id.itemCart:
                 openCart();
                 break;
-            case R.id.itemSearch: {
-
-                break;
-            }
+//            case R.id.itemSearch: {
+//
+//                break;
+//            }
         }
         return true;
     }

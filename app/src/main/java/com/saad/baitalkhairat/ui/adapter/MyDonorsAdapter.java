@@ -12,7 +12,7 @@ import com.saad.baitalkhairat.databinding.CellLoadMoreBinding;
 import com.saad.baitalkhairat.databinding.CellMyDonorsBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.model.donors.MyDonors;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemMyDonorsViewModel;
 

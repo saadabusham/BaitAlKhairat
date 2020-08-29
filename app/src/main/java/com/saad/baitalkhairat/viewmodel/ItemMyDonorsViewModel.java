@@ -9,7 +9,7 @@ import androidx.databinding.BaseObservable;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.enums.ProcessTypes;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.MyDonors;
+import com.saad.baitalkhairat.model.donors.MyDonors;
 
 
 public class ItemMyDonorsViewModel extends BaseObservable {
@@ -63,12 +63,12 @@ public class ItemMyDonorsViewModel extends BaseObservable {
     }
 
     private int getImage(int orderStatus) {
-        if (myDonors.getProcess() == ProcessTypes.FINISHED.getStatus()) {
+        if (myDonors.getStatus() == ProcessTypes.FINISHED.getStatus()) {
             return R.drawable.ic_process_done;
         }
-        if (myDonors.getProcess() > orderStatus) {
+        if (myDonors.getStatus() > orderStatus) {
             return R.drawable.ic_process_done;
-        } else if (myDonors.getProcess() == orderStatus) {
+        } else if (myDonors.getStatus() == orderStatus) {
             return R.drawable.ic_process_start;
         } else {
             return R.drawable.ic_process_wait;
@@ -88,7 +88,7 @@ public class ItemMyDonorsViewModel extends BaseObservable {
     }
 
     private int getColor(int orderStatus) {
-        if (myDonors.getProcess() >= orderStatus) {
+        if (myDonors.getStatus() >= orderStatus) {
             return R.color.green;
         } else {
             return R.color.process_gray;

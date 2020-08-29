@@ -98,12 +98,12 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
                 getBaseActivity().openCart();
             }
         });
-        mViewBinding.toolbar.toolbar.findViewById(R.id.itemSearch).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        mViewBinding.toolbar.toolbar.findViewById(R.id.itemSearch).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         mHomeViewModel.setUp();
     }

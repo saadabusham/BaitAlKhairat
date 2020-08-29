@@ -26,15 +26,15 @@
             android:layout_height="@dimen/_100sdp"
             android:gravity="center"
             android:onClick="@{viewModel::onItemClick}"
-            android:orientation="horizontal"
-            android:padding="@dimen/_20sdp">
+            android:orientation="horizontal">
 
             <ImageView
                 imageResources="@{viewModel.accountItem.image}"
-                android:layout_width="@dimen/_82sdp"
-                android:layout_height="@dimen/_85sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center"
-                android:layout_margin="2dp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_needy" />
 
             <TextView
@@ -53,6 +53,7 @@
             <ImageView
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 app:srcCompat="@drawable/ic_next_circle" />
 
         </LinearLayout>

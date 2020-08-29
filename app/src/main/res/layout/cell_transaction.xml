@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
-                android:text="@string/account_number"
+                android:text="@string/payment_method"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="13sp" />
 
@@ -42,22 +42,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:maxLines="3"
-                android:text="10/4/2020"
+                android:text="@{viewModel.transaction.createdAt}"
                 android:textColor="@color/subcategory_grid_text_color"
                 android:textSize="13sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvAccountNumber"
-            style="@style/bold_style"
+            style="@style/roman_style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:gravity="start|top"
             android:maxLines="3"
-            android:text="@string/all_rights_reserved"
+            android:text="@{viewModel.transaction.paymentTypeLabel}"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -71,7 +71,7 @@
             android:layout_marginEnd="@dimen/_7sdp"
             android:gravity="start|top"
             android:maxLines="3"
-            android:text="@string/all_rights_reserved"
+            android:text="@{viewModel.transaction.note}"
             android:textColor="@color/subcategory_grid_text_color"
             android:textSize="14sp" />
 
@@ -104,7 +104,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:maxLines="3"
-                android:text="100 jd"
+                android:text="@{viewModel.transaction.amount}"
                 android:textColor="@color/green"
                 android:textSize="15sp" />
         </LinearLayout>
