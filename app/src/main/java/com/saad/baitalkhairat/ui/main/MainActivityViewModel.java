@@ -59,33 +59,13 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
 
                 if (Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                         .getCurrentDestination().getId() != menuItem.getItemId()) {
-                    navigate(menuItem.getItemId());
-//                    if (menuItem.getItemId() == R.id.nav_account) {
-//                        if (SessionManager.isLoggedIn()) {
-//                            navigate(menuItem.getItemId());
-//                        } else {
-//                            new OnLineDialog(getBaseActivity()) {
-//                                @Override
-//                                public void onPositiveButtonClicked() {
-//                                    getViewBinding().appBarMain.drawerMainContent.bottomSheet.setSelectedItemId(Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                                            .getCurrentDestination().getId());
-//                                    dismiss();
-//                                    Navigation.findNavController(getBaseActivity(),R.id.nav_host_fragment)
-//                                            .navigate(R.id.signInHolderFragment);
-//                                }
-//
-//                                @Override
-//                                public void onNegativeButtonClicked() {
-//                                    getViewBinding().appBarMain.drawerMainContent.bottomSheet.setSelectedItemId(Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                                            .getCurrentDestination().getId());
-//                                    dismiss();
-//                                }
-//                            }.showConfirmationDialog(DialogTypes.OK_CANCEL, getMyContext().getResources().getString(R.string.login_is_required),
-//                                    getMyContext().getResources().getString(R.string.go_to_login));
-//                        }
-//                    } else {
-//                        navigate(menuItem.getItemId());
-//                    }
+
+                    if (menuItem.getItemId() == R.id.nav_home) {
+                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                .navigate(menuItem.getItemId(), null, navBuilder.setPopUpTo(R.id.nav_graph, true).build());
+                    } else {
+                        navigate(menuItem.getItemId());
+                    }
                 }
                 return true;
             }

@@ -20,7 +20,7 @@ public class DonorsDetailsViewModel extends BaseViewModel<DonorsDetailsNavigator
 
     @Override
     protected void setUp() {
-
+        getViewBinding().setData(getDonorsObj());
     }
 
     private MyDonors getDonorsObj() {
