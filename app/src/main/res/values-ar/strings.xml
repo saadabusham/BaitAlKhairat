@@ -238,4 +238,12 @@
     <string name="ok">حسنا</string>
     <string name="go_to_login">انتقل إلى تسجيل الدخول؟</string>
     <string name="login_is_required">تسجيل الدخول مطلوب</string>
+
+    <string name="choose_your_country">اختر بلدك</string>
+    <string name="choose_your_need_degree">اختر درجة حاجتك</string>
+    <string name="case_title">العنوان</string>
+    <string name="donate_amount">مبلغ التبرع</string>
+    <string name="registered_successfully">تم انشاء الحساب </string>
+    <string name="welcome_you_can_login_now">اهلا بك , يمكنك الان تسجيل الدخول</string>
+
 </resources>

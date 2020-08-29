@@ -12,7 +12,9 @@ import androidx.navigation.Navigation;
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentOtpVerifierBinding;
+import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
+import com.saad.baitalkhairat.enums.SignTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.User;
 import com.saad.baitalkhairat.model.VerifyPhoneResponeResponse;
@@ -25,6 +27,7 @@ import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverRe
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverResponseNoStandardLogin;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.utils.TimeUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -85,11 +88,23 @@ public class OtpVerifierViewModel extends BaseViewModel<OtpVerifierNavigator, Fr
                         <User>() {
                     @Override
                     public void onSuccess(User response) {
-                        User user = response;
-                        User.getInstance().setObjUser(user);
-                        SessionManager.createUserLoginSession();
-                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                                .navigate(R.id.action_otpVerifierFragment_to_nav_home);
+                        SessionManager.logoutUser();
+                        new OnLineDialog(getMyContext()) {
+                            @Override
+                            public void onPositiveButtonClicked() {
+                                Bundle data = new Bundle();
+                                data.putInt("type", SignTypes.LOGIN.getType());
+                                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                        .navigate(R.id.action_otpVerifierFragment_to_signInHolderFragment, data);
+                            }
+
+                            @Override
+                            public void onNegativeButtonClicked() {
+
+                            }
+                        }.showConfirmationDialog(DialogTypes.OK,
+                                getMyContext().getResources().getString(R.string.registered_successfully),
+                                getMyContext().getResources().getString(R.string.welcome_you_can_login_now));
                     }
 
                     @Override

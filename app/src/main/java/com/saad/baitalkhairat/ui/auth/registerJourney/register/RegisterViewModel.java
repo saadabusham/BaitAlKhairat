@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.Navigation;
@@ -72,6 +73,12 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
         getViewBinding().edConfirmPassword.addTextChangedListener(textWatcher);
         getViewBinding().spinnerGender.setOnItemSelectedListener(onItemSelectedListener);
         getViewBinding().spinnerCountry.setOnItemSelectedListener(onItemSelectedListener);
+        getViewBinding().checkboxReadTerm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isValid();
+            }
+        });
     }
 
     DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
@@ -271,6 +278,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
         user.setNationality(countryNameAdapter.getItem(getViewBinding().spinnerCountry.getSelectedItemPosition()).getValue());
         user.setPassword(getViewBinding().edPassword.getText().toString());
         user.setPassword_confirmation(getViewBinding().edConfirmPassword.getText().toString());
+        user.setTerms_of_uses(true);
         return user;
     }
 

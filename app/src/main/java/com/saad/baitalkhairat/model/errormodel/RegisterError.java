@@ -34,6 +34,9 @@ public class RegisterError implements Serializable {
     @SerializedName("email")
     private List<String> email;
 
+    @SerializedName("terms_of_uses")
+    private List<String> terms_of_uses;
+
     @SerializedName("verificationCode")
     private List<String> verificationCode;
 
@@ -92,6 +95,8 @@ public class RegisterError implements Serializable {
             stringBuilder.append("birthDate=" + birthDate);
         if (verificationCode != null)
             stringBuilder.append("verificationCode=" + verificationCode);
+        if (terms_of_uses != null)
+            stringBuilder.append("termsOfUser=" + terms_of_uses);
 
         return stringBuilder.toString();
     }

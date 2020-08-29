@@ -452,5 +452,7 @@
     <string name="choose_your_need_degree">Choose your need degree</string>
     <string name="case_title">Case title</string>
     <string name="donate_amount">"Donate amount : "</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="welcome_you_can_login_now">Welcome, you can login now</string>
 
 </resources>

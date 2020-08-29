@@ -30,6 +30,8 @@ public class User implements Serializable {
     private String password = "";
     @SerializedName("password_confirmation")
     private String password_confirmation = "";
+    @SerializedName("terms_of_uses")
+    boolean terms_of_uses;
     @SerializedName("verificationCode")
     private String verificationCode;
 
@@ -169,5 +171,13 @@ public class User implements Serializable {
 
     public void setTokenResponse(TokenResponse tokenResponse) {
         this.tokenResponse = tokenResponse;
+    }
+
+    public boolean isTerms_of_uses() {
+        return terms_of_uses;
+    }
+
+    public void setTerms_of_uses(boolean terms_of_uses) {
+        this.terms_of_uses = terms_of_uses;
     }
 }
