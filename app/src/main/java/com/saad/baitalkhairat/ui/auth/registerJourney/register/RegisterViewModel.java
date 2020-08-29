@@ -317,6 +317,10 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator, Fragment
             getViewBinding().edConfirmPassword.setError(getMyContext().getString(R.string.does_not_match));
         }
 
+        if (!getViewBinding().checkboxReadTerm.isChecked()) {
+            error++;
+        }
+
         if (error == 0)
             checkValidate(true);
         else

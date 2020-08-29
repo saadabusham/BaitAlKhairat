@@ -263,7 +263,7 @@
     <string name="user_name">Please enter your full name</string>
     <string name="please_enter_your_phone_number">Please enter your phone number</string>
     <string name="enter_email">Enter your E-mail</string>
-    <string name="by_clicking_on_register_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">By clicking on Register now, you agree to the terms and conditions for the Bait Al Khairat platform</string>
+    <string name="do_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">Do you agree to the terms and conditions for the Bait Al Khairat platform ?</string>
     <string name="select_gender">Select gender</string>
     <string name="country_of_residence">Country of residence</string>
     <string name="enter_new_password">Enter new Password</string>

@@ -298,18 +298,32 @@
                     style="@style/bold_style"
                     android:textColor="@color/login_text_gray" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_30sdp"
-                    android:gravity="center"
-                    android:text="@string/by_clicking_on_register_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform"
-                    android:textColor="@color/very_light_blue"
-                    style="@style/roman_style"
-                    android:textSize="14sp" />
+                    android:gravity="start|center"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkboxReadTerm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/check_box_selector"
+                        android:checked="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:gravity="center"
+                        android:text="@string/do_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform"
+                        android:textColor="@color/very_light_blue"
+                        style="@style/roman_style"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

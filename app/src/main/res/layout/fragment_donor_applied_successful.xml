@@ -37,7 +37,7 @@
             <ImageView
                 android:layout_width="230dp"
                 android:layout_height="160dp"
-                app:srcCompat="@drawable/ic_donor_applied" />
+                app:srcCompat="@drawable/donor_applied" />
 
             <LinearLayout
                 android:layout_width="match_parent"

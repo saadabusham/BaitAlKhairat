@@ -48,7 +48,7 @@
     <string name="you_will_receive_a_four_digit_confirmation_number_after_completing_the_registration">ستصلك رسالة التأكد من الرقم من اربع خانات بعد استكمال التسجيل</string>
     <string name="user_name">يرجى ادخال اسمك الكامل</string>
     <string name="enter_email">ادخل بريدك الالكتروني</string>
-    <string name="by_clicking_on_register_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">بالضغط على سجل الآن انت توافق على شروط والاحكام الخاصة في منصة بيت الخيرات</string>
+    <string name="do_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">هل انت توافق على شروط والاحكام الخاصة في منصة بيت الخيرات ؟</string>
     <string name="select_gender">اختر الجنس</string>
     <string name="country_of_residence">بلد الاقامة</string>
     <string name="enter_new_password">ادخل كلمة مرور جديدة</string>
