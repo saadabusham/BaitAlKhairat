@@ -9,6 +9,7 @@ import com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse;
 import com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources;
 import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
 import com.saad.baitalkhairat.model.app.aboutus.HumanityValueResponse;
+import com.saad.baitalkhairat.model.app.privacypolicy.PrivacyPolicyResponse;
 import com.saad.baitalkhairat.model.app.termsofuse.TermsOfUseResponse;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.news.NewsResponse;
@@ -185,6 +186,14 @@ public class AppService {
                 .subscribe(new CustomObserverResponseNoStandard<NewsResponse>(mContext, withProgress, apiCallBack));
     }
 
+    public void getPrivacyPolicy(Context mContext, boolean withProgress, int page, APICallBack<PrivacyPolicyResponse> apiCallBack) {
+        getDataApi().privacyPolicy(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<PrivacyPolicyResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -245,6 +254,9 @@ public class AppService {
 
         @GET(ApiConstants.apiAppService.NEWS)
         Single<Response<NewsResponse>> news(@Query("page") int page);
+
+        @GET(ApiConstants.apiAppService.PRIVACY_POLICY)
+        Single<Response<PrivacyPolicyResponse>> privacyPolicy(@Query("page") int page);
     }
 }
 

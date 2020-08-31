@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.settings.changelanguage;
+package com.saad.baitalkhairat.ui.changelanguage;
 
 
 import com.saad.baitalkhairat.ui.base.BaseNavigator;

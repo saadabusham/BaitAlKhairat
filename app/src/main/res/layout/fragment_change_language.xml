@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.settings.changelanguage.ChangeLanguageViewModel" />
+            type="com.saad.baitalkhairat.ui.changelanguage.ChangeLanguageViewModel" />
     </data>
 
     <LinearLayout

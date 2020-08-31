@@ -79,6 +79,7 @@ public class ApiConstants {
         public static final String DEGREE = "lists/need-request/degree";
         public static final String HUMANITY_VALUES = "our-humanity-values";
         public static final String NEWS = "news";
+        public static final String PRIVACY_POLICY = "privacy-polices";
     }
 
     public class apiDonorsService {

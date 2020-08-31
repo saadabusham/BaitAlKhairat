@@ -1,4 +1,4 @@
-package com.saad.baitalkhairat.ui.settings.changelanguage;
+package com.saad.baitalkhairat.ui.changelanguage;
 
 import android.content.Context;
 

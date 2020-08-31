@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.viewmodel.ItemTermsOfUseViewModel" />
+            type="com.saad.baitalkhairat.viewmodel.ItemPrivacyPolicyViewModel" />
     </data>
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center|start"
-            android:text="@{viewModel.termsOfUse.title}"
+            android:text="@{viewModel.privacyPolicy.title}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center|start"
-            android:text="@{viewModel.termsOfUse.description}"
+            android:text="@{viewModel.privacyPolicy.description}"
             android:textColor="@color/black"
             android:textSize="13sp" />
 
