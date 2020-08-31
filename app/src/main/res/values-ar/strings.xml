@@ -24,16 +24,12 @@
     <string name="case_id">رقم الحالة : </string>
     <string name="case_type">نوع الحالة : </string>
     <string name="country">البلد : </string>
-    <string name="jordan">الاردن</string>
     <string name="amount">المبلغ : </string>
     <string name="donate">قدم التبرع</string>
     <string name="add_to_cart">اضف الى السلة</string>
     <string name="filter_search">تصفية البحث</string>
     <string name="gender">الجنس</string>
-    <string name="male">ذكر</string>
-    <string name="female">انثى</string>
     <string name="country_original">الدولة</string>
-    <string name="case_type_original">نوع الحالة</string>
     <string name="login_to_your_account">تسجيل دخول الى حسابك</string>
     <string name="please_enter_your_phone_number_and_password">يرجى إدخال رقم هاتفك والرقم السري</string>
     <string name="phone_number">رقم الهاتف</string>
@@ -42,15 +38,12 @@
     <string name="login">تسجيل دخول</string>
     <string name="register">إنشاء حساب</string>
     <string name="login_or_register">سجل او انشئ حساب</string>
-    <string name="jordan_code">۹٦۲+</string>
     <string name="register_new">انشاء حساب جديد</string>
     <string name="create_an_account_with_your_phone_number">قم بإنشاء حساب باستخدام رقم هاتفك</string>
     <string name="you_will_receive_a_four_digit_confirmation_number_after_completing_the_registration">ستصلك رسالة التأكد من الرقم من اربع خانات بعد استكمال التسجيل</string>
     <string name="user_name">يرجى ادخال اسمك الكامل</string>
     <string name="enter_email">ادخل بريدك الالكتروني</string>
     <string name="do_you_agree_to_the_terms_and_conditions_for_the_Khairat_platform">هل انت توافق على شروط والاحكام الخاصة في منصة بيت الخيرات ؟</string>
-    <string name="select_gender">اختر الجنس</string>
-    <string name="country_of_residence">بلد الاقامة</string>
     <string name="enter_new_password">ادخل كلمة مرور جديدة</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="please_enter_your_phone_number">يرجى ادخال رقم الهاتف</string>
@@ -110,11 +103,6 @@
     <string name="city">المدينة</string>
     <string name="social_status">الحالة الاجتماعية</string>
     <string name="amman">عمان</string>
-    <string name="single">اعزب</string>
-    <string name="engaged">مخطوب</string>
-    <string name="married">متزوج</string>
-    <string name="widower">ارمل</string>
-    <string name="deforced">مطلق</string>
     <string name="facebook_link">رابط الفيسبوك</string>
     <string name="twitter_link">رابط التويتر</string>
     <string name="youtube_link">رابط اليوتيوب</string>
@@ -137,7 +125,6 @@
     <string name="there_are_no_needs_yet_you_can_provide_a_need">لا يوجد احتياجات الى الآن يمكنك تقديم احتياج</string>
     <string name="your_donations_list_is_empty">قائمة تبرعاتك فارغة</string>
     <string name="there_are_no_donations_yet_you_can_make_a_donation">لا يوجد تبرعات الى الآن يمكنك تقديم تبرع</string>
-    <string name="make_a_donation">قدم تبرع</string>
     <string name="current_needs">احتياجات حالية</string>
     <string name="past_needs">تبرعات سابقة</string>
     <string name="apply_need">قدم احتياج</string>
@@ -159,12 +146,9 @@
     <string name="upload_your_documents">حمل مستنداتك </string>
     <string name="add_your_documents">اضف مستنداتك</string>
     <string name="paper_types">الاوراق الثبوتية، الهوية، جواز السفر…الخ</string>
-    <string name="family">عائلة</string>
-    <string name="orphan">ايتام</string>
     <string name="type_here">اكتب هنا</string>
     <string name="thank_you">شكرا لك، </string>
     <string name="control_panel">لوحة التحكم</string>
-    <string name="applied_successfully">تم التقديم بنجاح</string>
     <string name="home">الصفحة الرئيسية</string>
     <string name="you_will_receive_a_text_message_via_your_phone_or_e_mail_he_holds_your_order_number_and_one_of_our_team_will_contact_you_complete_the_request">سوف تصلك رسالة نصية عبر هاتفك او الابريد الاكتروني
  يحمل رقم طلبك وسيتواصل معك احد من فريقنا
@@ -210,30 +194,11 @@
     <string name="the_value_of_donations_paid">قيمة التبرعات المدفوعة</string>
     <string name="the_rest_of_my_donation_balance">باقي من رصيد تبرعاتي</string>
     <string name="see_my_donation_transaction">معرفة حركات تبرعاتي</string>
-    <string name="account_number">رقم الحساب</string>
     <string name="all_transactions">جميع حركاتي</string>
     <string name="your_wallet_has_been_charged_at_value">لقد تم شحن محفظتك بقيمة</string>
     <string name="about_bait_al_khairat">عن منصة بيت الخيرات</string>
-    <string name="about_p1">منصة بيت الخيرات غير حكومية دولية تعمل في مجال المساعدات التنموية والإنسانية منذ عام ١٩٩٩ وفقا للقوانين المنظمة للقطاع غير الربحي في دولة الكويت. أنشئت بيت الخيرات الخيرية كتعبير مؤسسي لإرادة أهلية تستمد مقوماتها من القيم والمبادئ والموروث الثقافي والحضاري للمجتمع الكويتي من أجل عمل الخير والمشاركة في مسلسل التضامن الدولي بفعالية وكفاءة في التصدي لأهم التحديات الإنسانية والإنمائية التي تواجهها الشعوب الفقيرة والمحتاجة عبر العالم، حيث كان في مقدمة هذه الأولويات مساعدة الأطفال ضحايا الأزمات والكوارث، قبل أن تتوسع مجالات عمل بيت الخيرات لتشمل قطاعات إنسانية وتنموية متنوعة. وقد أنفقت منصة بيت الخيرات على الاعمال الإنسانية والتنموية خلال الأعوام الخمس الماضية أكثر من 1.2 مليار دولار، واستفاد منها أكثر من 29 مليون شخص حول العالم في مجالات إنسانية وتنموية متعددة مثل التعليم، والصحة، والمياه والإصحاح، والغذاء، والتمكين الاقتصادي، والطفولة، والرعاية الاجتماعي والوئام الاجتماعي.</string>
-    <string name="our_vision">رؤيتنا</string>
-    <string name="about_p2">تحمل منصة بيت الخيرات رؤية لعالم يتمتع فيه الأفراد، كل الأفراد وبدون أي تمييز كان، بحقوقهم الأساسية التي تمكنهم من العيش بكرامة وفي كل الظروف، عالم تتمتع فيه الشعوب والمجتمعات بكامل حقوقها في التنمية والسلم، وبحقها أيضا في الحماية والمساعدة كلما واجهتها ظروف استثنائية أثناء الكوارث والأزمات.</string>
-    <string name="our_message">رسالتنا</string>
-    <string name="about_p3">تجسيدا لهذه الرؤية تضطلع منصة بيت الخيرات برسالة تقوم على أنها منظمة تنموية وإنسانية دولية تنهل من مختلف التجارب البشرية المثلى لتحقيق أقوى تأثير من أجل أبلغ أثر، تعمل على تجسيد التضامن المسؤول مع أكثر الفئات الاجتماعية احتياجا، خصوصا الأطفال الذين هم في وضعية صعبة. تدعم منصة بيت الخيرات الفئات الاجتماعية الأكثر احتياجاً وفقاً لمبادئ الكرامة الإنسانية والعدالة الاجتماعية، بالتعاون مع شركاء التنمية والعمل الإنساني. </string>
     <string name="bait_alkhairat_resources">موارد بيت الخيرات</string>
-    <string name="about_p4">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة للتأكد من شرعية مصادر تمويلها. بشكل عام، وتستفيد منصة بيت الخيرات من مصدرين مهمين من مصادر التمويل: تمويل الأفراد، والتمويل المؤسسي</string>
     <string name="funding_sources">مصادر التمويل</string>
-    <string name="bait_alkhairat_managers">ادارة بيت الخيرات </string>
-    <string name="about_p5">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
-    <string name="international_donor_financing">تمويل الجهات المانحة الدولية</string>
-    <string name="about_p6">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
-    <string name="private_companies">القطاعات الخاصة</string>
-    <string name="about_p7">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
-    <string name="governmental_and_non_governmental_donor_institutions">المؤسسات المانحة الحكومية والغير حكومية</string>
-    <string name="about_p8">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
-    <string name="individuals">الافراد </string>
-    <string name="about_p9">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
-    <string name="organizations">المنظمات</string>
-    <string name="about_p10">تنفتح منصة بيت الخيرات على مختلف مصادر التمويل المشروعة. ووفقا للقانون، تتخذ الجمعية كل إجراءات الإحاطة اللازمة</string>
     <string name="our_human_values">قيمنا الإنسانية</string>
     <string name="ok">حسنا</string>
     <string name="go_to_login">انتقل إلى تسجيل الدخول؟</string>
@@ -245,5 +210,5 @@
     <string name="donate_amount">مبلغ التبرع</string>
     <string name="registered_successfully">تم انشاء الحساب </string>
     <string name="welcome_you_can_login_now">اهلا بك , يمكنك الان تسجيل الدخول</string>
-
+    <string name="terms_of_use">شروط الاستخدام</string>
 </resources>

@@ -17,8 +17,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentDonorsBinding;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Category;
-import com.saad.baitalkhairat.model.donors.CategoryResponse;
+import com.saad.baitalkhairat.model.category.Category;
+import com.saad.baitalkhairat.model.category.CategoryResponse;
 import com.saad.baitalkhairat.model.slider.Slider;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -172,10 +172,15 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
             @Override
             public void onSuccess(CategoryResponse response) {
                 checkIsLoadMoreAndRefreshing(true);
-                if (response.getList().size() > 6) {
-                    categoryAdapter.addItems(response.getList().subList(0, 6));
+                if (response.getData() != null) {
+                    if (response.getData().size() > 6) {
+                        categoryAdapter.addItems(response.getData().subList(0, 6));
+                    } else {
+                        categoryAdapter.addItems(response.getData());
+                    }
+                    notifiAdapter();
                 }
-                notifiAdapter();
+
             }
 
             @Override

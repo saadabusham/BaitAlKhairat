@@ -2,7 +2,9 @@ package com.saad.baitalkhairat.model.app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ContactUs {
+import java.io.Serializable;
+
+public class ContactUs implements Serializable {
 
     @SerializedName("twitter_link")
     private String twitterLink = "";

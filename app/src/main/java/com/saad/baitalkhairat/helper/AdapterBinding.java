@@ -1,9 +1,11 @@
 package com.saad.baitalkhairat.helper;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
@@ -35,5 +37,14 @@ public class AdapterBinding {
     @BindingAdapter("textViewColor")
     public static void setTextViewColor(TextView textView, int resource) {
         textView.setTextColor(App.getInstance().getResources().getColor(resource));
+    }
+
+    @BindingAdapter("cardViewBackgroundColor")
+    public static void setCardViewBackground(CardView cardView, String color) {
+        try {
+            cardView.setCardBackgroundColor(Color.parseColor(color));
+        } catch (Exception e) {
+
+        }
     }
 }

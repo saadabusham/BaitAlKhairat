@@ -23,7 +23,7 @@ import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
 import com.saad.baitalkhairat.model.MenuItem;
 import com.saad.baitalkhairat.model.Rate;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.services.TokenService;
@@ -124,6 +124,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
         menuItems.add(new MenuItem(R.string.rate_app, R.drawable.ic_rate_app, DrawerWithIconTypes.WITH_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.use_language, R.drawable.ic_language, DrawerWithIconTypes.WITH_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.privacy_policy, R.drawable.ic_privacy_policy, DrawerWithIconTypes.NO_ICON.getMode()));
+        menuItems.add(new MenuItem(R.string.terms_of_use, R.drawable.ic_privacy_policy, DrawerWithIconTypes.NO_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.about_us, R.drawable.ic_terms_condition, DrawerWithIconTypes.NO_ICON.getMode()));
         menuItems.add(new MenuItem(R.string.login, R.drawable.ic_logout, !SessionManager.isLoggedIn() ?
                 DrawerWithIconTypes.NO_ICON.getMode() :
@@ -158,13 +159,17 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                 break;
             case 5:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.aboutUsFragment);
+                        .navigate(R.id.termsOfUseFragment);
                 break;
             case 6:
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.signInHolderFragment);
+                        .navigate(R.id.aboutUsFragment);
                 break;
             case 7:
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.signInHolderFragment);
+                break;
+            case 8:
                 getDataManager().getAuthService().logout(getMyContext(), new APICallBack() {
                     @Override
                     public void onSuccess(Object response) {
@@ -182,14 +187,14 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
     }
 
     private void checkLoginStatus(boolean status) {
-        menuItems.get(6).setWithIcon(!SessionManager.isLoggedIn() ?
+        menuItems.get(7).setWithIcon(!SessionManager.isLoggedIn() ?
                 DrawerWithIconTypes.NO_ICON.getMode() :
                 DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode());
-        menuItems.get(7).setWithIcon(SessionManager.isLoggedIn() ?
+        menuItems.get(8).setWithIcon(SessionManager.isLoggedIn() ?
                 DrawerWithIconTypes.WITH_ICON.getMode() :
                 DrawerWithIconTypes.FULL_INVISIBLE_ITEM.getMode());
-        drawerAdapter.notifyItemChanged(6);
         drawerAdapter.notifyItemChanged(7);
+        drawerAdapter.notifyItemChanged(8);
     }
 
     private void showRateDialog() {

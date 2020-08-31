@@ -348,4 +348,8 @@
         android:id="@+id/donorsDetailsFragment"
         android:name="com.saad.baitalkhairat.ui.donatejourney.donordetails.DonorsDetailsFragment"
         android:label="DonorsDetailsFragment" />
+    <fragment
+        android:id="@+id/termsOfUseFragment"
+        android:name="com.saad.baitalkhairat.ui.menu.termsofuse.TermsOfUseFragment"
+        android:label="TermsOfUseFragment" />
 </navigation>

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.model.cart.CartResponse;
+import com.saad.baitalkhairat.model.category.CategoryResponse;
 import com.saad.baitalkhairat.model.donors.CasesResponse;
-import com.saad.baitalkhairat.model.donors.CategoryResponse;
 import com.saad.baitalkhairat.model.donors.DonorResponse;
 import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;

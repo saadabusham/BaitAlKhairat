@@ -68,7 +68,7 @@ public class ApiConstants {
         public static final String MARITALS = "lists/marital-status";
         public static final String SLIDERS = "banners";
         public static final String QUESTION = "faqs";
-        public static final String TERMS_AND_CONDITION = "app/terms-and-condations";
+        public static final String TERMS_OF_USE = "terms-of-uses";
         public static final String ABOUT_US = "system-information/about-us";
         public static final String ABOUT_US_SECTIONS = "about-us-sections";
         public static final String FUNDING_RESOURCE = "funding-sources";
@@ -81,7 +81,8 @@ public class ApiConstants {
     }
 
     public class apiDonorsService {
-        public static final String NEEDS_CATEGORIES = "lists/need-request/type";
+        public static final String NEEDS_CATEGORIES_WITH_NO_COLOR = "lists/need-request/type";
+        public static final String NEEDS_CATEGORIES = "need-request-types";
         public static final String CATEGORY_CASES = "need-requests";
         public static final String ADD_TO_CART = "need-requests/{id}/add-to-cart";
         public static final String GET_CART = "carts";

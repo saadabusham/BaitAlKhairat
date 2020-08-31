@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.saad.baitalkhairat.databinding.CellAccountItemsBinding;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
-import com.saad.baitalkhairat.model.AccountItem;
+import com.saad.baitalkhairat.model.account.AccountItem;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
 import com.saad.baitalkhairat.viewmodel.ItemAccountItemViewModel;
 

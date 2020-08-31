@@ -2,7 +2,9 @@ package com.saad.baitalkhairat.model.app.aboutus;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FundingResource {
+import java.io.Serializable;
+
+public class FundingResource implements Serializable {
 
     @SerializedName("id")
     private int id;

@@ -2,7 +2,9 @@ package com.saad.baitalkhairat.model.wallet;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CheckCharge {
+import java.io.Serializable;
+
+public class CheckCharge implements Serializable {
 
     @SerializedName("amount")
     private String amount;

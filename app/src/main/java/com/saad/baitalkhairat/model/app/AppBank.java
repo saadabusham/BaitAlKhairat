@@ -2,7 +2,9 @@ package com.saad.baitalkhairat.model.app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AppBank {
+import java.io.Serializable;
+
+public class AppBank implements Serializable {
 
     @SerializedName("account_number")
     private String accountNumber;

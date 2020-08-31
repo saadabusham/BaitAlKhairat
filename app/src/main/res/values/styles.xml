@@ -63,10 +63,6 @@
     </style>
 
 
-    <style name="ToolbarColoredBackArrow" parent="AppThemeLight">
-        <item name="android:textColorSecondary">@color/colorPrimaryDark</item>
-    </style>
-
     <style name="BottomNavigation" parent="AppThemeLight">
         <item name="android:background">@color/fill_item_gray</item>
         <!--        <item name="itemBackground">@drawable/ic_home_nav</item>-->
@@ -79,15 +75,6 @@
     <style name="RatingBarToRate" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/light_gray2</item>
         <item name="colorControlActivated">@color/rate_gold</item>
-    </style>
-
-    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="colorControlNormal">@color/light_gray2</item>
-        <item name="colorControlActivated">@color/gold</item>
-        <item name="android:scaleX">.8</item>
-        <item name="android:scaleY">.8</item>
-        <item name="android:transformPivotX">0dp</item>
-        <item name="android:transformPivotY">@dimen/_1sdp</item>
     </style>
 
     <style name="RatingBarColor" parent="Theme.AppCompat">
@@ -160,19 +147,6 @@
         <attr name="arcProgressStyle" format="reference" />
     </declare-styleable>
 
-    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
-    </style>
-
-    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-
-    <style name="customRatingBar" parent="android:style/Widget.Material.RatingBar.Small">
-        <item name="colorControlNormal">#E8DC33</item>
-        <item name="colorControlActivated">#E8DC33</item>
-    </style>
 
     <eat-comment />
     <color name="rippelColor">#0099CC</color>
@@ -192,19 +166,6 @@
     <eat-comment />
     <dimen name="rippleRadius">64dp</dimen>
     <dimen name="rippleStrokeWidth">2dp</dimen>
-
-
-    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
-        <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
-
-        <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">#f1f1f1</item>
-
-        <!-- inactive track color (30% transparency) -->
-        <item name="android:colorForeground">@color/colorPrimaryDark
-        </item>
-    </style>
 
 
 </resources>

@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.saad.baitalkhairat.databinding.FragmentNeedyBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Needy;
+import com.saad.baitalkhairat.model.needs.Needy;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.adapter.NeedyAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;

@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Needy;
+import com.saad.baitalkhairat.model.needs.Needy;
 
 
 public class ItemNeedyViewModel extends BaseObservable {

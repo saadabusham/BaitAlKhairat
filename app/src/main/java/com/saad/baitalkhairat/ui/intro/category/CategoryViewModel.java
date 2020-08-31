@@ -15,8 +15,8 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCategoryBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Category;
-import com.saad.baitalkhairat.model.donors.CategoryResponse;
+import com.saad.baitalkhairat.model.category.Category;
+import com.saad.baitalkhairat.model.category.CategoryResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
@@ -84,9 +84,14 @@ public class CategoryViewModel extends BaseViewModel<CategoryNavigator, Fragment
         getDataManager().getDonorsService().getCategory(getMyContext(), enableLoading, new APICallBack<CategoryResponse>() {
             @Override
             public void onSuccess(CategoryResponse response) {
-                checkIsLoadMoreAndRefreshing(true);
-                categoryAdapter.addItems(response.getList());
-                notifiAdapter();
+                if (response.getData() != null && response.getData().size() > 0) {
+                    checkIsLoadMoreAndRefreshing(true);
+                    categoryAdapter.addItems(response.getData());
+                    notifiAdapter();
+                } else {
+                    onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
+                }
+
             }
 
             @Override

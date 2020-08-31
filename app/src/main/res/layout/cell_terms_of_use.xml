@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemTermsOfUseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cardFavoriteCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/bold_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center|start"
+            android:text="@{viewModel.termsOfUse.title}"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            style="@style/roman_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center|start"
+            android:text="@{viewModel.termsOfUse.description}"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</layout>

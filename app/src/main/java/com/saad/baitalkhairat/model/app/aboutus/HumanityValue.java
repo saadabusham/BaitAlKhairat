@@ -3,7 +3,9 @@ package com.saad.baitalkhairat.model.app.aboutus;
 import com.google.gson.annotations.SerializedName;
 import com.saad.baitalkhairat.model.Image;
 
-public class HumanityValue {
+import java.io.Serializable;
+
+public class HumanityValue implements Serializable {
 
     @SerializedName("image")
     private Image image;

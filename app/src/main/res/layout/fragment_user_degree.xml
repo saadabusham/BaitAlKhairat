@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.saad.baitalkhairat.model.user.UserResponse" />
+            type="com.saad.baitalkhairat.model.account.UserResponse" />
     </data>
 
     <LinearLayout

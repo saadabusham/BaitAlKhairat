@@ -12,7 +12,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.saad.baitalkhairat.databinding.ActivitySplashScreenBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;

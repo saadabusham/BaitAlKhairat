@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
-import com.saad.baitalkhairat.model.AccountItem;
+import com.saad.baitalkhairat.model.account.AccountItem;
 
 
 public class ItemAccountItemViewModel extends BaseObservable {

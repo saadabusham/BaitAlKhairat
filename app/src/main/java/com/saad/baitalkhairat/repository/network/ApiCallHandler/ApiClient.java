@@ -2,7 +2,7 @@ package com.saad.baitalkhairat.repository.network.ApiCallHandler;
 
 
 import com.saad.baitalkhairat.App;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.util.concurrent.TimeUnit;

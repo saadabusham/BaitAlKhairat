@@ -22,7 +22,7 @@ import com.saad.baitalkhairat.databinding.FragmentRegisterBinding;
 import com.saad.baitalkhairat.enums.PhoneNumberTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.ListItem;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.errormodel.RegisterError;
 import com.saad.baitalkhairat.repository.DataManager;

@@ -2,7 +2,9 @@ package com.saad.baitalkhairat.model.app.aboutus;
 
 import com.google.gson.annotations.SerializedName;
 
-public class BaitAlKhairatResources {
+import java.io.Serializable;
+
+public class BaitAlKhairatResources implements Serializable {
 
     @SerializedName("description")
     private String description;

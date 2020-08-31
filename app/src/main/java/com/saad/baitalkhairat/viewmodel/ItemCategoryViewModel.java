@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Category;
+import com.saad.baitalkhairat.model.category.Category;
 
 
 public class ItemCategoryViewModel extends BaseObservable {

@@ -9,6 +9,7 @@ import com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse;
 import com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources;
 import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
 import com.saad.baitalkhairat.model.app.aboutus.HumanityValueResponse;
+import com.saad.baitalkhairat.model.app.termsofuse.TermsOfUseResponse;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.quastion.QuestionResponse;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
@@ -167,6 +168,14 @@ public class AppService {
     }
 
 
+    public void getTermsOfUse(Context mContext, boolean withProgress, int page, APICallBack<TermsOfUseResponse> apiCallBack) {
+        getDataApi().termsOfUse(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<TermsOfUseResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -222,7 +231,8 @@ public class AppService {
         @GET(ApiConstants.apiAppService.HUMANITY_VALUES)
         Single<Response<HumanityValueResponse>> humanityValues();
 
-
+        @GET(ApiConstants.apiAppService.TERMS_OF_USE)
+        Single<Response<TermsOfUseResponse>> termsOfUse(@Query("page") int page);
     }
 }
 

@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.ActivityDrawerMainBinding;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.services.TokenService;
 import com.saad.baitalkhairat.ui.base.BaseActivity;

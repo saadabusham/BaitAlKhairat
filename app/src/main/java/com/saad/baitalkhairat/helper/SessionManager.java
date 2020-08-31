@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.saad.baitalkhairat.App;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.enums.DialogTypes;
-import com.saad.baitalkhairat.model.User;
+import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 
 public class SessionManager {
