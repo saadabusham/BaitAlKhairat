@@ -46,8 +46,8 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
     ArrayList<ListItem> caseList = new ArrayList<>();
     ArrayAdapter<ListItem> caseAdapter;
 
-    ArrayList<ListItem> degreeList = new ArrayList<>();
-    ArrayAdapter<ListItem> degreeAdapter;
+//    ArrayList<ListItem> degreeList = new ArrayList<>();
+//    ArrayAdapter<ListItem> degreeAdapter;
 
     String bindingKey = "";
 
@@ -63,7 +63,7 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
         setUpRecyclerAmount();
         setUpRecyclerDocument();
         setUpSpinnerCaseType();
-        setUpSpinnerDegree();
+//        setUpSpinnerDegree();
     }
 
     private void setUpSpinnerCountry() {
@@ -131,43 +131,42 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
         });
     }
 
-    private void setUpSpinnerDegree() {
-        degreeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, degreeList);
-        degreeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerDegree.setAdapter(degreeAdapter);
-        getDegree();
-    }
-
-    private void getDegree() {
-        getDataManager().getAppService().getDegree(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
-            @Override
-            public void onSuccess(CountryCodeResponse response) {
-                degreeAdapter.addAll(response.getList());
-                degreeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onError(String error, int errorCode) {
-                showErrorSnackBar(error);
-            }
-        });
-    }
+//    private void setUpSpinnerDegree() {
+//        degreeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, degreeList);
+//        degreeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        getViewBinding().spinnerDegree.setAdapter(degreeAdapter);
+//        getDegree();
+//    }
+//
+//    private void getDegree() {
+//        getDataManager().getAppService().getDegree(getMyContext(), true, new APICallBack<CountryCodeResponse>() {
+//            @Override
+//            public void onSuccess(CountryCodeResponse response) {
+//                degreeAdapter.addAll(response.getList());
+//                degreeAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onError(String error, int errorCode) {
+//                showErrorSnackBar(error);
+//            }
+//        });
+//    }
 
     private void getLocalData() {
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("20", getMyContext().getResources().getString(R.string.jod)));
         amountAdapter.getItem(0).setSelected(true);
+        amountAdapter.addItem(new Amount("50", getMyContext().getResources().getString(R.string.jod)));
         amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
-        amountAdapter.addItem(new Amount("100", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("200", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("300", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("400", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("500", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("600", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("700", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("800", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("900", getMyContext().getResources().getString(R.string.jod)));
+        amountAdapter.addItem(new Amount("1000", getMyContext().getResources().getString(R.string.jod)));
 
     }
 
@@ -260,7 +259,7 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
                         Double.valueOf(amountAdapter.getSelectedItem().getAmount()),
                 Integer.valueOf(caseAdapter.getItem(getViewBinding().spinnerCaseType.getSelectedItemPosition()).getValue()),
                 countryNameAdapter.getItem(getViewBinding().spinnerCountry.getSelectedItemPosition()).getValue(),
-                Integer.valueOf(degreeAdapter.getItem(getViewBinding().spinnerDegree.getSelectedItemPosition()).getValue()),
+                getNavigator().getDegree(),
                 bindingKey);
     }
 
@@ -270,9 +269,6 @@ public class ApplyNeedsViewModel extends BaseViewModel<ApplyNeedsNavigator, Frag
             error++;
         }
         if (caseAdapter.getCount() == 0) {
-            error++;
-        }
-        if (degreeAdapter.getCount() == 0) {
             error++;
         }
         if (getViewBinding().edCaseTitle.getText().toString().isEmpty()) {

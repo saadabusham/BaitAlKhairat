@@ -10,7 +10,7 @@ public class Category implements Serializable {
     @SerializedName("color")
     String color;
 
-    @SerializedName("value")
+    @SerializedName("id")
     private int value;
     @SerializedName("image")
     Image image;

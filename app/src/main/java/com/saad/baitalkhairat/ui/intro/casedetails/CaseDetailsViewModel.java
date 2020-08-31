@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.google.gson.Gson;
 import com.saad.baitalkhairat.databinding.FragmentCaseDetailsBinding;
+import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.errormodel.AddToCartError;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBackNew;
@@ -25,28 +26,30 @@ public class CaseDetailsViewModel extends BaseViewModel<CaseDetailsNavigator, Fr
     }
 
     public void onAddToCartClick() {
-        getDataManager().getDonorsService().addToCart(getMyContext(), true,
-                DeviceUtils.getUDID(getBaseActivity()), getNavigator().getCase().getId(),
-                !getViewBinding().edAnotherAmount.getText().toString().isEmpty() ?
-                        getViewBinding().edAnotherAmount.getText().toString() : getNavigator().getCase().getAmount()
-                , new APICallBackNew<Object>() {
-                    @Override
-                    public void onSuccess(Object response) {
+        if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
+            getDataManager().getDonorsService().addToCart(getMyContext(), true,
+                    DeviceUtils.getUDID(getBaseActivity()), getNavigator().getCase().getId(),
+                    !getViewBinding().edAnotherAmount.getText().toString().isEmpty() ?
+                            getViewBinding().edAnotherAmount.getText().toString() : getNavigator().getCase().getAmount()
+                    , new APICallBackNew<Object>() {
+                        @Override
+                        public void onSuccess(Object response) {
 //                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
 //                                .navigate(R.id.action_casesFragment_to_donorAppliedSuccessfulFragment);
-                        popUp();
-                    }
+                            popUp();
+                        }
 
-                    @Override
-                    public void onError(String error, int errorCode) {
-                        AddToCartError addToCartError = new Gson().fromJson(error, AddToCartError.class);
-                        showToast(addToCartError.toString());
-                    }
+                        @Override
+                        public void onError(String error, int errorCode) {
+                            AddToCartError addToCartError = new Gson().fromJson(error, AddToCartError.class);
+                            showToast(addToCartError.toString());
+                        }
 
-                    @Override
-                    public void onNetworkError(String error, int errorCode) {
-                        showToast(error);
-                    }
-                });
+                        @Override
+                        public void onNetworkError(String error, int errorCode) {
+                            showToast(error);
+                        }
+                    });
+        }
     }
 }

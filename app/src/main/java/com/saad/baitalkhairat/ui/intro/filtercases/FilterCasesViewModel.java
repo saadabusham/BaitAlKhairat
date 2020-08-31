@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class FilterCasesViewModel extends BaseViewModel<FilterCasesNavigator, FragmentFilterCasesBinding> {
 
-    boolean canceled = false;
+    boolean canceled = true;
     ArrayList<ListItem> countryNameList = new ArrayList<>();
     ArrayAdapter<ListItem> countryNameAdapter;
 
@@ -50,6 +50,7 @@ public class FilterCasesViewModel extends BaseViewModel<FilterCasesNavigator, Fr
     }
 
     public void onFilterClick() {
+        canceled = false;
         popUp();
     }
 

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.ActivityDrawerMainBinding;
+import com.saad.baitalkhairat.enums.DialogTypes;
 import com.saad.baitalkhairat.enums.DrawerWithIconTypes;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.RecyclerClickNoData;
@@ -30,6 +31,7 @@ import com.saad.baitalkhairat.services.TokenService;
 import com.saad.baitalkhairat.ui.adapter.DrawerAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.ui.dialog.OnLineDialog;
 import com.saad.baitalkhairat.ui.dialog.RateDialog;
 import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.LanguageUtils;
@@ -148,7 +150,9 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                 DeviceUtils.shareApp(getBaseActivity());
                 break;
             case 2:
-                showRateDialog();
+                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
+                    showRateDialog();
+                }
                 break;
             case 3:
                 LanguageUtils.checkAndUpdateLanguage(getBaseActivity());
@@ -170,18 +174,31 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                         .navigate(R.id.signInHolderFragment);
                 break;
             case 8:
-                getDataManager().getAuthService().logout(getMyContext(), new APICallBack() {
+                new OnLineDialog(getMyContext()) {
                     @Override
-                    public void onSuccess(Object response) {
-                        SessionManager.logoutUser();
-                        checkLoginStatus(false);
+                    public void onPositiveButtonClicked() {
+                        dismiss();
+                        getDataManager().getAuthService().logout(getMyContext(), new APICallBack() {
+                            @Override
+                            public void onSuccess(Object response) {
+                                SessionManager.logoutUser();
+                                checkLoginStatus(false);
+                            }
+
+                            @Override
+                            public void onError(String error, int errorCode) {
+                                showErrorSnackBar(error);
+                            }
+                        });
                     }
 
                     @Override
-                    public void onError(String error, int errorCode) {
-
+                    public void onNegativeButtonClicked() {
+                        dismiss();
                     }
-                });
+                }.showConfirmationDialog(DialogTypes.OK_CANCEL,
+                        getMyContext().getResources().getString(R.string.logout),
+                        getMyContext().getResources().getString(R.string.logout_text));
                 break;
         }
     }

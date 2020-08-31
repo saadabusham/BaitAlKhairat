@@ -8,6 +8,7 @@ import com.saad.baitalkhairat.databinding.FragmentApplyNeedsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.PickImageUtility;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -105,5 +106,10 @@ public class ApplyNeedsFragment extends BaseFragment<FragmentApplyNeedsBinding, 
                 }
             }
         }
+    }
+
+    @Override
+    public int getDegree() {
+        return getArguments().getInt(AppConstants.BundleData.DEGREE, 1);
     }
 }

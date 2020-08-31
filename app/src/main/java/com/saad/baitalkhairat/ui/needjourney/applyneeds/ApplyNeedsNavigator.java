@@ -5,4 +5,5 @@ import com.saad.baitalkhairat.ui.base.BaseNavigator;
 
 public interface ApplyNeedsNavigator extends BaseNavigator {
 
+    int getDegree();
 }

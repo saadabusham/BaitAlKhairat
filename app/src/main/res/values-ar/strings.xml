@@ -211,4 +211,72 @@
     <string name="registered_successfully">تم انشاء الحساب </string>
     <string name="welcome_you_can_login_now">اهلا بك , يمكنك الان تسجيل الدخول</string>
     <string name="terms_of_use">شروط الاستخدام</string>
+
+    <string name="apply_your_needs">تقدم باحتياجاتك</string>
+    <string name="submit_a_request_for_your_needs_with_all_the_details_and_papers_in_order_to_present_it_to_the_donors">تقدم بطلب احتياجاتك مصحوبة بكل التفاصيل والأوراق من اجل عرضها على المتبرعين</string>
+    <string name="urgent_case">حالة عاجلة</string>
+    <string name="for_urgent_cases_that_need_immediate_assistance_be_sure_to_fill_out_the_application_completely">للحالات العاجلة والتي تحتاج الى اعانة بشكل فوري تاكد من تعبئة الطلب بشكل كامل</string>
+
+
+    <string name="download">جاري التنزيل</string>
+    <string name="downloading_failed">فشل التحميل</string>
+    <string name="Loading">جاري التحميل ... </string>
+    <string name="welcome">اهلا وسهلا</string>
+
+
+    <string name="permission_denied_you_cannot_access_location_data_and_camera">Permission denied you can not access location data and camera</string>
+
+
+    <string name="language">اللغة</string>
+    <string name="arabic">العربية</string>
+    <string name="english">English</string>
+    <string name="anything">Anything</string>
+
+
+    <string name="change_password">تغيير كلمة المرور</string>
+
+    <string name="error">لقد حصل خطأ ما</string>
+    <string name="retry">اعادة</string>
+    <string name="there_is_no_data_available_right_now">لا يوجد بيانات متاحة حاليا</string>
+    <string name="no_data_available">لا يوجد بيانات!</string>
+    <string name="unauthorized">غير مصرح لك</string>
+    <string name="server_error">خطأ في الخادم</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالشبكة</string>
+    <string name="error_parsing_entity">Error parsing entity</string>
+
+    <string name="please_fill_your_phone_number">الرجاء تعبئة رقم الهاتف</string>
+
+    <string name="myorders">My orders</string>
+
+    <string name="settings">الاعدادات</string>
+
+    <string name="change_language">تغيير اللغة</string>
+
+    <string name="logout_text">هل تريد تسجيل الخروج ؟</string>
+    <string name="yes">نعم</string>
+
+
+    <string name="week">week</string>
+    <string name="hour">hour</string>
+    <string name="minute">minute</string>
+    <string name="second">second</string>
+    <string name="now">now</string>
+    <string name="save_changes">جفظ التعديلات</string>
+    <string name="please_choose_your_preferred_language">الرجاء اختيار لغتك</string>
+
+    <string name="error_request_type">Error request type</string>
+    <string name="update_successfully">تم التحديث بنجاح</string>
+    <string name="you_can_login_now">يمكنك تسجيل الدخول الان</string>
+    <string name="old_password_is_required">كلمة المرور القديمة اجبارية</string>
+    <string name="your_password_has_been_updated_successfully">تم تحديث كلمة المرور بنجاح</string>
+    <string name="not_found">لا يوجد</string>
+    <string name="your_profile_has_been_updated_successfully">تم تحديث بياناتك بنجاح</string>
+    <string name="uploading">جاري الرفع</string>
+    <string name="file_too_large">الملف كبير جدا </string>
+
+    <string name="no">كلا</string>
+    <string name="jod">د.أ</string>
+    <string name="old_password">كلمة المرور القديمة</string>
+
+    <string name="confirm_new_password">تأكيد كلمة المرور</string>
 </resources>

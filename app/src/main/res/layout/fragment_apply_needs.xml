@@ -71,13 +71,15 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/choose_your_need_degree"
                     android:textColor="@color/login_gray"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
                 <Spinner
                     android:id="@+id/spinnerDegree"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"

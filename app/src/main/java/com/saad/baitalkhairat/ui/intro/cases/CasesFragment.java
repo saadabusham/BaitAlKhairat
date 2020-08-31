@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
+import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.model.Filter;
 import com.saad.baitalkhairat.repository.DataManager;
@@ -95,7 +96,9 @@ public class CasesFragment extends BaseFragment<FragmentCasesBinding, CasesViewM
         mViewBinding.toolbar.toolbar.findViewById(R.id.itemCart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getBaseActivity().openCart();
+                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
+                    getBaseActivity().openCart();
+                }
             }
         });
 //        mViewBinding.toolbar.toolbar.findViewById(R.id.itemSearch).setOnClickListener(new View.OnClickListener() {

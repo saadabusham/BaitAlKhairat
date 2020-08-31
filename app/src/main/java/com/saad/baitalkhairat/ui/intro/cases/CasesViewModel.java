@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentCasesBinding;
 import com.saad.baitalkhairat.enums.RecycleClickCasesTypes;
+import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClickWithCase;
 import com.saad.baitalkhairat.model.Filter;
@@ -270,7 +271,9 @@ public class CasesViewModel extends BaseViewModel<CasesNavigator, FragmentCasesB
                 break;
 
             case ADD_TO_CART:
-                addToCart(aCase, anotherAmount);
+                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
+                    addToCart(aCase, anotherAmount);
+                }
                 break;
 
             case DONATE:

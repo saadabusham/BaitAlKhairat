@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.ActivityDrawerMainBinding;
+import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.model.auth.User;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.services.TokenService;
@@ -116,7 +117,9 @@ public class MainActivity extends BaseActivity<ActivityDrawerMainBinding, MainAc
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemCart:
-                openCart();
+                if (SessionManager.isLoggedInAndLogin(this)) {
+                    openCart();
+                }
                 break;
 //            case R.id.itemSearch: {
 //
