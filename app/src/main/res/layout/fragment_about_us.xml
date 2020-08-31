@@ -170,125 +170,133 @@
                         android:textColor="@color/black"
                         android:textSize="22sp" />
 
-                    <TextView
-                        style="@style/bold_style"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewFundingResource"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(0).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_15sdp" />
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(0).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(0).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp" />-->
 
-                    <TextView
-                        style="@style/bold_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(1).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(0).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp" />-->
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(1).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(1).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp" />-->
 
-                    <TextView
-                        style="@style/bold_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(2).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(1).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp" />-->
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(2).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(2).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp" />-->
 
-                    <TextView
-                        style="@style/bold_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(3).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(2).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp" />-->
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(3).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(3).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp" />-->
 
-                    <TextView
-                        style="@style/bold_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(4).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(3).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp" />-->
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(4).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(4).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp" />-->
 
-                    <TextView
-                        style="@style/bold_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(4).title}"
-                        android:textColor="@color/black"
-                        android:textSize="17sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(4).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp" />-->
 
-                    <TextView
-                        style="@style/roman_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:text="@{fundingResources.data.get(4).description}"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                    <!--                    <TextView-->
+                    <!--                        style="@style/bold_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_17sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(4).title}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="17sp"-->
+                    <!--                        android:visibility="gone"/>-->
+
+                    <!--                    <TextView-->
+                    <!--                        style="@style/roman_style"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                        android:gravity="center|start"-->
+                    <!--                        android:text="@{fundingResources.data.get(4).description}"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="13sp"-->
+                    <!--                        android:visibility="gone"/>-->
 
                     <TextView
                         style="@style/bold_style"
@@ -299,15 +307,13 @@
                         android:text="@string/our_human_values"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewHumanityValues"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_30sdp"
-                        android:scaleType="fitXY"
-                        android:visibility="gone" />
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_15sdp" />
 
                 </LinearLayout>
             </LinearLayout>

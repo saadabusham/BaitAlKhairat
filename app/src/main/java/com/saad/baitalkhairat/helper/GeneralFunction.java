@@ -96,12 +96,12 @@ public class GeneralFunction {
 
 
     public static void loadImage(Context mContext, String imgUrl, ImageView imageView) {
-
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.ic_loading);
-        requestOptions.error(R.color.navigation_gray);
-        Glide.with(mContext).applyDefaultRequestOptions(requestOptions).load(imgUrl).into(imageView);
-
+        Glide.with(imageView.getContext())
+                .load(imgUrl)
+                .placeholder(R.drawable.progress_drawable_semi_small)
+                .dontAnimate()
+                .error(R.color.navigation_gray)
+                .into(imageView);
     }
 
     public static void loadImage(Context mContext, Uri imgUrl, ImageView imageView) {

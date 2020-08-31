@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.saad.baitalkhairat.App;
 import com.saad.baitalkhairat.R;
 
@@ -15,10 +14,12 @@ public class AdapterBinding {
 
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String url) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.ic_loading);
-        requestOptions.error(R.color.gray);
-        Glide.with(imageView.getContext()).applyDefaultRequestOptions(requestOptions).load(url).into(imageView);
+        Glide.with(imageView.getContext())
+                .load(url)
+                .placeholder(R.drawable.progress_drawable_semi_small)
+                .dontAnimate()
+                .error(R.color.navigation_gray)
+                .into(imageView);
     }
 
     @BindingAdapter("imageResources")

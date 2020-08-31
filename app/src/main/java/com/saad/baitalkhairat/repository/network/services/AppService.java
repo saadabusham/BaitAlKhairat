@@ -8,6 +8,7 @@ import com.saad.baitalkhairat.model.app.aboutus.AboutUs;
 import com.saad.baitalkhairat.model.app.aboutus.AboutUsSectionsResponse;
 import com.saad.baitalkhairat.model.app.aboutus.BaitAlKhairatResources;
 import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
+import com.saad.baitalkhairat.model.app.aboutus.HumanityValueResponse;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
 import com.saad.baitalkhairat.model.quastion.QuestionResponse;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
@@ -157,6 +158,14 @@ public class AppService {
                 .subscribe(new CustomObserverResponseNoStandard<CountryCodeResponse>(mContext, withProgress, apiCallBack));
     }
 
+    public void getHumanityValues(Context mContext, boolean withProgress, APICallBack<HumanityValueResponse> apiCallBack) {
+        getDataApi().humanityValues()
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<HumanityValueResponse>(mContext, withProgress, apiCallBack));
+    }
+
 
     public DataApi getDataApi() {
         return mDataApi;
@@ -209,6 +218,9 @@ public class AppService {
 
         @GET(ApiConstants.apiAppService.APP_BANK_INFO)
         Single<Response<GeneralResponse<AppBank>>> getAppBankInfo();
+
+        @GET(ApiConstants.apiAppService.HUMANITY_VALUES)
+        Single<Response<HumanityValueResponse>> humanityValues();
 
 
     }

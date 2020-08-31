@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="153dp"
             android:layout_above="@id/recyclerViewImagesDot"
-            app:cardBackgroundColor="@color/orange"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="0dp">
 

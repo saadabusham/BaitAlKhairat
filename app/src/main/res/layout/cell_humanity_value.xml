@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemHumanityValueViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/cardFavoriteCell"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:onClick="@{viewModel::onItemClick}">
+
+
+        <ImageView
+            android:id="@+id/imgTitle"
+            imageUrl="@{viewModel.humanityValue.image.path}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            style="@style/bold_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@{viewModel.humanityValue.title}"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</layout>

@@ -77,6 +77,7 @@ public class ApiConstants {
         public static final String APP_BANK_INFO = "system-information/bank";
         public static final String CASE_TYPE = "lists/need-request/type";
         public static final String DEGREE = "lists/need-request/degree";
+        public static final String HUMANITY_VALUES = "our-humanity-values";
     }
 
     public class apiDonorsService {

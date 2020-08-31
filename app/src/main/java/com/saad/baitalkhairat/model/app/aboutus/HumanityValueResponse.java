@@ -7,17 +7,17 @@ import com.saad.baitalkhairat.model.listdetails.Meta;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FundingResourceResponse implements Serializable {
+public class HumanityValueResponse implements Serializable {
 
     @SerializedName("data")
-    ArrayList<FundingResource> data;
+    ArrayList<HumanityValue> data;
 
     @SerializedName("links")
     Links links;
     @SerializedName("meta")
     Meta meta;
 
-    public ArrayList<FundingResource> getData() {
+    public ArrayList<HumanityValue> getData() {
         return data;
     }
 
