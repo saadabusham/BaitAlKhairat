@@ -1,43 +1,46 @@
-package com.saad.baitalkhairat.ui.menu.commonquastions;
+package com.saad.baitalkhairat.ui.newsjourney.news;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentCommonQuastionsBinding;
+import com.saad.baitalkhairat.databinding.FragmentNewsBinding;
 import com.saad.baitalkhairat.helper.SessionManager;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.quastion.Question;
-import com.saad.baitalkhairat.model.quastion.QuestionResponse;
+import com.saad.baitalkhairat.model.news.News;
+import com.saad.baitalkhairat.model.news.NewsResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
-import com.saad.baitalkhairat.ui.adapter.QuestionsAdapter;
+import com.saad.baitalkhairat.ui.adapter.NewsAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
 import com.saad.baitalkhairat.ui.main.MainActivity;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
-public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, FragmentCommonQuastionsBinding>
-        implements RecyclerClick<Question> {
+public class NewsViewModel extends BaseViewModel<NewsNavigator, FragmentNewsBinding>
+        implements RecyclerClick<News> {
 
-    QuestionsAdapter questionsAdapter;
+    NewsAdapter newsAdapter;
     boolean isRefreshing = false;
     boolean isRetry = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
 
-    QuestionResponse questionResponse;
+    NewsResponse newsResponse;
 
-    public <V extends ViewDataBinding, N extends BaseNavigator> QuestionsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
-        super(mContext, dataManager, (QuestionsNavigator) navigation, (FragmentCommonQuastionsBinding) viewDataBinding);
+    public <V extends ViewDataBinding, N extends BaseNavigator> NewsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
+        super(mContext, dataManager, (NewsNavigator) navigation, (FragmentNewsBinding) viewDataBinding);
     }
 
     @Override
@@ -67,19 +70,20 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
 
         getViewBinding().recyclerView.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.VERTICAL, false));
         getViewBinding().recyclerView.setItemAnimator(new DefaultItemAnimator());
-        questionsAdapter = new QuestionsAdapter(getMyContext(), this, getViewBinding().recyclerView);
-        getViewBinding().recyclerView.setAdapter(questionsAdapter);
-        questionsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+        newsAdapter = new NewsAdapter(getMyContext(), this, getViewBinding().recyclerView);
+        getViewBinding().recyclerView.setAdapter(newsAdapter);
+        newsAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (questionResponse != null &&
-                        questionResponse.getMeta().getCurrentPage() < questionResponse.getMeta().getLastPage()) {
-                    questionsAdapter.addItem(null);
-                    questionsAdapter.notifyItemInserted(questionsAdapter.getItemCount() - 1);
-                    getViewBinding().recyclerView.scrollToPosition(questionsAdapter.getItemCount() - 1);
+                if (newsResponse != null &&
+                        newsResponse.getMeta().getCurrentPage() < newsResponse.getMeta().getLastPage()) {
+                    newsAdapter.addItem(null);
+                    newsAdapter.notifyItemInserted(newsAdapter.getItemCount() - 1);
+                    getViewBinding().recyclerView.scrollToPosition(newsAdapter.getItemCount() - 1);
                     setLoadMore(true);
-                    getData(questionResponse.getMeta().getCurrentPage() + 1);
+                    getData(newsResponse.getMeta().getCurrentPage() + 1);
                 }
+
             }
         });
     }
@@ -88,13 +92,13 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
         if (!isLoadMore() && !isRefreshing() && !isRetry()) {
             enableLoading = true;
         }
-        getDataManager().getAppService().getQuestions(getMyContext(), true, page, new APICallBack<QuestionResponse>() {
+        getDataManager().getAppService().getNews(getMyContext(), enableLoading, page, new APICallBack<NewsResponse>() {
             @Override
-            public void onSuccess(QuestionResponse response) {
+            public void onSuccess(NewsResponse response) {
                 checkIsLoadMoreAndRefreshing(true);
                 if (response.getData() != null && response.getData().size() > 0) {
-                    questionResponse = response;
-                    questionsAdapter.addItems(response.getData());
+                    newsResponse = response;
+                    newsAdapter.addItems(response.getData());
                     notifiAdapter();
                 } else {
                     onError(getMyContext().getResources().getString(R.string.no_data_available), 0);
@@ -103,7 +107,7 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
 
             @Override
             public void onError(String error, int errorCode) {
-                if (questionsAdapter.getItemCount() == 0) {
+                if (newsAdapter.getItemCount() == 0) {
                     showNoDataFound();
                 }
                 showSnackBar(getMyContext().getString(R.string.error),
@@ -118,7 +122,6 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
             }
         });
     }
-
     private void showNoDataFound() {
         getViewBinding().swipeRefreshLayout.setEnabled(false);
         getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.VISIBLE);
@@ -129,17 +132,17 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
         getViewBinding().recyclerView.post(new Runnable() {
             @Override
             public void run() {
-                questionsAdapter.notifyDataSetChanged();
+                newsAdapter.notifyDataSetChanged();
             }
         });
     }
 
     @Override
-    public void onClick(Question question, int position) {
-//        Bundle data = new Bundle();
-//        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
-//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-//                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
+    public void onClick(News news, int position) {
+        Bundle data = new Bundle();
+        data.putSerializable(AppConstants.BundleData.NEWS, news);
+        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment, data);
 
     }
 
@@ -180,9 +183,9 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
     }
 
     public void finishLoadMore() {
-        questionsAdapter.remove(questionsAdapter.getItemCount() - 1);
-        questionsAdapter.notifyItemRemoved(questionsAdapter.getItemCount());
-        questionsAdapter.setLoaded();
+        newsAdapter.remove(newsAdapter.getItemCount() - 1);
+        newsAdapter.notifyItemRemoved(newsAdapter.getItemCount());
+        newsAdapter.setLoaded();
         setLoadMore(false);
     }
 
@@ -198,7 +201,7 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
         getViewBinding().layoutNoDataFound.btnRetry.setVisibility(View.VISIBLE);
         setRetry(false);
         if (isSuccess) {
-            questionsAdapter.clearItems();
+            newsAdapter.clearItems();
             getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
             getViewBinding().swipeRefreshLayout.setEnabled(true);
         }
@@ -206,7 +209,7 @@ public class QuestionsViewModel extends BaseViewModel<QuestionsNavigator, Fragme
 
     protected void finishRefreshing(boolean isSuccess) {
         if (isSuccess) {
-            questionsAdapter.clearItems();
+            newsAdapter.clearItems();
         }
         getViewBinding().swipeRefreshLayout.setRefreshing(false);
         setIsRefreshing(false);

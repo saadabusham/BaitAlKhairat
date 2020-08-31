@@ -1,11 +1,9 @@
 package com.saad.baitalkhairat.ui.menu.termsofuse;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,19 +13,18 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentTermsOfUseBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.app.termsofuse.TermsOfUse;
 import com.saad.baitalkhairat.model.app.termsofuse.TermsOfUseResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.TermsOfUseAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
-import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class TermsOfUseViewModel extends BaseViewModel<TermsOfUseNavigator, FragmentTermsOfUseBinding>
-        implements RecyclerClick<Notification> {
+        implements RecyclerClick<TermsOfUse> {
 
     TermsOfUseAdapter termsOfUseAdapter;
     boolean isRefreshing = false;
@@ -133,11 +130,11 @@ public class TermsOfUseViewModel extends BaseViewModel<TermsOfUseNavigator, Frag
     }
 
     @Override
-    public void onClick(Notification notification, int position) {
-        Bundle data = new Bundle();
-        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
+    public void onClick(TermsOfUse termsOfUse, int position) {
+//        Bundle data = new Bundle();
+//        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
+//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
 
     }
 

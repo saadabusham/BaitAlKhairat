@@ -78,6 +78,7 @@ public class ApiConstants {
         public static final String CASE_TYPE = "lists/need-request/type";
         public static final String DEGREE = "lists/need-request/degree";
         public static final String HUMANITY_VALUES = "our-humanity-values";
+        public static final String NEWS = "news";
     }
 
     public class apiDonorsService {

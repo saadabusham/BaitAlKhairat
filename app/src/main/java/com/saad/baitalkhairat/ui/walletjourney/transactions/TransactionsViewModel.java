@@ -1,11 +1,9 @@
 package com.saad.baitalkhairat.ui.walletjourney.transactions;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,19 +13,18 @@ import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentTransactionsBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.wallet.Transaction;
 import com.saad.baitalkhairat.model.wallet.TransactionResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.TransactionAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
-import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, FragmentTransactionsBinding>
-        implements RecyclerClick<Notification> {
+        implements RecyclerClick<Transaction> {
 
     TransactionAdapter transactionAdapter;
     boolean isRefreshing = false;
@@ -126,11 +123,11 @@ public class TransactionsViewModel extends BaseViewModel<TransactionsNavigator, 
     }
 
     @Override
-    public void onClick(Notification notification, int position) {
-        Bundle data = new Bundle();
-        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
+    public void onClick(Transaction transaction, int position) {
+//        Bundle data = new Bundle();
+//        data.putSerializable(AppConstants.BundleData.NOTIFICATIONS, notification);
+//        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+//                .navigate(R.id.action_nav_notifications_to_notificationDetailsFragment);
 
     }
 

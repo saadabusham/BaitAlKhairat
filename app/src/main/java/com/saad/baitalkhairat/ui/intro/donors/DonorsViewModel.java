@@ -19,12 +19,15 @@ import com.saad.baitalkhairat.databinding.FragmentDonorsBinding;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
 import com.saad.baitalkhairat.model.category.Category;
 import com.saad.baitalkhairat.model.category.CategoryResponse;
+import com.saad.baitalkhairat.model.news.News;
+import com.saad.baitalkhairat.model.news.NewsResponse;
 import com.saad.baitalkhairat.model.slider.Slider;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
 import com.saad.baitalkhairat.ui.adapter.CategoryAdapter;
 import com.saad.baitalkhairat.ui.adapter.DotAdapter;
+import com.saad.baitalkhairat.ui.adapter.NewsBarAdapter;
 import com.saad.baitalkhairat.ui.adapter.SliderImageAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
@@ -35,7 +38,7 @@ import com.saad.baitalkhairat.utils.SnackViewBulider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDonorsBinding> implements RecyclerClick<Category> {
+public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDonorsBinding> implements RecyclerClick<Object> {
 
     CategoryAdapter categoryAdapter;
     boolean isRefreshing = false;
@@ -47,6 +50,9 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     SliderImageAdapter sliderImageAdapter;
     CountDownTimer countDownTimer;
 
+    NewsResponse newsResponse;
+    NewsBarAdapter newsBarAdapter;
+
     public <V extends ViewDataBinding, N extends BaseNavigator> DonorsViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (DonorsNavigator) navigation, (FragmentDonorsBinding) viewDataBinding);
     }
@@ -54,13 +60,40 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     @Override
     protected void setUp() {
         setUpRecycler();
+        setUpNewsBarRecycler();
         getSliders();
         getData();
+        getNewsBar();
         getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setRetring();
                 getData();
+            }
+        });
+    }
+
+    private void setUpNewsBarRecycler() {
+        getViewBinding().recyclerViewNewsBar.setLayoutManager(new LinearLayoutManager(getMyContext(), LinearLayoutManager.HORIZONTAL, false));
+        getViewBinding().recyclerViewNewsBar.setItemAnimator(new DefaultItemAnimator());
+        newsBarAdapter = new NewsBarAdapter(getMyContext(), this, getViewBinding().recyclerView);
+        getViewBinding().recyclerViewNewsBar.setAdapter(newsBarAdapter);
+    }
+
+    public void getNewsBar() {
+        getDataManager().getAppService().getNews(getMyContext(), true, 1, new APICallBack<NewsResponse>() {
+            @Override
+            public void onSuccess(NewsResponse response) {
+                checkIsLoadMoreAndRefreshing(true);
+                if (response.getData() != null && response.getData().size() > 0) {
+                    newsResponse = response;
+                    newsBarAdapter.addItems(response.getData());
+                    notifiAdapter();
+                }
+            }
+
+            @Override
+            public void onError(String error, int errorCode) {
             }
         });
     }
@@ -217,12 +250,21 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
     }
 
     @Override
-    public void onClick(Category category, int position) {
-        Bundle data = new Bundle();
-        data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getValue());
-        data.putString(AppConstants.BundleData.CATEGORY_NAME, category.getLabel());
-        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_nav_home_to_cases_Fragment, data);
+    public void onClick(Object object, int position) {
+        if (object instanceof Category) {
+            Category category = (Category) object;
+            Bundle data = new Bundle();
+            data.putInt(AppConstants.BundleData.CATEGORY_ID, category.getValue());
+            data.putString(AppConstants.BundleData.CATEGORY_NAME, category.getLabel());
+            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                    .navigate(R.id.action_nav_home_to_cases_Fragment, data);
+        } else if (object instanceof News) {
+            News news = (News) object;
+            Bundle data = new Bundle();
+            data.putSerializable(AppConstants.BundleData.NEWS, news);
+            Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                    .navigate(R.id.notificationDetailsFragment, data);
+        }
     }
 
     public boolean isRefreshing() {

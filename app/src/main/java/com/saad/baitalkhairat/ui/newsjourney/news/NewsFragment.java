@@ -1,9 +1,9 @@
-package com.saad.baitalkhairat.ui.notificationjourney.notifications;
+package com.saad.baitalkhairat.ui.newsjourney.news;
 
 import android.content.Context;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentNotificationsBinding;
+import com.saad.baitalkhairat.databinding.FragmentNewsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
@@ -12,14 +12,14 @@ import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 import javax.inject.Inject;
 
 
-public class NotificationsFragment extends BaseFragment<FragmentNotificationsBinding, NotificationsViewModel> implements NotificationsNavigator {
+public class NewsFragment extends BaseFragment<FragmentNewsBinding, NewsViewModel> implements NewsNavigator {
 
-    private static final String TAG = NotificationsFragment.class.getSimpleName();
+    private static final String TAG = NewsFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private NotificationsViewModel mViewModel;
-    private FragmentNotificationsBinding mViewBinding;
+    private NewsViewModel mViewModel;
+    private FragmentNewsBinding mViewBinding;
 
 
     @Override
@@ -55,13 +55,13 @@ public class NotificationsFragment extends BaseFragment<FragmentNotificationsBin
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_notifications;
+        return R.layout.fragment_news;
     }
 
     @Override
-    public NotificationsViewModel getViewModel() {
-        mViewModel = (NotificationsViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(NotificationsViewModel.class, getViewDataBinding(), this);
+    public NewsViewModel getViewModel() {
+        mViewModel = (NewsViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(NewsViewModel.class, getViewDataBinding(), this);
         return mViewModel;
     }
 

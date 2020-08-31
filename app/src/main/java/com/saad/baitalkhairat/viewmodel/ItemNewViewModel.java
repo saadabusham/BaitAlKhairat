@@ -8,35 +8,35 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.news.News;
 import com.saad.baitalkhairat.utils.LanguageUtils;
 
 
-public class ItemNotificationViewModel extends BaseObservable {
+public class ItemNewViewModel extends BaseObservable {
 
     private final Context context;
     RecyclerClick mRecyclerClick;
-    private Notification notification;
+    private News news;
     private int position;
 
-    public ItemNotificationViewModel(Context context, Notification notification, int position, RecyclerClick mRecyclerClick) {
+    public ItemNewViewModel(Context context, News news, int position, RecyclerClick mRecyclerClick) {
         this.context = context;
-        this.notification = notification;
+        this.news = news;
         this.position = position;
         this.mRecyclerClick = mRecyclerClick;
     }
 
-    public Notification getNotification() {
-        return notification;
+    public News getNews() {
+        return news;
     }
 
-    public void setNotification(Notification notification) {
-        this.notification = notification;
+    public void setNews(News news) {
+        this.news = news;
         notifyChange();
     }
 
     public void onItemClick(View view) {
-        mRecyclerClick.onClick(notification, position);
+        mRecyclerClick.onClick(news, position);
     }
 
     public int getGravity() {

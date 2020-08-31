@@ -1,26 +1,28 @@
-package com.saad.baitalkhairat.ui.notificationjourney.notificationdetails;
+package com.saad.baitalkhairat.ui.newsjourney.newsdetails;
 
 import android.content.Context;
 
 import com.saad.baitalkhairat.R;
-import com.saad.baitalkhairat.databinding.FragmentNotificationDetailsBinding;
+import com.saad.baitalkhairat.databinding.FragmentNewsDetailsBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.news.News;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
 
-public class NotificationDetailsFragment extends BaseFragment<FragmentNotificationDetailsBinding, NotificationDetailsViewModel>
-        implements NotificationDetailsNavigator {
+public class NewsDetailsFragment extends BaseFragment<FragmentNewsDetailsBinding, NewsDetailsViewModel>
+        implements NewsDetailsNavigator {
 
-    private static final String TAG = NotificationDetailsFragment.class.getSimpleName();
+    private static final String TAG = NewsDetailsFragment.class.getSimpleName();
 
     @Inject
     ViewModelProviderFactory factory;
-    private NotificationDetailsViewModel mViewModel;
-    private FragmentNotificationDetailsBinding mViewBinding;
+    private NewsDetailsViewModel mViewModel;
+    private FragmentNewsDetailsBinding mViewBinding;
 
 
     @Override
@@ -55,13 +57,13 @@ public class NotificationDetailsFragment extends BaseFragment<FragmentNotificati
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_notification_details;
+        return R.layout.fragment_news_details;
     }
 
     @Override
-    public NotificationDetailsViewModel getViewModel() {
-        mViewModel = (NotificationDetailsViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
-                .create(NotificationDetailsViewModel.class, getViewDataBinding(), this);
+    public NewsDetailsViewModel getViewModel() {
+        mViewModel = (NewsDetailsViewModel) new ViewModelProviderFactory(DataManager.getInstance(), getMyContext())
+                .create(NewsDetailsViewModel.class, getViewDataBinding(), this);
         return mViewModel;
     }
 
@@ -77,4 +79,8 @@ public class NotificationDetailsFragment extends BaseFragment<FragmentNotificati
         mViewModel.setUp();
     }
 
+    @Override
+    public News getNews() {
+        return (News) getArguments().getSerializable(AppConstants.BundleData.NEWS);
+    }
 }

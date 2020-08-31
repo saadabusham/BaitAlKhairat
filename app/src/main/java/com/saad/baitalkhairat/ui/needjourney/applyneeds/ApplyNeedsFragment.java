@@ -110,6 +110,8 @@ public class ApplyNeedsFragment extends BaseFragment<FragmentApplyNeedsBinding, 
 
     @Override
     public int getDegree() {
-        return getArguments().getInt(AppConstants.BundleData.DEGREE, 1);
+        if (getArguments() != null)
+            return getArguments().getInt(AppConstants.BundleData.DEGREE, 1);
+        return 1;
     }
 }

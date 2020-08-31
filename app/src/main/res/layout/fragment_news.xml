@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel" />
+            type="com.saad.baitalkhairat.ui.newsjourney.news.NewsViewModel" />
     </data>
 
     <LinearLayout

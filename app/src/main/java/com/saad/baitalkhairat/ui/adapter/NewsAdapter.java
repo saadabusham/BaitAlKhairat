@@ -9,29 +9,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.saad.baitalkhairat.databinding.CellLoadMoreBinding;
-import com.saad.baitalkhairat.databinding.CellNotificationBinding;
+import com.saad.baitalkhairat.databinding.CellNewBinding;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.news.News;
 import com.saad.baitalkhairat.ui.base.BaseViewHolder;
-import com.saad.baitalkhairat.viewmodel.ItemNotificationViewModel;
+import com.saad.baitalkhairat.viewmodel.ItemNewViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-    private final List<Notification> notificationList;
+    private final List<News> newsList;
     Context mContext;
     RecyclerClick mRecyclerClick;
     private int lastVisibleItem, totalItemCount;
     private boolean loading;
     private OnLoadMoreListener loadMoreListener;
 
-    public NotificationsAdapter(Context mContext, RecyclerClick mRecyclerClick, RecyclerView recyclerView) {
-        this.notificationList = new ArrayList<>();
+    public NewsAdapter(Context mContext, RecyclerClick mRecyclerClick, RecyclerView recyclerView) {
+        this.newsList = new ArrayList<>();
         this.mContext = mContext;
         this.mRecyclerClick = mRecyclerClick;
 
@@ -74,8 +74,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (!notificationList.isEmpty()) {
-            return notificationList.size();
+        if (!newsList.isEmpty()) {
+            return newsList.size();
         } else {
             return 0;
         }
@@ -83,7 +83,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return notificationList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
+        return newsList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
     @Override
@@ -94,9 +94,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_ITEM) {
-            CellNotificationBinding cellBinding = CellNotificationBinding
+            CellNewBinding cellBinding = CellNewBinding
                     .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-            return new NotificationCellViewHolder(cellBinding);
+            return new NewsCellViewHolder(cellBinding);
         } else {
             CellLoadMoreBinding cellLoadMoreBinding = CellLoadMoreBinding
                     .inflate(LayoutInflater.from(parent.getContext()), parent, false);
@@ -104,29 +104,29 @@ public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addItems(List<Notification> repoList) {
-        notificationList.addAll(repoList);
+    public void addItems(List<News> repoList) {
+        newsList.addAll(repoList);
         notifyDataSetChanged();
     }
 
-    public void addItem(Notification notification) {
-        notificationList.add(notification);
+    public void addItem(News notification) {
+        newsList.add(notification);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        notificationList.clear();
+        newsList.clear();
     }
 
     public void remove(int position) {
-        notificationList.remove(position);
+        newsList.remove(position);
     }
 
-    public class NotificationCellViewHolder extends BaseViewHolder {
+    public class NewsCellViewHolder extends BaseViewHolder {
 
-        private final CellNotificationBinding mBinding;
+        private final CellNewBinding mBinding;
 
-        public NotificationCellViewHolder(CellNotificationBinding binding) {
+        public NewsCellViewHolder(CellNewBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
@@ -134,9 +134,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             if (mBinding.getViewModel() == null) {
-                mBinding.setViewModel(new ItemNotificationViewModel(mContext, notificationList.get(position), position, mRecyclerClick));
+                mBinding.setViewModel(new ItemNewViewModel(mContext, newsList.get(position), position, mRecyclerClick));
             } else {
-                mBinding.getViewModel().setNotification(notificationList.get(position));
+                mBinding.getViewModel().setNews(newsList.get(position));
             }
         }
 

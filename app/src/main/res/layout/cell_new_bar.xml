@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.saad.baitalkhairat.viewmodel.ItemNewViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangle"
+        android:gravity="center|start"
+        android:minHeight="@dimen/_40sdp"
+        android:onClick="@{viewModel::onItemClick}"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/tvArgent"
+            style="@style/bold_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start|top"
+            android:text="@string/news"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            android:visibility="@{viewModel.news.isUrgent}" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/roman_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:text="@{viewModel.news.title}"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</layout>

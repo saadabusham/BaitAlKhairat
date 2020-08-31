@@ -11,6 +11,7 @@ import com.saad.baitalkhairat.model.app.aboutus.FundingResourceResponse;
 import com.saad.baitalkhairat.model.app.aboutus.HumanityValueResponse;
 import com.saad.baitalkhairat.model.app.termsofuse.TermsOfUseResponse;
 import com.saad.baitalkhairat.model.country.countrycode.CountryCodeResponse;
+import com.saad.baitalkhairat.model.news.NewsResponse;
 import com.saad.baitalkhairat.model.quastion.QuestionResponse;
 import com.saad.baitalkhairat.model.slider.SliderResponse;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -176,6 +177,14 @@ public class AppService {
                 .subscribe(new CustomObserverResponseNoStandard<TermsOfUseResponse>(mContext, withProgress, apiCallBack));
     }
 
+    public void getNews(Context mContext, boolean withProgress, int page, APICallBack<NewsResponse> apiCallBack) {
+        getDataApi().news(page)
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponseNoStandard<NewsResponse>(mContext, withProgress, apiCallBack));
+    }
+
     public DataApi getDataApi() {
         return mDataApi;
     }
@@ -233,6 +242,9 @@ public class AppService {
 
         @GET(ApiConstants.apiAppService.TERMS_OF_USE)
         Single<Response<TermsOfUseResponse>> termsOfUse(@Query("page") int page);
+
+        @GET(ApiConstants.apiAppService.NEWS)
+        Single<Response<NewsResponse>> news(@Query("page") int page);
     }
 }
 

@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
-        android:name="com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsFragment"
+        android:name="com.saad.baitalkhairat.ui.newsjourney.news.NewsFragment"
         android:label="NotificationsFragment">
         <action
             android:id="@+id/action_nav_notifications_to_notificationDetailsFragment"
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationDetailsFragment"
-        android:name="com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsFragment"
+        android:name="com.saad.baitalkhairat.ui.newsjourney.newsdetails.NewsDetailsFragment"
         android:label="NotificationDetailsFragment" />
     <fragment
         android:id="@+id/serviceCenterFragment"

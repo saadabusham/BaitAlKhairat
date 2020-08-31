@@ -4,8 +4,12 @@
     <data>
 
         <variable
-            name="all"
-            type="com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsViewModel" />
+            name="viewModel"
+            type="com.saad.baitalkhairat.ui.newsjourney.newsdetails.NewsDetailsViewModel" />
+
+        <variable
+            name="data"
+            type="com.saad.baitalkhairat.model.news.News" />
     </data>
 
     <LinearLayout
@@ -37,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="27–4 2020"
+                    android:text="@{data.publishedAt}"
                     android:textColor="@color/notification_date_color"
                     android:textSize="10sp" />
 
@@ -47,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:text="أيام قليلة متبقية على رمضان 2020 -1441"
+                    android:text="@{data.title}"
                     android:textColor="@color/notification_title_gray"
                     style="@style/bold_style"
                     android:textSize="16sp" />
@@ -59,7 +63,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:text="@string/reg"
+                    android:text="@{data.description}"
                     android:textColor="@color/notification_body_gray"
                     android:textSize="14sp" />
             </LinearLayout>

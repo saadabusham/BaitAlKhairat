@@ -14,7 +14,7 @@ import com.saad.baitalkhairat.databinding.FragmentMyNeedsListBinding;
 import com.saad.baitalkhairat.enums.MyNeedsTabTypes;
 import com.saad.baitalkhairat.interfaces.OnLoadMoreListener;
 import com.saad.baitalkhairat.interfaces.RecyclerClick;
-import com.saad.baitalkhairat.model.Notification;
+import com.saad.baitalkhairat.model.needs.MyNeeds;
 import com.saad.baitalkhairat.model.needs.NeedResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -25,7 +25,7 @@ import com.saad.baitalkhairat.utils.SnackViewBulider;
 
 
 public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, FragmentMyNeedsListBinding>
-        implements RecyclerClick<Notification> {
+        implements RecyclerClick<MyNeeds> {
 
     MyNeedsAdapter myNeedsAdapter;
     boolean isRefreshing = false;
@@ -34,6 +34,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     boolean isRetry = false;
 
     NeedResponse needResponse;
+
     public <V extends ViewDataBinding, N extends BaseNavigator> MyNeedsListViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (MyNeedsListNavigator) navigation, (FragmentMyNeedsListBinding) viewDataBinding);
     }
@@ -185,7 +186,7 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
     }
 
     @Override
-    public void onClick(Notification notification, int position) {
+    public void onClick(MyNeeds myNeeds, int position) {
 
 
     }

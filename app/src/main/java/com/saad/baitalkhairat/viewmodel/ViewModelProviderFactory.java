@@ -39,8 +39,8 @@ import com.saad.baitalkhairat.ui.needjourney.applyneeds.ApplyNeedsViewModel;
 import com.saad.baitalkhairat.ui.needjourney.myneedsholder.MyNeedsHolderViewModel;
 import com.saad.baitalkhairat.ui.needjourney.myneedslist.MyNeedsListViewModel;
 import com.saad.baitalkhairat.ui.needjourney.needappliedsuccessful.NeedAppliedSuccessfulViewModel;
-import com.saad.baitalkhairat.ui.notificationjourney.notificationdetails.NotificationDetailsViewModel;
-import com.saad.baitalkhairat.ui.notificationjourney.notifications.NotificationsViewModel;
+import com.saad.baitalkhairat.ui.newsjourney.news.NewsViewModel;
+import com.saad.baitalkhairat.ui.newsjourney.newsdetails.NewsDetailsViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.account.AccountViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.editprofile.EditProfileViewModel;
 import com.saad.baitalkhairat.ui.profilejourney.identification_document.IdentificationDocumentViewModel;
@@ -144,12 +144,12 @@ public class ViewModelProviderFactory<V extends ViewDataBinding, N extends BaseN
         } else if (modelClass.isAssignableFrom(AccountViewModel.class)) {
             //noinspection unchecked
             return (T) new AccountViewModel(mContext, dataManager, viewDataBinding, navigation);
-        } else if (modelClass.isAssignableFrom(NotificationsViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(NewsViewModel.class)) {
             //noinspection unchecked
-            return (T) new NotificationsViewModel(mContext, dataManager, viewDataBinding, navigation);
-        } else if (modelClass.isAssignableFrom(NotificationDetailsViewModel.class)) {
+            return (T) new NewsViewModel(mContext, dataManager, viewDataBinding, navigation);
+        } else if (modelClass.isAssignableFrom(NewsDetailsViewModel.class)) {
             //noinspection unchecked
-            return (T) new NotificationDetailsViewModel(mContext, dataManager, viewDataBinding, navigation);
+            return (T) new NewsDetailsViewModel(mContext, dataManager, viewDataBinding, navigation);
         } else if (modelClass.isAssignableFrom(ServiceCenterViewModel.class)) {
             //noinspection unchecked
             return (T) new ServiceCenterViewModel(mContext, dataManager, viewDataBinding, navigation);

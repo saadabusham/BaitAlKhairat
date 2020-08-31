@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.baitalkhairat.viewmodel.ItemNotificationViewModel" />
+            type="com.saad.baitalkhairat.viewmodel.ItemNewViewModel" />
     </data>
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:text="27–4 2020"
+            android:text="@{viewModel.news.publishedAt}"
             android:gravity="@{viewModel.gravity}"
             android:textColor="@color/notification_date_color"
             android:textSize="10sp" />
@@ -40,7 +40,7 @@
             android:gravity="@{viewModel.getGravity}"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:drawablePadding="@dimen/_10sdp"
-            android:text="أيام قليلة متبقية على رمضان 2020 -1441"
+            android:text="@{viewModel.news.title}"
             android:textColor="@color/notification_title_gray"
             android:textSize="13sp" />
 
