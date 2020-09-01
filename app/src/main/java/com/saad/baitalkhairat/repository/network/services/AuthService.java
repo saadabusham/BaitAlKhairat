@@ -228,7 +228,13 @@ public class AuthService {
         @Multipart
         @PUT(ApiConstants.apiAuthService.UPDATE_PROFILE_PICTURE)
         Single<Response<GeneralResponse<ProfileResponse>>> updateProfilePicture(@Part MultipartBody.Part image,
-                                                                                @Query("binding_key") String uuid);
+                                                                                @Query("binding_key") String uuid,
+                                                                                @Query("email") String email,
+                                                                                @Query("name") String name,
+                                                                                @Query("birth_date") String birthDate,
+                                                                                @Query("country_of_residence") String countryOfResidence,
+                                                                                @Query("gender") int gender,
+                                                                                @Query("description") String description);
 
         @Multipart
         @POST(ApiConstants.apiAuthService.ADD_ATTACHMENT)

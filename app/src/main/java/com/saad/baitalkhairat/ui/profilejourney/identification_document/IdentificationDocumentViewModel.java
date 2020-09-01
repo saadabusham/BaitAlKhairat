@@ -17,6 +17,8 @@ import com.saad.baitalkhairat.enums.PickImageTypes;
 import com.saad.baitalkhairat.helper.GeneralFunction;
 import com.saad.baitalkhairat.interfaces.RecycleDeleteClick;
 import com.saad.baitalkhairat.model.File;
+import com.saad.baitalkhairat.model.account.ProfileResponse;
+import com.saad.baitalkhairat.model.account.UserResponse;
 import com.saad.baitalkhairat.model.needs.AddNeedDocResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.repository.network.ApiCallHandler.APICallBack;
@@ -121,6 +123,7 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                                 customUploadingDialog.setProgress(100);
                                 getNavigator().getUser().getDocuments().add(response.getFile());
                                 identificationDocumentAdapter.replaceLastItem(response.getFile());
+                                updateClicked();
                             }
 
                             @Override
@@ -137,6 +140,27 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                             }
                         }));
 
+    }
+
+    public void updateClicked() {
+        getDataManager().getAuthService().getDataApi().updateProfile(getUserObj())
+                .toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), true, new APICallBack<ProfileResponse>() {
+                    @Override
+                    public void onSuccess(ProfileResponse response) {
+                    }
+
+                    @Override
+                    public void onError(String error, int errorCode) {
+                    }
+                }));
+    }
+
+    private UserResponse getUserObj() {
+        getNavigator().getUser().setBinding_key(bindingKey);
+        return getNavigator().getUser();
     }
 
     @Override

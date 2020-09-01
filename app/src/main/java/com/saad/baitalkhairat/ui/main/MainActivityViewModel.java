@@ -150,9 +150,10 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                 DeviceUtils.shareApp(getBaseActivity());
                 break;
             case 2:
-                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
-                    showRateDialog();
-                }
+//                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
+//                    showRateDialog();
+//                }
+                DeviceUtils.shareApp(getBaseActivity());
                 break;
             case 3:
                 LanguageUtils.checkAndUpdateLanguage(getBaseActivity());

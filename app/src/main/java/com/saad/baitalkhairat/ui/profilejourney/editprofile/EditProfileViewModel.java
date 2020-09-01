@@ -265,7 +265,13 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         customUploadingDialog.showProgress();
         getDataManager().getAuthService().getDataApi()
                 .updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(),
-                        "profile_img", this), bindingKey)
+                        "profile_img", this), bindingKey,
+                        getNavigator().getUser().getEmail(),
+                        getNavigator().getUser().getName(),
+                        getUserObj().getBirthDate(),
+                        getNavigator().getUser().getCountryOfResidence(),
+                        getNavigator().getUser().getGender(),
+                        getNavigator().getUser().getDescription())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
