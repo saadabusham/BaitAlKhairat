@@ -105,10 +105,10 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
     public void addImage(String imagePath) {
         identificationDocumentAdapter.addItem(new File(imagePath));
         getViewBinding().recyclerView.scrollToPosition(identificationDocumentAdapter.getItemCount() - 1);
-        uploadProfilePicture(imagePath);
+        uploadDocument(imagePath);
     }
 
-    public void uploadProfilePicture(String path) {
+    public void uploadDocument(String path) {
         customUploadingDialog.showProgress();
         getDataManager().getAuthService().getDataApi()
                 .addAttachment(GeneralFunction.getImageMultiPartWithProgress(path,
@@ -150,6 +150,7 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                 .subscribe(new CustomObserverResponse<ProfileResponse>(getMyContext(), true, new APICallBack<ProfileResponse>() {
                     @Override
                     public void onSuccess(ProfileResponse response) {
+
                     }
 
                     @Override
@@ -182,6 +183,9 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                     public void onSuccess(Object response) {
                         identificationDocumentAdapter.remove(position);
                         identificationDocumentAdapter.notifyDataSetChanged();
+                        getNavigator().getUser().getDeletedDocuments().clear();
+                        getNavigator().getUser().getDeletedDocuments().add(String.valueOf(id));
+                        updateClicked();
                     }
 
                     @Override

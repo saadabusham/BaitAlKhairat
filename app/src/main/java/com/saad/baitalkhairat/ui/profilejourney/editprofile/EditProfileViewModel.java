@@ -265,13 +265,15 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
         customUploadingDialog.showProgress();
         getDataManager().getAuthService().getDataApi()
                 .updateProfilePicture(GeneralFunction.getImageMultiPartWithProgress(uri.getPath(),
-                        "profile_img", this), bindingKey,
+                        "profile_img", this),
+                        bindingKey,
                         getNavigator().getUser().getEmail(),
                         getNavigator().getUser().getName(),
                         getUserObj().getBirthDate(),
                         getNavigator().getUser().getCountryOfResidence(),
                         getNavigator().getUser().getGender(),
-                        getNavigator().getUser().getDescription())
+                        getNavigator().getUser().getDescription(),
+                        "PUT")
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -280,6 +282,20 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
                             @Override
                             public void onSuccess(ProfileResponse response) {
                                 customUploadingDialog.setProgress(100);
+                                new OnLineDialog(getMyContext()) {
+                                    @Override
+                                    public void onPositiveButtonClicked() {
+                                        dismiss();
+                                        Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                                                .navigate(R.id.action_editProfileFragment_to_nav_account);
+                                    }
+
+                                    @Override
+                                    public void onNegativeButtonClicked() {
+
+                                    }
+                                }.showConfirmationDialog(DialogTypes.OK, getMyContext().getResources().getString(R.string.update_successfully),
+                                        getMyContext().getResources().getString(R.string.your_profile_has_been_updated_successfully));
                             }
 
                             @Override

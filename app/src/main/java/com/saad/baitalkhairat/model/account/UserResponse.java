@@ -108,8 +108,12 @@ public class UserResponse implements Serializable {
 
     @SerializedName("social_twitter_link")
     private String socialTwitterLink;
+
     @SerializedName("documents")
     private ArrayList<File> documents;
+
+    @SerializedName("delete_documents")
+    private ArrayList<String> deletedDocuments;
 
     public int getMyGender(List<ListItem> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -468,5 +472,15 @@ public class UserResponse implements Serializable {
 
     public void setBinding_key(String binding_key) {
         this.binding_key = binding_key;
+    }
+
+    public ArrayList<String> getDeletedDocuments() {
+        if (deletedDocuments == null)
+            deletedDocuments = new ArrayList<>();
+        return deletedDocuments;
+    }
+
+    public void setDeletedDocuments(ArrayList<String> deletedDocuments) {
+        this.deletedDocuments = deletedDocuments;
     }
 }

@@ -73,9 +73,9 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
             }
         });
 
-        if (SessionManager.getIsThereNotification())
-            getViewBinding().appBarMain.drawerMainContent.bottomSheet.getMenu().getItem(2)
-                    .setIcon(getMyContext().getResources().getDrawable(R.drawable.ic_notification_active_nav));
+//        if (SessionManager.getIsThereNotification())
+//            getViewBinding().appBarMain.drawerMainContent.bottomSheet.getMenu().getItem(2)
+//                    .setIcon(getMyContext().getResources().getDrawable(R.drawable.ic_notification_active_nav));
 
         SessionManager.isLoggedIn.observe(getBaseActivity(), new Observer<Boolean>() {
             @Override
@@ -153,7 +153,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
 //                if (SessionManager.isLoggedInAndLogin(getBaseActivity())) {
 //                    showRateDialog();
 //                }
-                DeviceUtils.shareApp(getBaseActivity());
+                DeviceUtils.rateApp(getBaseActivity());
                 break;
             case 3:
                 LanguageUtils.checkAndUpdateLanguage(getBaseActivity());

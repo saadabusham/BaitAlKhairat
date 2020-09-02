@@ -39,6 +39,9 @@ public class MyDonors implements Serializable {
     @SerializedName("status")
     private int status;
 
+    @SerializedName("created_at")
+    private String createdAt;
+
     public String getDonationAmount() {
         return donationAmount;
     }
@@ -85,5 +88,9 @@ public class MyDonors implements Serializable {
 
     public int getStatus() {
         return status;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 }
