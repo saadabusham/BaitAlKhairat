@@ -1,11 +1,17 @@
 package com.saad.baitalkhairat.model.needs;
 
 import com.google.gson.annotations.SerializedName;
+import com.saad.baitalkhairat.App;
+import com.saad.baitalkhairat.utils.LanguageUtils;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MyNeeds implements Serializable {
 
+    NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale(LanguageUtils.getLanguage(App.getInstance())));
+    NumberFormat numberFormatUs = NumberFormat.getCurrencyInstance(Locale.US);
     @SerializedName("country")
     private String country;
 

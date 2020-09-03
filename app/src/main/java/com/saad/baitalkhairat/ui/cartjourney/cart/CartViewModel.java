@@ -1,9 +1,11 @@
 package com.saad.baitalkhairat.ui.cartjourney.cart;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import com.saad.baitalkhairat.repository.network.ApiCallHandler.CustomObserverRe
 import com.saad.baitalkhairat.ui.adapter.CartAdapter;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
 import com.saad.baitalkhairat.ui.base.BaseViewModel;
+import com.saad.baitalkhairat.utils.AppConstants;
 import com.saad.baitalkhairat.utils.DeviceUtils;
 import com.saad.baitalkhairat.utils.SnackViewBulider;
 
@@ -36,9 +39,11 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     boolean isRefreshing = false;
     boolean enableLoading = false;
     boolean isLoadMore = false;
-    boolean isRetry = false;
 
     CartResponse cartResponse;
+
+    NavOptions navOptions;
+    NavOptions.Builder navBuilder = new NavOptions.Builder();
 
     public <V extends ViewDataBinding, N extends BaseNavigator> CartViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (CartNavigator) navigation, (FragmentCartBinding) viewDataBinding);
@@ -47,11 +52,13 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     @Override
     protected void setUp() {
         setUpRecycler();
-        getViewBinding().layoutNoDataFound.btnRetry.setOnClickListener(new View.OnClickListener() {
+        getViewBinding().layoutNoDataFound.tvStartDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setRetring();
-                getData(1);
+                Bundle data = new Bundle();
+                data.putInt(AppConstants.BundleData.CATEGORY_ID, 0);
+                Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.casesFragment, data, navBuilder.setPopUpTo(R.id.nav_graph, true).build());
             }
         });
     }
@@ -107,7 +114,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
     }
 
     public void getData(int page) {
-        if (!isLoadMore() && !isRefreshing() && !isRetry()) {
+        if (!isLoadMore() && !isRefreshing()) {
             enableLoading = true;
         }
         getDataManager().getDonorsService().getDataApi().getCart(page)
@@ -148,7 +155,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
 
     private void showNoDataFound() {
         getViewBinding().swipeRefreshLayout.setEnabled(false);
-        getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.VISIBLE);
+        getViewBinding().layoutNoDataFound.relativeListEmpty.setVisibility(View.VISIBLE);
         getViewBinding().linearTools.setVisibility(View.GONE);
 
     }
@@ -208,24 +215,15 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
         isRefreshing = refreshing;
     }
 
-    public boolean isRetry() {
-        return isRetry;
-    }
-
-    public void setRetry(boolean retry) {
-        isRetry = retry;
-    }
-
     private void checkIsLoadMoreAndRefreshing(boolean isSuccess) {
         if (isRefreshing()) {
             finishRefreshing(isSuccess);
-        } else if (isRetry()) {
-            finishRetry(isSuccess);
         } else if (isLoadMore()) {
             finishLoadMore();
         } else {
             enableLoading = false;
         }
+        finishRetry(isSuccess);
     }
 
     public void finishLoadMore() {
@@ -235,20 +233,10 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
         setLoadMore(false);
     }
 
-    protected void setRetring() {
-        getViewBinding().layoutNoDataFound.btnRetry.setVisibility(View.GONE);
-        getViewBinding().layoutNoDataFound.progressBar.setVisibility(View.VISIBLE);
-        setRetry(true);
-    }
-
     protected void finishRetry(boolean isSuccess) {
-
-        getViewBinding().layoutNoDataFound.progressBar.setVisibility(View.GONE);
-        getViewBinding().layoutNoDataFound.btnRetry.setVisibility(View.VISIBLE);
-        setRetry(false);
         if (isSuccess) {
             cartAdapter.clearItems();
-            getViewBinding().layoutNoDataFound.relativeNoData.setVisibility(View.GONE);
+            getViewBinding().layoutNoDataFound.relativeListEmpty.setVisibility(View.GONE);
             getViewBinding().linearTools.setVisibility(View.VISIBLE);
             getViewBinding().swipeRefreshLayout.setEnabled(true);
         }

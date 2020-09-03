@@ -38,7 +38,7 @@
 
                 <include
                     android:id="@+id/layoutNoDataFound"
-                    layout="@layout/no_data_found" />
+                    layout="@layout/layout_cart_empty" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"

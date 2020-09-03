@@ -280,5 +280,7 @@
     <string name="submit_a_request_for_your_needs_with_all_the_details_and_papers_in_order_to_present_it_to_the_donors">Submit a request for your needs with all the details and papers in order to present it to the donors</string>
     <string name="urgent_case">Urgent case</string>
     <string name="for_urgent_cases_that_need_immediate_assistance_be_sure_to_fill_out_the_application_completely">For urgent cases that need immediate assistance, be sure to fill out the application completely</string>
+    <string name="start_donate">Start donate</string>
+    <string name="your_donation_cart_is_empty">Your donation cart is empty</string>
 
 </resources>
