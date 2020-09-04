@@ -58,7 +58,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
                 Bundle data = new Bundle();
                 data.putInt(AppConstants.BundleData.CATEGORY_ID, 0);
                 Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
-                        .navigate(R.id.casesFragment, data, navBuilder.setPopUpTo(R.id.nav_graph, true).build());
+                        .navigate(R.id.casesFragment, data, navBuilder.setPopUpTo(R.id.nav_home, false).build());
             }
         });
     }
@@ -140,14 +140,16 @@ public class CartViewModel extends BaseViewModel<CartNavigator, FragmentCartBind
                         if (cartAdapter.getItemCount() == 0) {
                             showNoDataFound();
                         }
-                        showSnackBar(getMyContext().getString(R.string.error),
-                                error, getMyContext().getResources().getString(R.string.ok),
-                                new SnackViewBulider.SnackbarCallback() {
-                                    @Override
-                                    public void onActionClick(Snackbar snackbar) {
-                                        snackbar.dismiss();
-                                    }
-                                });
+                        if (!isLoadMore && cartAdapter.getItemCount() == 0 && errorCode != 0) {
+                            showSnackBar(getMyContext().getString(R.string.error),
+                                    error, getMyContext().getResources().getString(R.string.ok),
+                                    new SnackViewBulider.SnackbarCallback() {
+                                        @Override
+                                        public void onActionClick(Snackbar snackbar) {
+                                            snackbar.dismiss();
+                                        }
+                                    });
+                        }
                         checkIsLoadMoreAndRefreshing(false);
                     }
                 }));

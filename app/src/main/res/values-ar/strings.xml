@@ -279,4 +279,6 @@
     <string name="old_password">كلمة المرور القديمة</string>
 
     <string name="confirm_new_password">تأكيد كلمة المرور</string>
+    <string name="start_donate">ابدأ التبرع</string>
+    <string name="your_donation_cart_is_empty">سلة تبرعاتك فارغة</string>
 </resources>

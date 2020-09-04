@@ -122,14 +122,16 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
                 if (myNeedsAdapter.getItemCount() == 0) {
                     showNoDataFound();
                 }
-                showSnackBar(getMyContext().getString(R.string.error),
-                        error, getMyContext().getResources().getString(R.string.ok),
-                        new SnackViewBulider.SnackbarCallback() {
-                            @Override
-                            public void onActionClick(Snackbar snackbar) {
-                                snackbar.dismiss();
-                            }
-                        });
+                if (!isLoadMore && myNeedsAdapter.getItemCount() == 0 && errorCode != 0) {
+                    showSnackBar(getMyContext().getString(R.string.error),
+                            error, getMyContext().getResources().getString(R.string.ok),
+                            new SnackViewBulider.SnackbarCallback() {
+                                @Override
+                                public void onActionClick(Snackbar snackbar) {
+                                    snackbar.dismiss();
+                                }
+                            });
+                }
                 checkIsLoadMoreAndRefreshing(false);
             }
         });
@@ -157,14 +159,16 @@ public class MyNeedsListViewModel extends BaseViewModel<MyNeedsListNavigator, Fr
                 if (myNeedsAdapter.getItemCount() == 0) {
                     showNoDataFound();
                 }
-                showSnackBar(getMyContext().getString(R.string.error),
-                        error, getMyContext().getResources().getString(R.string.ok),
-                        new SnackViewBulider.SnackbarCallback() {
-                            @Override
-                            public void onActionClick(Snackbar snackbar) {
-                                snackbar.dismiss();
-                            }
-                        });
+                if (!isLoadMore && myNeedsAdapter.getItemCount() == 0 && errorCode != 0) {
+                    showSnackBar(getMyContext().getString(R.string.error),
+                            error, getMyContext().getResources().getString(R.string.ok),
+                            new SnackViewBulider.SnackbarCallback() {
+                                @Override
+                                public void onActionClick(Snackbar snackbar) {
+                                    snackbar.dismiss();
+                                }
+                            });
+                }
                 checkIsLoadMoreAndRefreshing(false);
             }
         });

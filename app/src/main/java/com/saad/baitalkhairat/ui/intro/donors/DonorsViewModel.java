@@ -221,14 +221,16 @@ public class DonorsViewModel extends BaseViewModel<DonorsNavigator, FragmentDono
                 if (categoryAdapter.getItemCount() == 0) {
                     showNoDataFound();
                 }
-                showSnackBar(getMyContext().getString(R.string.error),
-                        error, getMyContext().getResources().getString(R.string.OK),
-                        new SnackViewBulider.SnackbarCallback() {
-                            @Override
-                            public void onActionClick(Snackbar snackbar) {
-                                snackbar.dismiss();
-                            }
-                        });
+                if (categoryAdapter.getItemCount() == 0 && errorCode != 0) {
+                    showSnackBar(getMyContext().getString(R.string.error),
+                            error, getMyContext().getResources().getString(R.string.ok),
+                            new SnackViewBulider.SnackbarCallback() {
+                                @Override
+                                public void onActionClick(Snackbar snackbar) {
+                                    snackbar.dismiss();
+                                }
+                            });
+                }
                 checkIsLoadMoreAndRefreshing(false);
             }
         });
