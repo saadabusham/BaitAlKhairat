@@ -34,7 +34,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -222,7 +221,7 @@ public class AuthService {
                                                                  @Query("password_confirmation") String password_confirmation,
                                                                  @Query("current_password") String current_password);
 
-        @PUT(ApiConstants.apiAuthService.UPDATE_PROFILE)
+        @POST(ApiConstants.apiAuthService.UPDATE_PROFILE)
         Single<Response<GeneralResponse<ProfileResponse>>> updateProfile(@Body UserResponse user);
 
         @Multipart
@@ -234,8 +233,7 @@ public class AuthService {
                                                                                 @Query("birth_date") String birthDate,
                                                                                 @Query("country_of_residence") String countryOfResidence,
                                                                                 @Query("gender") int gender,
-                                                                                @Query("description") String description,
-                                                                                @Query("_method") String paramter_method
+                                                                                @Query("description") String description
         );
 
         @Multipart

@@ -108,5 +108,6 @@ public final class AppConstants {
         public static final String COUNTRY_CODE = "COUNTRY_CODE";
         public static final String DEGREE = "DEGREE";
         public static final String NEWS = "NEWS";
+        public static final String FILE = "FILE";
     }
 }

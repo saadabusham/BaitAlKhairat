@@ -1,5 +1,7 @@
 package com.saad.baitalkhairat.model.account;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.annotations.SerializedName;
 import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.model.ListItem;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class UserResponse implements Serializable {
 
+    private static MutableLiveData<UserResponse> userResponseMutableLiveData = new MutableLiveData<>();
     @SerializedName("social_youtube_link")
     private String socialYoutubeLink;
 
@@ -304,8 +307,8 @@ public class UserResponse implements Serializable {
         return birthDate.split("-")[2];
     }
 
-    public void setDocuments(ArrayList<File> documents) {
-        this.documents = documents;
+    public static MutableLiveData<UserResponse> getUserResponseMutableLiveData() {
+        return userResponseMutableLiveData;
     }
 
     public String getEducationStartYear() {
@@ -482,5 +485,23 @@ public class UserResponse implements Serializable {
 
     public void setDeletedDocuments(ArrayList<String> deletedDocuments) {
         this.deletedDocuments = deletedDocuments;
+    }
+
+    public static void setUserResponseMutableLiveData(MutableLiveData<UserResponse> userResponseMutableLiveData) {
+        UserResponse.userResponseMutableLiveData = userResponseMutableLiveData;
+    }
+
+    public void setDocuments(ArrayList<File> documents) {
+        this.documents = documents;
+        getUserResponseMutableLiveData().postValue(this);
+    }
+
+    public ArrayList<File> removeDocument(int id) {
+        for (int i = 0; i < documents.size(); i++) {
+            if (documents.get(i).getId() == id) {
+                documents.remove(i);
+            }
+        }
+        return documents;
     }
 }

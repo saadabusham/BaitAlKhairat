@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentIdentificationDocumentBinding;
 import com.saad.baitalkhairat.interfaces.ActivityResultCallBack;
+import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.model.account.UserResponse;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseFragment;
@@ -17,6 +18,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import javax.inject.Inject;
 
 import static android.app.Activity.RESULT_OK;
+import static com.saad.baitalkhairat.ui.profilejourney.identification_document.IdentificationDocumentViewModel.REMOVE;
 
 
 public class IdentificationDocumentFragment extends BaseFragment<FragmentIdentificationDocumentBinding, IdentificationDocumentViewModel>
@@ -108,6 +110,11 @@ public class IdentificationDocumentFragment extends BaseFragment<FragmentIdentif
                     Exception error = result.getError();
                 }
             }
+            case REMOVE:
+                if (resultCode == RESULT_OK) {
+                    mEditProfileViewModel.removeItem((File) data.getSerializableExtra(AppConstants.BundleData.FILE));
+                }
+                break;
         }
     }
 

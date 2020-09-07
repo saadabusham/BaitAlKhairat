@@ -7,9 +7,6 @@
             name="viewModel"
             type="com.saad.baitalkhairat.ui.profilejourney.viewdocument.ViewDocumentViewModel" />
 
-        <variable
-            name="data"
-            type="String" />
     </data>
 
     <RelativeLayout
@@ -31,7 +28,6 @@
             android:layout_height="345dp"
             android:layout_below="@id/toolbar"
             android:layout_centerInParent="true"
-            imageUrlWithHeader="@{data}"
             android:layout_marginTop="@dimen/_40sdp" />
 
         <LinearLayout

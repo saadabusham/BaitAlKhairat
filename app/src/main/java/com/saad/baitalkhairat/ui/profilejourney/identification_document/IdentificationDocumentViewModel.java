@@ -45,6 +45,7 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
     IdentificationDocumentAdapter identificationDocumentAdapter;
     String bindingKey = "";
 
+    public static final int REMOVE = 66101;
     public <V extends ViewDataBinding, N extends BaseNavigator> IdentificationDocumentViewModel(Context mContext, DataManager dataManager, V viewDataBinding, N navigation) {
         super(mContext, dataManager, (IdentificationDocumentNavigator) navigation, (FragmentIdentificationDocumentBinding) viewDataBinding);
     }
@@ -171,6 +172,7 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
         } else {
             Bundle data = new Bundle();
             data.putSerializable(AppConstants.BundleData.DOCUMENT, object);
+            data.putSerializable(AppConstants.BundleData.USER, getNavigator().getUser());
             Navigation.findNavController(getBaseActivity(), R.id.nav_host_fragment)
                     .navigate(R.id.action_identificationDocumentFragment_to_viewDocumentFragment, data);
         }
@@ -193,5 +195,10 @@ public class IdentificationDocumentViewModel extends BaseViewModel<Identificatio
                         showErrorSnackBar(error);
                     }
                 });
+    }
+
+    public void removeItem(File file) {
+        identificationDocumentAdapter.removeById(file.getId());
+        identificationDocumentAdapter.notifyDataSetChanged();
     }
 }

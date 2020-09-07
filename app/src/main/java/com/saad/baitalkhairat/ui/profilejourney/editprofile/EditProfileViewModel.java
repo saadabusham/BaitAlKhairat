@@ -272,8 +272,7 @@ public class EditProfileViewModel extends BaseViewModel<EditProfileNavigator, Fr
                         getUserObj().getBirthDate(),
                         getNavigator().getUser().getCountryOfResidence(),
                         getNavigator().getUser().getGender(),
-                        getNavigator().getUser().getDescription(),
-                        "PUT")
+                        getNavigator().getUser().getDescription())
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

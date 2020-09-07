@@ -79,6 +79,14 @@ public class IdentificationDocumentAdapter extends RecyclerView.Adapter<BaseView
         notifyDataSetChanged();
     }
 
+    public void removeById(int id) {
+        for (File file : identificationDocuments) {
+            if (file.getId() == id) {
+                identificationDocuments.remove(file);
+            }
+        }
+    }
+
     public class CellViewHolder extends BaseViewHolder {
 
         private final CellIdentifecationDocumentBinding mBinding;
