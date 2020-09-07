@@ -282,4 +282,5 @@
     <string name="start_donate">ابدأ التبرع</string>
     <string name="your_donation_cart_is_empty">سلة تبرعاتك فارغة</string>
     <string name="current_requests">الطلبات الحالية</string>
+    <string name="please_choose_valid_code">اختر رمز دولة صحيح</string>
 </resources>
