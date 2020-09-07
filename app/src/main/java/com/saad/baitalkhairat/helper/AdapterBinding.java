@@ -9,8 +9,11 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.saad.baitalkhairat.App;
 import com.saad.baitalkhairat.R;
+import com.saad.baitalkhairat.model.auth.User;
 
 public class AdapterBinding {
 
@@ -18,6 +21,26 @@ public class AdapterBinding {
     public static void setImageUrl(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
+                .placeholder(R.drawable.progress_drawable_semi_small)
+                .dontAnimate()
+                .error(R.color.navigation_gray)
+                .into(imageView);
+    }
+
+    @BindingAdapter("imageUrlWithHeader")
+    public static void setImageUrlWithHeader(ImageView imageView, String url) {
+        String token = "";
+        if (User.getInstance().getTokenResponse() != null) {
+            token = "Bearer " + User.getInstance().getTokenResponse().getAccessToken();
+        } else {
+            token = "Bearer " + "";
+        }
+        GlideUrl glideUrl = new GlideUrl(url, new LazyHeaders.Builder()
+                .addHeader("Authorization", token)
+                .build());
+
+        Glide.with(imageView.getContext())
+                .load(glideUrl)
                 .placeholder(R.drawable.progress_drawable_semi_small)
                 .dontAnimate()
                 .error(R.color.navigation_gray)

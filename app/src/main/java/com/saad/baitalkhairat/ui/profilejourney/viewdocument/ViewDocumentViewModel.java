@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding;
 import com.saad.baitalkhairat.R;
 import com.saad.baitalkhairat.databinding.FragmentViewDocumentBinding;
 import com.saad.baitalkhairat.enums.DialogTypes;
-import com.saad.baitalkhairat.helper.GeneralFunction;
+import com.saad.baitalkhairat.helper.AdapterBinding;
 import com.saad.baitalkhairat.model.File;
 import com.saad.baitalkhairat.repository.DataManager;
 import com.saad.baitalkhairat.ui.base.BaseNavigator;
@@ -26,7 +26,8 @@ public class ViewDocumentViewModel extends BaseViewModel<ViewDocumentNavigator, 
     @Override
     protected void setUp() {
         identificationDocument = getNavigator().getDocument();
-        GeneralFunction.loadImage(getMyContext(), identificationDocument.getPath(), getViewBinding().imgDocument);
+        AdapterBinding.setImageUrlWithHeader(getViewBinding().imgDocument, identificationDocument.getPath());
+//        getViewBinding().setData(identificationDocument.getPath());
     }
 
     public File getIdentificationDocument() {
@@ -37,6 +38,9 @@ public class ViewDocumentViewModel extends BaseViewModel<ViewDocumentNavigator, 
         popUp();
     }
 
+    /**
+     * todo
+     */
     public void onRemoveClick() {
         new OnLineDialog(getMyContext()) {
             @Override
