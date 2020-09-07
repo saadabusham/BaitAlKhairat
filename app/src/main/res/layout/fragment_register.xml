@@ -74,10 +74,46 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!--                            <Spinner-->
+                            <!--                                android:id="@+id/spinnerCountryCode"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_gravity="center"-->
+                            <!--                                android:background="@color/white"-->
+                            <!--                                app:contentColor="@color/black"-->
+                            <!--                                app:defaultNameCode="US"-->
+                            <!--                                app:textSize="14sp" />-->
+
+                            <com.saad.baitalkhairat.custom.CustomAutoComplete
+                                android:id="@+id/autoComTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:digits="0123456789+"
+                                android:gravity="center"
+                                android:hint="+xxx"
+                                android:imeOptions="actionSearch"
+                                android:inputType="textAutoComplete|textAutoCorrect|numberDecimal"
+                                android:minWidth="@dimen/_50sdp"
+                                android:background="@color/white"
+                                android:textColor="@color/black" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/edittextUnderline" />
+
+                        </LinearLayout>
+
                         <EditText
                             android:id="@+id/edPhoneNumber"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:layout_weight="1"
                             android:backgroundTint="@color/edittextUnderline"
                             android:hint="@string/please_enter_your_phone_number"
@@ -88,28 +124,7 @@
                             android:textColorHint="@color/edittextUnderline"
                             android:textSize="16sp" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:orientation="vertical">
 
-                            <Spinner
-                                android:id="@+id/spinnerCountryCode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@color/white"
-                                app:contentColor="@color/black"
-                                app:defaultNameCode="US"
-                                app:textSize="14sp" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/edittextUnderline" />
-
-                        </LinearLayout>
 
 
                     </LinearLayout>

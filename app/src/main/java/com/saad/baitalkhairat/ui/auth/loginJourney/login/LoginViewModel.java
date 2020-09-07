@@ -1,11 +1,15 @@
 package com.saad.baitalkhairat.ui.auth.loginJourney.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.databinding.ViewDataBinding;
@@ -99,7 +103,33 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
     private void setUpSpinnerCountry() {
         countryCodeAdapter = new ArrayAdapter<ListItem>(getMyContext(), android.R.layout.simple_spinner_item, countryCodeList);
         countryCodeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        getViewBinding().spinnerCountryCode.setAdapter(countryCodeAdapter);
+//        getViewBinding().spinnerCountryCode.setAdapter(countryCodeAdapter);
+
+        getViewBinding().autoComTextView.setThreshold(1);
+        getViewBinding().autoComTextView.setAdapter(countryCodeAdapter);
+
+        getViewBinding().autoComTextView.setOnTouchListener(new View.OnTouchListener() {
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View paramView, MotionEvent paramMotionEvent) {
+                if (countryCodeAdapter.getCount() > 0) {
+                    if (!getViewBinding().autoComTextView.getText().toString().equals(""))
+                        countryCodeAdapter.getFilter().filter(null);
+                    getViewBinding().autoComTextView.showDropDown();
+                    isValidate();
+                }
+                return false;
+            }
+        });
+        getViewBinding().autoComTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
+                getViewBinding().autoComTextView.setText(countryCodeAdapter.getItem(position).getLabel());
+                isValidate();
+            }
+        });
+
+        getViewBinding().autoComTextView.addTextChangedListener(textWatcher);
         getCountryCodes();
     }
 
@@ -109,6 +139,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
             public void onSuccess(CountryCodeResponse response) {
                 countryCodeAdapter.addAll(response.getList());
                 countryCodeAdapter.notifyDataSetChanged();
+                getViewBinding().autoComTextView.setText(response.getList().get(0).getLabel());
             }
 
             @Override
@@ -163,8 +194,16 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
 
     private LoginObject getLoginObj() {
         return new LoginObject(getViewBinding().edPhoneNumber.getText().toString().trim(),
-                countryCodeAdapter.getItem(getViewBinding().spinnerCountryCode.getSelectedItemPosition()).getValue(),
+                getSelectedCountryItem(getViewBinding().autoComTextView.getText().toString()),
                 getViewBinding().edPassword.getText().toString(), DeviceUtils.getUDID(getBaseActivity()));
+    }
+
+    private String getSelectedCountryItem(String text) {
+        for (int i = 0; i < countryCodeAdapter.getCount(); i++) {
+            if (countryCodeAdapter.getItem(i).getLabel().equals(text))
+                return countryCodeAdapter.getItem(i).getValue();
+        }
+        return "";
     }
 
     private boolean isValidate() {
@@ -177,6 +216,22 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator, FragmentLoginB
             getViewBinding().edPassword.setError(getMyContext().getString(R.string.this_fieled_is_required));
             error = +1;
         }
+
+        if (getViewBinding().autoComTextView.getText().toString().isEmpty()) {
+            getViewBinding().autoComTextView.setError(getMyContext().getString(R.string.this_fieled_is_required));
+            error = +1;
+        } else {
+            getViewBinding().autoComTextView.setError(null);
+        }
+
+        if (getSelectedCountryItem(getViewBinding().autoComTextView.getText().toString()).isEmpty()) {
+            getViewBinding().autoComTextView.setError(getMyContext().getString(R.string.please_choose_valid_code));
+            error = +1;
+        } else if (getViewBinding().autoComTextView.getError() != null &&
+                getViewBinding().autoComTextView.getError().length() == 0) {
+            getViewBinding().autoComTextView.setError(null);
+        }
+
         if (error == 0)
             checkValidate(true);
         else
