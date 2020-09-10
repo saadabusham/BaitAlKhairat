@@ -5,6 +5,7 @@
     <color name="colorAccent">#000000</color>
 
     <color name="orange">#FF9500</color>
+    <color name="orange_transparent">#59035B04</color>
     <color name="orange_login_button">#F9A514</color>
     <color name="edittextUnderline">#525A65</color>
     <color name="forgetpassword_blue">#1371FF</color>

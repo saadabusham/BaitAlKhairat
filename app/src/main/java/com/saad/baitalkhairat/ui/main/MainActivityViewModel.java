@@ -117,6 +117,32 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityNavigator, 
                 drawer.openDrawer(GravityCompat.START);
             }
         });
+
+//        drawer.setScrimColor(Color.TRANSPARENT);
+////        drawer.setScrimColor(getMyContext().getResources().getColor(R.color.orange_transparent));
+//        drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+//                                     @Override
+//                                     public void onDrawerSlide(View drawer, float slideOffset) {
+//
+//                                         if(LanguageUtils.getLanguage(getMyContext()).equals("ar")) {
+//                                             getViewBinding().appBarMain.container.setX((getViewBinding().navigationView.getWidth() * slideOffset)*-1);
+//                                         }else{
+//                                             getViewBinding().appBarMain.container.setX(getViewBinding().navigationView.getWidth() * slideOffset);
+//                                         }
+//                                         RelativeLayout.LayoutParams lp =
+//                                                 (RelativeLayout.LayoutParams) getViewBinding().appBarMain.container.getLayoutParams();
+//                                         lp.height = drawer.getHeight() -
+//                                                 (int) (drawer.getHeight() * slideOffset * 0.3f);
+//                                         lp.topMargin = (drawer.getHeight() - lp.height) / 2;
+//                                         getViewBinding().appBarMain.container.setLayoutParams(lp);
+//                                     }
+//
+//                                     @Override
+//                                     public void onDrawerClosed(View drawerView) {
+//
+//                                     }
+//                                 }
+//        );
     }
 
     public ArrayList<MenuItem> getDrawerList() {
